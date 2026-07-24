@@ -1,0 +1,42 @@
+# Hempston Home
+
+> Hempston Home designs and handcrafts custom cabinetry, bespoke kitchens, vanities and built-in millwork. Studios in Halifax (Nova Scotia), Toronto and Long Beach, with installation coast to coast across Canada and the United States.
+
+Hempston is a 100% custom cabinetry maker. Every commission is designed, drawn, and built to the room — never flat-packed, never modular. Signature work includes painted Shaker and inset face-frame kitchens, natural white oak and walnut millwork, butler's pantries, wet bars, custom vanities, mudrooms, laundry rooms, and integrated built-ins.
+
+Design collaborators include 31 Westgate Design Studio, David Bourque, Sara McKeenan, and Hen House. Featured cabinetry projects include Glen Haven, Crombie House, Northwest Cove, and Modern Drift.
+
+Materials, finishes, and hardware are specified from vetted suppliers: solid white oak, walnut, maple, cherry, and MDF substrates; Farrow & Ball and Benjamin Moore paint colours; Rubio Monocoat hardwax-oil stains and conversion-varnish topcoats; hardware from Top Knobs, Emtek, Rejuvenation, and Rocky Mountain Hardware; drawer and hinge systems from Blum and Blum Movento; solid-surface countertops from Caesarstone, Cambria, and natural stone yards.
+
+Services delivered on every project: kitchen design, 3D laser site measures, site coordination visits, construction-grade shop drawings, full-size custom samples, and solid-surface (stone) procurement and management.
+
+Contact: info@hempstonhome.com · (902) 719-8497
+
+## Overview
+
+- [Home — Custom Cabinetry + More](/): Studio overview, product categories, and recent work.
+- [Services](/services): Kitchen design, 3D site measures, shop drawings, samples, stone procurement.
+- [About Hempston](/about): Studio story, craftspeople, credentials, and design collaborators.
+- [Contact](/contact): Book a complimentary custom cabinetry consultation.
+
+## Locations
+
+- [Custom Cabinetry in Halifax, Nova Scotia](/custom-cabinetry-halifax): Halifax service area, local process, HRM permit guidance, Halifax kitchen FAQs.
+
+## Cabinetry (Products)
+
+- [Cabinet Door Styles](/products/door-styles): Shaker, slab, raised panel, beaded inset, reeded, and specialty profiles with white-background renders.
+- [Cabinet Construction Styles](/products/cabinet-styles): Inset face frame, full overlay face frame, and frameless (European) construction explained.
+- [Custom Colours & Finishes](/products/colours-finishes): Painted Farrow & Ball / Benjamin Moore palette, Rubio Monocoat stains, conversion-varnish topcoats.
+- [Brands We Work With](/products/brands): Suppliers, hardware, appliance panels, and finishing partners.
+
+## Case Studies
+
+- [Glen Haven Custom Kitchen](/case-studies/glen-haven): White painted Shaker kitchen with stained white oak island, Nova Scotia coastal home.
+- [Crombie House Millwork](/case-studies/crombie-house): Heritage inset face-frame cabinetry, custom mirrors, refined joinery.
+- [Northwest Cove Kitchen](/case-studies/northwest-cove): White oak island kitchen, integrated appliance panels, coastal light.
+- [Modern Drift Cabinetry](/case-studies/modern-drift): Slab-door contemporary cabinetry, laundry and mudroom built-ins.
+
+## Optional
+
+- [Sitemap (XML)](/sitemap.xml)

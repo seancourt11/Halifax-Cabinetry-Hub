@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sI \"https://hempston-halifax-showcase.lovable.app/__l5e/assets-v1/ee6f4fb2-45ce-4b97-9250-e9e85452c050/nwc-marble-brass-faucet.jpg\")",
+      "Bash(bun -v)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 \"/private/tmp/claude-501/-Users-talal-Downloads-Halifax-Cabinetry-Hub-2/b8cb7ecd-800b-4ab3-986c-97559ba5e832/scratchpad/download_assets.py\")",
+      "Bash(python3 \"/private/tmp/claude-501/-Users-talal-Downloads-Halifax-Cabinetry-Hub-2/b8cb7ecd-800b-4ab3-986c-97559ba5e832/scratchpad/rewrite_imports.py\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{content_type} %{size_download} bytes\\\\n\" \"http://localhost:4174/src/assets/projects/gh-oak-island-painted-beams.jpg\")",
+      "Bash(pkill -f \"vite dev --port 4174\")",
+      "Bash(pkill -f \"vite preview\")",
+      "Bash(echo \"scan done, exit $?\")"
+    ]
+  }
+}
