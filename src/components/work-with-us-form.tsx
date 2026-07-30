@@ -36,6 +36,8 @@ export function WorkWithUsForm() {
   const [submitted, setSubmitted] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function handleFiles(selected: FileList | null) {
@@ -60,7 +62,7 @@ export function WorkWithUsForm() {
     setFileError(null);
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = {
@@ -83,10 +85,39 @@ export function WorkWithUsForm() {
       setErrors(fe);
       return;
     }
+
     setErrors({});
-    setSubmitted(true);
-    form.reset();
-    setFiles([]);
+    setSubmitError(null);
+    setIsSubmitting(true);
+    try {
+      const body = new FormData();
+      body.set("formType", "work-with-us");
+      body.set("name", result.data.name);
+      body.set("email", result.data.email);
+      body.set("phone", result.data.phone ?? "");
+      body.set("location", result.data.location);
+      body.set("projectType", result.data.projectType ?? "");
+      body.set("installDate", result.data.installDate ?? "");
+      body.set("meetingPref", result.data.meetingPref ?? "");
+      body.set("message", result.data.message);
+      for (const file of files) body.append("attachments", file);
+
+      const res = await fetch("/api/contact", { method: "POST", body });
+      const json = (await res.json().catch(() => null)) as { ok: boolean; error?: string } | null;
+      if (!res.ok || !json?.ok) {
+        throw new Error(json?.error || "Something went wrong. Please try again or call us.");
+      }
+
+      setSubmitted(true);
+      form.reset();
+      setFiles([]);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again or call us.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -242,8 +273,15 @@ export function WorkWithUsForm() {
           {fileError && <p className="text-sm text-destructive">{fileError}</p>}
         </div>
 
-        <Button type="submit" size="xl" className="w-full bg-white text-black hover:bg-white/90">
-          Submit & Schedule Google Meet
+        {submitError && <p className="text-sm text-destructive">{submitError}</p>}
+
+        <Button
+          type="submit"
+          size="xl"
+          className="w-full bg-white text-black hover:bg-white/90"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending…" : "Submit & Schedule Google Meet"}
         </Button>
         <p className="text-center text-xs text-white/50">
           We reply within one business day with a meeting invite.

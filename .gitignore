@@ -20,6 +20,12 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Environment variables (SMTP credentials, etc.) — never commit secrets
+.env
+.env.*
+!.env.example
+.output
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

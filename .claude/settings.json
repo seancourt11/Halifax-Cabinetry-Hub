@@ -9,7 +9,13 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code} %{content_type} %{size_download} bytes\\\\n\" \"http://localhost:4174/src/assets/projects/gh-oak-island-painted-beams.jpg\")",
       "Bash(pkill -f \"vite dev --port 4174\")",
       "Bash(pkill -f \"vite preview\")",
-      "Bash(echo \"scan done, exit $?\")"
+      "Bash(echo \"scan done, exit $?\")",
+      "Bash(command -v bun)",
+      "Read(//opt/homebrew/bin/**)",
+      "Bash(npm -v)",
+      "Bash(npm view *)",
+      "Bash(pkill -f \"vite dev --port 5199\")",
+      "Bash(pkill -f \"npx vite dev\")"
     ]
   }
 }

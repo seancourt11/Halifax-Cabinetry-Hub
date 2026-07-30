@@ -50,6 +50,8 @@ export function HalifaxLeadForm() {
   const [formKey, setFormKey] = useState(0);
   const [files, setFiles] = useState<File[]>([]);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function handleFiles(selected: FileList | null) {
@@ -95,7 +97,7 @@ export function HalifaxLeadForm() {
   }, []);
 
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = {
@@ -118,10 +120,35 @@ export function HalifaxLeadForm() {
     }
 
     setErrors({});
-    setSubmitted(true);
-    form.reset();
-    setFiles([]);
-    setFileError(null);
+    setSubmitError(null);
+    setIsSubmitting(true);
+    try {
+      const body = new FormData();
+      body.set("formType", "consultation");
+      body.set("name", result.data.name);
+      body.set("email", result.data.email);
+      body.set("phone", result.data.phone ?? "");
+      body.set("projectType", result.data.projectType ?? "");
+      body.set("message", result.data.message);
+      for (const file of files) body.append("attachments", file);
+
+      const res = await fetch("/api/contact", { method: "POST", body });
+      const json = (await res.json().catch(() => null)) as { ok: boolean; error?: string } | null;
+      if (!res.ok || !json?.ok) {
+        throw new Error(json?.error || "Something went wrong. Please try again or call us.");
+      }
+
+      setSubmitted(true);
+      form.reset();
+      setFiles([]);
+      setFileError(null);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again or call us.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -279,9 +306,10 @@ export function HalifaxLeadForm() {
           {fileError && <p className="text-sm text-destructive">{fileError}</p>}
         </div>
 
+        {submitError && <p className="text-sm text-destructive">{submitError}</p>}
 
-        <Button type="submit" variant="hero" size="xl" className="w-full">
-          Book My Free Consultation
+        <Button type="submit" variant="hero" size="xl" className="w-full" disabled={isSubmitting}>
+          {isSubmitting ? "Sending…" : "Book My Free Consultation"}
         </Button>
         <p className="text-center text-xs text-muted-foreground">
           We typically respond within one business day.

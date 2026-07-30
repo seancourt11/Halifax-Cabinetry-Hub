@@ -36,6 +36,7 @@ import { Route as SitemapImagesDotxmlRouteImport } from './routes/sitemap-images
 import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as WorkWithUsRouteImport } from './routes/work-with-us'
+import { Route as ApiContactRouteImport } from './routes/api.contact'
 import { Route as ProductsBrandsRouteImport } from './routes/products.brands'
 import { Route as ProductsCabinetStylesRouteImport } from './routes/products.cabinet-styles'
 import { Route as ProductsColoursFinishesRouteImport } from './routes/products.colours-finishes'
@@ -183,6 +184,11 @@ const WorkWithUsRoute = WorkWithUsRouteImport.update({
   path: '/work-with-us',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsBrandsRoute = ProductsBrandsRouteImport.update({
   id: '/products/brands',
   path: '/products/brands',
@@ -232,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work-with-us': typeof WorkWithUsRoute
+  '/api/contact': typeof ApiContactRoute
   '/products/brands': typeof ProductsBrandsRoute
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
@@ -265,6 +272,7 @@ export interface FileRoutesByTo {
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work-with-us': typeof WorkWithUsRoute
+  '/api/contact': typeof ApiContactRoute
   '/products/brands': typeof ProductsBrandsRoute
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
@@ -299,6 +307,7 @@ export interface FileRoutesById {
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work-with-us': typeof WorkWithUsRoute
+  '/api/contact': typeof ApiContactRoute
   '/products/brands': typeof ProductsBrandsRoute
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
@@ -334,6 +343,7 @@ export interface FileRouteTypes {
     | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/work-with-us'
+    | '/api/contact'
     | '/products/brands'
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
@@ -367,6 +377,7 @@ export interface FileRouteTypes {
     | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/work-with-us'
+    | '/api/contact'
     | '/products/brands'
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
@@ -400,6 +411,7 @@ export interface FileRouteTypes {
     | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/work-with-us'
+    | '/api/contact'
     | '/products/brands'
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
@@ -434,6 +446,7 @@ export interface RootRouteChildren {
   SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WorkWithUsRoute: typeof WorkWithUsRoute
+  ApiContactRoute: typeof ApiContactRoute
   ProductsBrandsRoute: typeof ProductsBrandsRoute
   ProductsCabinetStylesRoute: typeof ProductsCabinetStylesRoute
   ProductsColoursFinishesRoute: typeof ProductsColoursFinishesRoute
@@ -631,6 +644,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkWithUsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/brands': {
       id: '/products/brands'
       path: '/products/brands'
@@ -690,6 +710,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WorkWithUsRoute: WorkWithUsRoute,
+  ApiContactRoute: ApiContactRoute,
   ProductsBrandsRoute: ProductsBrandsRoute,
   ProductsCabinetStylesRoute: ProductsCabinetStylesRoute,
   ProductsColoursFinishesRoute: ProductsColoursFinishesRoute,
