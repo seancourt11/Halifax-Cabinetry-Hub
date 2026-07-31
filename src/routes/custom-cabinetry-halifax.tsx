@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import ogImg from "@/assets/og/og-halifax.jpg";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { howToSchema, ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, ORG_SAMEAS } from "@/lib/schema";
+import { breadcrumbSchema, howToSchema, ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, ORG_SAMEAS, SITE_URL } from "@/lib/schema";
 import {
   ChefHat,
   Bath,
@@ -116,6 +116,8 @@ const mixedFeaturedDoors: typeof showcaseGallery = (() => {
 const PAGE_TITLE = "Custom Kitchen Cabinetry Halifax NS — 100% Custom | Hempston";
 const PAGE_DESC =
   "10+ yrs building custom kitchen cabinetry in Halifax & Nova Scotia. Hand-drawn, hand-built, hand-finished. Free in-home design consult · (902) 719-8497.";
+const ABSOLUTE_URL = `${SITE_URL}/custom-cabinetry-halifax`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 const faqs = [
   {
@@ -292,15 +294,15 @@ export const Route = createFileRoute("/custom-cabinetry-halifax")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/custom-cabinetry-halifax" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
     links: [
-      { rel: "canonical", href: "/custom-cabinetry-halifax" },
+      { rel: "canonical", href: ABSOLUTE_URL },
       { rel: "preload", as: "image", href: projGhOakIsland, fetchpriority: "high" },
     ],
     scripts: [
@@ -312,7 +314,7 @@ export const Route = createFileRoute("/custom-cabinetry-halifax")({
           "@id": "https://hempstonhome.com/#halifax",
           name: "Hempston Home — Custom Cabinetry Halifax",
           description: PAGE_DESC,
-          image: ogImg,
+          image: ABSOLUTE_IMAGE,
           areaServed: [
             {
               "@type": "City",
@@ -355,19 +357,12 @@ export const Route = createFileRoute("/custom-cabinetry-halifax")({
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-            {
-              "@type": "ListItem",
-              position: 2,
-              name: "Custom Cabinetry Halifax",
-              item: "/custom-cabinetry-halifax",
-            },
-          ],
-        }),
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Custom Cabinetry Halifax", item: "/custom-cabinetry-halifax" },
+          ]),
+        ),
       },
       {
         type: "application/ld+json",

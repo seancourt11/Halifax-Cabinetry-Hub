@@ -9,7 +9,7 @@ import { SampleRequestLink } from "@/components/sample-request-link";
 
 import { paintColors, woodStains } from "@/data/finishes";
 import { insetGallery2026 } from "@/data/door-gallery-2026";
-import { faqPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
 import ogImg from "@/assets/og/og-colours-finishes.jpg";
 
 const finishFaqs = [
@@ -22,6 +22,8 @@ const finishFaqs = [
 const PAGE_TITLE = "Custom Cabinet Paint Colours & Wood Stains — Hempston";
 const PAGE_DESC =
   "Hempston's curated cabinet paint palette and hardwax-oil wood stain range — hand-sprayed conversion finishes and hand-rubbed oils for white oak, walnut and painted cabinetry.";
+const ABSOLUTE_URL = `${SITE_URL}/products/colours-finishes`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 const darkBg = "bg-[oklch(0.14_0_0)]";
 const lightBg = "bg-[oklch(0.98_0_0)]";
@@ -41,26 +43,24 @@ export const Route = createFileRoute("/products/colours-finishes")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/products/colours-finishes" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/products/colours-finishes" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-            { "@type": "ListItem", position: 2, name: "Custom Cabinets", item: "/products/door-styles" },
-            { "@type": "ListItem", position: 3, name: "Colours & Finishes", item: "/products/colours-finishes" },
-          ],
-        }),
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Custom Cabinets", item: "/products/door-styles" },
+            { name: "Colours & Finishes", item: "/products/colours-finishes" },
+          ]),
+        ),
       },
       { type: "application/ld+json", children: JSON.stringify(faqPageSchema(finishFaqs)) },
     ],

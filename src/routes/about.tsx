@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, ORG_SAMEAS } from "@/lib/schema";
+import { breadcrumbSchema, ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, ORG_SAMEAS, SITE_URL } from "@/lib/schema";
 import ogImg from "@/assets/og/og-about.jpg";
 import heroImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 import workshopImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
@@ -11,6 +11,8 @@ import workshopImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
 const PAGE_TITLE = "About Hempston — Custom Cabinet Makers, Halifax & Toronto";
 const PAGE_DESC =
   "Meet the Hempston Home studio: 10+ years crafting custom cabinetry, 100% built-to-order, coast to coast. Our craftspeople, credentials, and design collaborators.";
+const ABSOLUTE_URL = `${SITE_URL}/about`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -20,14 +22,14 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/about" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",
@@ -36,7 +38,7 @@ export const Route = createFileRoute("/about")({
           "@type": "AboutPage",
           name: PAGE_TITLE,
           description: PAGE_DESC,
-          url: "/about",
+          url: ABSOLUTE_URL,
           about: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME, email: ORG_EMAIL, telephone: ORG_PHONE, sameAs: ORG_SAMEAS },
         }),
       },

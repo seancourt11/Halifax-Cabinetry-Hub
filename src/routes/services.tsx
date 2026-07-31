@@ -3,7 +3,7 @@ import { PencilRuler, Scan, HardHat, FileText, Palette, Gem, Hammer, PackageChec
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
 import ogImg from "@/assets/og/og-services.jpg";
 import heroImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 import kitchenImg from "@/assets/projects/modern-marble-kitchen.jpg";
@@ -18,6 +18,8 @@ import preStageImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 const PAGE_TITLE = "Custom Cabinetry Services: Design, Shop Drawings & Install | Hempston";
 const PAGE_DESC =
   "Kitchen design, 3D laser site measures, shop drawings, custom samples & stone management — end-to-end for every Hempston custom cabinetry commission.";
+const ABSOLUTE_URL = `${SITE_URL}/services`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 const servicesFaqs = [
   {
@@ -46,14 +48,14 @@ export const Route = createFileRoute("/services")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/services" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",

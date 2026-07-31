@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
 import ogImg from "@/assets/og/og-case-studies.jpg";
 import ghImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 
@@ -14,6 +14,8 @@ import peterLoweImg from "@/assets/projects/dba-pl-island-kitchen.jpg";
 const PAGE_TITLE = "Cabinetry Case Studies — Custom Kitchens & Millwork | Hempston";
 const PAGE_DESC =
   "A curated look at Hempston Home cabinetry commissions — coastal kitchens, heritage millwork, and whole-home installations designed with 31 Westgate and DB Architecture.";
+const ABSOLUTE_URL = `${SITE_URL}/case-studies`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -23,12 +25,12 @@ export const Route = createFileRoute("/case-studies")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/case-studies" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/case-studies" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",

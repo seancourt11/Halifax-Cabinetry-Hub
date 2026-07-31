@@ -4,13 +4,15 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, ORG_EMAIL, ORG_PHONE } from "@/lib/schema";
+import { breadcrumbSchema, ORG_EMAIL, ORG_PHONE, SITE_URL } from "@/lib/schema";
 
 import ogImg from "@/assets/og/og-contact.jpg";
 
 const PAGE_TITLE = "Book a Custom Cabinetry Consultation | Hempston Home";
 const PAGE_DESC =
   "Free custom cabinetry consultation — kitchens, vanities & built-ins. Call (902) 719-8497 or email info@hempstonhome.com. Halifax · Toronto · Long Beach.";
+const ABSOLUTE_URL = `${SITE_URL}/contact`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -20,14 +22,14 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/contact" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",
@@ -35,7 +37,7 @@ export const Route = createFileRoute("/contact")({
           "@context": "https://schema.org",
           "@type": "ContactPage",
           name: PAGE_TITLE,
-          url: "/contact",
+          url: ABSOLUTE_URL,
           mainEntity: {
             "@type": "Organization",
             name: "Hempston Home",

@@ -6,7 +6,7 @@ import { ProductCTA, ProductBreadcrumb } from "@/components/product-cta";
 import { CustomRequestCTA } from "@/components/custom-request-cta";
 import { cabinetStyles } from "@/data/finishes";
 import { insetGallery2026 as faceFrameGallery } from "@/data/door-gallery-2026";
-import { faqPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
 import ogImg from "@/assets/og/og-cabinet-styles.jpg";
 
 const cabinetFaqs = [
@@ -19,6 +19,8 @@ const cabinetFaqs = [
 const PAGE_TITLE = "Cabinetry Construction: Frameless vs Inset Face Frame — Hempston";
 const PAGE_DESC =
   "Compare frameless European cabinetry and inset face-frame construction. See real door examples and learn which build style suits your custom kitchen.";
+const ABSOLUTE_URL = `${SITE_URL}/products/cabinet-styles`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 const darkBg = "bg-[oklch(0.14_0_0)]";
 const lightBg = "bg-[oklch(0.98_0_0)]";
@@ -38,26 +40,24 @@ export const Route = createFileRoute("/products/cabinet-styles")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/products/cabinet-styles" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/products/cabinet-styles" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-            { "@type": "ListItem", position: 2, name: "Custom Cabinets", item: "/products/door-styles" },
-            { "@type": "ListItem", position: 3, name: "Cabinetry Construction Styles", item: "/products/cabinet-styles" },
-          ],
-        }),
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Custom Cabinets", item: "/products/door-styles" },
+            { name: "Cabinetry Construction Styles", item: "/products/cabinet-styles" },
+          ]),
+        ),
       },
       {
         type: "application/ld+json",

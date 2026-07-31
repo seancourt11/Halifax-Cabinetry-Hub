@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { SITE_URL } from "@/lib/schema";
 
 /**
  * Sitemap index — references the per-topic sitemaps. Search engines follow
@@ -10,8 +11,8 @@ export const Route = createFileRoute("/sitemap-index.xml")({
     handlers: {
       GET: async () => {
         const sitemaps = [
-          "/sitemap.xml",
-          "/sitemap-images.xml",
+          `${SITE_URL}/sitemap.xml`,
+          `${SITE_URL}/sitemap-images.xml`,
         ];
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,

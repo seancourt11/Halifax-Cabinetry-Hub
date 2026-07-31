@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ProductCTA, ProductBreadcrumb } from "@/components/product-cta";
 import { CustomRequestCTA } from "@/components/custom-request-cta";
 import { SampleRequestLink } from "@/components/sample-request-link";
-import { faqPageSchema, ORG_ID, ORG_NAME } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, ORG_ID, ORG_NAME, SITE_URL } from "@/lib/schema";
 import ogImg from "@/assets/og/og-door-styles.jpg";
 
 import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
@@ -13,6 +13,8 @@ import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
 const PAGE_TITLE = "Cabinet Door Styles: Shaker, Slab, Raised Panel & More — Hempston";
 const PAGE_DESC =
   "Browse Hempston's custom cabinet door styles — Shaker, slim shaker, slab, raised panel, beaded, reeded and inset face frame doors. Hand-finished in any colour or stain.";
+const ABSOLUTE_URL = `${SITE_URL}/products/door-styles`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 const doorFaqs = [
   {
@@ -55,25 +57,23 @@ export const Route = createFileRoute("/products/door-styles")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/products/door-styles" },
-      { property: "og:image", content: ogImg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
-      { name: "twitter:image", content: ogImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/products/door-styles" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-            { "@type": "ListItem", position: 2, name: "Custom Cabinets", item: "/products/door-styles" },
-            { "@type": "ListItem", position: 3, name: "Cabinet Door Styles", item: "/products/door-styles" },
-          ],
-        }),
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Custom Cabinets", item: "/products/door-styles" },
+            { name: "Cabinet Door Styles", item: "/products/door-styles" },
+          ]),
+        ),
       },
       {
         type: "application/ld+json",
@@ -85,7 +85,7 @@ export const Route = createFileRoute("/products/door-styles")({
             "@type": "ListItem",
             position: i + 1,
             item: {
-              "@type": "Product",
+              "@type": "Thing",
               name: d.name,
               brand: { "@id": ORG_ID, "@type": "Brand", name: ORG_NAME },
               category: "Custom cabinet door",

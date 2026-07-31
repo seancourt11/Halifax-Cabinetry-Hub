@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Droplet, Instagram } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SITE_URL } from "@/lib/schema";
 import heroKitchen from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 import elevateRoom from "@/assets/projects/md-laundry-cabinetry.jpg";
 import featureLever from "@/assets/projects/nwc-marble-brass-faucet.jpg";
@@ -19,6 +20,8 @@ import ig4 from "@/assets/door-gallery-2026/04_cerused_oak_shaker.png";
 const PAGE_TITLE = "Custom Kitchen Cabinetry & Bespoke Millwork | Hempston Home";
 const PAGE_DESC =
   "Hempston Home designs and handcrafts custom kitchen cabinetry, vanities and built-in millwork — Halifax, Toronto, Long Beach + install coast to coast. Book a free design consultation.";
+const ABSOLUTE_URL = SITE_URL;
+const ABSOLUTE_IMAGE = `${SITE_URL}${heroKitchen}`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,15 +31,15 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-      { property: "og:image", content: heroKitchen },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: heroKitchen },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
     links: [
-      { rel: "canonical", href: "/" },
+      { rel: "canonical", href: ABSOLUTE_URL },
       { rel: "preload", as: "image", href: heroKitchen, fetchpriority: "high" },
     ],
     scripts: [
@@ -46,7 +49,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "Hempston Home",
-          url: "/",
+          url: ABSOLUTE_URL,
           publisher: { "@type": "Organization", name: "Hempston Home" },
         }),
       },

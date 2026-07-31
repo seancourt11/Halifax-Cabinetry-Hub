@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, faqPageSchema, serviceSchema, howToSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, serviceSchema, howToSchema, SITE_URL } from "@/lib/schema";
 
 import heroImg from "@/assets/projects/modern-marble-kitchen.jpg";
 import processImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
@@ -16,7 +16,8 @@ import proofImg from "@/assets/projects/glen-haven-brass-hood-kitchen.jpg";
 const PAGE_TITLE = "Fast Custom Kitchen Cabinets | Rush Timeline | Hempston";
 const PAGE_DESC =
   "Expedited bespoke kitchen cabinetry for high-end renovations, move-in dates and delayed projects. Custom-quality millwork on a compressed timeline without compromise.";
-const CANONICAL = "/rush-custom-kitchen-cabinets";
+const CANONICAL = `${SITE_URL}/rush-custom-kitchen-cabinets`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${heroImg}`;
 
 const faqs = [
   {
@@ -94,11 +95,11 @@ export const Route = createFileRoute("/rush-custom-kitchen-cabinets")({
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: CANONICAL },
-      { property: "og:image", content: heroImg },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: heroImg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
     links: [{ rel: "canonical", href: CANONICAL }],
     scripts: [

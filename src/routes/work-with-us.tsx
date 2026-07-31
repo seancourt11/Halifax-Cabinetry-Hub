@@ -16,11 +16,12 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { WorkWithUsForm } from "@/components/work-with-us-form";
-import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
 
 const PAGE_TITLE = "How to Work With Us | Custom Cabinetry Process | Hempston Home";
 const PAGE_DESC =
   "Our step-by-step process for custom cabinetry — from first Google Meet consultation to design, shop build, pre-staging, and white-glove install.";
+const ABSOLUTE_URL = `${SITE_URL}/work-with-us`;
 
 const steps = [
   {
@@ -112,12 +113,12 @@ export const Route = createFileRoute("/work-with-us")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/work-with-us" },
+      { property: "og:url", content: ABSOLUTE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
     ],
-    links: [{ rel: "canonical", href: "/work-with-us" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",

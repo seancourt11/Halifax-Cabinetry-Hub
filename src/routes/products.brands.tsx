@@ -3,12 +3,15 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { ProductCTA, ProductBreadcrumb } from "@/components/product-cta";
+import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
 import ogImg from "@/assets/og/og-brands.jpg";
 import calacattaBg from "@/assets/materials/detail_13_calacatta_viola_bookmatch.png";
 
 const PAGE_TITLE = "Brands We Work With: Cabinetry Suppliers — Hempston";
 const PAGE_DESC =
   "The premium brands Hempston Home specifies — Blum, Sub-Zero, Rubio Monocoat, Caesarstone, Richelieu & more — for hardware, finishes, stone, appliances, and panels.";
+const ABSOLUTE_URL = `${SITE_URL}/products/brands`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 type Brand = { name: string; desc: string };
 type BrandGroup = { name?: string; brands: Brand[] };
@@ -178,26 +181,24 @@ export const Route = createFileRoute("/products/brands")({
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/products/brands" },
-      { property: "og:image", content: calacattaBg },
+      { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
-      { name: "twitter:image", content: calacattaBg },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/products/brands" }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-            { "@type": "ListItem", position: 2, name: "Products", item: "/products" },
-            { "@type": "ListItem", position: 3, name: "Brands", item: "/products/brands" },
-          ],
-        }),
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Custom Cabinets", item: "/products/door-styles" },
+            { name: "Brands", item: "/products/brands" },
+          ]),
+        ),
       },
     ],
   }),

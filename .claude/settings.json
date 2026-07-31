@@ -15,7 +15,17 @@
       "Bash(npm -v)",
       "Bash(npm view *)",
       "Bash(pkill -f \"vite dev --port 5199\")",
-      "Bash(pkill -f \"npx vite dev\")"
+      "Bash(pkill -f \"npx vite dev\")",
+      "Bash(./node_modules/.bin/tsc -p tsconfig.json --noEmit)",
+      "Bash(lsof -iTCP:5199 -sTCP:LISTEN -n -P)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5199/)",
+      "Bash(node \"/private/tmp/claude-501/-Users-talal-Downloads-Halifax-Cabinetry-Hub-2/3c0592bf-bddf-4834-8184-f30a48deee6a/scratchpad/audit-schema.mjs\")",
+      "Bash(curl -s http://localhost:5199/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5199/products)",
+      "Bash(curl -s http://localhost:5199/products/brands)",
+      "Bash(curl -s http://localhost:5199/about)",
+      "Bash(curl -s -o /tmp/about.html -w \"%{http_code}\\\\n\" http://localhost:5199/about)",
+      "Bash(sed -n '/<head/,/<\\\\/head>/p' /tmp/about.html)"
     ]
   }
 }

@@ -2,7 +2,7 @@
  * Shared JSON-LD schema builders. Keep site-wide constants here so they stay
  * in sync across routes.
  */
-export const SITE_URL = "https://hempston-halifax-showcase.lovable.app";
+export const SITE_URL = "https://www.hempstonhome.com";
 export const ORG_ID = "https://hempstonhome.com/#organization";
 export const ORG_NAME = "Hempston Home";
 export const ORG_EMAIL = "info@hempstonhome.com";
@@ -20,7 +20,7 @@ export function breadcrumbSchema(crumbs: Crumb[]) {
       "@type": "ListItem",
       position: i + 1,
       name: c.name,
-      item: c.item,
+      item: c.item.startsWith("http") ? c.item : `${SITE_URL}${c.item}`,
     })),
   };
 }
@@ -48,7 +48,7 @@ export function serviceSchema(opts: {
     "@type": "Service",
     name: opts.name,
     description: opts.description,
-    url: opts.url,
+    url: opts.url.startsWith("http") ? opts.url : `${SITE_URL}${opts.url}`,
     provider: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
     areaServed:
       opts.areaServed ??
