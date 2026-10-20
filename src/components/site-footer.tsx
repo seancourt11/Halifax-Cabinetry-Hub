@@ -1,10 +1,22 @@
 import { Link } from "@tanstack/react-router";
+import { LOCATION_LIST, PHONE_DISPLAY, mapsUrl } from "@/lib/site";
 
 const productLinks = [
   { label: "Cabinet Door Styles", to: "/products/door-styles" as const },
   { label: "Construction Styles", to: "/products/cabinet-styles" as const },
-  { label: "Colours & Finishes", to: "/products/colours-finishes" as const },
+  { label: "Colours and Finishes", to: "/products/colours-finishes" as const },
   { label: "Brands We Work With", to: "/products/brands" as const },
+];
+
+const studioLinks = [
+  { label: "About", to: "/about" as const },
+  { label: "Services", to: "/services" as const },
+  { label: "Case Studies", to: "/case-studies" as const },
+  { label: "How We Work", to: "/work-with-us" as const },
+  { label: "Rush Cabinets", to: "/rush-custom-kitchen-cabinets" as const },
+  { label: "Halifax", to: "/custom-cabinetry-halifax" as const },
+  { label: "Toronto", to: "/custom-cabinetry-toronto" as const },
+  { label: "All locations", to: "/locations" as const },
 ];
 
 export function SiteFooter() {
@@ -15,13 +27,14 @@ export function SiteFooter() {
           <div>
             <Link
               to="/"
+              aria-label="Hempston Home"
               className="font-display text-2xl font-light uppercase tracking-[0.28em] text-white"
             >
-              Hempston
+              Hempston Home
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">
-              Bespoke cabinetry and fine millwork, designed and built for homes from coast to
-              coast. Heirloom craftsmanship, made to measure.
+              Custom kitchen cabinets, vanities and built-in millwork. We install across Canada and
+              the United States.
             </p>
             <Link
               to="/contact"
@@ -31,23 +44,25 @@ export function SiteFooter() {
             </Link>
           </div>
 
-          <FooterColumn eyebrow="01 — Products" items={productLinks} />
+          <FooterColumn eyebrow="01 Products" items={productLinks} />
+          <FooterColumn eyebrow="02 Studio" items={studioLinks} />
 
           <div>
             <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
-              02 — Contact
+              03 Contact
             </p>
-            <ul className="mt-6 space-y-3 text-sm text-white/70">
-              <li>Halifax · Toronto · Long Beach</li>
-              <li className="text-white/50">Installing coast to coast</li>
-              <li>
-                <Link to="/locations" className="transition-colors hover:text-white">
-                  All locations
-                </Link>
-              </li>
+            <ul className="mt-6 space-y-4 text-sm text-white/70">
+              {LOCATION_LIST.map((loc) => (
+                <li key={loc.key}>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-white/45">{loc.role}</p>
+                  <a href={mapsUrl(loc)} className="mt-1 block transition-colors hover:text-white">
+                    {loc.copyLabel}
+                  </a>
+                </li>
+              ))}
               <li>
                 <a href="tel:+19027198497" className="transition-colors hover:text-white">
-                  (902) 719-8497
+                  {PHONE_DISPLAY}
                 </a>
               </li>
               <li>
@@ -55,17 +70,15 @@ export function SiteFooter() {
                   info@hempstonhome.com
                 </a>
               </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
-              03 — Studio
-            </p>
-            <ul className="mt-6 space-y-3 text-sm text-white/70">
-              <li>Mon–Fri · 9am–5pm</li>
-              <li>By appointment</li>
-              <li>Installing coast to coast</li>
+              <li>Monday to Friday, 9am to 5pm, by appointment</li>
+              <li>
+                <a
+                  href="https://www.instagram.com/hempstonhome"
+                  className="transition-colors hover:text-white"
+                >
+                  Instagram
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -74,10 +87,10 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/45">
-            Halifax · Toronto · Long Beach + installing coast to coast
+            We install across Canada and the United States.
           </p>
           <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/45">
-            © {new Date().getFullYear()} Hempston
+            © {new Date().getFullYear()} Hempston Home
           </p>
         </div>
       </div>

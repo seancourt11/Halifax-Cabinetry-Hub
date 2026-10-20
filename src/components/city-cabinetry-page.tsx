@@ -13,37 +13,30 @@ import {
   Award,
   Clock,
   MapPin,
-  Star,
 } from "lucide-react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
+import { VisibleFaq } from "@/components/visible-faq";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import {
   showcaseGallery,
   insetGallery2026,
 } from "@/data/door-gallery-2026";
-import { buildCityFaqs, nearbyCitiesFor, type CityPageData } from "@/data/city-pages";
+import { buildCityFaqs, cityPages, nearbyCitiesFor, type CityPageData } from "@/data/city-pages";
+import { breadcrumbSchema, cityServiceSchema, faqPageSchema, howToSchema, ORG_NAME, SITE_URL } from "@/lib/schema";
 import {
-  howToSchema,
-  ORG_ID,
-  ORG_NAME,
-  ORG_EMAIL,
-  ORG_PHONE,
-  ORG_SAMEAS,
-  ORG_FOUNDING_YEAR,
-  SITE_URL,
-} from "@/lib/schema";
-
-import ogImg from "@/assets/og/og-halifax.jpg";
-import projGhOakIsland from "@/assets/projects/gh-oak-island-painted-beams.jpg";
+  CITY_SEO,
+  FOUNDING_YEAR,
+  KITCHEN_PRICE_LABEL,
+  LEAD_TIME_LABEL,
+  LOCATIONS,
+  VANITY_PRICE_LABEL,
+  WARRANTY_LABEL,
+  mapsUrl,
+} from "@/lib/site";
 import projGlenHaven from "@/assets/projects/glen-haven-brass-hood-kitchen.jpg";
 import projNwcBrass from "@/assets/projects/nwc-brass-hood-white-cabinets.jpg";
 import projDbaPlIsland from "@/assets/projects/dba-pl-island-kitchen.jpg";
@@ -84,7 +77,7 @@ const services = [
 
 const reasons = [
   { icon: ShieldCheck, title: "Built to Last Generations", body: "Solid-wood construction, dovetailed drawers, and conversion finishes engineered to weather Canadian humidity and temperature swings." },
-  { icon: Leaf, title: "Handcrafted in Canada", body: "Designed and crafted by local hands — never imported flat-pack — so quality and timelines stay in our control." },
+  { icon: Leaf, title: "Built in Canada", body: "Built in Canada. We design, build and install custom cabinetry for your home, and we install across Canada and the United States." },
   { icon: Clock, title: "On-Time, On-Budget", body: "Written timelines and itemised quotes before any deposit. No vague estimates, no moving targets." },
   { icon: Award, title: "Heirloom Craftsmanship", body: "Decades of combined cabinet-making experience poured into every joint, edge, and finished surface." },
 ];
@@ -111,51 +104,48 @@ const recentProjectsPool = [
 const process = [
   { icon: Pencil, step: "01", title: "Design Consultation", body: "We meet, take precise measurements, and learn how you live. You leave with a clear direction and an honest budget range." },
   { icon: Ruler, step: "02", title: "Detailed Design", body: "You receive scaled drawings, 3D renderings, and curated material samples so you can see and feel every decision before we build." },
-  { icon: Factory, step: "03", title: "Local Fabrication", body: "Your cabinetry is hand-built in our Canadian workshops using solid hardwoods, dovetailed drawers, and conversion-grade finishes." },
+  { icon: Factory, step: "03", title: "Built in Canada", body: "Your cabinetry is built in Canada, using solid hardwoods, dovetailed drawers, and conversion-grade finishes." },
   { icon: Truck, step: "04", title: "White-Glove Installation", body: "Our installers fit, level, and finish every detail on site, then walk you through care so your investment lasts for generations." },
 ];
 
-/**
- * Build the full <head> metadata for a city page. Consumed by each route file:
- *   head: () => cityHead(city)
- *
- * 2026 local/GEO SEO checklist applied here:
- *  - Absolute canonical + og:url (crawlers require self-referencing absolute URLs).
- *  - Differentiated title & meta description per city (city + region + province)
- *    so no two pages ship the same tags.
- *  - LocalBusiness JSON-LD enriched with knowsAbout, serviceType, slogan,
- *    foundingDate, aggregateRating + Review array (derived from real testimonials),
- *    hasOfferCatalog, and dateModified for freshness signals.
- *  - Speakable schema for voice + AI Overviews.
- *  - Per-city FAQPage, BreadcrumbList, HowTo schemas.
- */
+const shareImages = [
+  projNwcBrass,
+  projDbaPlIsland,
+  projGhWhite,
+  projDbaKentKitchen1,
+  projMdKitchen,
+  projDbaPlKitchen1,
+  projNwcOakIsland,
+  projDbaKentPantry,
+  projModernMarble,
+  projMdVanity,
+  projGhButler,
+  projReededVanity,
+  projNwcNavyTile,
+  projWhiteMarble,
+  projGlenHaven,
+];
+
+function cityIndex(city: CityPageData) {
+  const i = cityPages.findIndex((c) => c.slug === city.slug);
+  return i < 0 ? 0 : i;
+}
+
 export function cityHead(city: CityPageData) {
   const path = `/${city.slug}`;
   const absoluteUrl = `${SITE_URL}${path}`;
-  const absoluteImage = `${SITE_URL}${ogImg}`;
-  const title = `Custom Kitchen Cabinetry ${city.city}, ${city.provinceCode} — Bespoke Cabinet Makers | Hempston`;
-  const desc = `Award-winning custom kitchen cabinetry in ${city.city}, ${city.province}. Hand-drawn, hand-built and installed across ${city.region}. Free design consultation — call (902) 719-8497.`;
+  const seo = CITY_SEO[city.slug];
+  const title = seo?.title ?? `Custom Kitchen Cabinets ${city.city} | Hempston Home`;
+  const desc = seo?.description ?? city.heroLead;
+  const share = shareImages[cityIndex(city) % shareImages.length];
+  const absoluteImage = `${SITE_URL}${share}`;
   const faqs = buildCityFaqs(city);
-  const nearby = nearbyCitiesFor(city, 4);
-  const dateModified = new Date().toISOString().split("T")[0];
-
-  const reviews = city.testimonials.map((t) => ({
-    "@type": "Review",
-    reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
-    author: { "@type": "Person", name: t.name },
-    reviewBody: t.quote,
-    locationCreated: { "@type": "Place", name: t.place },
-  }));
 
   return {
     meta: [
       { title },
       { name: "description", content: desc },
       { name: "keywords", content: city.keywords },
-      { name: "geo.region", content: `${city.countryCode}-${city.provinceCode}` },
-      { name: "geo.placename", content: `${city.city}, ${city.province}` },
-      { name: "geo.position", content: `${city.geo.lat};${city.geo.lng}` },
-      { name: "ICBM", content: `${city.geo.lat}, ${city.geo.lng}` },
       { property: "og:title", content: title },
       { property: "og:description", content: desc },
       { property: "og:type", content: "website" },
@@ -170,164 +160,43 @@ export function cityHead(city: CityPageData) {
     ],
     links: [
       { rel: "canonical", href: absoluteUrl },
-      { rel: "preload", as: "image", href: projGhOakIsland, fetchpriority: "high" },
-      // Local link graph: hint to search engines about sibling city pages.
-      ...nearby.map((n) => ({ rel: "alternate", href: `${SITE_URL}/${n.slug}` })),
+      { rel: "preload", as: "image", href: share, fetchpriority: "high" },
     ],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "@id": `${SITE_URL}${path}#localbusiness`,
-          name: `${ORG_NAME} — Custom Cabinetry ${city.city}`,
-          alternateName: `Hempston Cabinet Makers ${city.city}`,
-          url: absoluteUrl,
-          slogan: "100% custom cabinetry, coast to coast.",
-          description: desc,
-          image: absoluteImage,
-          logo: `${SITE_URL}/favicon.ico`,
-          foundingDate: ORG_FOUNDING_YEAR,
-          dateModified,
-          knowsAbout: [
-            "Custom kitchen cabinetry",
-            "Bespoke millwork",
-            "Inset face-frame cabinetry",
-            "Frameless (European) cabinetry",
-            "Painted Shaker cabinets",
-            "White oak cabinetry",
-            "Butler's pantries",
-            "Custom vanities",
-            "Built-in millwork",
-            "Mudroom and laundry cabinetry",
-            "Home office built-ins",
-            "Kitchen design",
-          ],
-          serviceType: [
-            "Custom kitchen design",
-            "Custom cabinet making",
-            "Bathroom vanity fabrication",
-            "Built-in millwork",
-            "Cabinet installation",
-          ],
-          areaServed: [
-            {
-              "@type": "City",
-              name: city.city,
-              containedInPlace: { "@type": "AdministrativeArea", name: city.province },
-            },
-            ...city.neighbourhoods.slice(0, 8).map((n) => ({ "@type": "Place", name: n })),
-            ...city.regions.slice(0, 6).map((n) => ({ "@type": "Place", name: n })),
-            { "@type": "AdministrativeArea", name: city.province },
-            { "@type": "Country", name: "Canada" },
-          ],
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: city.city,
-            addressRegion: city.provinceCode,
-            addressCountry: city.countryCode,
-          },
-          geo: { "@type": "GeoCoordinates", latitude: city.geo.lat, longitude: city.geo.lng },
-          telephone: ORG_PHONE,
-          email: ORG_EMAIL,
-          priceRange: "$$$",
-          currenciesAccepted: "CAD",
-          paymentAccepted: "Cash, Cheque, EFT, Credit Card",
-          openingHoursSpecification: [
-            {
-              "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              opens: "09:00",
-              closes: "17:00",
-            },
-          ],
-          sameAs: ORG_SAMEAS,
-          parentOrganization: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
-          hasOfferCatalog: {
-            "@type": "OfferCatalog",
-            name: `Custom cabinetry services — ${city.city}`,
-            itemListElement: services.map((s) => ({
-              "@type": "Offer",
-              itemOffered: { "@type": "Service", name: s.title, description: s.body },
-            })),
-          },
-          makesOffer: services.map((s) => ({
-            "@type": "Offer",
-            itemOffered: { "@type": "Service", name: s.title, description: s.body },
-          })),
-          ...(reviews.length > 0
-            ? {
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: "5.0",
-                  bestRating: "5",
-                  reviewCount: String(reviews.length),
-                },
-                review: reviews,
-              }
-            : {}),
-        }),
+        children: JSON.stringify(
+          cityServiceSchema({
+            slug: city.slug,
+            city: city.city,
+            province: city.province,
+            region: city.region,
+          }),
+        ),
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-            { "@type": "ListItem", position: 2, name: "Locations", item: `${SITE_URL}/locations` },
-            {
-              "@type": "ListItem",
-              position: 3,
-              name: `Custom Cabinetry ${city.city}`,
-              item: absoluteUrl,
-            },
-          ],
-        }),
+        children: JSON.stringify(
+          breadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Locations", item: "/locations" },
+            { name: `Custom Cabinetry ${city.city}`, item: path },
+          ]),
+        ),
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
-        }),
+        children: JSON.stringify(faqPageSchema(faqs)),
       },
       {
         type: "application/ld+json",
         children: JSON.stringify(
           howToSchema({
-            name: `Our ${city.city} custom cabinetry process`,
-            description: `How Hempston designs, builds, and installs custom kitchen cabinetry for ${city.city} and ${city.province} homes — first consultation to final walk-through.`,
-            totalTime: "P10W",
+            name: `Custom cabinetry process for ${city.city}`,
+            description: `How Hempston Home designs, builds, and installs custom kitchen cabinetry for ${city.city} homes. Most kitchens take ${LEAD_TIME_LABEL}.`,
             steps: process.map((p) => ({ name: p.title, text: p.body })),
           }),
         ),
-      },
-      // Speakable: AI Overviews + voice assistants read the At-a-Glance block aloud.
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "@id": `${absoluteUrl}#webpage`,
-          url: absoluteUrl,
-          name: title,
-          description: desc,
-          inLanguage: "en-CA",
-          dateModified,
-          isPartOf: { "@type": "WebSite", url: SITE_URL, name: ORG_NAME },
-          about: { "@type": "Place", name: `${city.city}, ${city.province}` },
-          speakable: {
-            "@type": "SpeakableSpecification",
-            cssSelector: ["#at-a-glance", "#at-a-glance dl"],
-          },
-        }),
       },
     ],
   };
@@ -336,6 +205,12 @@ export function cityHead(city: CityPageData) {
 export function CityCabinetryPage({ city }: { city: CityPageData }) {
   const faqs = buildCityFaqs(city);
   const nearby = nearbyCitiesFor(city, 4);
+  const seo = CITY_SEO[city.slug];
+  const idx = cityIndex(city);
+  const heroImg = shareImages[idx % shareImages.length];
+  const shownProjects = Array.from({ length: 6 }, (_, i) => recentProjectsPool[(idx + i) % recentProjectsPool.length]);
+  const shownDoors = Array.from({ length: 8 }, (_, i) => mixedFeaturedDoors[(idx + i) % mixedFeaturedDoors.length]);
+  const torontoStudio = city.slug === "custom-cabinetry-toronto" ? LOCATIONS.toronto : null;
   const darkBg = "bg-[oklch(0.14_0_0)]";
   const lightBg = "bg-[oklch(0.98_0_0)]";
   const darkText = "text-[oklch(0.15_0_0)]";
@@ -355,10 +230,12 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
       {/* HERO */}
       <section className="relative">
         <img
-          src={projGhOakIsland}
-          alt={`Custom kitchen by Hempston — painted white oak island cabinetry and shaker perimeter in a ${city.city} home`}
-          width={1920}
-          height={1100}
+          src={heroImg}
+          alt="Custom kitchen cabinetry by Hempston Home"
+          width={1600}
+          height={1000}
+          fetchPriority="high"
+          decoding="async"
           className="h-[86vh] min-h-[560px] w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
@@ -371,15 +248,12 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
                 <span className="text-white">Custom Cabinetry {city.city}</span>
               </nav>
               <p className={eyebrowDark}>{city.eyebrow}</p>
-              <h1 className="mt-5 font-display text-5xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-7xl">
-                {city.heroTitle.map((line, i) => (
-                  <span key={i}>
-                    {line}
-                    {i < city.heroTitle.length - 1 ? <br /> : null}
-                  </span>
-                ))}
+              <h1 className="mt-5 font-display text-4xl font-light uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-6xl">
+                {seo?.h1 ?? `Custom Kitchen Cabinets in ${city.city}`}
               </h1>
-              <p className="mt-8 max-w-md text-sm leading-relaxed text-white/75">{city.heroLead}</p>
+              <p className="mt-8 max-w-md text-sm leading-relaxed text-white/75">
+                Built in Canada. Hempston Home designs, builds and installs custom kitchen cabinets, vanities and built-ins for {city.city} homes. We install across Canada and the United States.
+              </p>
               <div className="mt-10 flex flex-wrap gap-3">
                 <a
                   href="#consultation"
@@ -419,6 +293,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
             {city.introHeadline}
           </h2>
+          <BuiltInCanadaLine className="mt-6 text-sm leading-relaxed text-white/80" />
           <div className="mt-8 space-y-5 text-sm leading-relaxed text-white/70">
             {city.introBody.map((p, i) => (
               <p key={i}>{p}</p>
@@ -434,24 +309,30 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
         <div className="mx-auto max-w-5xl px-5 sm:px-8">
           <p className={eyebrowLight}>At a Glance</p>
           <h2 className="mt-4 font-display text-2xl font-light uppercase tracking-[0.06em] sm:text-3xl">
-            Custom cabinetry in {city.city}, {city.province} — the essentials
+            Custom cabinetry in {city.city}, {city.province}: the essentials
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/70">
-            {ORG_NAME} designs and hand-builds custom kitchen cabinetry, bathroom vanities and
-            built-in millwork for homes throughout {city.city} and {city.region}. Every project
-            is 100% custom — no fixed catalogues, no stock sizes.
+            {ORG_NAME} designs, builds and installs custom kitchen cabinets, bathroom vanities and
+            built-in millwork for homes in {city.city} and {city.region}. Built in Canada. Every project
+            is fully custom. We install across Canada and the United States.
           </p>
           <dl className="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { k: "Service", v: "Custom kitchen cabinetry, vanities & built-in millwork" },
-              { k: "Service area", v: `${city.city}, ${city.region} and all of ${city.province}` },
-              { k: "Typical kitchen investment", v: "CAD $30,000 – $90,000+ (fully itemised quotes)" },
-              { k: "Timeline", v: "8 – 16 weeks, first consultation to installed kitchen" },
-              { k: "Founded", v: `${ORG_FOUNDING_YEAR} · 10+ years of cabinet making` },
+              { k: "Service", v: "Custom kitchen cabinets, vanities and built-in millwork" },
+              { k: "Service area", v: `${city.city}, ${city.region} and ${city.province}` },
+              { k: "Typical kitchen", v: `CAD ${KITCHEN_PRICE_LABEL}` },
+              { k: "Vanities and built-ins", v: `Usually ${VANITY_PRICE_LABEL}` },
+              { k: "Timeline", v: `${LEAD_TIME_LABEL} from consultation to install` },
+              { k: "Warranty", v: WARRANTY_LABEL },
+              { k: "Origin", v: "Built in Canada" },
+              { k: "Founded", v: FOUNDING_YEAR },
               { k: "Applicable tax", v: `${city.taxNote} (${city.province})` },
-              { k: "Consultation", v: "Free, on-site, no obligation" },
+              { k: "Consultation", v: "Free" },
               { k: "Phone", v: "(902) 719-8497" },
               { k: "Email", v: "info@hempstonhome.com" },
+              ...(torontoStudio
+                ? [{ k: "Toronto studio", v: torontoStudio.copyLabel }]
+                : []),
             ].map((row) => (
               <div key={row.k} className="border-t border-black/15 pt-4">
                 <dt className="text-[10px] font-medium uppercase tracking-[0.24em] text-black/55">
@@ -471,9 +352,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-5 py-16 sm:px-8 md:grid-cols-4">
           {[
             { n: "10+", l: "Years of cabinetmaking" },
-            { n: "100%", l: "Handcrafted in Canada" },
-            { n: "8–16", l: "Weeks, concept to install" },
-            { n: "5.0", l: "Average client rating" },
+            { n: "Canada", l: "Built in Canada" },
+            { n: "8 to 14", l: "Weeks, concept to install" },
+            { n: "5 yr", l: "Workmanship warranty" },
           ].map((s) => (
             <div key={s.l} className="text-center">
               <p className="font-display text-4xl font-light text-white sm:text-5xl">{s.n}</p>
@@ -518,12 +399,11 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Kitchens & millwork we've built
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-black/70">
-              A curated selection of recent Hempston projects. Every kitchen, vanity and built-in was
-              designed and hand-built to measure — the same care goes into every {city.city} commission.
+              A selection of Hempston Home kitchens and millwork. The same design and build process is used for {city.city} homes.
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {recentProjectsPool.map((p) => (
+            {shownProjects.map((p) => (
               <figure key={p.title + p.src} className="group overflow-hidden">
                 <div className="relative overflow-hidden">
                   <img
@@ -563,7 +443,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {mixedFeaturedDoors.slice(0, 12).map((d) => (
+            {shownDoors.map((d) => (
               <figure key={d.name} className="group border border-white/15 bg-white p-4 sm:p-6">
                 <img
                   src={d.src}
@@ -666,9 +546,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Serving {city.city} and homes across {city.province}
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-white/75">
-              While Hempston's workshops are based in Halifax, Toronto and Long Beach, we design and
-              install bespoke kitchens, vanities and built-ins for homeowners across {city.region} — and
-              we ship &amp; install coast to coast.
+              Hempston Home designs, builds and installs custom cabinetry for {city.city} and {city.region}. Built in Canada. We install across Canada and the United States.
             </p>
           </div>
 
@@ -702,37 +580,24 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className={`${lightBg} ${darkText} py-24`}>
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className={eyebrowLight}>Client Stories</p>
-            <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
-              Loved by {city.city} homeowners
+      {torontoStudio ? (
+        <section className={`${lightBg} ${darkText} border-y border-black/10 py-16`}>
+          <div className="mx-auto max-w-3xl px-5 sm:px-8">
+            <p className={eyebrowLight}>Toronto studio</p>
+            <h2 className="mt-4 font-display text-3xl font-light uppercase tracking-[0.06em]">
+              Visit the Toronto studio
             </h2>
+            <p className="mt-6 text-sm leading-relaxed text-black/75">
+              The Toronto studio is a local base for Greater Toronto Area projects. {torontoStudio.copyLabel}.
+            </p>
+            <a href={mapsUrl(torontoStudio)} className="mt-6 inline-block text-sm underline">
+              Map for the Toronto studio
+            </a>
           </div>
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {city.testimonials.map((t) => (
-              <figure key={t.name} className="border border-black/10 bg-white p-8">
-                <div className="flex gap-1 text-black">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="mt-5 text-sm leading-relaxed">"{t.quote}"</blockquote>
-                <figcaption className="mt-6 border-t border-black/10 pt-4">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.18em]">{t.name}</p>
-                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/55">{t.place}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      {/* NEARBY CITIES — internal link graph across the location network.
-          Sends local ranking signals city-to-city and gives crawlers /
-          AI answer engines a clear "we serve this whole region" map. */}
+      {/* NEARBY CITIES */}
       <section className={`${lightBg} ${darkText} py-20`}>
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
@@ -788,18 +653,15 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Custom cabinetry in {city.city}: FAQ
             </h2>
           </div>
-          <Accordion type="single" collapsible className="mt-12">
-            {faqs.map((f, i) => (
-              <AccordionItem key={i} value={`item-${i}`} className="border-white/15">
-                <AccordionTrigger className="text-left font-display text-base font-light uppercase tracking-[0.1em] text-white hover:no-underline">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm leading-relaxed text-white/70">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <VisibleFaq
+            items={faqs}
+            className="mt-12"
+            questionClassName="font-display text-lg font-light uppercase tracking-[0.08em] text-white"
+            answerClassName="mt-3 text-sm leading-relaxed text-white/75"
+          />
+          <p className="mt-8 text-sm leading-relaxed text-white/70">
+            Need it sooner? See <Link to="/rush-custom-kitchen-cabinets" className="underline">rush custom kitchen cabinets</Link>.
+          </p>
         </div>
       </section>
 
@@ -819,7 +681,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               {[
                 `Free design consultation across ${city.region}`,
                 "Itemised, written quote before any deposit",
-                "Handcrafted in Canada, installed coast to coast",
+                "Built in Canada. We install across Canada and the United States.",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-6 shrink-0 bg-black/50" />

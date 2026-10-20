@@ -40,51 +40,52 @@ function baseFaqs(d: {
   permitUrl: string;
   areas: string[];
 }): CityFaq[] {
-  const areaList = d.areas.slice(0, 8).join(", ");
+  const areaList = d.areas.slice(0, 6).join(", ");
+  const place = d.areas[0] ?? d.city;
   return [
     {
       q: `How much does custom cabinetry cost in ${d.city}?`,
-      a: `Custom cabinetry in ${d.city} typically ranges from $30,000 to $90,000+ for a full kitchen, depending on the size of the space, door style, wood species, hardware, and complexity. Smaller commissions like a single vanity or a run of built-ins usually start between $4,500 and $14,000. Because every Hempston project is made to measure, we provide a fully itemised written quote after your ${d.city} design consultation — no vague estimates, no surprise line items.`,
+      a: `A full custom kitchen for a ${d.city} home typically runs from $25,000 to $75,000. Vanities and smaller built-ins usually start between $4,000 and $12,000. The quote is itemised in writing after a design consultation, and it reflects the size of the room, the door style, the wood, and the hardware.`,
     },
     {
       q: `How long does a custom kitchen project take in ${d.city}?`,
-      a: `From your first design consultation to installation, most ${d.city} kitchens take 8 to 16 weeks. Design and approvals usually take 2 to 4 weeks, fabrication in our workshop 5 to 10 weeks, and installation 3 to 7 days on site. We confirm your timeline in writing before any deposit is taken.`,
+      a: `Most ${d.city} kitchens take 8 to 14 weeks from the first design consultation to installation. We confirm that timeline in writing before any deposit. Qualifying rush projects are a separate program.`,
     },
     {
-      q: `What is the difference between custom, semi-custom, and stock cabinets?`,
-      a: `Stock cabinets come in fixed sizes off the shelf and rarely fit ${d.city} homes perfectly. Semi-custom offers limited modifications to standard boxes. Fully custom cabinetry — what Hempston builds — is designed and fabricated specifically for your room, your storage needs, and your chosen materials, with no filler panels or compromises. Custom cabinetry maximises every inch and lasts for decades.`,
+      q: "What is the difference between custom, semi-custom, and stock cabinets?",
+      a: `Stock cabinets come in fixed sizes and rarely fit ${place} homes without filler. Semi-custom cabinets allow limited changes to standard boxes. Hempston Home builds fully custom cabinetry for the room, the storage, and the materials you choose.`,
     },
     {
       q: `Do you serve areas outside downtown ${d.city}?`,
-      a: `Yes. We design and install custom cabinetry throughout ${d.region}, including ${areaList} and surrounding communities across ${d.province}.`,
+      a: `Yes. We design, build and install custom cabinetry throughout ${d.region}, including ${areaList}, and in other communities across ${d.province}. We also install across Canada and the United States.`,
     },
     {
       q: "What materials and finishes do you offer?",
-      a: "We work with solid hardwoods such as walnut, white oak, maple, and cherry, along with premium plywood casework, painted MDF for crisp Shaker and inset styles, and a wide range of hand-applied stains, lacquers, and conversion finishes. Soft-close doors and drawers, dovetailed solid-wood drawer boxes, and quality European hardware are standard on every Hempston project.",
+      a: "We use solid hardwoods such as walnut, white oak, maple, and cherry, plus painted MDF for Shaker and inset doors. Soft-close hardware, dovetailed drawer boxes, hand-applied stains, and sprayed conversion finishes are part of a Hempston Home kitchen.",
     },
     {
-      q: "Are your cabinets made locally?",
-      a: `Every piece is designed and hand-built by our team in our Canadian workshops — never imported flat-pack. We install coast to coast, and each project ships fully pre-staged and quality-checked before it leaves the shop, so on-site work in ${d.city} is precise and fast.`,
+      q: "Where are your cabinets made?",
+      a: `Cabinetry for ${d.city} homes, including projects in ${place}, is built in Canada. We design, build and install it for your ${d.city} project. We install across Canada and the United States.`,
     },
     {
       q: "Do you offer kitchen design services?",
-      a: "Yes. Design is built into every Hempston project. Our kitchen designers handle the full layout — work triangle, island placement, storage zones, lighting, and appliance planning — and provide scaled drawings, 3D renderings, and material samples so you can see and feel your new kitchen before we build it.",
+      a: `Yes. Design is included in a Hempston Home project in ${d.city}. The designer plans the layout, storage, lighting, and appliances, then provides drawings and material samples before we build.`,
     },
     {
       q: "Can you build any cabinet style or colour?",
-      a: "Yes. Hempston is a 100% custom cabinet maker — you are never limited to a fixed catalogue. The door profiles, inset styles, and finishes shown on our site are just a sample. We build virtually any door style, wood species, paint colour, or stain — from modern handleless slabs to classic beaded inset — and can match a reference photo or an existing piece in your home.",
+      a: `Yes. Hempston Home is a fully custom cabinet maker for ${d.city} homes. The doors and colours on this site are examples. We can build the profile, wood, paint, or stain you specify, including a match to a photo or an existing piece.`,
     },
     {
       q: "Do you offer a warranty on custom cabinetry?",
-      a: "We stand behind our craftsmanship with a comprehensive workmanship warranty, and we pass along manufacturer warranties on hardware and finishes. Full details are provided in writing with your project agreement.",
+      a: "Hempston Home warrants cabinetry workmanship for 5 years. Manufacturer warranties on hardware and finishes are passed along in the project agreement.",
     },
     {
       q: `Do I need a permit for a kitchen renovation in ${d.city}?`,
-      a: `Simply replacing cabinetry usually doesn't require a permit, but a full kitchen renovation that moves plumbing, electrical, or walls typically does need a permit from ${d.permitAuthority}. We coordinate with your contractor and can point you to official building-permit information at ${d.permitUrl} so the cabinetry side of your project stays fully compliant.`,
+      a: `Replacing cabinetry on its own usually does not need a permit in ${d.city}. A renovation that moves plumbing, electrical, or walls usually does, through ${d.permitAuthority}. We coordinate with your contractor. Permit details are published at ${d.permitUrl}.`,
     },
     {
       q: `Is ${d.taxNote.split(" ")[0]} included in your ${d.city} quotes?`,
-      a: `Our itemised, written quotes clearly show pricing and applicable ${d.province} tax (${d.taxNote}) before any deposit, so you always know your total investment up front — no vague estimates or surprise add-ons.`,
+      a: `Written quotes for ${d.city} show the price and the applicable ${d.province} tax (${d.taxNote}) before any deposit.`,
     },
   ];
 }

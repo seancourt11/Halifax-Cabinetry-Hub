@@ -1,9 +1,17 @@
-import * as React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Droplet, Instagram } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { SITE_URL } from "@/lib/schema";
+import { faqPageSchema, SITE_URL } from "@/lib/schema";
+import {
+  HALIFAX_BUILD_SENTENCE,
+  KITCHEN_PRICE_LABEL,
+  LEAD_TIME_LABEL,
+  VANITY_PRICE_LABEL,
+  WARRANTY_LABEL,
+} from "@/lib/site";
+import { VisibleFaq } from "@/components/visible-faq";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import heroKitchen from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 import elevateRoom from "@/assets/projects/md-laundry-cabinetry.jpg";
 import featureLever from "@/assets/projects/nwc-marble-brass-faucet.jpg";
@@ -17,9 +25,28 @@ import ig2 from "@/assets/projects/white-oak-cabinet-detail.jpg";
 import ig3 from "@/assets/projects/nwc-navy-tile-backsplash.jpg";
 import ig4 from "@/assets/door-gallery-2026/04_cerused_oak_shaker.png";
 
-const PAGE_TITLE = "Custom Kitchen Cabinetry & Bespoke Millwork | Hempston Home";
+const PAGE_TITLE = "Custom Cabinetry and Millwork Nova Scotia | Hempston Home";
 const PAGE_DESC =
-  "Hempston Home designs and handcrafts custom kitchen cabinetry, vanities and built-in millwork — Halifax, Toronto, Long Beach + install coast to coast. Book a free design consultation.";
+  "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.";
+
+const homeFaqs = [
+  {
+    q: "Where are Hempston Home cabinets built?",
+    a: `${HALIFAX_BUILD_SENTENCE} Built in Canada. We install across Canada and the United States.`,
+  },
+  {
+    q: "How much does a Hempston Home kitchen cost?",
+    a: `A full custom kitchen typically runs from ${KITCHEN_PRICE_LABEL}. Vanities and built-ins usually start between ${VANITY_PRICE_LABEL}. Quotes are itemised in writing.`,
+  },
+  {
+    q: "How long does a custom kitchen take?",
+    a: `Most kitchens take ${LEAD_TIME_LABEL} from the first design consultation to installation. Qualifying rush projects can be about 6 weeks. We confirm the timeline in writing before any deposit.`,
+  },
+  {
+    q: "What warranty do you offer?",
+    a: `Hempston Home warrants cabinetry workmanship for 5 years. Manufacturer warranties on hardware and finishes are passed along in the project agreement.`,
+  },
+];
 const ABSOLUTE_URL = SITE_URL;
 const ABSOLUTE_IMAGE = `${SITE_URL}${heroKitchen}`;
 
@@ -45,110 +72,26 @@ export const Route = createFileRoute("/")({
     scripts: [
       {
         type: "application/ld+json",
+        children: JSON.stringify(faqPageSchema(homeFaqs)),
+      },
+      {
+        type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "Hempston Home",
+          "@type": "WebPage",
           url: ABSOLUTE_URL,
-          publisher: { "@type": "Organization", name: "Hempston Home" },
+          name: PAGE_TITLE,
+          description: PAGE_DESC,
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: ["#home-summary"],
+          },
         }),
       },
     ],
   }),
   component: Index,
 });
-
-function ShakerDoorIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="3" y="2" width="8" height="20" rx="0.5" />
-      <rect x="4.25" y="3.25" width="5.5" height="17.5" rx="0.25" />
-      <rect x="13" y="2" width="8" height="20" rx="0.5" />
-      <rect x="14.25" y="3.25" width="5.5" height="17.5" rx="0.25" />
-    </svg>
-  );
-}
-
-function SolidSurfaceIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="0.3" y="5" width="23.4" height="14" rx="1" />
-    </svg>
-  );
-}
-
-function CabinetPullIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <circle cx="7" cy="5" r="1" />
-      <circle cx="7" cy="19" r="1" />
-      <path d="M7 6v12" />
-      <circle cx="17" cy="5" r="1" />
-      <circle cx="17" cy="19" r="1" />
-      <path d="M17 6v12" />
-    </svg>
-  );
-}
-
-function TileIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="3" y="3" width="5.5" height="5.5" rx="0.5" />
-      <rect x="9.25" y="3" width="5.5" height="5.5" rx="0.5" />
-      <rect x="15.5" y="3" width="5.5" height="5.5" rx="0.5" />
-      <rect x="3" y="9.25" width="5.5" height="5.5" rx="0.5" />
-      <rect x="9.25" y="9.25" width="5.5" height="5.5" rx="0.5" />
-      <rect x="15.5" y="9.25" width="5.5" height="5.5" rx="0.5" />
-      <rect x="3" y="15.5" width="5.5" height="5.5" rx="0.5" />
-      <rect x="9.25" y="15.5" width="5.5" height="5.5" rx="0.5" />
-      <rect x="15.5" y="15.5" width="5.5" height="5.5" rx="0.5" />
-    </svg>
-  );
-}
-
-function FlooringPlanksIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="3" y="2" width="4" height="20" rx="0.5" />
-      <rect x="10" y="2" width="4" height="20" rx="0.5" />
-      <rect x="17" y="2" width="4" height="20" rx="0.5" />
-    </svg>
-  );
-}
-
-const categories = [
-  { icon: ShakerDoorIcon, label: "Cabinetry", active: true },
-  { icon: SolidSurfaceIcon, label: "Solid Surfaces", active: false },
-  { icon: CabinetPullIcon, label: "Hardware", active: false },
-  { icon: FlooringPlanksIcon, label: "Flooring", active: false },
-  { icon: Droplet, label: "Faucets", active: false },
-  { icon: TileIcon, label: "Tile", active: false },
-];
-
-type Category = (typeof categories)[number];
-
-function CategoryIcon({ category: c }: { category: Category }) {
-  const Icon = c.icon;
-  return (
-    <div
-      key={c.label}
-      title={`${c.label} — launching soon`}
-      aria-label={`${c.label} — launching soon`}
-      role="img"
-      className="group flex flex-col items-center gap-4 text-white/75 grayscale transition-opacity hover:opacity-90"
-    >
-      <div className="relative flex h-20 w-20 items-center justify-center">
-        <Icon className="h-10 w-10 blur-[2px]" strokeWidth={1.1} aria-hidden="true" />
-        <span className="absolute -right-2 -top-2 rounded-sm bg-black/50 px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white shadow-sm blur-[1px]">
-          SOON
-        </span>
-      </div>
-      <div className="text-center">
-        <span className="text-[10px] font-light uppercase tracking-[0.26em] text-white/90 blur-[2px]">{c.label}</span>
-      </div>
-    </div>
-  );
-}
 
 const carouselProducts = [
   { title: "Custom Kitchen Cabinetry", image: featureLever, alt: "Bespoke white inset kitchen cabinetry with painted shaker doors", designer: "31 Westgate" },
@@ -193,9 +136,12 @@ function Index() {
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
             <div className="max-w-xl">
-              <h1 className="font-display text-5xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-7xl">
-                Custom<br />Cabinetry<br />+ More
+              <h1 className="font-display text-4xl font-light uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-6xl">
+                Custom Cabinetry and Millwork, Made in Nova Scotia
               </h1>
+              <p id="home-summary" className="mt-6 max-w-md text-sm leading-relaxed text-white/80">
+                Hempston Home is a Halifax, Nova Scotia cabinet studio that designs, builds and installs 100% custom kitchens, vanities and built-ins. Built in Canada. Most kitchens take {LEAD_TIME_LABEL} and start around $25,000. We install across Canada and the United States.
+              </p>
               <div className="mt-10">
                 <Link
                   to="/contact"
@@ -209,47 +155,36 @@ function Index() {
         </div>
       </section>
 
-      {/* CATEGORY ICON ROW */}
-      <section className="border-t border-b border-white/10 bg-[oklch(0.14_0_0)]">
-        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
-          <p className="mb-10 text-center text-[10px] font-medium uppercase tracking-[0.32em] text-white/60">
-            Our Products
-          </p>
-          <div className="flex flex-wrap items-start justify-center gap-x-6 gap-y-10 md:gap-x-10 lg:gap-x-14">
-            {categories
-              .filter((c) => !c.active)
-              .slice(0, 2)
-              .map((c) => (
-                <CategoryIcon key={c.label} category={c} />
-              ))}
+      <section className="border-y border-white/10 bg-[oklch(0.98_0_0)] text-[oklch(0.15_0_0)]">
+        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-10 sm:grid-cols-4 sm:px-8">
+          {[
+            { k: "Based in", v: "Halifax, Nova Scotia" },
+            { k: "Kitchens", v: `From ${KITCHEN_PRICE_LABEL.split(" to ")[0]}` },
+            { k: "Lead time", v: LEAD_TIME_LABEL },
+            { k: "Consult", v: "Free in-home consult in HRM" },
+          ].map((item) => (
+            <div key={item.k}>
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-black/50">{item.k}</p>
+              <p className="mt-2 text-sm">{item.v}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Cabinetry — centered and emphasized */}
-            {(() => {
-              const c = categories.find((x) => x.active)!;
-              const Icon = c.icon;
-              return (
-                <Link
-                  to="/products/door-styles"
-                  className="group flex flex-col items-center gap-5 text-white transition-opacity hover:opacity-90"
-                >
-                  <div className="relative flex h-24 w-24 items-center justify-center">
-                    <Icon className="h-12 w-12" strokeWidth={1} />
-                    <span className="absolute -bottom-1.5 h-1.5 w-1.5 rounded-full bg-white" />
-                  </div>
-                  <div className="text-center">
-                    <span className="text-[11px] font-light uppercase tracking-[0.26em]">{c.label}</span>
-                  </div>
-                </Link>
-              );
-            })()}
-
-            {categories
-              .filter((c) => !c.active)
-              .slice(2)
-              .map((c) => (
-                <CategoryIcon key={c.label} category={c} />
-              ))}
-          </div>
+      <section className="border-b border-white/10 bg-[oklch(0.14_0_0)]">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-8 px-5 py-10 sm:px-8">
+          <Link to="/products/door-styles" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+            Cabinet door styles
+          </Link>
+          <Link to="/services" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+            Services
+          </Link>
+          <Link to="/case-studies" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+            Projects
+          </Link>
+          <Link to="/about" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+            About
+          </Link>
         </div>
       </section>
 
@@ -384,8 +319,8 @@ function Index() {
                 </div>
               </div>
               <h3 className="mt-6 text-sm font-medium uppercase tracking-[0.22em]">
-                <Link to="/products/door-styles" className="hover:text-neutral-600">
-                  {exploreProducts[0].title} →
+                <Link to="/case-studies" className="hover:text-neutral-600">
+                  {exploreProducts[0].title}
                 </Link>
               </h3>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-neutral-600">
@@ -412,8 +347,8 @@ function Index() {
                     </div>
                   </div>
                   <h3 className="mt-5 text-sm font-medium uppercase tracking-[0.22em]">
-                    <Link to="/products/door-styles" className="hover:text-neutral-600">
-                      {p.title} →
+                    <Link to="/case-studies" className="hover:text-neutral-600">
+                      {p.title}
                     </Link>
                   </h3>
                   <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">{p.blurb}</p>
@@ -451,7 +386,7 @@ function Index() {
           </p>
           <div className="mt-8 text-center">
             <Link
-              to="/custom-cabinetry-halifax"
+              to="/about"
               className="inline-block border border-white/80 bg-white px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-transparent hover:text-white"
             >
               Discover Our Story
@@ -475,7 +410,7 @@ function Index() {
             {instagramTiles.map((tile, i) => (
               <a
                 key={i}
-                href="https://instagram.com"
+                href="https://www.instagram.com/hempstonhome"
                 target="_blank"
                 rel="noreferrer"
                 className="group relative block overflow-hidden bg-neutral-100"
@@ -551,14 +486,24 @@ function Index() {
             Physical Locations
           </p>
           <p className="mt-4 font-display text-2xl font-light uppercase tracking-[0.12em] text-white sm:text-3xl">
-            Halifax · Toronto · Long Beach
+            Halifax, Toronto and Long Beach
           </p>
-          <p className="mt-3 text-sm font-light uppercase tracking-[0.22em] text-white/70">
-            + installing coast to coast
-          </p>
+          <BuiltInCanadaLine className="mt-4 text-sm text-white/70" />
         </div>
       </section>
 
+      <section className="border-t border-white/10 bg-[oklch(0.14_0_0)] py-20 text-white">
+        <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">Questions</h2>
+          <VisibleFaq
+            items={homeFaqs}
+            className="mt-8"
+            questionClassName="font-display text-lg font-light text-white"
+            answerClassName="mt-3 text-sm leading-relaxed text-white/75"
+          />
+          <p className="mt-6 text-sm text-white/60">{WARRANTY_LABEL}.</p>
+        </div>
+      </section>
 
       <SiteFooter />
     </div>

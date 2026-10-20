@@ -17,11 +17,14 @@ import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { WorkWithUsForm } from "@/components/work-with-us-form";
 import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import ogImg from "@/assets/og/og-about.jpg";
 
-const PAGE_TITLE = "How to Work With Us | Custom Cabinetry Process | Hempston Home";
+const PAGE_TITLE = "Our Custom Cabinetry Process | Hempston Home";
 const PAGE_DESC =
-  "Our step-by-step process for custom cabinetry — from first Google Meet consultation to design, shop build, pre-staging, and white-glove install.";
+  "How a Hempston Home project works: form, video consult, design, quote, shop build and install. Built in Canada. Most kitchens take 8 to 14 weeks.";
 const ABSOLUTE_URL = `${SITE_URL}/work-with-us`;
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
 const steps = [
   {
@@ -36,7 +39,7 @@ const steps = [
     icon: CalendarDays,
     title: "Add your preferred install date",
     body:
-      "Tell us when you'd like the finished cabinetry installed. Custom lead times typically run 10–16 weeks — the earlier we know, the more precisely we can schedule shop time.",
+      "Tell us when you'd like the finished cabinetry installed. Most kitchens take 8 to 14 weeks. The earlier we know, the more precisely we can schedule shop time.",
   },
   {
     n: "03",
@@ -93,7 +96,7 @@ const faqs = [
   },
   {
     q: "How long does the full process take?",
-    a: "From first Google Meet to installed cabinetry is typically 12–20 weeks depending on scope and finishes. Design usually takes 3–5 weeks, shop build 6–10 weeks, and install 1–2 weeks.",
+    a: "Most kitchens take 8 to 14 weeks from consultation to install. Design is included in the cabinetry quote. We charge once the design is approved and the project is commissioned. A rush program can deliver qualifying kitchens in about 6 weeks.",
   },
   {
     q: "Can we meet in person instead of Google Meet?",
@@ -114,7 +117,9 @@ export const Route = createFileRoute("/work-with-us")({
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: ABSOLUTE_URL },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
     ],
@@ -164,11 +169,13 @@ function WorkWithUsPage() {
           Our process
         </p>
         <h1 className="mx-auto mt-6 max-w-3xl font-display text-4xl font-semibold uppercase leading-[1.05] tracking-[0.14em] text-white sm:text-6xl">
-          How to Work With Us
+          How Our Custom Cabinetry Process Works, Step by Step
         </h1>
+        <BuiltInCanadaLine className="mx-auto mt-6 max-w-2xl text-sm text-white/70" />
         <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/70">
-          From the first message to install day, here's exactly how a Hempston commission comes
-          together — eight deliberate steps designed to make custom cabinetry feel effortless.
+          From the first message to install day, here is how a Hempston Home commission comes
+          together. Most kitchens take 8 to 14 weeks. Qualifying projects can use the{" "}
+          <Link to="/rush-custom-kitchen-cabinets" className="underline">rush program</Link>, about 6 weeks.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a

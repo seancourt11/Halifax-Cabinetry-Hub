@@ -6,13 +6,15 @@ import { ProductCTA, ProductBreadcrumb } from "@/components/product-cta";
 import { CustomRequestCTA } from "@/components/custom-request-cta";
 import { SampleRequestLink } from "@/components/sample-request-link";
 import { breadcrumbSchema, faqPageSchema, ORG_ID, ORG_NAME, SITE_URL } from "@/lib/schema";
+import { VisibleFaq } from "@/components/visible-faq";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/og/og-door-styles.jpg";
 
 import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
 
-const PAGE_TITLE = "Cabinet Door Styles: Shaker, Slab, Raised Panel & More — Hempston";
+const PAGE_TITLE = "Custom Cabinet Door Styles | Hempston Home";
 const PAGE_DESC =
-  "Browse Hempston's custom cabinet door styles — Shaker, slim shaker, slab, raised panel, beaded, reeded and inset face frame doors. Hand-finished in any colour or stain.";
+  "Shaker, slim Shaker, slab, raised panel, beaded and reeded cabinet doors, built to order in any wood, paint or stain. Built in Canada. Request a door sample.";
 const ABSOLUTE_URL = `${SITE_URL}/products/door-styles`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -85,7 +87,7 @@ export const Route = createFileRoute("/products/door-styles")({
             "@type": "ListItem",
             position: i + 1,
             item: {
-              "@type": "Thing",
+              "@type": "Product",
               name: d.name,
               brand: { "@id": ORG_ID, "@type": "Brand", name: ORG_NAME },
               category: "Custom cabinet door",
@@ -130,13 +132,14 @@ function DoorStylesPage() {
           </div>
           <p className={`${eyebrowDark} mt-10`}>Cabinet Door Styles</p>
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-light uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-6xl">
-            Custom Door Styles + Finishes
+            Custom Cabinet Door Styles: Shaker, Slab, Inset and More
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             Hempston is a 100% custom cabinet maker. The doors below are pieces from our signature
             door collections — a starting point, not a fixed catalogue. Any profile, wood species,
             colour or stain can be built to your specification.
           </p>
+          <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/55">
             Have a reference photo, an existing door, or a proprietary profile in mind? We'll match
             it or design it from scratch.
@@ -246,6 +249,17 @@ function DoorStylesPage() {
               <strong className="text-white">reeded door</strong> on an island or range hood.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className={`border-t border-white/10 ${darkBg}`}>
+        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em] text-white">Door style questions</h2>
+          <VisibleFaq
+            items={doorFaqs}
+            questionClassName="font-display text-base uppercase tracking-[0.08em] text-white"
+            answerClassName="mt-3 text-sm leading-relaxed text-white/70"
+          />
         </div>
       </section>
 

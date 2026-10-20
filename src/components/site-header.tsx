@@ -1,12 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, Phone } from "lucide-react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -39,6 +33,34 @@ const locations = [
   { label: "Saint John", to: "/custom-cabinetry-saint-john" as const },
   { label: "St. John’s", to: "/custom-cabinetry-st-johns" as const },
 ];
+
+function NavMenu({
+  label,
+  links,
+}: {
+  label: string;
+  links: ReadonlyArray<{ label: string; to: string }>;
+}) {
+  return (
+    <details className="group relative">
+      <summary className="flex cursor-pointer list-none items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white [&::-webkit-details-marker]:hidden">
+        {label}
+        <ChevronDown className="h-3 w-3" />
+      </summary>
+      <div className="absolute left-1/2 z-50 mt-3 min-w-[14rem] -translate-x-1/2 border border-white/10 bg-[oklch(0.14_0_0)] p-2">
+        {links.map((l) => (
+          <Link
+            key={l.label}
+            to={l.to}
+            className="block px-3 py-3 text-[11px] font-medium uppercase tracking-[0.22em] text-white/75 hover:text-white"
+          >
+            {l.label}
+          </Link>
+        ))}
+      </div>
+    </details>
+  );
+}
 
 export function SiteHeader() {
   return (
@@ -87,88 +109,16 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop navigation — generous spacing, no CTA here */}
-          <nav className="mt-7 hidden items-center gap-12 lg:flex">
+          <nav className="mt-7 hidden items-center gap-12 lg:flex" aria-label="Primary">
             <Link
               to="/"
               className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white"
             >
               Home
             </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white focus:outline-none">
-                Custom Cabinets
-                <ChevronDown className="h-3 w-3" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="center"
-                className="min-w-[14rem] rounded-none border border-white/10 bg-[oklch(0.14_0_0)] p-1"
-              >
-                {customCabinets.map((l) => (
-                  <DropdownMenuItem
-                    key={l.label}
-                    asChild
-                    className="rounded-none focus:bg-white/5 focus:text-white"
-                  >
-                    <Link
-                      to={l.to}
-                      className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/70"
-                    >
-                      {l.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white focus:outline-none">
-                Studio
-                <ChevronDown className="h-3 w-3" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="center"
-                className="min-w-[12rem] rounded-none border border-white/10 bg-[oklch(0.14_0_0)] p-1"
-              >
-                {studioLinks.map((l) => (
-                  <DropdownMenuItem
-                    key={l.label}
-                    asChild
-                    className="rounded-none focus:bg-white/5 focus:text-white"
-                  >
-                    <Link
-                      to={l.to}
-                      className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/70"
-                    >
-                      {l.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white focus:outline-none">
-                Locations
-                <ChevronDown className="h-3 w-3" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="center"
-                className="min-w-[12rem] rounded-none border border-white/10 bg-[oklch(0.14_0_0)] p-1"
-              >
-                {locations.map((l) => (
-                  <DropdownMenuItem
-                    key={l.label}
-                    asChild
-                    className="rounded-none focus:bg-white/5 focus:text-white"
-                  >
-                    <Link
-                      to={l.to}
-                      className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/70"
-                    >
-                      {l.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <NavMenu label="Custom Cabinets" links={customCabinets} />
+            <NavMenu label="Studio" links={studioLinks} />
+            <NavMenu label="Locations" links={locations} />
             <Link
               to="/contact"
               className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white"

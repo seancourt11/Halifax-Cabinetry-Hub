@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/og/og-case-studies.jpg";
 import ghImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 
@@ -11,9 +12,9 @@ import nwcImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 import kentImg from "@/assets/projects/dba-kent-kitchen-1.jpg";
 import peterLoweImg from "@/assets/projects/dba-pl-island-kitchen.jpg";
 
-const PAGE_TITLE = "Cabinetry Case Studies — Custom Kitchens & Millwork | Hempston";
+const PAGE_TITLE = "Custom Kitchen Projects Nova Scotia | Hempston Home";
 const PAGE_DESC =
-  "A curated look at Hempston Home cabinetry commissions — coastal kitchens, heritage millwork, and whole-home installations designed with 31 Westgate and DB Architecture.";
+  "See custom kitchens, pantries and whole-home millwork by Hempston Home in Halifax and Nova Scotia. Built in Canada. Stories live on the designers' sites.";
 const ABSOLUTE_URL = `${SITE_URL}/case-studies`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -97,8 +98,9 @@ function CaseStudiesIndex() {
       <section className="mx-auto max-w-4xl px-5 pb-16 pt-32 text-center sm:px-8">
         <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60">Case Studies</p>
         <h1 className="mt-5 font-display text-4xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-6xl">
-          Kitchens, Pantries<br />+ Whole Homes
+          Custom Kitchen and Millwork Projects in Nova Scotia
         </h1>
+        <BuiltInCanadaLine className="mx-auto mt-6 max-w-xl text-sm text-white/75" />
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/75">
           A closer look at recent Hempston cabinetry commissions — brief, materials, and the
           craftsmanship behind each finished room. Select a project to view the full story on the designer's site.

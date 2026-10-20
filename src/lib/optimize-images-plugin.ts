@@ -1,0 +1,146 @@
+import { createHash } from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+import type { Plugin } from "vite";
+
+/**
+ * Serves imported JPG/PNG assets as resized WebP (800 and 1600) so pages
+ * do not ship multi-megabyte originals. Default export is the 1600w URL.
+ * Named export `srcSet` is "800w, 1600w" for responsive images.
+ */
+const CACHE = path.resolve("node_modules/.cache/hempston-img");
+let sharpMod: typeof import("sharp") | undefined;
+
+async function loadSharp() {
+  if (!sharpMod) {
+    sharpMod = (await import("sharp")).default as unknown as typeof import("sharp");
+  }
+  return sharpMod;
+}
+
+type Built = { fullName: string; smallName: string; width: number; height: number };
+
+const built = new Map<string, Built>();
+
+let active = 0;
+const waiters: (() => void)[] = [];
+const MAX = 2;
+
+function acquire() {
+  if (active < MAX) {
+    active += 1;
+    return Promise.resolve();
+  }
+  return new Promise<void>((resolve) => waiters.push(resolve));
+}
+
+function release() {
+  const next = waiters.shift();
+  if (next) next();
+  else active -= 1;
+}
+
+async function ensure(file: string): Promise<Built> {
+  const stat = fs.statSync(file);
+  const key = createHash("sha1")
+    .update(file)
+    .update(String(stat.mtimeMs))
+    .update(String(stat.size))
+    .digest("hex")
+    .slice(0, 16);
+  const cached = built.get(key);
+  if (cached && fs.existsSync(path.join(CACHE, cached.fullName))) return cached;
+
+  const dir = path.join(CACHE, key);
+  fs.mkdirSync(dir, { recursive: true });
+  const fullPath = path.join(dir, "1600.webp");
+  const smallPath = path.join(dir, "800.webp");
+  await acquire();
+  const sharp = await loadSharp();
+  try {
+  if (!fs.existsSync(fullPath) || !fs.existsSync(smallPath)) {
+    const input = sharp(file, { limitInputPixels: false, sequentialRead: true }).rotate();
+    await input
+      .clone()
+      .resize({ width: 1600, withoutEnlargement: true })
+      .webp({ quality: 72, effort: 4 })
+      .toFile(fullPath);
+    await sharp(file, { limitInputPixels: false, sequentialRead: true })
+      .rotate()
+      .resize({ width: 800, withoutEnlargement: true })
+      .webp({ quality: 68, effort: 4 })
+      .toFile(smallPath);
+  }
+  const meta = await sharp(fullPath).metadata();
+  const result: Built = {
+    fullName: `${key}-1600.webp`,
+    smallName: `${key}-800.webp`,
+    width: meta.width ?? 1600,
+    height: meta.height ?? 1000,
+  };
+  fs.copyFileSync(fullPath, path.join(CACHE, result.fullName));
+  fs.copyFileSync(smallPath, path.join(CACHE, result.smallName));
+  built.set(key, result);
+  return result;
+  } finally {
+    release();
+  }
+}
+
+function isAssetImage(id: string) {
+  const clean = id.split("?")[0];
+  if (!/\.(png|jpe?g)$/i.test(clean)) return false;
+  if (id.includes("?")) return false;
+  if (clean.includes(`${path.sep}node_modules${path.sep}`)) return false;
+  return clean.includes(`${path.sep}src${path.sep}assets${path.sep}`);
+}
+
+export function optimizeImagesPlugin(): Plugin {
+  return {
+    name: "hempston-optimize-images",
+    enforce: "pre",
+    async load(id) {
+      if (!isAssetImage(id)) return null;
+      const file = id.split("?")[0];
+      const img = await ensure(file);
+      const command = this.environment?.config?.command;
+      const serve = command === "serve";
+
+      if (serve) {
+        const pub = path.resolve("public/opt");
+        fs.mkdirSync(pub, { recursive: true });
+        for (const name of [img.fullName, img.smallName]) {
+          const dest = path.join(pub, name);
+          if (!fs.existsSync(dest)) fs.copyFileSync(path.join(CACHE, name), dest);
+        }
+        const fullUrl = `/opt/${img.fullName}`;
+        const smallUrl = `/opt/${img.smallName}`;
+        return [
+          `export default ${JSON.stringify(fullUrl)};`,
+          `export const srcSet = ${JSON.stringify(`${smallUrl} 800w, ${fullUrl} 1600w`)};`,
+          `export const width = ${img.width};`,
+          `export const height = ${img.height};`,
+        ].join("\n");
+      }
+
+      const fullRef = this.emitFile({
+        type: "asset",
+        name: img.fullName,
+        source: fs.readFileSync(path.join(CACHE, img.fullName)),
+      });
+      const smallRef = this.emitFile({
+        type: "asset",
+        name: img.smallName,
+        source: fs.readFileSync(path.join(CACHE, img.smallName)),
+      });
+      return [
+        `const src = import.meta.ROLLUP_FILE_URL_${fullRef};`,
+        `const small = import.meta.ROLLUP_FILE_URL_${smallRef};`,
+        `export default src;`,
+        `export const srcSet = small + " 800w, " + src + " 1600w";`,
+        `export const width = ${img.width};`,
+        `export const height = ${img.height};`,
+      ].join("\n");
+    },
+  };
+}

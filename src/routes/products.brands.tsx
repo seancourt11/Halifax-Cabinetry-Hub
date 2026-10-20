@@ -4,12 +4,13 @@ import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { ProductCTA, ProductBreadcrumb } from "@/components/product-cta";
 import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/og/og-brands.jpg";
 import calacattaBg from "@/assets/materials/detail_13_calacatta_viola_bookmatch.png";
 
-const PAGE_TITLE = "Brands We Work With: Cabinetry Suppliers — Hempston";
+const PAGE_TITLE = "Cabinet Hardware and Finish Brands | Hempston Home";
 const PAGE_DESC =
-  "The premium brands Hempston Home specifies — Blum, Sub-Zero, Rubio Monocoat, Caesarstone, Richelieu & more — for hardware, finishes, stone, appliances, and panels.";
+  "The hardware, finish, stone and appliance brands Hempston Home uses, including Blum, Rubio Monocoat, Caesarstone, Emtek and Sub-Zero. Built in Canada.";
 const ABSOLUTE_URL = `${SITE_URL}/products/brands`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -233,8 +234,9 @@ function BrandsPage() {
           </div>
           <p className={`${eyebrowDark} mt-10`}>Brands We Work With</p>
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-light uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-6xl">
-            The Brands Behind Every Hempston Build
+            Cabinet Hardware, Finish and Stone Brands We Use
           </h1>
+          <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             Every kitchen, cabinetry build, and custom installation is only as good as the components inside it. We specify and install the same materials, hardware, and finishes trusted by top designers, architects, and luxury builders worldwide — sourced through established Canadian and international suppliers.
           </p>

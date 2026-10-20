@@ -1,42 +1,51 @@
 # Hempston Home
 
-> Hempston Home designs and handcrafts custom cabinetry, bespoke kitchens, vanities and built-in millwork. Studios in Halifax (Nova Scotia), Toronto and Long Beach, with installation coast to coast across Canada and the United States.
+> Hempston Home designs and builds 100% custom kitchen cabinets, vanities and built-in millwork. Built in Canada. We install across Canada and the United States.
 
-Hempston is a 100% custom cabinetry maker. Every commission is designed, drawn, and built to the room — never flat-packed, never modular. Signature work includes painted Shaker and inset face-frame kitchens, natural white oak and walnut millwork, butler's pantries, wet bars, custom vanities, mudrooms, laundry rooms, and integrated built-ins.
+Hempston Home is a custom cabinet maker founded in 2015. Every commission is designed and built to the room. Signature work includes painted Shaker and inset face-frame kitchens, white oak and walnut millwork, butler's pantries, wet bars, custom vanities, mudrooms, laundry rooms, and built-ins.
 
-Design collaborators include 31 Westgate Design Studio, David Bourque, Sara McKeenan, and Hen House. Featured cabinetry projects include Glen Haven, Crombie House, Northwest Cove, and Modern Drift.
+## Key facts
 
-Materials, finishes, and hardware are specified from vetted suppliers: solid white oak, walnut, maple, cherry, and MDF substrates; Farrow & Ball and Benjamin Moore paint colours; Rubio Monocoat hardwax-oil stains and conversion-varnish topcoats; hardware from Top Knobs, Emtek, Rejuvenation, and Rocky Mountain Hardware; drawer and hinge systems from Blum and Blum Movento; solid-surface countertops from Caesarstone, Cambria, and natural stone yards.
-
-Services delivered on every project: kitchen design, 3D laser site measures, site coordination visits, construction-grade shop drawings, full-size custom samples, and solid-surface (stone) procurement and management.
-
-Contact: info@hempstonhome.com · (902) 719-8497
+- Business: Hempston Home, custom cabinet maker, founded 2015
+- Built in Canada. Cabinets are built in Halifax, Nova Scotia at our Bayne St shop, 6359 Bayne St, Halifax, NS B3K 2V6. Toronto and the Long Beach area facility are studios and service bases, not manufacturing sites.
+- Halifax studio (main): 6359 Bayne St, Halifax, NS B3K 2V6, Canada
+- Toronto studio: 116B Galaxy Blvd, Toronto (Etobicoke), ON M9W 4Y6, Canada
+- Long Beach area facility: 3460 Cherry Ave, Lakewood, CA 90712, USA (serves Long Beach and Southern California)
+- Phone: (902) 719-8497 | Email: info@hempstonhome.com | Hours: Monday to Friday, 9am to 5pm, by appointment
+- Service area: we install across Canada and the United States, including Halifax and Nova Scotia, Atlantic Canada, Toronto and the GTA, and the Long Beach area
+- Typical full custom kitchen: CAD $25,000 to $75,000. Vanities and built-ins usually start between $4,000 and $12,000
+- Lead time: 8 to 14 weeks from first consultation to install. Rush is a separate program, about 6 weeks for qualifying projects, with the rush premium quoted up front
+- Warranty: 5-year workmanship warranty on cabinetry. Manufacturer warranties on hardware and finishes are passed along in the project agreement
+- Consultation: free. We reply within one business day
 
 ## Overview
 
-- [Home — Custom Cabinetry + More](/): Studio overview, product categories, and recent work.
-- [Services](/services): Kitchen design, 3D site measures, shop drawings, samples, stone procurement.
-- [About Hempston](/about): Studio story, craftspeople, credentials, and design collaborators.
-- [Contact](/contact): Book a complimentary custom cabinetry consultation.
+- [Home](/): Custom cabinetry and millwork in Nova Scotia.
+- [Services](/services): Kitchen design, 3D site measures, shop drawings, samples, stone management and installation.
+- [About Hempston Home](/about): Studio story, Halifax shop, and how the team works.
+- [Contact](/contact): Book a free consultation. All three studio addresses.
+- [How we work](/work-with-us): The custom cabinetry process, 8 to 14 weeks.
+- [Rush custom kitchen cabinets](/rush-custom-kitchen-cabinets): About 6 weeks for qualifying projects.
+- [Projects](/case-studies): Custom kitchens and millwork in Nova Scotia. Project stories live on the designers' sites. There are no separate case-study URLs on this site.
 
 ## Locations
 
-- [Custom Cabinetry in Halifax, Nova Scotia](/custom-cabinetry-halifax): Halifax service area, local process, HRM permit guidance, Halifax kitchen FAQs.
+- [Halifax, Nova Scotia](/custom-cabinetry-halifax)
+- [Toronto, Ontario](/custom-cabinetry-toronto)
+- [Moncton, New Brunswick](/custom-cabinetry-moncton)
+- [Saint John, New Brunswick](/custom-cabinetry-saint-john)
+- [Fredericton, New Brunswick](/custom-cabinetry-fredericton)
+- [Charlottetown, Prince Edward Island](/custom-cabinetry-charlottetown)
+- [St. John's, Newfoundland and Labrador](/custom-cabinetry-st-johns)
+- [All service areas](/locations)
 
-## Cabinetry (Products)
+## Cabinetry
 
-- [Cabinet Door Styles](/products/door-styles): Shaker, slab, raised panel, beaded inset, reeded, and specialty profiles with white-background renders.
-- [Cabinet Construction Styles](/products/cabinet-styles): Inset face frame, full overlay face frame, and frameless (European) construction explained.
-- [Custom Colours & Finishes](/products/colours-finishes): Painted Farrow & Ball / Benjamin Moore palette, Rubio Monocoat stains, conversion-varnish topcoats.
-- [Brands We Work With](/products/brands): Suppliers, hardware, appliance panels, and finishing partners.
-
-## Case Studies
-
-- [Glen Haven Custom Kitchen](/case-studies/glen-haven): White painted Shaker kitchen with stained white oak island, Nova Scotia coastal home.
-- [Crombie House Millwork](/case-studies/crombie-house): Heritage inset face-frame cabinetry, custom mirrors, refined joinery.
-- [Northwest Cove Kitchen](/case-studies/northwest-cove): White oak island kitchen, integrated appliance panels, coastal light.
-- [Modern Drift Cabinetry](/case-studies/modern-drift): Slab-door contemporary cabinetry, laundry and mudroom built-ins.
+- [Cabinet door styles](/products/door-styles)
+- [Inset and frameless construction](/products/cabinet-styles)
+- [Paint colours and wood stains](/products/colours-finishes)
+- [Hardware, finish and stone brands](/products/brands)
 
 ## Optional
 
-- [Sitemap (XML)](/sitemap.xml)
+- [Sitemap](/sitemap.xml)
