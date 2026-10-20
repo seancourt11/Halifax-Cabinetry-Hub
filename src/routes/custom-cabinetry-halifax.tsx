@@ -1,7 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import ogImg from "@/assets/og/og-halifax.jpg";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, howToSchema, ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, ORG_SAMEAS, SITE_URL } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, howToSchema, serviceSchema, SITE_URL } from "@/lib/schema";
+import { VisibleFaq } from "@/components/visible-faq";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import {
+  HALIFAX_BUILD_SENTENCE,
+  KITCHEN_PRICE_LABEL,
+  LEAD_TIME_LABEL,
+  LOCATIONS,
+  PHONE_DISPLAY,
+  VANITY_PRICE_LABEL,
+  WARRANTY_LABEL,
+  mapsUrl,
+} from "@/lib/site";
 import {
   ChefHat,
   Bath,
@@ -18,15 +30,8 @@ import {
   MapPin,
   CheckCircle2,
   Quote,
-  Star,
 } from "lucide-react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
@@ -113,9 +118,9 @@ const mixedFeaturedDoors: typeof showcaseGallery = (() => {
 })();
 
 
-const PAGE_TITLE = "Custom Kitchen Cabinetry Halifax NS — 100% Custom | Hempston";
+const PAGE_TITLE = "Custom Kitchen Cabinets Halifax | Hempston Home";
 const PAGE_DESC =
-  "10+ yrs building custom kitchen cabinetry in Halifax & Nova Scotia. Hand-drawn, hand-built, hand-finished. Free in-home design consult · (902) 719-8497.";
+  "Custom kitchen cabinets for Halifax and HRM homes, built in Canada. Full kitchens from $25,000, about 8 to 14 weeks. Book a free in-home consultation.";
 const ABSOLUTE_URL = `${SITE_URL}/custom-cabinetry-halifax`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -142,7 +147,11 @@ const faqs = [
   },
   {
     q: "Are your cabinets made locally?",
-    a: "Yes. Every piece is designed and built by our team here in Nova Scotia, not imported flat-packed. Building locally lets us control quality, support the regional economy, and respond quickly during installation.",
+    a: `${HALIFAX_BUILD_SENTENCE} Built in Canada. We install across Canada and the United States.`,
+  },
+  {
+    q: "Do you work with contractors and designers?",
+    a: "Yes. Design and shop drawings are included in the cabinetry quote. We coordinate with your contractor, architect or interior designer, and we charge once the design is approved and the project is commissioned.",
   },
   {
     q: "Do you offer kitchen design services?",
@@ -154,7 +163,7 @@ const faqs = [
   },
   {
     q: "Do you offer a warranty on custom cabinetry?",
-    a: "We stand behind our craftsmanship with a comprehensive workmanship warranty, and we pass along manufacturer warranties on hardware and finishes. Details are provided in writing with your project agreement.",
+    a: "Every Hempston Home project includes a 5-year workmanship warranty. Manufacturer warranties on hardware and finishes are passed along. Details are in writing with your project agreement.",
   },
   {
     q: "Do I need a permit for a kitchen renovation in Halifax?",
@@ -219,8 +228,8 @@ const process = [
   {
     icon: Factory,
     step: "03",
-    title: "Local Fabrication",
-    body: "Your cabinetry is hand-built in our Nova Scotia workshop using solid hardwoods, dovetailed drawers, and conversion-grade finishes.",
+    title: "Built at the Bayne St shop",
+    body: "Your cabinetry is built in Halifax at our Bayne St shop, using solid hardwoods, dovetailed drawers, and conversion-grade finishes.",
   },
   {
     icon: Truck,
@@ -266,8 +275,8 @@ const reasons = [
   },
   {
     icon: Leaf,
-    title: "Locally Made in Nova Scotia",
-    body: "Designed and crafted by local hands — never imported flat-pack — so quality and timelines stay in our control.",
+    title: "Built in Canada",
+    body: "Cabinets are built in Halifax at our Bayne St shop. Toronto and the Long Beach area facility are studios and service bases.",
   },
   {
     icon: Clock,
@@ -308,52 +317,23 @@ export const Route = createFileRoute("/custom-cabinetry-halifax")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "@id": "https://hempstonhome.com/#halifax",
-          name: "Hempston Home — Custom Cabinetry Halifax",
-          description: PAGE_DESC,
-          image: ABSOLUTE_IMAGE,
-          areaServed: [
-            {
-              "@type": "City",
-              name: "Halifax",
-              containedInPlace: { "@type": "AdministrativeArea", name: "Nova Scotia" },
-            },
-            { "@type": "City", name: "Dartmouth" },
-            { "@type": "City", name: "Bedford" },
-            { "@type": "AdministrativeArea", name: "Nova Scotia" },
-          ],
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Halifax",
-            addressRegion: "NS",
-            addressCountry: "CA",
-          },
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: 44.6488,
-            longitude: -63.5752,
-          },
-          telephone: ORG_PHONE,
-          email: ORG_EMAIL,
-          priceRange: "$$$",
-          openingHoursSpecification: [
-            {
-              "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              opens: "09:00",
-              closes: "17:00",
-            },
-          ],
-          sameAs: ORG_SAMEAS,
-          parentOrganization: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
-          makesOffer: services.map((s) => ({
-            "@type": "Offer",
-            itemOffered: { "@type": "Service", name: s.title, description: s.body },
-          })),
-        }),
+        children: JSON.stringify(
+          serviceSchema({
+            name: "Custom Kitchen Cabinets in Halifax, Nova Scotia",
+            description: PAGE_DESC,
+            url: ABSOLUTE_URL,
+            providerId: LOCATIONS.halifax.id,
+            areaServed: [
+              {
+                "@type": "City",
+                name: "Halifax",
+                containedInPlace: { "@type": "AdministrativeArea", name: "Nova Scotia" },
+              },
+              { "@type": "AdministrativeArea", name: "Halifax Regional Municipality" },
+              { "@type": "AdministrativeArea", name: "Nova Scotia" },
+            ],
+          }),
+        ),
       },
       {
         type: "application/ld+json",
@@ -366,15 +346,7 @@ export const Route = createFileRoute("/custom-cabinetry-halifax")({
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
-        }),
+        children: JSON.stringify(faqPageSchema(faqs)),
       },
       {
         type: "application/ld+json",
@@ -430,11 +402,14 @@ function HalifaxPage() {
               </nav>
               <p className={eyebrowDark}>Halifax · Nova Scotia</p>
               <h1 className="mt-5 font-display text-5xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-7xl">
-                Custom Kitchen<br />Cabinetry in<br />Halifax
+                Custom Kitchen Cabinets in Halifax, Nova Scotia
               </h1>
               <p className="mt-8 max-w-md text-sm leading-relaxed text-white/75">
-                Hempston designs and handcrafts bespoke kitchen cabinetry, vanities, and built-ins
-                for Halifax and Nova Scotia homes — made to measure locally, never flat-packed.
+                Hempston Home designs, builds and installs custom kitchen cabinets, vanities and built-ins
+                for Halifax and Nova Scotia homes. Built in Canada. {HALIFAX_BUILD_SENTENCE}
+              </p>
+              <p className="mt-4 text-sm text-white/70">
+                <Link to="/rush-custom-kitchen-cabinets" className="underline">Need cabinets in about 6 weeks?</Link>
               </p>
               <div className="mt-10 flex flex-wrap gap-3">
                 <a href="#consultation" className={btnLight} aria-label="Book a free in-home design consultation in Halifax">Book a Free Design Consultation</a>
@@ -478,6 +453,7 @@ function HalifaxPage() {
               day. The result is cabinetry that feels inevitable — like it was always meant to be
               there.
             </p>
+            <BuiltInCanadaLine className="text-sm text-white/80" />
           </div>
         </div>
       </section>
@@ -486,14 +462,38 @@ function HalifaxPage() {
       <section className="border-y border-white/10">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-5 py-16 sm:px-8 md:grid-cols-4">
           {[
-            { n: "10+", l: "Years of cabinetmaking" },
-            { n: "100%", l: "Made in Nova Scotia" },
-            { n: "8–14", l: "Weeks, concept to install" },
-            { n: "5.0", l: "Average client rating" },
+            { n: "2015", l: "Founded" },
+            { n: "Canada", l: "Built in Canada" },
+            { n: "8 to 14", l: "Weeks, concept to install" },
+            { n: "5 yr", l: "Workmanship warranty" },
           ].map((s) => (
             <div key={s.l} className="text-center">
               <p className="font-display text-4xl font-light text-white sm:text-5xl">{s.n}</p>
               <p className="mt-3 text-[10px] font-light uppercase tracking-[0.22em] text-white/60">{s.l}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-b border-white/10">
+        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-12 sm:grid-cols-2 sm:px-8 lg:grid-cols-3">
+          {[
+            { k: "Kitchens", v: KITCHEN_PRICE_LABEL },
+            { k: "Vanities and built-ins", v: VANITY_PRICE_LABEL },
+            { k: "Lead time", v: LEAD_TIME_LABEL },
+            { k: "Warranty", v: WARRANTY_LABEL },
+            { k: "Halifax studio", v: LOCATIONS.halifax.copyLabel },
+            { k: "Phone", v: PHONE_DISPLAY },
+          ].map((item) => (
+            <div key={item.k}>
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/45">{item.k}</p>
+              {item.k === "Halifax studio" ? (
+                <a href={mapsUrl(LOCATIONS.halifax)} className="mt-2 block text-sm text-white underline">
+                  {item.v}
+                </a>
+              ) : (
+                <p className="mt-2 text-sm text-white">{item.v}</p>
+              )}
             </div>
           ))}
         </div>
@@ -619,7 +619,7 @@ function HalifaxPage() {
             </p>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {recentProjects.map((p) => (
+            {recentProjects.slice(0, 12).map((p) => (
               <div key={p.src} className="group cursor-pointer">
                 <div className="relative overflow-hidden bg-neutral-100">
                   <img
@@ -664,7 +664,7 @@ function HalifaxPage() {
             </p>
           </div>
           <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
-            {mixedFeaturedDoors.map((d) => (
+            {mixedFeaturedDoors.slice(0, 12).map((d) => (
               <figure key={d.src} className="overflow-hidden bg-white text-black">
                 <div className="aspect-[3/4] overflow-hidden bg-white">
                   <img
@@ -978,38 +978,6 @@ function HalifaxPage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className={`${lightBg} ${darkText} py-24`}>
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className={eyebrowLight}>Client Stories</p>
-            <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
-              Loved by Halifax homeowners
-            </h2>
-          </div>
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {[
-              { quote: "Hempston transformed our cramped South End kitchen into the most-used room in the house. The fit and finish are flawless.", name: "Sarah & Daniel M.", place: "South End, Halifax" },
-              { quote: "The built-ins around our fireplace look like they've always been there. Thoughtful design and beautiful craftsmanship.", name: "Priya K.", place: "Bedford, NS" },
-              { quote: "On time, on budget, and genuinely a pleasure to work with. Our new vanities feel like furniture, not cabinets.", name: "Tom R.", place: "Dartmouth, NS" },
-            ].map((t) => (
-              <figure key={t.name} className="border border-black/10 bg-white p-8">
-                <div className="flex gap-1 text-black">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="mt-5 text-sm leading-relaxed">"{t.quote}"</blockquote>
-                <figcaption className="mt-6 border-t border-black/10 pt-4">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.18em]">{t.name}</p>
-                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/55">{t.place}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section id="faq" className={`${darkBg} scroll-mt-24 py-24`}>
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
@@ -1019,18 +987,12 @@ function HalifaxPage() {
               Custom cabinetry in Halifax: FAQ
             </h2>
           </div>
-          <Accordion type="single" collapsible className="mt-12">
-            {faqs.map((f, i) => (
-              <AccordionItem key={i} value={`item-${i}`} className="border-white/15">
-                <AccordionTrigger className="text-left font-display text-base font-light uppercase tracking-[0.1em] text-white hover:no-underline">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm leading-relaxed text-white/70">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <VisibleFaq
+            items={faqs}
+            className="mt-12"
+            questionClassName="font-display text-base font-light uppercase tracking-[0.1em] text-white"
+            answerClassName="mt-3 text-sm leading-relaxed text-white/70"
+          />
         </div>
       </section>
 
@@ -1050,7 +1012,7 @@ function HalifaxPage() {
               {[
                 "Free in-home design consultation across the HRM",
                 "Itemised, written quote before any deposit",
-                "Locally handcrafted in Nova Scotia",
+                "Built in Canada at our Bayne St shop in Halifax",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-6 shrink-0 bg-black/50" />

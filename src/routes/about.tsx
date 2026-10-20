@@ -8,9 +8,9 @@ import ogImg from "@/assets/og/og-about.jpg";
 import heroImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 import workshopImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
 
-const PAGE_TITLE = "About Hempston — Custom Cabinet Makers, Halifax & Toronto";
+const PAGE_TITLE = "About Our Halifax Cabinet Makers | Hempston Home";
 const PAGE_DESC =
-  "Meet the Hempston Home studio: 10+ years crafting custom cabinetry, 100% built-to-order, coast to coast. Our craftspeople, credentials, and design collaborators.";
+  "Meet Hempston Home, a Halifax cabinet studio founded in 2015. Built in Canada at our Bayne St shop. One team designs, builds, finishes and installs.";
 const ABSOLUTE_URL = `${SITE_URL}/about`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -90,7 +90,7 @@ const values = [
   {
     n: "04",
     title: "Coast-to-Coast Install",
-    body: "Studios in Halifax, Toronto, and Long Beach — with installation crews travelling across Canada and the United States for full-home commissions.",
+    body: "Studios in Halifax, Toronto, and the Long Beach area. Cabinets are built at the Bayne St shop in Halifax. We install across Canada and the United States.",
   },
 ];
 
@@ -120,12 +120,12 @@ function AboutPage() {
           <div className="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-24">
             <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/70">About Hempston Home</p>
             <h1 className="mt-5 max-w-3xl font-display text-4xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-6xl">
-              Custom Cabinet Makers,<br />Coast to Coast
+              About Hempston Home: Custom Cabinet Makers in Halifax, NS
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80">
-              Hempston Home is a fully bespoke cabinetry studio with roots in Nova Scotia and
-              installs from the Atlantic to the Pacific. Ten-plus years of kitchens, vanities,
-              butler's pantries, and built-in millwork — designed, drawn, and built under one roof.
+              Hempston Home is a Halifax custom cabinet studio founded in 2015. Built in Canada.
+              One team designs, builds, finishes and installs every kitchen, vanity and built-in.
+              Cabinets are built in Halifax, Nova Scotia at our Bayne St shop, 6359 Bayne St, Halifax, NS B3K 2V6.
             </p>
           </div>
         </div>
@@ -135,9 +135,9 @@ function AboutPage() {
       <section className="border-b border-white/10 bg-[oklch(0.16_0_0)] py-20">
         <div className="mx-auto grid max-w-5xl gap-10 px-5 sm:grid-cols-3 sm:px-8">
           {[
-            { k: "Founded", v: "10+ years cabinet making" },
-            { k: "Studios", v: "Halifax · Toronto · Long Beach" },
-            { k: "Install", v: "Coast to coast, Canada + US" },
+            { k: "Founded", v: "2015" },
+            { k: "Halifax shop", v: "6359 Bayne St, Halifax, NS B3K 2V6" },
+            { k: "Warranty", v: "5 years on workmanship" },
           ].map((s) => (
             <div key={s.k}>
               <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">{s.k}</p>
@@ -161,11 +161,10 @@ function AboutPage() {
             it's going into.
           </p>
           <p>
-            Over the past decade our studio has grown from a single Nova Scotia workshop into a
-            multi-studio operation with design and install crews on both coasts. What hasn't
-            changed is the process: one team from concept to install, laser-measured shop
-            drawings for every commission, and finishes hand-sprayed or hand-rubbed the way
-            they were a hundred years ago.
+            Cabinets are built in Halifax, Nova Scotia at our Bayne St shop. Toronto and the Long Beach
+            area facility are studios and service bases, not manufacturing sites. Built in Canada.
+            We install across Canada and the United States. One team still takes a project from
+            concept to install, with laser-measured shop drawings and finishes sprayed or hand-rubbed.
           </p>
           <p>
             We take on kitchens, bathrooms, butler's pantries, wet bars, mudrooms, media units,

@@ -15,9 +15,9 @@ import stoneImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 import millworkImg from "@/assets/projects/crombie-warm-oak-stairwell.jpg";
 import preStageImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 
-const PAGE_TITLE = "Custom Cabinetry Services: Design, Shop Drawings & Install | Hempston";
+const PAGE_TITLE = "Kitchen Design and Cabinetry Services | Hempston Home";
 const PAGE_DESC =
-  "Kitchen design, 3D laser site measures, shop drawings, custom samples & stone management — end-to-end for every Hempston custom cabinetry commission.";
+  "Kitchen design, shop drawings, samples, stone management and installation. Built in Canada by Hempston Home. Every project includes all of it.";
 const ABSOLUTE_URL = `${SITE_URL}/services`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -233,12 +233,18 @@ function ServicesPage() {
         <div className="absolute inset-0 flex items-end">
           <div className="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-24">
             <p className="tracked text-xs font-medium text-white/70">Project Services</p>
-            <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold uppercase leading-[1.05] tracking-[0.12em] text-white text-balance sm:text-6xl">
-              Bespoke Solutions for Every Project
+            <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold uppercase leading-[1.05] tracking-[0.08em] text-white text-balance sm:text-5xl">
+              Kitchen Design, Shop Drawings and Cabinet Installation Services
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80">
-              From first sketch to final install, every Hempston commission is guided by a single
-              team through eight deliberate stages of design, documentation, fabrication, and coordination.
+              From first sketch to final install, every Hempston Home commission is guided by one
+              team through design, documentation, fabrication, and installation. Built in Canada.
+              Design and shop drawings are included in the cabinetry quote. Full kitchens typically
+              run from $25,000 to $75,000, and most projects take 8 to 14 weeks.
+            </p>
+            <p className="mt-6 flex flex-wrap gap-4 text-sm">
+              <Link to="/work-with-us" className="underline">See the full process</Link>
+              <Link to="/rush-custom-kitchen-cabinets" className="underline">Need a rush timeline?</Link>
             </p>
           </div>
         </div>

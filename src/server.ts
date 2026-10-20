@@ -40,6 +40,17 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+      if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
+        url.pathname = url.pathname.replace(/\/+$/, "");
+        return new Response(null, {
+          status: 308,
+          headers: {
+            Location: url.toString(),
+            "Cache-Control": "public, max-age=31536000",
+          },
+        });
+      }
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

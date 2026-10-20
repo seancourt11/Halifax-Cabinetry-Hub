@@ -18,7 +18,7 @@ export const Route = createFileRoute("/sitemap-index.xml")({
           `<?xml version="1.0" encoding="UTF-8"?>`,
           `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
           ...sitemaps.map(
-            (s) => `  <sitemap><loc>${s}</loc></sitemap>`,
+            (s) => `  <sitemap><loc>${s}</loc><lastmod>2026-10-20</lastmod></sitemap>`,
           ),
           `</sitemapindex>`,
         ].join("\n");
