@@ -5,13 +5,14 @@ import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
 import monctonHero from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
-import heroSmall from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg?w=800";
 
 const PAGE_TITLE = "Custom Kitchen Cabinets Moncton | Hempston Home";
 const PAGE_DESC =
-  "Custom kitchen cabinets, kitchen design and custom kitchen doors for Moncton, Dieppe, Riverview and Shediac. Built in Canada. Consult in person or by video call.";
+  "Custom kitchen cabinets and kitchen design for Moncton, Dieppe, Riverview and Shediac. Built in Canada. Consult in person or by video call.";
 const ABSOLUTE_URL = `${SITE_URL}/custom-cabinetry-moncton`;
 const HERO_ALT =
   "Custom painted built-in cabinets and fireplace surround for a home in Dieppe, NB by Hempston Home";
@@ -98,17 +99,7 @@ export const Route = createFileRoute("/custom-cabinetry-moncton")({
       { name: "twitter:description", content: PAGE_DESC },
       { name: "twitter:image", content: `${SITE_URL}${monctonHero}` },
     ],
-    links: [
-      { rel: "canonical", href: ABSOLUTE_URL },
-      {
-        rel: "preload",
-        as: "image",
-        href: heroSmall,
-        imageSrcSet: `${heroSmall} 800w, ${monctonHero} 1600w`,
-        imageSizes: "100vw",
-        fetchPriority: "high",
-      },
-    ],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(monctonHero)],
     scripts: [
       {
         type: "application/ld+json",
@@ -155,9 +146,8 @@ function MonctonPage() {
       <SiteHeader />
 
       <section className="relative">
-        <img
+        <ResponsiveImg
           src={monctonHero}
-          srcSet={`${heroSmall} 800w, ${monctonHero} 1600w`}
           sizes="100vw"
           alt={HERO_ALT}
           width={1600}

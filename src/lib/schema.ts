@@ -112,46 +112,63 @@ function locationEntity(loc: ShopLocation) {
   };
 }
 
-/** One Organization plus three location branches. Rendered once from the root. */
-export function organizationJsonLd() {
+/**
+ * Service-area city pages (every cabinetry city except the Halifax and Toronto
+ * offices) must not carry LocalBusiness or a street address.
+ */
+export function isServiceAreaPath(pathname: string) {
+  const path = pathname.replace(/\/$/, "") || "/";
+  return (
+    path.startsWith("/custom-cabinetry-") &&
+    path !== "/custom-cabinetry-halifax" &&
+    path !== "/custom-cabinetry-toronto"
+  );
+}
+
+/** One Organization. Office pages also include the three real locations. */
+export function organizationJsonLd(opts?: { includeOffices?: boolean }) {
+  const includeOffices = opts?.includeOffices !== false;
+  const organization: Record<string, unknown> = {
+    "@type": "Organization",
+    "@id": ORG_ID,
+    name: BRAND,
+    url: `${SITE_URL}/`,
+    logo: {
+      "@type": "ImageObject",
+      url: LOGO_URL,
+      width: 512,
+      height: 512,
+    },
+    image: LOGO_URL,
+    description: ENTITY_SENTENCE,
+    email: EMAIL,
+    telephone: PHONE_E164,
+    foundingDate: FOUNDING_YEAR,
+    priceRange: "$$$",
+    areaServed: [
+      { "@type": "Country", name: "Canada" },
+      { "@type": "Country", name: "United States" },
+    ],
+    sameAs: ORG_SAMEAS,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: EMAIL,
+      telephone: PHONE_E164,
+      areaServed: ["CA", "US"],
+      availableLanguage: ["English"],
+    },
+    openingHoursSpecification: openingHours(),
+  };
+  if (includeOffices) {
+    organization.address = postalAddress(LOCATION_LIST[0]);
+    organization.location = LOCATION_LIST.map((loc) => ({ "@id": loc.id }));
+  }
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        "@id": ORG_ID,
-        name: BRAND,
-        url: `${SITE_URL}/`,
-        logo: {
-          "@type": "ImageObject",
-          url: LOGO_URL,
-          width: 512,
-          height: 512,
-        },
-        image: LOGO_URL,
-        description: ENTITY_SENTENCE,
-        email: EMAIL,
-        telephone: PHONE_E164,
-        foundingDate: FOUNDING_YEAR,
-        priceRange: "$$$",
-        address: postalAddress(LOCATION_LIST[0]),
-        location: LOCATION_LIST.map((loc) => ({ "@id": loc.id })),
-        areaServed: [
-          { "@type": "Country", name: "Canada" },
-          { "@type": "Country", name: "United States" },
-        ],
-        sameAs: ORG_SAMEAS,
-        contactPoint: {
-          "@type": "ContactPoint",
-          contactType: "customer support",
-          email: EMAIL,
-          telephone: PHONE_E164,
-          areaServed: ["CA", "US"],
-          availableLanguage: ["English"],
-        },
-        openingHoursSpecification: openingHours(),
-      },
-      ...LOCATION_LIST.map(locationEntity),
+      organization,
+      ...(includeOffices ? LOCATION_LIST.map(locationEntity) : []),
       {
         "@type": "WebSite",
         "@id": WEBSITE_ID,

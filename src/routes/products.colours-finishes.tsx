@@ -12,13 +12,26 @@ import { insetGallery2026 } from "@/data/door-gallery-2026";
 import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import { ResponsiveImg } from "@/components/responsive-img";
 import ogImg from "@/assets/og/og-colours-finishes.jpg";
 
 const finishFaqs = [
-  { q: "Can Hempston match any paint colour on cabinetry?", a: "Yes — we can match virtually any paint colour, including Farrow & Ball, Benjamin Moore, Sherwin-Williams, and custom mixes. The palette on this page is our reference edit, not a limit." },
-  { q: "What is a hardwax-oil wood stain?", a: "A hardwax oil is a penetrating wood finish (like Rubio Monocoat) that colours and protects hardwood in a single hand-rubbed application. It leaves a natural low-sheen surface that shows the wood's grain." },
-  { q: "What finish do you use on painted cabinets?", a: "Our painted cabinets are hand-sprayed with a professional conversion varnish or waterborne 2K polyurethane, cured in a dedicated finishing room. Hard, low-sheen, and repairable." },
-  { q: "Can I get a real painted or stained sample before I decide?", a: "Yes. We produce hand-made samples in your exact wood species, paint colour, or hardwax-oil stain before fabrication." },
+  {
+    q: "Can Hempston match any paint colour on cabinetry?",
+    a: "Yes — we can match virtually any paint colour, including Farrow & Ball, Benjamin Moore, Sherwin-Williams, and custom mixes. The palette on this page is our reference edit, not a limit.",
+  },
+  {
+    q: "What is a hardwax-oil wood stain?",
+    a: "A hardwax oil is a penetrating wood finish (like Rubio Monocoat) that colours and protects hardwood in a single hand-rubbed application. It leaves a natural low-sheen surface that shows the wood's grain.",
+  },
+  {
+    q: "What finish do you use on painted cabinets?",
+    a: "Our painted cabinets are hand-sprayed with a professional conversion varnish or waterborne 2K polyurethane, cured in a dedicated finishing room. Hard, low-sheen, and repairable.",
+  },
+  {
+    q: "Can I get a real painted or stained sample before I decide?",
+    a: "Yes. We produce hand-made samples in your exact wood species, paint colour, or hardwax-oil stain before fabrication.",
+  },
 ];
 
 const PAGE_TITLE = "Cabinet Paint Colours and Stains | Hempston Home";
@@ -84,7 +97,10 @@ function ColoursFinishesPage() {
 
       {/* HERO */}
       <section className={`relative overflow-hidden ${darkBg}`}>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" aria-hidden="true" />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70"
+          aria-hidden="true"
+        />
         <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 sm:pt-20 sm:pb-28">
           <div className="text-white/80">
             <ProductBreadcrumb label="Colours & Finishes" />
@@ -95,9 +111,9 @@ function ColoursFinishesPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             The painted palette includes Noto White, Cefalù Linen, Vieux-Port Plaster, Cassis Mist,
-            Exmoor Berry, El Hierro Green, Salcombe Green, Aeolian Blue, La Palma Navy and Palermo Noir.
-            Stains include Etna Oak, Lanzarote Oak and Tenerife Walnut. The palette is matched to
-            Farrow and Ball and Benjamin Moore.
+            Exmoor Berry, El Hierro Green, Salcombe Green, Aeolian Blue, La Palma Navy and Palermo
+            Noir. Stains include Etna Oak, Lanzarote Oak and Tenerife Walnut. The palette is matched
+            to Farrow and Ball and Benjamin Moore.
           </p>
           <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/55">
@@ -106,7 +122,6 @@ function ColoursFinishesPage() {
           </p>
         </div>
       </section>
-
 
       <CustomRequestCTA
         tone="dark"
@@ -143,7 +158,7 @@ function ColoursFinishesPage() {
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {visiblePaints.map((c) => (
                   <div key={c.id} className="border-y border-black/10 bg-white">
-                    <img
+                    <ResponsiveImg
                       src={c.image}
                       alt={`${c.name} painted cabinet door sample`}
                       loading="lazy"
@@ -176,7 +191,9 @@ function ColoursFinishesPage() {
                     onClick={() => setPaintsExpanded((v) => !v)}
                     className="border border-black bg-black px-8 py-4 text-[11px] font-medium uppercase tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-black"
                   >
-                    {paintsExpanded ? "Show fewer colours" : `Show all ${paintsWithDoors.length} signature colours`}
+                    {paintsExpanded
+                      ? "Show fewer colours"
+                      : `Show all ${paintsWithDoors.length} signature colours`}
                   </button>
                   <p className="max-w-md text-xs leading-relaxed text-black/55">
                     A selection from our signature palette — Hempston can match virtually any paint
@@ -185,66 +202,74 @@ function ColoursFinishesPage() {
                 </div>
               )}
 
-          {/* Neutral inset face frame highlight */}
-          <div className="mt-14 border border-black/10 bg-white p-6 sm:p-8">
-            <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-              <div>
-                <p className={eyebrowLight}>Inset Face Frame</p>
-                <h3 className="mt-4 font-display text-2xl font-light uppercase leading-[1.05] tracking-[0.06em] text-black sm:text-3xl">
-                  Neutrals on an inset face frame
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-black/65 sm:text-base">
-                  Hand-sprayed conversion varnish on furniture-grade inset face frames. The
-                  door sits flush inside the frame for a tailored, heritage look. Shown below
-                  in <em>Tracadie</em> and <em>Vieux-Port Plaster</em> — two of our
-                  most-requested neutrals. Any Farrow &amp; Ball, Benjamin Moore or custom
-                  colour can be matched on the same construction.
-                </p>
-                <div className="mt-6">
-                  <SampleRequestLink
-                    tone="light"
-                    projectType="Neutral inset face frame sample"
-                    message="Please prepare a hand-painted neutral conversion-varnish sample on an inset face-frame door."
-                    label="Request an inset face-frame sample"
-                  />
+              {/* Neutral inset face frame highlight */}
+              <div className="mt-14 border border-black/10 bg-white p-6 sm:p-8">
+                <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+                  <div>
+                    <p className={eyebrowLight}>Inset Face Frame</p>
+                    <h3 className="mt-4 font-display text-2xl font-light uppercase leading-[1.05] tracking-[0.06em] text-black sm:text-3xl">
+                      Neutrals on an inset face frame
+                    </h3>
+                    <p className="mt-4 text-sm leading-relaxed text-black/65 sm:text-base">
+                      Hand-sprayed conversion varnish on furniture-grade inset face frames. The door
+                      sits flush inside the frame for a tailored, heritage look. Shown below in{" "}
+                      <em>Tracadie</em> and <em>Vieux-Port Plaster</em> — two of our most-requested
+                      neutrals. Any Farrow &amp; Ball, Benjamin Moore or custom colour can be
+                      matched on the same construction.
+                    </p>
+                    <div className="mt-6">
+                      <SampleRequestLink
+                        tone="light"
+                        projectType="Neutral inset face frame sample"
+                        message="Please prepare a hand-painted neutral conversion-varnish sample on an inset face-frame door."
+                        label="Request an inset face-frame sample"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <figure className="border-y border-black/10 bg-white">
+                      <ResponsiveImg
+                        src={insetGallery2026[1].src}
+                        alt="Tracadie painted inset face frame cabinet door"
+                        loading="lazy"
+                        width={640}
+                        height={800}
+                        className="aspect-[5/6] w-full object-cover"
+                      />
+                      <figcaption className="border-t border-black/10 p-3 text-center">
+                        <p className="font-display text-[11px] font-light uppercase tracking-[0.18em]">
+                          Tracadie
+                        </p>
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/55">
+                          Inset Face Frame
+                        </p>
+                      </figcaption>
+                    </figure>
+                    <figure className="border-y border-black/10 bg-white">
+                      <ResponsiveImg
+                        src={insetGallery2026[0].src}
+                        alt="Vieux-Port Plaster painted inset face frame cabinet door"
+                        loading="lazy"
+                        width={640}
+                        height={800}
+                        className="aspect-[5/6] w-full object-cover"
+                      />
+                      <figcaption className="border-t border-black/10 p-3 text-center">
+                        <p className="font-display text-[11px] font-light uppercase tracking-[0.18em]">
+                          Vieux-Port Plaster
+                        </p>
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/55">
+                          Inset Face Frame
+                        </p>
+                      </figcaption>
+                    </figure>
+                  </div>
                 </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <figure className="border-y border-black/10 bg-white">
-                  <img
-                    src={insetGallery2026[1].src}
-                    alt="Tracadie painted inset face frame cabinet door"
-                    loading="lazy"
-                    width={640}
-                    height={800}
-                    className="aspect-[5/6] w-full object-cover"
-                  />
-                  <figcaption className="border-t border-black/10 p-3 text-center">
-                    <p className="font-display text-[11px] font-light uppercase tracking-[0.18em]">Tracadie</p>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/55">Inset Face Frame</p>
-                  </figcaption>
-                </figure>
-                <figure className="border-y border-black/10 bg-white">
-                  <img
-                    src={insetGallery2026[0].src}
-                    alt="Vieux-Port Plaster painted inset face frame cabinet door"
-                    loading="lazy"
-                    width={640}
-                    height={800}
-                    className="aspect-[5/6] w-full object-cover"
-                  />
-                  <figcaption className="border-t border-black/10 p-3 text-center">
-                    <p className="font-display text-[11px] font-light uppercase tracking-[0.18em]">Vieux-Port Plaster</p>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/55">Inset Face Frame</p>
-                  </figcaption>
-                </figure>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
       {/* WOOD STAINS — dark band */}
       <section id="stains" className={`border-t border-white/10 ${darkBg} text-white`}>
@@ -270,7 +295,7 @@ function ColoursFinishesPage() {
               {woodStains.map((s) => (
                 <div key={s.id} className="border border-white/10 bg-black/40">
                   {s.image ? (
-                    <img
+                    <ResponsiveImg
                       src={s.image}
                       alt={`${s.name} hardwax-oil stain sample on white oak`}
                       loading="lazy"
@@ -300,7 +325,6 @@ function ColoursFinishesPage() {
                       />
                     </div>
                   </div>
-
                 </div>
               ))}
             </div>
@@ -310,7 +334,9 @@ function ColoursFinishesPage() {
 
       <section className={`border-t border-white/10 ${darkBg}`}>
         <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
-          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">Finish questions</h2>
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">
+            Finish questions
+          </h2>
           <VisibleFaq
             items={finishFaqs}
             questionClassName="font-display text-base uppercase tracking-[0.08em] text-white"
@@ -324,7 +350,6 @@ function ColoursFinishesPage() {
         heading="Request a sample of a custom colour or stain"
         body="Bring us any Farrow & Ball, Benjamin Moore, Sherwin-Williams, or Rubio Monocoat reference — or a colour of your own — and we'll hand-finish a real sample on your chosen species so you can approve it in your own light."
       />
-
 
       <StickyConsultationCTA />
       <SiteFooter />

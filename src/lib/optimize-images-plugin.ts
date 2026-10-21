@@ -4,10 +4,11 @@ import path from "node:path";
 import type { Plugin } from "vite";
 
 /**
- * Serves imported JPG/PNG assets as resized WebP (800 and 1600) so pages
- * do not ship multi-megabyte originals. Default export is the 1600w URL.
- * Import `file.jpg?w=800` for the mobile URL. The default import is 1600w.
- * WebP output does not keep EXIF or other metadata.
+ * Serves imported JPG/PNG assets as resized WebP and AVIF (800 and 1600)
+ * so pages do not ship multi-megabyte originals. Default export is the
+ * 1600w WebP URL. Import `file.jpg?w=800` for the 800w WebP URL.
+ * AVIF files use the same hash with an `.avif` extension.
+ * Output does not keep EXIF or other metadata.
  */
 const CACHE = path.resolve("node_modules/.cache/hempston-img");
 let sharpMod: typeof import("sharp") | undefined;
@@ -19,7 +20,18 @@ async function loadSharp() {
   return sharpMod;
 }
 
-type Built = { fullName: string; smallName: string; width: number; height: number };
+type Built = {
+  fullName: string;
+  smallName: string;
+  fullAvifName: string;
+  smallAvifName: string;
+  width: number;
+  height: number;
+};
+
+function assetNames(img: Built) {
+  return [img.fullName, img.smallName, img.fullAvifName, img.smallAvifName];
+}
 
 const built = new Map<string, Built>();
 const emitted = new Set<string>();
@@ -51,38 +63,68 @@ async function ensure(file: string): Promise<Built> {
     .digest("hex")
     .slice(0, 16);
   const cached = built.get(key);
-  if (cached && fs.existsSync(path.join(CACHE, cached.fullName))) return cached;
+  if (
+    cached &&
+    fs.existsSync(path.join(CACHE, cached.fullName)) &&
+    fs.existsSync(path.join(CACHE, cached.fullAvifName))
+  ) {
+    return cached;
+  }
 
   const dir = path.join(CACHE, key);
   fs.mkdirSync(dir, { recursive: true });
   const fullPath = path.join(dir, "1600.webp");
   const smallPath = path.join(dir, "800.webp");
+  const fullAvifPath = path.join(dir, "1600.avif");
+  const smallAvifPath = path.join(dir, "800.avif");
   await acquire();
-  const sharp = await loadSharp();
   try {
+    const sharp = await loadSharp();
+    const inputOpts = { limitInputPixels: false, sequentialRead: true } as const;
     if (!fs.existsSync(fullPath) || !fs.existsSync(smallPath)) {
-      // rotate() bakes in orientation. WebP is written without EXIF, GPS, or ICC.
-      const input = sharp(file, { limitInputPixels: false, sequentialRead: true }).rotate();
-      await input
-        .clone()
+      // rotate() bakes in orientation. Output is written without EXIF, GPS, or ICC.
+      await sharp(file, inputOpts)
+        .rotate()
         .resize({ width: 1600, withoutEnlargement: true })
         .webp({ quality: 72, effort: 4 })
         .toFile(fullPath);
-      await sharp(file, { limitInputPixels: false, sequentialRead: true })
+      await sharp(file, inputOpts)
         .rotate()
         .resize({ width: 800, withoutEnlargement: true })
         .webp({ quality: 64, effort: 4 })
         .toFile(smallPath);
     }
+    if (!fs.existsSync(fullAvifPath) || !fs.existsSync(smallAvifPath)) {
+      await sharp(file, inputOpts)
+        .rotate()
+        .resize({ width: 1600, withoutEnlargement: true })
+        .avif({ quality: 45, effort: 2 })
+        .toFile(fullAvifPath);
+      await sharp(file, inputOpts)
+        .rotate()
+        .resize({ width: 800, withoutEnlargement: true })
+        .avif({ quality: 40, effort: 2 })
+        .toFile(smallAvifPath);
+    }
     const meta = await sharp(fullPath).metadata();
     const result: Built = {
       fullName: `${key}-1600.webp`,
       smallName: `${key}-800.webp`,
+      fullAvifName: `${key}-1600.avif`,
+      smallAvifName: `${key}-800.avif`,
       width: meta.width ?? 1600,
       height: meta.height ?? 1000,
     };
-    fs.copyFileSync(fullPath, path.join(CACHE, result.fullName));
-    fs.copyFileSync(smallPath, path.join(CACHE, result.smallName));
+    for (const name of assetNames(result)) {
+      const from = name.endsWith("-1600.webp")
+        ? fullPath
+        : name.endsWith("-800.webp")
+          ? smallPath
+          : name.endsWith("-1600.avif")
+            ? fullAvifPath
+            : smallAvifPath;
+      fs.copyFileSync(from, path.join(CACHE, name));
+    }
     built.set(key, result);
     return result;
   } finally {
@@ -114,7 +156,7 @@ export function optimizeImagesPlugin(): Plugin {
       if (serve) {
         const pub = path.resolve("public/opt");
         fs.mkdirSync(pub, { recursive: true });
-        for (const name of [img.fullName, img.smallName]) {
+        for (const name of assetNames(img)) {
           const dest = path.join(pub, name);
           if (!fs.existsSync(dest)) fs.copyFileSync(path.join(CACHE, name), dest);
         }
@@ -130,7 +172,7 @@ export function optimizeImagesPlugin(): Plugin {
       const envName = this.environment?.name ?? "";
       const isServer = envName === "ssr" || envName.includes("ssr");
       if (!isServer) {
-        for (const name of [img.fullName, img.smallName]) {
+        for (const name of assetNames(img)) {
           if (emitted.has(name)) continue;
           emitted.add(name);
           this.emitFile({

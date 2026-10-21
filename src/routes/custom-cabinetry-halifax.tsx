@@ -9,6 +9,8 @@ import {
   SITE_URL,
 } from "@/lib/schema";
 import { VisibleFaq } from "@/components/visible-faq";
+import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import {
   HALIFAX_BUILD_SENTENCE,
@@ -62,7 +64,6 @@ import projNwcNavyTile from "@/assets/projects/nwc-navy-tile-backsplash.jpg";
 import projGhWhite from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 
 import projGhOakIsland from "@/assets/projects/gh-oak-island-painted-beams.jpg";
-import heroSmall from "@/assets/projects/gh-oak-island-painted-beams.jpg?w=800";
 import projGhButler from "@/assets/projects/gh-butler-pantry-glass.jpg";
 
 import projMdKitchen from "@/assets/projects/md-white-kitchen-brass-pendants.jpg";
@@ -262,7 +263,7 @@ const mixedFeaturedDoors: typeof showcaseGallery = (() => {
   return out;
 })();
 
-const PAGE_TITLE = "Custom Kitchen Cabinets & Cabinet Maker in Halifax | Hempston Home";
+const PAGE_TITLE = "Custom Kitchen Cabinets in Halifax | Hempston Home";
 const PAGE_DESC =
   "Custom kitchen cabinets from a cabinet maker in Halifax. Designed and built at 6359 Bayne St, Halifax, NS B3K 2V6. Serving Dartmouth, Bedford and HRM.";
 const ABSOLUTE_URL = `${SITE_URL}/custom-cabinetry-halifax`;
@@ -454,17 +455,7 @@ export const Route = createFileRoute("/custom-cabinetry-halifax")({
       { name: "twitter:description", content: PAGE_DESC },
       { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [
-      { rel: "canonical", href: ABSOLUTE_URL },
-      {
-        rel: "preload",
-        as: "image",
-        href: heroSmall,
-        imageSrcSet: `${heroSmall} 800w, ${projGhOakIsland} 1600w`,
-        imageSizes: "100vw",
-        fetchPriority: "high",
-      },
-    ],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(projGhOakIsland)],
     scripts: [
       {
         type: "application/ld+json",
@@ -535,9 +526,8 @@ function HalifaxPage() {
 
       {/* HERO */}
       <section className="relative">
-        <img
+        <ResponsiveImg
           src={projGhOakIsland}
-          srcSet={`${heroSmall} 800w, ${projGhOakIsland} 1600w`}
           sizes="100vw"
           alt="Custom kitchen cabinets in a Halifax home: painted shaker perimeter and a white oak island by Hempston Home"
           width={1600}
@@ -760,12 +750,13 @@ function HalifaxPage() {
       <section className={`${lightBg} ${darkText} py-24`}>
         <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
           <div className="overflow-hidden">
-            <img
+            <ResponsiveImg
               src={projGlenHaven}
               alt="Glen Haven custom white painted perimeter cabinetry with stained white oak island by Hempston"
               width={1200}
               height={1200}
               loading="lazy"
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="h-[560px] w-full object-cover"
             />
           </div>
@@ -825,12 +816,13 @@ function HalifaxPage() {
             </ul>
           </div>
           <div className="order-1 overflow-hidden lg:order-2">
-            <img
+            <ResponsiveImg
               src={dovetailDrawers}
               alt="Custom red built-in pantry and bar cabinetry with glass doors and brass hardware in a Halifax home"
               width={1200}
               height={900}
               loading="lazy"
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="h-[560px] w-full object-cover"
             />
           </div>
@@ -855,12 +847,13 @@ function HalifaxPage() {
             {recentProjects.slice(0, 12).map((p) => (
               <div key={p.src} className="group cursor-pointer">
                 <div className="relative overflow-hidden bg-neutral-100">
-                  <img
+                  <ResponsiveImg
                     src={p.src}
                     alt={p.alt}
                     width={1200}
                     height={900}
                     loading="lazy"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-x-0 bottom-4 flex justify-center px-4">
@@ -906,12 +899,13 @@ function HalifaxPage() {
             {mixedFeaturedDoors.slice(0, 12).map((d) => (
               <figure key={d.src} className="overflow-hidden bg-white text-black">
                 <div className="aspect-[3/4] overflow-hidden bg-white">
-                  <img
+                  <ResponsiveImg
                     src={d.src}
                     alt={`${d.name} — ${d.profile} custom cabinet door in ${d.finish}`}
                     width={600}
                     height={800}
                     loading="lazy"
+                    sizes="(min-width: 1024px) 25vw, 50vw"
                     className="h-full w-full object-cover"
                   />
                 </div>
@@ -1183,12 +1177,13 @@ function HalifaxPage() {
 
       {/* CRAFT DETAIL — pull quote */}
       <section className="relative isolate overflow-hidden">
-        <img
+        <ResponsiveImg
           src={craftDetail}
           alt="Close-up detail of handcrafted custom cabinetry from the Hempston workshop"
           width={1600}
           height={900}
           loading="lazy"
+          sizes="100vw"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-black/65" />
@@ -1233,12 +1228,13 @@ function HalifaxPage() {
               },
             ].map((img) => (
               <div key={img.alt} className="overflow-hidden">
-                <img
+                <ResponsiveImg
                   src={img.src}
                   alt={img.alt}
                   width={1200}
                   height={900}
                   loading="lazy"
+                  sizes="(min-width: 1024px) 33vw, 100vw"
                   className="aspect-[4/3] h-full w-full object-cover"
                 />
               </div>
@@ -1284,12 +1280,13 @@ function HalifaxPage() {
 
       {/* AREAS SERVED */}
       <section className="relative isolate overflow-hidden">
-        <img
+        <ResponsiveImg
           src={cityImg}
           alt="Halifax, Nova Scotia waterfront with historic Maritime architecture"
           width={1600}
           height={900}
           loading="lazy"
+          sizes="100vw"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-black/80" />

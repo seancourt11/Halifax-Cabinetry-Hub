@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { GalleryImage } from "@/data/project-galleries";
+import { ResponsiveImg } from "@/components/responsive-img";
 
 type Props = {
   images: GalleryImage[];
@@ -18,7 +19,8 @@ export function ProjectGallery({
   const [active, setActive] = useState<number | null>(null);
 
   const close = () => setActive(null);
-  const prev = () => setActive((i) => (i === null ? null : (i - 1 + images.length) % images.length));
+  const prev = () =>
+    setActive((i) => (i === null ? null : (i - 1 + images.length) % images.length));
   const next = () => setActive((i) => (i === null ? null : (i + 1) % images.length));
 
   return (
@@ -39,10 +41,11 @@ export function ProjectGallery({
               className="group relative aspect-[4/5] overflow-hidden bg-neutral-900"
               aria-label={`Open image: ${img.alt}`}
             >
-              <img
+              <ResponsiveImg
                 src={img.url}
                 alt={img.alt}
                 loading="lazy"
+                sizes="(min-width: 768px) 33vw, 50vw"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </button>
@@ -59,7 +62,10 @@ export function ProjectGallery({
         >
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); close(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              close();
+            }}
             className="absolute right-4 top-4 rounded-full border border-white/20 p-2 text-white hover:bg-white/10"
             aria-label="Close"
           >
@@ -67,21 +73,28 @@ export function ProjectGallery({
           </button>
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); prev(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              prev();
+            }}
             className="absolute left-4 rounded-full border border-white/20 p-2 text-white hover:bg-white/10"
             aria-label="Previous"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
-          <img
+          <ResponsiveImg
             src={images[active].url}
             alt={images[active].alt}
+            sizes="92vw"
             className="max-h-[90vh] max-w-[92vw] object-contain"
             onClick={(e) => e.stopPropagation()}
           />
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); next(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              next();
+            }}
             className="absolute right-4 rounded-full border border-white/20 p-2 text-white hover:bg-white/10"
             aria-label="Next"
           >

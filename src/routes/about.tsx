@@ -13,6 +13,8 @@ import {
   SITE_URL,
 } from "@/lib/schema";
 import { ENTITY_SENTENCE } from "@/lib/site";
+import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import ogImg from "@/assets/og/og-about.jpg";
 import heroImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 import workshopImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
@@ -38,7 +40,7 @@ export const Route = createFileRoute("/about")({
       { name: "twitter:description", content: PAGE_DESC },
       { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(heroImg)],
     scripts: [
       {
         type: "application/ld+json",
@@ -118,11 +120,13 @@ function AboutPage() {
 
       {/* Hero */}
       <section className="relative">
-        <img
+        <ResponsiveImg
           src={heroImg}
+          sizes="100vw"
           alt="Hempston Home custom white painted shaker kitchen cabinetry with brass hood in Glen Haven, Nova Scotia"
           width={1600}
           height={1000}
+          fetchPriority="high"
           className="h-[70vh] min-h-[500px] w-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
@@ -220,8 +224,9 @@ function AboutPage() {
 
       {/* Craft / workshop image */}
       <section className="relative">
-        <img
+        <ResponsiveImg
           src={workshopImg}
+          sizes="100vw"
           alt="Hand-detailed custom white oak cabinet by Hempston Home craftspeople"
           width={1600}
           height={900}

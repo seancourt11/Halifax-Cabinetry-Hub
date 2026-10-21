@@ -21,6 +21,8 @@ import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
 import { buildCityFaqs, cityPages, nearbyCitiesFor, type CityPageData } from "@/data/city-pages";
 import { cityServiceNotes } from "@/data/city-service-notes";
@@ -334,17 +336,7 @@ export function cityHead(city: CityPageData) {
       { name: "twitter:description", content: desc },
       { name: "twitter:image", content: absoluteImage },
     ],
-    links: [
-      { rel: "canonical", href: absoluteUrl },
-      {
-        rel: "preload",
-        as: "image",
-        href: share.small,
-        imageSrcSet: `${share.small} 800w, ${share.full} 1600w`,
-        imageSizes: "100vw",
-        fetchpriority: "high",
-      },
-    ],
+    links: [{ rel: "canonical", href: absoluteUrl }, heroImagePreload(share.full)],
     scripts: [
       {
         type: "application/ld+json",
@@ -428,9 +420,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
 
       {/* HERO */}
       <section className="relative">
-        <img
+        <ResponsiveImg
           src={heroImg.full}
-          srcSet={`${heroImg.small} 800w, ${heroImg.full} 1600w`}
           sizes="100vw"
           alt="Custom kitchen cabinetry by Hempston Home"
           width={1600}
@@ -648,12 +639,13 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             {shownProjects.map((p) => (
               <figure key={p.title + p.src} className="group overflow-hidden">
                 <div className="relative overflow-hidden">
-                  <img
+                  <ResponsiveImg
                     src={p.src}
                     alt={p.alt}
                     width={1200}
                     height={900}
                     loading="lazy"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                   <div className="pointer-events-none absolute bottom-4 left-4 rounded-full border border-white/25 bg-white/15 px-4 py-1.5 text-[9px] font-medium uppercase tracking-[0.22em] text-white backdrop-blur-2xl">
@@ -689,12 +681,13 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {shownDoors.map((d) => (
               <figure key={d.name} className="group border border-white/15 bg-white p-4 sm:p-6">
-                <img
+                <ResponsiveImg
                   src={d.src}
                   alt={`${d.name} — ${d.profile} custom door render for ${city.city} kitchen cabinetry`}
                   width={800}
                   height={1000}
                   loading="lazy"
+                  sizes="(min-width: 1024px) 25vw, 50vw"
                   className="aspect-[4/5] w-full object-contain"
                 />
                 <figcaption className="mt-4 text-center">

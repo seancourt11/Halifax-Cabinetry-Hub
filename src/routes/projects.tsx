@@ -2,12 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
+import { ResponsiveImg } from "@/components/responsive-img";
 import monctonHero from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
-import monctonSmall from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg?w=800";
 
 const PAGE_TITLE = "Cabinetry Projects | Hempston Home";
 const PAGE_DESC =
-  "Published Hempston Home cabinetry: a Greater Moncton built-in, plus Nova Scotia kitchens whose stories live on the designers' sites.";
+  "Published Hempston Home cabinetry: built-ins and a fireplace surround in Dieppe, NB, plus Nova Scotia kitchens on the designers' sites.";
 const ABSOLUTE_URL = `${SITE_URL}/projects`;
 
 export const Route = createFileRoute("/projects")({
@@ -56,15 +56,13 @@ function ProjectsPage() {
       </section>
 
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-20 sm:px-8 lg:grid-cols-2">
-        <img
+        <ResponsiveImg
           src={monctonHero}
-          srcSet={`${monctonSmall} 800w, ${monctonHero} 1600w`}
           sizes="(min-width: 1024px) 50vw, 100vw"
           alt="Custom painted built-in cabinets and fireplace surround for a home in Dieppe, NB by Hempston Home"
           width={1600}
           height={1200}
           loading="lazy"
-          decoding="async"
           className="w-full object-cover"
         />
         <div>

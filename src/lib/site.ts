@@ -149,7 +149,7 @@ export const CITY_SEO: Record<string, PageSeo> = {
   "custom-cabinetry-moncton": {
     title: "Custom Kitchen Cabinets Moncton NB | Hempston Home",
     description:
-      "Custom kitchen cabinets, kitchen design and custom kitchen doors for Moncton, Dieppe, Riverview and Shediac. Built in Canada. Consult in person or by video call.",
+      "Custom kitchen cabinets and kitchen design for Moncton, Dieppe, Riverview and Shediac. Built in Canada. Consult in person or by video call.",
     h1: "Custom Kitchen Cabinets in Moncton",
   },
   "custom-cabinetry-charlottetown": {

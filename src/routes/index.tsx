@@ -11,9 +11,10 @@ import {
   WARRANTY_LABEL,
 } from "@/lib/site";
 import { VisibleFaq } from "@/components/visible-faq";
+import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import heroKitchen from "@/assets/projects/gh-oak-island-painted-beams.jpg";
-import heroSmall from "@/assets/projects/gh-oak-island-painted-beams.jpg?w=800";
 import elevateRoom from "@/assets/projects/md-laundry-cabinetry.jpg";
 import featureLever from "@/assets/projects/nwc-marble-brass-faucet.jpg";
 import productPot from "@/assets/projects/grey-oak-bar-pantry.jpg";
@@ -66,17 +67,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:description", content: PAGE_DESC },
       { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [
-      { rel: "canonical", href: ABSOLUTE_URL },
-      {
-        rel: "preload",
-        as: "image",
-        href: heroSmall,
-        imageSrcSet: `${heroSmall} 800w, ${heroKitchen} 1600w`,
-        imageSizes: "100vw",
-        fetchPriority: "high",
-      },
-    ],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(heroKitchen)],
     scripts: [
       {
         type: "application/ld+json",
@@ -171,9 +162,8 @@ function Index() {
 
       {/* HERO */}
       <section className="relative">
-        <img
+        <ResponsiveImg
           src={heroKitchen}
-          srcSet={`${heroSmall} 800w, ${heroKitchen} 1600w`}
           sizes="100vw"
           alt="Glen Haven custom white painted kitchen cabinetry with stained white oak island by Hempston Home"
           width={1600}
@@ -259,12 +249,13 @@ function Index() {
       <section className="bg-[oklch(0.14_0_0)] py-16">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="relative overflow-hidden">
-            <img
+            <ResponsiveImg
               src={elevateRoom}
               alt="Modern Drift custom white laundry room cabinetry with painted shaker doors and full-height storage by Hempston Home"
               width={1600}
               height={780}
               loading="lazy"
+              sizes="(min-width: 1152px) 1152px, 100vw"
               className="h-[60vh] min-h-[380px] w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
@@ -324,10 +315,11 @@ function Index() {
                     isFocus ? "w-[340px] sm:w-[420px]" : "w-[220px] sm:w-[300px] opacity-40"
                   } ${isDoorRender ? "bg-white" : ""}`}
                 >
-                  <img
+                  <ResponsiveImg
                     src={p.image}
                     alt={p.alt}
                     loading="lazy"
+                    sizes="(min-width: 640px) 420px, 80vw"
                     className={`w-full ${isDoorRender ? "object-contain p-4 sm:p-6" : "object-cover"} ${isFocus ? "h-[520px]" : "h-[520px] blur-sm"}`}
                   />
                   <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/60 to-transparent" />
@@ -378,10 +370,11 @@ function Index() {
             {/* Tall left */}
             <article className="group">
               <div className="relative overflow-hidden bg-neutral-100">
-                <img
+                <ResponsiveImg
                   src={exploreProducts[0].image}
                   alt={exploreProducts[0].alt}
                   loading="lazy"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className="h-[640px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 />
                 <div className="absolute inset-x-0 bottom-4 flex justify-center px-4">
@@ -410,10 +403,11 @@ function Index() {
               {exploreProducts.slice(1).map((p) => (
                 <article key={p.title} className="group">
                   <div className="relative overflow-hidden bg-neutral-100">
-                    <img
+                    <ResponsiveImg
                       src={p.image}
                       alt={p.alt}
                       loading="lazy"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
                       className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                     <div className="absolute inset-x-0 bottom-4 flex justify-center px-4">
@@ -448,12 +442,13 @@ function Index() {
           </h2>
 
           <div className="relative mt-12 overflow-hidden">
-            <img
+            <ResponsiveImg
               src={storyRoom}
               alt="Glen Haven custom white painted kitchen cabinetry with brass hood and shaker doors by Hempston Home"
               width={1600}
               height={800}
               loading="lazy"
+              sizes="(min-width: 1152px) 1152px, 100vw"
               className="h-[62vh] min-h-[420px] w-full object-cover"
             />
             <div className="absolute inset-0 bg-black/25" />
@@ -496,10 +491,11 @@ function Index() {
                 rel="noreferrer"
                 className="group relative block overflow-hidden bg-neutral-100"
               >
-                <img
+                <ResponsiveImg
                   src={tile.asset}
                   alt={`Custom Hempston Home cabinetry project ${i + 1} on Instagram`}
                   loading="lazy"
+                  sizes="(min-width: 768px) 25vw, 50vw"
                   className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-x-0 top-3 flex justify-center px-3">

@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import { ResponsiveImg } from "@/components/responsive-img";
 import ogImg from "@/assets/og/og-case-studies.jpg";
 import ghImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 
@@ -96,20 +97,24 @@ function CaseStudiesIndex() {
       <SiteHeader />
 
       <section className="mx-auto max-w-4xl px-5 pb-16 pt-32 text-center sm:px-8">
-        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60">Case Studies</p>
+        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60">
+          Case Studies
+        </p>
         <h1 className="mt-5 font-display text-4xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-6xl">
           Custom Kitchen and Millwork Projects in Nova Scotia
         </h1>
         <BuiltInCanadaLine className="mx-auto mt-6 max-w-xl text-sm text-white/75" />
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/75">
           A closer look at recent Hempston cabinetry commissions — brief, materials, and the
-          craftsmanship behind each finished room. Select a project to view the full story on the designer's site.
+          craftsmanship behind each finished room. Select a project to view the full story on the
+          designer's site.
         </p>
       </section>
 
       <section className="mx-auto max-w-6xl space-y-16 px-5 pb-32 sm:px-8">
         {studies.map((s) => (
           <a
+            id={s.slug}
             key={s.slug}
             href={s.externalUrl}
             target="_blank"
@@ -117,17 +122,20 @@ function CaseStudiesIndex() {
             className="group grid gap-8 md:grid-cols-2 md:items-center md:gap-12"
           >
             <div className="overflow-hidden">
-              <img
+              <ResponsiveImg
                 src={s.image}
                 alt={`${s.title} — custom Hempston cabinetry, designed by ${s.designer}`}
                 width={1200}
                 height={900}
                 loading="lazy"
+                sizes="(min-width: 768px) 50vw, 100vw"
                 className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
               />
             </div>
             <div>
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">{s.location}</p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                {s.location}
+              </p>
               <h2 className="mt-4 font-display text-2xl font-light uppercase tracking-[0.05em] text-white sm:text-3xl">
                 {s.title}
               </h2>

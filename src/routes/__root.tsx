@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { organizationJsonLd } from "../lib/schema";
+import { isServiceAreaPath, organizationJsonLd } from "../lib/schema";
 import { BRAND } from "../lib/site";
 
 function NotFoundComponent() {
@@ -75,7 +75,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
+  head: ({ matches }) => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -127,7 +127,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(organizationJsonLd()),
+        children: JSON.stringify(
+          organizationJsonLd({
+            includeOffices: !isServiceAreaPath(matches.at(-1)?.pathname ?? "/"),
+          }),
+        ),
       },
     ],
   }),
