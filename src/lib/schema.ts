@@ -5,7 +5,9 @@ import {
   BRAND,
   CITY_SEO,
   EMAIL,
+  ENTITY_SENTENCE,
   FOUNDING_YEAR,
+  HALIFAX_SHOP_HOURS,
   HOURS,
   INSTAGRAM_URL,
   KITCHEN_PRICE_MAX,
@@ -52,13 +54,26 @@ function openingHours() {
   ];
 }
 
+function halifaxOpeningHours() {
+  return [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [...HALIFAX_SHOP_HOURS.days],
+      opens: HALIFAX_SHOP_HOURS.opens,
+      closes: HALIFAX_SHOP_HOURS.closes,
+    },
+  ];
+}
+
 function locationEntity(loc: ShopLocation) {
+  const isHalifax = loc.key === "halifax";
   return {
-    "@type": "HomeAndConstructionBusiness",
+    // LocalBusiness, not a store or building-supplies type.
+    "@type": "LocalBusiness",
     "@id": loc.id,
     name: loc.name,
     description: loc.schemaDescription,
-    url: `${SITE_URL}/`,
+    url: isHalifax ? `${SITE_URL}/custom-cabinetry-halifax` : `${SITE_URL}/`,
     image: LOGO_URL,
     logo: LOGO_URL,
     parentOrganization: { "@id": ORG_ID },
@@ -69,8 +84,13 @@ function locationEntity(loc: ShopLocation) {
       longitude: loc.longitude,
     },
     // One published phone, on the organization and the Halifax studio only.
-    ...(loc.key === "halifax" ? { telephone: PHONE_E164, email: EMAIL } : { email: EMAIL }),
-    openingHoursSpecification: openingHours(),
+    ...(isHalifax ? { telephone: PHONE_E164, email: EMAIL } : { email: EMAIL }),
+    ...(isHalifax
+      ? {
+          openingHours: HALIFAX_SHOP_HOURS.openingHours,
+          openingHoursSpecification: halifaxOpeningHours(),
+        }
+      : { openingHoursSpecification: openingHours() }),
     priceRange: "$$$",
     currenciesAccepted: loc.addressCountry === "US" ? "USD" : "CAD",
     areaServed:
@@ -109,8 +129,7 @@ export function organizationJsonLd() {
           height: 512,
         },
         image: LOGO_URL,
-        description:
-          "Custom kitchen cabinets, vanities and built-in millwork. Studios in Halifax, Toronto and the Long Beach area. Installs across Canada and the United States.",
+        description: ENTITY_SENTENCE,
         email: EMAIL,
         telephone: PHONE_E164,
         foundingDate: FOUNDING_YEAR,
@@ -184,12 +203,10 @@ export function serviceSchema(opts: {
     description: opts.description,
     url: opts.url.startsWith("http") ? opts.url : `${SITE_URL}${opts.url}`,
     provider: { "@id": opts.providerId ?? ORG_ID },
-    areaServed:
-      opts.areaServed ??
-      [
-        { "@type": "Country", name: "Canada" },
-        { "@type": "Country", name: "United States" },
-      ],
+    areaServed: opts.areaServed ?? [
+      { "@type": "Country", name: "Canada" },
+      { "@type": "Country", name: "United States" },
+    ],
     serviceType: "Custom cabinetry",
   };
 }
@@ -281,17 +298,13 @@ export function howToSchema(opts: {
   };
 }
 
-export function imageObjectsSchema(
-  items: { url: string; caption: string; creator?: string }[],
-) {
+export function imageObjectsSchema(items: { url: string; caption: string; creator?: string }[]) {
   return items.map((it) => ({
     "@context": "https://schema.org",
     "@type": "ImageObject",
     contentUrl: it.url,
     caption: it.caption,
-    ...(it.creator
-      ? { creator: { "@type": "Person", name: it.creator } }
-      : {}),
+    ...(it.creator ? { creator: { "@type": "Person", name: it.creator } } : {}),
     copyrightHolder: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
   }));
 }

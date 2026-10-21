@@ -11,6 +11,13 @@
 
 export const BRAND = "Hempston Home";
 export const SITE_URL = "https://www.hempstonhome.com";
+
+/**
+ * Use this sentence verbatim on About, llms.txt, and the Organization
+ * schema description. Do not paraphrase it in those three places.
+ */
+export const ENTITY_SENTENCE =
+  "Hempston Home designs and builds custom kitchen cabinets, vanities and built-ins in Halifax, Nova Scotia, and installs across Canada and the US.";
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const EMAIL = "info@hempstonhome.com";
@@ -74,7 +81,7 @@ export const LOCATIONS: Record<ShopLocation["key"], ShopLocation> = {
     longitude: -63.6203887,
     copyLabel: "6359 Bayne St, Halifax, NS B3K 2V6, Canada",
     schemaDescription:
-      "Halifax studio at 6359 Bayne St, Halifax, NS B3K 2V6.",
+      "Custom kitchen cabinet maker in Halifax. Cabinets are designed and built at 6359 Bayne St, Halifax, NS B3K 2V6.",
   },
   toronto: {
     id: `${SITE_URL}/#location-toronto`,
@@ -127,14 +134,23 @@ export const HOURS = {
   label: "Monday to Friday, 9am to 5pm, by appointment",
 };
 
+/** Shop hours shown on the Halifax page and on the Halifax LocalBusiness schema. */
+export const HALIFAX_SHOP_HOURS = {
+  days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
+  opens: "07:00",
+  closes: "17:00",
+  openingHours: "Mo-Fr 07:00-17:00",
+  label: "Monday to Friday, 7:00 AM to 5:00 PM",
+};
+
 export type PageSeo = { title: string; description: string; h1: string };
 
 export const CITY_SEO: Record<string, PageSeo> = {
   "custom-cabinetry-moncton": {
     title: "Custom Kitchen Cabinets Moncton NB | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Moncton, Dieppe and Riverview homes. Built in Canada by Hempston Home. Book a free consult.",
-    h1: "Custom Kitchen Cabinets in Moncton, New Brunswick",
+      "Custom kitchen cabinets, kitchen design and custom kitchen doors for Moncton, Dieppe, Riverview and Shediac. Built in Canada. Consult in person or by video call.",
+    h1: "Custom Kitchen Cabinets in Moncton",
   },
   "custom-cabinetry-charlottetown": {
     title: "Custom Kitchen Cabinets Charlottetown | Hempston Home",

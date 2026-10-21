@@ -3,7 +3,16 @@ import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, ORG_SAMEAS, SITE_URL } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  ORG_ID,
+  ORG_NAME,
+  ORG_EMAIL,
+  ORG_PHONE,
+  ORG_SAMEAS,
+  SITE_URL,
+} from "@/lib/schema";
+import { ENTITY_SENTENCE } from "@/lib/site";
 import ogImg from "@/assets/og/og-about.jpg";
 import heroImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 import workshopImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
@@ -39,23 +48,29 @@ export const Route = createFileRoute("/about")({
           name: PAGE_TITLE,
           description: PAGE_DESC,
           url: ABSOLUTE_URL,
-          about: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME, email: ORG_EMAIL, telephone: ORG_PHONE, sameAs: ORG_SAMEAS },
+          about: {
+            "@id": ORG_ID,
+            "@type": "Organization",
+            name: ORG_NAME,
+            email: ORG_EMAIL,
+            telephone: ORG_PHONE,
+            sameAs: ORG_SAMEAS,
+          },
         }),
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify(
-          [
-            {
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Hempston Studio Team",
-              jobTitle: "Custom cabinet makers, designers & installers",
-              worksFor: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
-              description: "The Hempston Home design and cabinet-making team — designers, drafters, cabinetmakers, finishers and installers working under one roof.",
-            },
-          ],
-        ),
+        children: JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Hempston Studio Team",
+            jobTitle: "Custom cabinet makers, designers & installers",
+            worksFor: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
+            description:
+              "The Hempston Home design and cabinet-making team — designers, drafters, cabinetmakers, finishers and installers working under one roof.",
+          },
+        ]),
       },
       {
         type: "application/ld+json",
@@ -94,12 +109,7 @@ const values = [
   },
 ];
 
-const collaborators = [
-  "31 Westgate Design Studio",
-  "David Bourque",
-  "Sara McKeenan",
-  "Hen House",
-];
+const collaborators = ["31 Westgate Design Studio", "David Bourque", "Sara McKeenan", "Hen House"];
 
 function AboutPage() {
   return (
@@ -118,14 +128,16 @@ function AboutPage() {
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 flex items-end">
           <div className="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-24">
-            <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/70">About Hempston Home</p>
+            <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/70">
+              About Hempston Home
+            </p>
             <h1 className="mt-5 max-w-3xl font-display text-4xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-6xl">
               About Hempston Home: Custom Cabinet Makers in Halifax, NS
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80">
-              Hempston Home is a Halifax custom cabinet studio founded in 2015. Built in Canada.
-              One team designs, builds, finishes and installs every kitchen, vanity and built-in.
-              Cabinets are built in Halifax, Nova Scotia at our Bayne St shop, 6359 Bayne St, Halifax, NS B3K 2V6.
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90">
+              {ENTITY_SENTENCE} One team designs, builds, finishes and installs every kitchen,
+              vanity and built-in. Cabinets are built in Halifax, Nova Scotia at our Bayne St shop,
+              6359 Bayne St, Halifax, NS B3K 2V6.
             </p>
           </div>
         </div>
@@ -140,8 +152,12 @@ function AboutPage() {
             { k: "Warranty", v: "5 years on workmanship" },
           ].map((s) => (
             <div key={s.k}>
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">{s.k}</p>
-              <p className="mt-3 font-display text-2xl font-light uppercase tracking-[0.05em] text-white">{s.v}</p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                {s.k}
+              </p>
+              <p className="mt-3 font-display text-2xl font-light uppercase tracking-[0.05em] text-white">
+                {s.v}
+              </p>
             </div>
           ))}
         </div>
@@ -149,28 +165,30 @@ function AboutPage() {
 
       {/* Story */}
       <section className="mx-auto max-w-3xl px-5 py-24 sm:px-8">
-        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">Our Story</p>
+        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+          Our Story
+        </p>
         <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
           A studio built around the room
         </h2>
         <div className="mt-8 space-y-5 text-base leading-relaxed text-white/75">
           <p>
-            Hempston Home was founded on a stubborn belief: a kitchen worth building deserves to
-            be drawn from scratch. Not sized from a catalog, not adapted from a stock box —
-            drawn from the exact walls, ceilings, sightlines, and daily rituals of the home
-            it's going into.
+            Hempston Home was founded on a stubborn belief: a kitchen worth building deserves to be
+            drawn from scratch. Not sized from a catalog, not adapted from a stock box — drawn from
+            the exact walls, ceilings, sightlines, and daily rituals of the home it's going into.
           </p>
           <p>
-            Cabinets are built in Halifax, Nova Scotia at our Bayne St shop. Toronto and the Long Beach
-            area facility are studios and service bases, not manufacturing sites. Built in Canada.
-            We install across Canada and the United States. One team still takes a project from
-            concept to install, with laser-measured shop drawings and finishes sprayed or hand-rubbed.
+            Cabinets are built in Halifax, Nova Scotia at our Bayne St shop. Toronto and the Long
+            Beach area facility are studios and service bases, not manufacturing sites. Built in
+            Canada. We install across Canada and the United States. One team still takes a project
+            from concept to install, with laser-measured shop drawings and finishes sprayed or
+            hand-rubbed.
           </p>
           <p>
             We take on kitchens, bathrooms, butler's pantries, wet bars, mudrooms, media units,
-            libraries, and any built-in millwork a house needs. Every project is 100% custom,
-            so the pages of doors, colours, and construction styles on this site are examples —
-            not menus. If you can draw it, we can build it.
+            libraries, and any built-in millwork a house needs. Every project is 100% custom, so the
+            pages of doors, colours, and construction styles on this site are examples — not menus.
+            If you can draw it, we can build it.
           </p>
         </div>
       </section>
@@ -178,15 +196,21 @@ function AboutPage() {
       {/* Values */}
       <section className="bg-[oklch(0.16_0_0)] py-24">
         <div className="mx-auto max-w-5xl px-5 sm:px-8">
-          <p className="text-center text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">How we work</p>
+          <p className="text-center text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+            How we work
+          </p>
           <h2 className="mx-auto mt-5 max-w-xl text-center font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
             The Hempston way
           </h2>
           <div className="mt-14 grid gap-10 sm:grid-cols-2">
             {values.map((v) => (
               <div key={v.n} className="border-t border-white/15 pt-6">
-                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">{v.n}</p>
-                <h3 className="mt-4 font-display text-xl font-light uppercase tracking-[0.06em] text-white">{v.title}</h3>
+                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                  {v.n}
+                </p>
+                <h3 className="mt-4 font-display text-xl font-light uppercase tracking-[0.06em] text-white">
+                  {v.title}
+                </h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/70">{v.body}</p>
               </div>
             ))}
@@ -208,21 +232,43 @@ function AboutPage() {
 
       {/* Craftspeople / roles */}
       <section className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">Craftspeople</p>
+        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+          Craftspeople
+        </p>
         <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
           Every commission passes through six pairs of hands
         </h2>
         <div className="mt-12 grid gap-10 sm:grid-cols-2 md:grid-cols-3">
           {[
-            { role: "Kitchen Designer", body: "Plans layout, sightlines, storage, and material palette in a first-principles design brief." },
-            { role: "Drafter", body: "Turns the design into millimetre-accurate shop drawings — plans, elevations, sections." },
-            { role: "Cabinetmaker", body: "Cuts, joins, and assembles every box, face frame, door, and drawer in the workshop." },
-            { role: "Finisher", body: "Hand-sprays conversion varnish, lacquer, or hand-rubs Rubio Monocoat under studio lighting." },
-            { role: "Project Lead", body: "Coordinates with your builder, designer, and trades — one point of contact from start to punch list." },
-            { role: "Installer", body: "Sets, scribes, and reveals every cabinet on site. Inset construction lives and dies here." },
+            {
+              role: "Kitchen Designer",
+              body: "Plans layout, sightlines, storage, and material palette in a first-principles design brief.",
+            },
+            {
+              role: "Drafter",
+              body: "Turns the design into millimetre-accurate shop drawings — plans, elevations, sections.",
+            },
+            {
+              role: "Cabinetmaker",
+              body: "Cuts, joins, and assembles every box, face frame, door, and drawer in the workshop.",
+            },
+            {
+              role: "Finisher",
+              body: "Hand-sprays conversion varnish, lacquer, or hand-rubs Rubio Monocoat under studio lighting.",
+            },
+            {
+              role: "Project Lead",
+              body: "Coordinates with your builder, designer, and trades — one point of contact from start to punch list.",
+            },
+            {
+              role: "Installer",
+              body: "Sets, scribes, and reveals every cabinet on site. Inset construction lives and dies here.",
+            },
           ].map((p) => (
             <div key={p.role} className="border-t border-white/15 pt-6">
-              <h3 className="font-display text-lg font-light uppercase tracking-[0.06em] text-white">{p.role}</h3>
+              <h3 className="font-display text-lg font-light uppercase tracking-[0.06em] text-white">
+                {p.role}
+              </h3>
               <p className="mt-3 text-sm leading-relaxed text-white/70">{p.body}</p>
             </div>
           ))}
@@ -249,22 +295,24 @@ function AboutPage() {
             ))}
           </div>
           <p className="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-white/60">
-            Our cabinetry appears in projects designed by 31 Westgate Design Studio, David
-            Bourque, Sara McKeenan, and Hen House — among the interior designers and architects
-            we regularly collaborate with across Nova Scotia, Ontario, and beyond.
+            Our cabinetry appears in projects designed by 31 Westgate Design Studio, David Bourque,
+            Sara McKeenan, and Hen House — among the interior designers and architects we regularly
+            collaborate with across Nova Scotia, Ontario, and beyond.
           </p>
         </div>
       </section>
 
       {/* CTA */}
       <section className="bg-background px-5 py-24 text-center text-foreground sm:px-8">
-        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-accent">Start your project</p>
+        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-accent">
+          Start your project
+        </p>
         <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
           Bring us your walls
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Whether you're renovating a Halifax heritage kitchen or building new on either coast,
-          we'd love to hear what you're planning.
+          Whether you're renovating a Halifax heritage kitchen or building new on either coast, we'd
+          love to hear what you're planning.
         </p>
         <Link
           to="/contact"

@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown, Menu, Phone } from "lucide-react";
 import {
   Sheet,
@@ -43,16 +43,16 @@ function NavMenu({
 }) {
   return (
     <details className="group relative">
-      <summary className="flex cursor-pointer list-none items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white/90 transition-colors hover:text-white [&::-webkit-details-marker]:hidden">
         {label}
-        <ChevronDown className="h-3 w-3" />
+        <ChevronDown className="h-3 w-3" aria-hidden="true" />
       </summary>
       <div className="absolute left-1/2 z-50 mt-3 min-w-[14rem] -translate-x-1/2 border border-white/10 bg-[oklch(0.14_0_0)] p-2">
         {links.map((l) => (
           <Link
             key={l.label}
             to={l.to}
-            className="block px-3 py-3 text-[11px] font-medium uppercase tracking-[0.22em] text-white/75 hover:text-white"
+            className="block px-3 py-3 text-[11px] font-medium uppercase tracking-[0.22em] text-white/90 hover:text-white"
           >
             {l.label}
           </Link>
@@ -63,18 +63,25 @@ function NavMenu({
 }
 
 export function SiteHeader() {
+  const onMoncton = useRouterState({
+    select: (s) => s.location.pathname === "/custom-cabinetry-moncton",
+  });
+  const locationLinks = onMoncton
+    ? locations.filter((item) => item.label !== "Halifax")
+    : locations;
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[oklch(0.14_0_0)]/95 backdrop-blur">
       {/* Top utility bar */}
       <div className="border-b border-white/10">
         <div className="mx-auto flex h-9 max-w-7xl items-center justify-between px-5 sm:px-8">
           <div className="flex items-center gap-6">
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/50">
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/85">
               Canada, USA.
             </span>
             <Link
               to="/contact"
-              className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-white"
+              className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/85 transition-colors hover:text-white"
             >
               Contact
             </Link>
@@ -82,14 +89,14 @@ export function SiteHeader() {
           <div className="hidden items-center gap-6 sm:flex">
             <a
               href="tel:+19027198497"
-              className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-white"
+              className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white/85 transition-colors hover:text-white"
             >
-              <Phone className="h-3 w-3" />
+              <Phone className="h-3 w-3" aria-hidden="true" />
               (902) 719-8497
             </a>
             <Link
               to="/contact"
-              className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-white"
+              className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/85 transition-colors hover:text-white"
             >
               Book a Consultation
             </Link>
@@ -112,16 +119,16 @@ export function SiteHeader() {
           <nav className="mt-7 hidden items-center gap-12 lg:flex" aria-label="Primary">
             <Link
               to="/"
-              className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white"
+              className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/90 transition-colors hover:text-white"
             >
               Home
             </Link>
             <NavMenu label="Custom Cabinets" links={customCabinets} />
             <NavMenu label="Studio" links={studioLinks} />
-            <NavMenu label="Locations" links={locations} />
+            <NavMenu label="Locations" links={locationLinks} />
             <Link
               to="/contact"
-              className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white"
+              className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/90 transition-colors hover:text-white"
             >
               Contact
             </Link>
@@ -137,7 +144,7 @@ export function SiteHeader() {
                 className="inline-flex h-10 w-10 items-center justify-center text-white/80 transition-colors hover:text-white"
                 aria-label="Open menu"
               >
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6" aria-hidden="true" />
               </button>
             </SheetTrigger>
             <SheetContent
@@ -145,53 +152,55 @@ export function SiteHeader() {
               className="w-full max-w-sm border-white/10 bg-[oklch(0.14_0_0)] p-0"
             >
               <SheetHeader className="border-b border-white/10 p-6 text-left">
-                <SheetTitle className="font-display text-xl font-light uppercase tracking-[0.35em] text-white">
-                  Hempston
+                <SheetTitle asChild>
+                  <p className="font-display text-xl font-light uppercase tracking-[0.35em] text-white">
+                    Hempston
+                  </p>
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col p-6">
                 <SheetClose asChild>
                   <Link
                     to="/"
-                    className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/70 transition-colors hover:text-white"
+                    className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/90 transition-colors hover:text-white"
                   >
                     Home
                   </Link>
                 </SheetClose>
-                <div className="mt-4 pt-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/40">
+                <div className="mt-4 pt-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/85">
                   Custom Cabinets
                 </div>
                 {customCabinets.map((item) => (
                   <SheetClose asChild key={item.label}>
                     <Link
                       to={item.to}
-                      className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/70 transition-colors hover:text-white"
+                      className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/90 transition-colors hover:text-white"
                     >
                       {item.label}
                     </Link>
                   </SheetClose>
                 ))}
-                <div className="mt-4 pt-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/40">
+                <div className="mt-4 pt-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/85">
                   Studio
                 </div>
                 {studioLinks.map((l) => (
                   <SheetClose asChild key={l.label}>
                     <Link
                       to={l.to}
-                      className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/70 transition-colors hover:text-white"
+                      className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/90 transition-colors hover:text-white"
                     >
                       {l.label}
                     </Link>
                   </SheetClose>
                 ))}
-                <div className="mt-4 pt-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/40">
+                <div className="mt-4 pt-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/85">
                   Locations
                 </div>
-                {locations.map((l) => (
+                {locationLinks.map((l) => (
                   <SheetClose asChild key={l.label}>
                     <Link
                       to={l.to}
-                      className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/70 transition-colors hover:text-white"
+                      className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/90 transition-colors hover:text-white"
                     >
                       {l.label}
                     </Link>
@@ -200,7 +209,7 @@ export function SiteHeader() {
                 <SheetClose asChild>
                   <Link
                     to="/contact"
-                    className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/70 transition-colors hover:text-white"
+                    className="border-b border-white/10 py-5 text-sm font-medium uppercase tracking-[0.25em] text-white/90 transition-colors hover:text-white"
                   >
                     Contact
                   </Link>

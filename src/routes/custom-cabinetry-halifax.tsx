@@ -1,11 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import ogImg from "@/assets/og/og-halifax.jpg";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, faqPageSchema, howToSchema, serviceSchema, SITE_URL } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  howToSchema,
+  serviceSchema,
+  SITE_URL,
+} from "@/lib/schema";
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import {
   HALIFAX_BUILD_SENTENCE,
+  HALIFAX_SHOP_HOURS,
   KITCHEN_PRICE_LABEL,
   LEAD_TIME_LABEL,
   LOCATIONS,
@@ -28,22 +35,15 @@ import {
   Award,
   Clock,
   MapPin,
-  CheckCircle2,
   Quote,
 } from "lucide-react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
-import {
-  showcaseGallery,
-  insetGallery2026,
-} from "@/data/door-gallery-2026";
-
-
+import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
 
 import craftDetail from "@/assets/hempston-craft-detail-2.jpg";
-
 
 import dovetailDrawers from "@/assets/hempston-dovetail-drawers.jpg";
 import cityImg from "@/assets/halifax-city.jpg";
@@ -62,6 +62,7 @@ import projNwcNavyTile from "@/assets/projects/nwc-navy-tile-backsplash.jpg";
 import projGhWhite from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 
 import projGhOakIsland from "@/assets/projects/gh-oak-island-painted-beams.jpg";
+import heroSmall from "@/assets/projects/gh-oak-island-painted-beams.jpg?w=800";
 import projGhButler from "@/assets/projects/gh-butler-pantry-glass.jpg";
 
 import projMdKitchen from "@/assets/projects/md-white-kitchen-brass-pendants.jpg";
@@ -77,30 +78,174 @@ import projDbaKentPantry from "@/assets/projects/dba-kent-pantry.jpg";
 import materialWidePlank from "@/assets/materials/detail_10_wideplank_jetblack.png";
 
 const recentProjects = [
-  { src: projNwcBrass, alt: "Coastal Cottage custom overlay cabinetry with painted shaker doors and brass hood", title: "Coastal Cottage", subtitle: "Custom Overlay", designer: "31 Westgate" },
-  { src: projDbaPlIsland, alt: "Custom painted kitchen with dark stained oak island and white oak beams — House on Peter Lowe", title: "Dark Oak Island Kitchen", subtitle: "Painted + Stained Oak", designer: "DB Architecture" },
-  { src: projGhWhite, alt: "Custom white painted shaker kitchen cabinetry", title: "Painted Shaker Kitchen", subtitle: "White Painted Cabinetry", designer: "31 Westgate" },
-  { src: projDbaKentKitchen1, alt: "Inset custom cabinetry with white oak island and corner window — House on Kent", title: "Inset Oak Island Kitchen", subtitle: "Inset Cabinetry + Oak Island", designer: "DB Architecture" },
-  { src: projMdKitchen, alt: "Custom white kitchen cabinetry with panelled island", title: "White Panelled Kitchen", subtitle: "White Painted Cabinetry", designer: "31 Westgate" },
-  { src: projDbaPlKitchen1, alt: "Open-concept custom kitchen cabinetry with quartzite counters and timber ceiling — House on Peter Lowe", title: "Timber-Ceiling Kitchen", subtitle: "Open-Concept Cabinetry", designer: "DB Architecture" },
-  { src: projNwcOakIsland, alt: "Custom white oak island cabinetry with painted perimeter cabinets", title: "White Oak Island Kitchen", subtitle: "White Oak Island Cabinetry", designer: "31 Westgate" },
-  { src: projDbaKentPantry, alt: "Custom entry cabinetry with painted millwork, upholstered bench and integrated storage — House on Kent", title: "Painted Entry Built-Ins", subtitle: "Custom Built-In Cabinetry", designer: "DB Architecture" },
-  { src: projGhOakIsland, alt: "Custom kitchen island cabinetry with painted white oak beams and stained oak base", title: "Painted & Stained Oak Island", subtitle: "Painted & Stained Oak", designer: "31 Westgate" },
-  { src: projModernMarble, alt: "Modern light oak custom kitchen cabinetry with book-matched island", title: "Modern Oak Kitchen", subtitle: "Light Oak Cabinetry", designer: "Hempston" },
-  { src: projMdVanity, alt: "Light oak double vanity cabinetry with custom drawer bank", title: "Light Oak Double Vanity", subtitle: "Light Oak Vanity Cabinetry", designer: "31 Westgate" },
-  { src: projDbaKentKitchen2, alt: "Custom inset kitchen cabinetry with hemlock beams and hidden coffee station — House on Kent", title: "Hidden Coffee Station", subtitle: "Inset Custom Cabinetry", designer: "DB Architecture" },
-  { src: projGhButler, alt: "Butler pantry with custom glass-front upper cabinetry", title: "Glass-Front Butler Pantry", subtitle: "Glass-Front Cabinetry", designer: "31 Westgate" },
-  { src: projReededVanity, alt: "Reeded walnut bathroom vanity with custom reeded walnut cabinetry", title: "Reeded Walnut Vanity", subtitle: "Reeded Walnut Cabinetry", designer: "Hen House" },
-  { src: projMdLaundry, alt: "Laundry room with full-height inset custom cabinetry", title: "Inset Laundry Cabinetry", subtitle: "Inset Cabinetry", designer: "31 Westgate" },
-  { src: projDbaPlKitchen2, alt: "Custom sage green mudroom cabinetry with brass hardware and checkered floor — House on Peter Lowe", title: "Sage Green Mudroom", subtitle: "Painted Mudroom Cabinetry", designer: "DB Architecture" },
-  { src: projCrombieStair, alt: "Custom framed wall mirror by Hempston", title: "Custom Framed Mirror", subtitle: "Framed Mirror", designer: "31 Westgate" },
-  { src: projNwcNavyTile, alt: "Custom navy shaker cabinetry with recessed panel doors", title: "Navy Shaker Kitchen", subtitle: "Navy Shaker Cabinetry", designer: "31 Westgate" },
-  { src: projWhiteOakDetail, alt: "Rift-cut micro shaker white oak custom cabinetry detail", title: "Rift Cut Micro Shaker", subtitle: "Rift-Cut White Oak Cabinetry", designer: "Sara McKeenan" },
-  { src: projGlenHaven, alt: "Custom white painted perimeter cabinetry with stained oak island", title: "White + Oak Island Kitchen", subtitle: "White Cabinets & Oak Island", designer: "31 Westgate" },
-  { src: projNavyBrass, alt: "Custom navy shaker cabinetry with painted recessed panel doors", title: "Navy Shaker Kitchen", subtitle: "Navy Painted Shaker", designer: "31 Westgate" },
-  { src: projFarmhouse, alt: "Custom white inset shaker cabinetry with painted recessed panel doors", title: "White Inset Kitchen", subtitle: "White Inset Shaker Cabinetry", designer: "31 Westgate" },
-  { src: projWhiteMarble, alt: "Custom white painted kitchen cabinetry with glass-front upper cabinets", title: "White Painted Kitchen", subtitle: "Glass-Front Cabinetry", designer: "31 Westgate" },
-  { src: projGreyOakBar, alt: "Grey-stained white oak custom bar and pantry cabinetry", title: "Grey Oak Bar & Pantry", subtitle: "Grey-Stained Oak Cabinetry", designer: "31 Westgate" },
+  {
+    src: projNwcBrass,
+    alt: "Coastal Cottage custom overlay cabinetry with painted shaker doors and brass hood",
+    title: "Coastal Cottage",
+    subtitle: "Custom Overlay",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaPlIsland,
+    alt: "Custom painted kitchen with dark stained oak island and white oak beams — House on Peter Lowe",
+    title: "Dark Oak Island Kitchen",
+    subtitle: "Painted + Stained Oak",
+    designer: "DB Architecture",
+  },
+  {
+    src: projGhWhite,
+    alt: "Custom white painted shaker kitchen cabinetry",
+    title: "Painted Shaker Kitchen",
+    subtitle: "White Painted Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaKentKitchen1,
+    alt: "Inset custom cabinetry with white oak island and corner window — House on Kent",
+    title: "Inset Oak Island Kitchen",
+    subtitle: "Inset Cabinetry + Oak Island",
+    designer: "DB Architecture",
+  },
+  {
+    src: projMdKitchen,
+    alt: "Custom white kitchen cabinetry with panelled island",
+    title: "White Panelled Kitchen",
+    subtitle: "White Painted Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaPlKitchen1,
+    alt: "Open-concept custom kitchen cabinetry with quartzite counters and timber ceiling — House on Peter Lowe",
+    title: "Timber-Ceiling Kitchen",
+    subtitle: "Open-Concept Cabinetry",
+    designer: "DB Architecture",
+  },
+  {
+    src: projNwcOakIsland,
+    alt: "Custom white oak island cabinetry with painted perimeter cabinets",
+    title: "White Oak Island Kitchen",
+    subtitle: "White Oak Island Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaKentPantry,
+    alt: "Custom entry cabinetry with painted millwork, upholstered bench and integrated storage — House on Kent",
+    title: "Painted Entry Built-Ins",
+    subtitle: "Custom Built-In Cabinetry",
+    designer: "DB Architecture",
+  },
+  {
+    src: projGhOakIsland,
+    alt: "Custom kitchen island cabinetry with painted white oak beams and stained oak base",
+    title: "Painted & Stained Oak Island",
+    subtitle: "Painted & Stained Oak",
+    designer: "31 Westgate",
+  },
+  {
+    src: projModernMarble,
+    alt: "Modern light oak custom kitchen cabinetry with book-matched island",
+    title: "Modern Oak Kitchen",
+    subtitle: "Light Oak Cabinetry",
+    designer: "Hempston",
+  },
+  {
+    src: projMdVanity,
+    alt: "Light oak double vanity cabinetry with custom drawer bank",
+    title: "Light Oak Double Vanity",
+    subtitle: "Light Oak Vanity Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaKentKitchen2,
+    alt: "Custom inset kitchen cabinetry with hemlock beams and hidden coffee station — House on Kent",
+    title: "Hidden Coffee Station",
+    subtitle: "Inset Custom Cabinetry",
+    designer: "DB Architecture",
+  },
+  {
+    src: projGhButler,
+    alt: "Butler pantry with custom glass-front upper cabinetry",
+    title: "Glass-Front Butler Pantry",
+    subtitle: "Glass-Front Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projReededVanity,
+    alt: "Reeded walnut bathroom vanity with custom reeded walnut cabinetry",
+    title: "Reeded Walnut Vanity",
+    subtitle: "Reeded Walnut Cabinetry",
+    designer: "Hen House",
+  },
+  {
+    src: projMdLaundry,
+    alt: "Laundry room with full-height inset custom cabinetry",
+    title: "Inset Laundry Cabinetry",
+    subtitle: "Inset Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaPlKitchen2,
+    alt: "Custom sage green mudroom cabinetry with brass hardware and checkered floor — House on Peter Lowe",
+    title: "Sage Green Mudroom",
+    subtitle: "Painted Mudroom Cabinetry",
+    designer: "DB Architecture",
+  },
+  {
+    src: projCrombieStair,
+    alt: "Custom framed wall mirror by Hempston",
+    title: "Custom Framed Mirror",
+    subtitle: "Framed Mirror",
+    designer: "31 Westgate",
+  },
+  {
+    src: projNwcNavyTile,
+    alt: "Custom navy shaker cabinetry with recessed panel doors",
+    title: "Navy Shaker Kitchen",
+    subtitle: "Navy Shaker Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projWhiteOakDetail,
+    alt: "Rift-cut micro shaker white oak custom cabinetry detail",
+    title: "Rift Cut Micro Shaker",
+    subtitle: "Rift-Cut White Oak Cabinetry",
+    designer: "Sara McKeenan",
+  },
+  {
+    src: projGlenHaven,
+    alt: "Custom white painted perimeter cabinetry with stained oak island",
+    title: "White + Oak Island Kitchen",
+    subtitle: "White Cabinets & Oak Island",
+    designer: "31 Westgate",
+  },
+  {
+    src: projNavyBrass,
+    alt: "Custom navy shaker cabinetry with painted recessed panel doors",
+    title: "Navy Shaker Kitchen",
+    subtitle: "Navy Painted Shaker",
+    designer: "31 Westgate",
+  },
+  {
+    src: projFarmhouse,
+    alt: "Custom white inset shaker cabinetry with painted recessed panel doors",
+    title: "White Inset Kitchen",
+    subtitle: "White Inset Shaker Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projWhiteMarble,
+    alt: "Custom white painted kitchen cabinetry with glass-front upper cabinets",
+    title: "White Painted Kitchen",
+    subtitle: "Glass-Front Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projGreyOakBar,
+    alt: "Grey-stained white oak custom bar and pantry cabinetry",
+    title: "Grey Oak Bar & Pantry",
+    subtitle: "Grey-Stained Oak Cabinetry",
+    designer: "31 Westgate",
+  },
 ];
 
 // Interleave overlay slab/shaker with inset face frame renders so the Featured
@@ -117,10 +262,9 @@ const mixedFeaturedDoors: typeof showcaseGallery = (() => {
   return out;
 })();
 
-
-const PAGE_TITLE = "Custom Kitchen Cabinets Halifax | Hempston Home";
+const PAGE_TITLE = "Custom Kitchen Cabinets & Cabinet Maker in Halifax | Hempston Home";
 const PAGE_DESC =
-  "Custom kitchen cabinets for Halifax and HRM homes, built in Canada. Full kitchens from $25,000, about 8 to 14 weeks. Book a free in-home consultation.";
+  "Custom kitchen cabinets from a cabinet maker in Halifax. Designed and built at 6359 Bayne St, Halifax, NS B3K 2V6. Serving Dartmouth, Bedford and HRM.";
 const ABSOLUTE_URL = `${SITE_URL}/custom-cabinetry-halifax`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -312,7 +456,14 @@ export const Route = createFileRoute("/custom-cabinetry-halifax")({
     ],
     links: [
       { rel: "canonical", href: ABSOLUTE_URL },
-      { rel: "preload", as: "image", href: projGhOakIsland, fetchpriority: "high" },
+      {
+        rel: "preload",
+        as: "image",
+        href: heroSmall,
+        imageSrcSet: `${heroSmall} 800w, ${projGhOakIsland} 1600w`,
+        imageSizes: "100vw",
+        fetchPriority: "high",
+      },
     ],
     scripts: [
       {
@@ -369,8 +520,8 @@ function HalifaxPage() {
   const darkBg = "bg-[oklch(0.14_0_0)]";
   const lightBg = "bg-[oklch(0.98_0_0)]";
   const darkText = "text-[oklch(0.15_0_0)]";
-  const eyebrowDark = "text-[10px] font-medium uppercase tracking-[0.28em] text-white/70";
-  const eyebrowLight = "text-[10px] font-medium uppercase tracking-[0.28em] text-black/60";
+  const eyebrowDark = "text-[10px] font-medium uppercase tracking-[0.28em] text-white/90";
+  const eyebrowLight = "text-[10px] font-medium uppercase tracking-[0.28em] text-black/75";
   const btnLight =
     "inline-block border border-white/80 bg-white px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-transparent hover:text-white";
   const btnOutlineDark =
@@ -386,45 +537,71 @@ function HalifaxPage() {
       <section className="relative">
         <img
           src={projGhOakIsland}
-          alt="Custom Glen Haven kitchen by Hempston — painted white oak island cabinetry and shaker perimeter in a Halifax, Nova Scotia home"
-          width={1920}
-          height={1100}
+          srcSet={`${heroSmall} 800w, ${projGhOakIsland} 1600w`}
+          sizes="100vw"
+          alt="Custom kitchen cabinets in a Halifax home: painted shaker perimeter and a white oak island by Hempston Home"
+          width={1600}
+          height={1000}
+          fetchPriority="high"
+          decoding="sync"
           className="h-[86vh] min-h-[560px] w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/72 to-black/35" />
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
             <div className="max-w-xl">
               <nav aria-label="Breadcrumb" className={`${eyebrowDark} mb-6`}>
-                <Link to="/" className="hover:text-white">Home</Link>
+                <Link to="/" className="hover:text-white">
+                  Home
+                </Link>
                 <span className="mx-2 opacity-60">/</span>
                 <span className="text-white">Custom Cabinetry Halifax</span>
               </nav>
               <p className={eyebrowDark}>Halifax · Nova Scotia</p>
               <h1 className="mt-5 font-display text-5xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-7xl">
-                Custom Kitchen Cabinets in Halifax, Nova Scotia
+                Custom Kitchen Cabinets from a Cabinet Maker in Halifax
               </h1>
-              <p className="mt-8 max-w-md text-sm leading-relaxed text-white/75">
-                Hempston Home designs, builds and installs custom kitchen cabinets, vanities and built-ins
-                for Halifax and Nova Scotia homes. Built in Canada. {HALIFAX_BUILD_SENTENCE}
+              <p className="mt-8 max-w-md text-sm leading-relaxed text-white">
+                Hempston Home is a cabinet maker in Halifax. Custom kitchen cabinets, vanities and
+                built-ins are designed and built at our Bayne St shop, 6359 Bayne St, Halifax, NS
+                B3K 2V6. We install in Halifax, Dartmouth, Bedford and across the Halifax Regional
+                Municipality.
               </p>
-              <p className="mt-4 text-sm text-white/70">
-                <Link to="/rush-custom-kitchen-cabinets" className="underline">Need cabinets in about 6 weeks?</Link>
+              <p className="mt-4 text-sm text-white/90">
+                <Link to="/rush-custom-kitchen-cabinets" className="underline">
+                  Need cabinets in about 6 weeks?
+                </Link>
               </p>
               <div className="mt-10 flex flex-wrap gap-3">
-                <a href="#consultation" className={btnLight} aria-label="Book a free in-home design consultation in Halifax">Book a Free Design Consultation</a>
-                <a href="#recent-work" className={btnOutlineDark} aria-label="View recent custom Halifax kitchen projects">View Recent Halifax Kitchens</a>
+                <a href="#consultation" className={btnLight}>
+                  Book a Free Design Consultation
+                </a>
+                <a href="#recent-work" className={btnOutlineDark}>
+                  View Recent Halifax Kitchens
+                </a>
               </div>
-              <nav aria-label="On this page" className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-light uppercase tracking-[0.22em] text-white/55">
-                <a href="#services" className="hover:text-white">What we build</a>
-                <span aria-hidden="true">·</span>
-                <a href="#recent-work" className="hover:text-white">Recent work</a>
-                <span aria-hidden="true">·</span>
-                <a href="#doors" className="hover:text-white">Doors &amp; finishes</a>
-                <span aria-hidden="true">·</span>
-                <a href="#process" className="hover:text-white">Process</a>
-                <span aria-hidden="true">·</span>
-                <a href="#faq" className="hover:text-white">FAQ</a>
+              <nav
+                aria-label="On this page"
+                className="mt-10 flex flex-wrap gap-x-4 gap-y-3 text-[10px] font-light uppercase tracking-[0.22em] text-white/90"
+              >
+                <a href="#services" className="inline-flex min-h-6 items-center hover:text-white">
+                  What we build
+                </a>
+                <a
+                  href="#recent-work"
+                  className="inline-flex min-h-6 items-center hover:text-white"
+                >
+                  Recent work
+                </a>
+                <a href="#doors" className="inline-flex min-h-6 items-center hover:text-white">
+                  Doors &amp; finishes
+                </a>
+                <a href="#process" className="inline-flex min-h-6 items-center hover:text-white">
+                  Process
+                </a>
+                <a href="#faq" className="inline-flex min-h-6 items-center hover:text-white">
+                  FAQ
+                </a>
               </nav>
             </div>
           </div>
@@ -438,23 +615,68 @@ function HalifaxPage() {
           <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
             Cabinetry designed for how Halifax really lives
           </h2>
-          <div className="mt-8 space-y-5 text-sm leading-relaxed text-white/70">
+          <div className="mt-8 space-y-5 text-sm leading-relaxed text-white/90">
             <p>
-              A kitchen in a heritage South End rowhouse, a coastal cottage near St. Margaret's Bay, a
-              modern build in Bedford — no two Halifax homes are alike, and neither are the people who
-              live in them. That is exactly why stock cabinetry so rarely fits. At Hempston, we design
-              and build <strong className="text-white">custom cabinetry in Halifax</strong> from
-              the ground up, shaping every cabinet, drawer, and surface around your space, your
-              storage, and your style.
+              Hempston Home is a cabinet maker in Halifax. Custom kitchen cabinets are designed and
+              built at the Bayne St shop, then installed for homes in Halifax, Dartmouth, Bedford
+              and the rest of HRM. A South End rowhouse, a Dartmouth character house, and a newer
+              Bedford build do not share a stock size, so every cabinet is drawn to the room.
             </p>
             <p>
-              From the first measurement to the final reveal, your project is handled by craftspeople
-              who care about the joints you will never see as much as the doors you will open every
-              day. The result is cabinetry that feels inevitable — like it was always meant to be
-              there.
+              From the first measurement to the final reveal, your project is handled by
+              craftspeople who care about the joints you will never see as much as the doors you
+              will open every day. The result is cabinetry that feels inevitable — like it was
+              always meant to be there.
             </p>
-            <BuiltInCanadaLine className="text-sm text-white/80" />
+            <BuiltInCanadaLine className="text-sm text-white/90" />
           </div>
+        </div>
+      </section>
+
+      <section
+        id="shop"
+        className={`${lightBg} ${darkText} scroll-mt-24 py-20`}
+        aria-labelledby="shop-heading"
+      >
+        <div className="mx-auto grid max-w-6xl items-start gap-10 px-5 sm:px-8 lg:grid-cols-2">
+          <div>
+            <p className={eyebrowLight}>Bayne St shop</p>
+            <h2
+              id="shop-heading"
+              className="mt-5 font-display text-3xl font-light uppercase tracking-[0.04em] sm:text-4xl"
+            >
+              Designed and built at 6359 Bayne St
+            </h2>
+            <p className="mt-6 text-sm leading-relaxed text-black/80">
+              Custom kitchen cabinets are designed and built at the Hempston Home shop in Halifax.
+              The same shop builds vanities and built-ins for Dartmouth, Bedford and the wider HRM.
+            </p>
+            <address className="mt-6 text-sm not-italic leading-relaxed text-black">
+              6359 Bayne St, Halifax, NS B3K 2V6
+            </address>
+            <p className="mt-3 text-sm text-black">
+              <span className="font-medium">Hours: </span>
+              {HALIFAX_SHOP_HOURS.label}
+            </p>
+            <p className="mt-3 text-sm text-black">
+              <a href={`tel:+19027198497`} className="underline">
+                {PHONE_DISPLAY}
+              </a>
+            </p>
+            <a
+              href={mapsUrl(LOCATIONS.halifax)}
+              className="mt-6 inline-block text-sm text-black underline"
+            >
+              Open the Bayne St shop in Google Maps
+            </a>
+          </div>
+          <iframe
+            title="Map of the Hempston Home shop at 6359 Bayne St, Halifax, NS"
+            src="https://maps.google.com/maps?q=6359%20Bayne%20St%2C%20Halifax%2C%20NS%20B3K%202V6&z=16&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-80 w-full border border-black/15"
+          />
         </div>
       </section>
 
@@ -469,7 +691,9 @@ function HalifaxPage() {
           ].map((s) => (
             <div key={s.l} className="text-center">
               <p className="font-display text-4xl font-light text-white sm:text-5xl">{s.n}</p>
-              <p className="mt-3 text-[10px] font-light uppercase tracking-[0.22em] text-white/60">{s.l}</p>
+              <p className="mt-3 text-[10px] font-light uppercase tracking-[0.22em] text-white/85">
+                {s.l}
+              </p>
             </div>
           ))}
         </div>
@@ -486,9 +710,14 @@ function HalifaxPage() {
             { k: "Phone", v: PHONE_DISPLAY },
           ].map((item) => (
             <div key={item.k}>
-              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/45">{item.k}</p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/85">
+                {item.k}
+              </p>
               {item.k === "Halifax studio" ? (
-                <a href={mapsUrl(LOCATIONS.halifax)} className="mt-2 block text-sm text-white underline">
+                <a
+                  href={mapsUrl(LOCATIONS.halifax)}
+                  className="mt-2 block text-sm text-white underline"
+                >
                   {item.v}
                 </a>
               ) : (
@@ -507,17 +736,20 @@ function HalifaxPage() {
             <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
               Custom cabinetry for every room
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-white/70">
+            <p className="mt-6 text-sm leading-relaxed text-white/90">
               Whether you are renovating a single room or building from scratch, we craft cohesive,
-              made-to-measure cabinetry that carries your home's character from one space to the next.
+              made-to-measure cabinetry that carries your home's character from one space to the
+              next.
             </p>
           </div>
           <div className="mt-14 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
               <article key={s.title} className={`${darkBg} p-8`}>
-                <s.icon className="h-6 w-6 text-white/85" strokeWidth={1.2} />
-                <h3 className="mt-6 font-display text-lg font-light uppercase tracking-[0.18em] text-white">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/65">{s.body}</p>
+                <s.icon className="h-6 w-6 text-white" strokeWidth={1.2} aria-hidden="true" />
+                <h3 className="mt-6 font-display text-lg font-light uppercase tracking-[0.18em] text-white">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/90">{s.body}</p>
               </article>
             ))}
           </div>
@@ -572,7 +804,7 @@ function HalifaxPage() {
             <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.04em] text-white sm:text-4xl">
               Built-ins that turn awkward spaces into favourite ones
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-white/70">
+            <p className="mt-6 text-sm leading-relaxed text-white/90">
               Older Halifax homes are full of character — and full of nooks, sloped ceilings, and
               chimney breasts that stock furniture can never fit. Our custom built-ins, fireplace
               surrounds, window seats, and library walls work with your home's quirks instead of
@@ -614,8 +846,9 @@ function HalifaxPage() {
               Kitchens & cabinetry built for Halifax homes
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-black/65">
-              A selection of custom kitchens, bars, and vanities designed and handcrafted for clients
-              across Halifax and Nova Scotia — from painted inset shaker to grain-forward white oak.
+              A selection of custom kitchens, bars, and vanities designed and handcrafted for
+              clients across Halifax and Nova Scotia — from painted inset shaker to grain-forward
+              white oak.
             </p>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -631,15 +864,21 @@ function HalifaxPage() {
                     className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-x-0 bottom-4 flex justify-center px-4">
-                    <div className="flex items-center gap-2 rounded-full border border-white/40 bg-white/40 px-4 py-2 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] ring-1 ring-black/5 backdrop-blur-xl">
-                      <span className="text-[9px] font-light uppercase tracking-[0.2em] text-black/80">DESIGN by</span>
+                    <div className="flex items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2">
+                      <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-black">
+                        Design by
+                      </span>
                       <span className="text-[11px] font-medium text-black">{p.designer}</span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-5">
-                  <h3 className="font-display text-base font-light uppercase tracking-[0.18em]">{p.title}</h3>
-                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/55">{p.subtitle}</p>
+                  <h3 className="font-display text-base font-light uppercase tracking-[0.18em]">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/75">
+                    {p.subtitle}
+                  </p>
                 </div>
               </div>
             ))}
@@ -655,7 +894,7 @@ function HalifaxPage() {
             <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
               A few favourite door + finish combinations
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-white/70">
+            <p className="mt-6 text-sm leading-relaxed text-white/90">
               The doors below are a small sample of the styles, profiles, and finishes we regularly
               build for Halifax and Nova Scotia homes. Because we're{" "}
               <strong className="text-white">100% custom</strong>, every profile can be adapted to
@@ -677,14 +916,18 @@ function HalifaxPage() {
                   />
                 </div>
                 <figcaption className="p-4 text-center">
-                  <p className="font-display text-sm font-light uppercase tracking-[0.18em]">{d.name}</p>
-                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/55">{d.profile} — {d.finish}</p>
+                  <p className="font-display text-sm font-light uppercase tracking-[0.18em]">
+                    {d.name}
+                  </p>
+                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/75">
+                    {d.profile} — {d.finish}
+                  </p>
                 </figcaption>
               </figure>
             ))}
           </div>
           <div className="mt-14 text-center">
-            <Link to="/products/door-styles" className={btnOutlineDark} aria-label="Browse all custom cabinet door styles">
+            <Link to="/products/door-styles" className={btnOutlineDark}>
               Browse All Custom Door Styles
             </Link>
           </div>
@@ -700,20 +943,19 @@ function HalifaxPage() {
           </h2>
           <p className="mt-6 text-sm leading-relaxed text-black/70">
             Inset cabinetry — where the door sits flush within a solid face frame — is the hallmark
-            of heirloom, furniture-quality millwork. It demands precise tolerances and expert
-            hands, and it's a signature of the finest custom kitchens across Nova Scotia's heritage
-            homes and coastal builds. Several inset examples are mixed into the Featured Doors
-            gallery above alongside our slab and shaker profiles. Every project is fully bespoke,
-            so you're never limited to a catalogue.
+            of heirloom, furniture-quality millwork. It demands precise tolerances and expert hands,
+            and it's a signature of the finest custom kitchens across Nova Scotia's heritage homes
+            and coastal builds. Several inset examples are mixed into the Featured Doors gallery
+            above alongside our slab and shaker profiles. Every project is fully bespoke, so you're
+            never limited to a catalogue.
           </p>
           <div className="mt-10">
-            <Link to="/products/cabinet-styles" className={btnDark} aria-label="Browse all custom cabinet construction styles">
+            <Link to="/products/cabinet-styles" className={btnDark}>
               Browse All Cabinet Construction Styles
             </Link>
           </div>
         </div>
       </section>
-
 
       {/* 100% CUSTOM CALLOUT */}
       <section className={`${darkBg} border-y border-white/10 py-20`}>
@@ -722,17 +964,19 @@ function HalifaxPage() {
           <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
             Every door you've seen here is just the beginning
           </h2>
-          <p className="mt-6 text-sm leading-relaxed text-white/70">
-            The door profiles, inset styles, colours, and finishes shown across this page are a small
-            sample of what we've built — not a menu you have to choose from. Hempston is a{" "}
-            <strong className="text-white">100% custom cabinet maker</strong>. There are no
-            fixed sizes, no locked-in door catalogues, and no standard colours. Whatever style,
-            profile, wood species, paint, stain, or hardware you have in mind — whether it's a modern
+          <p className="mt-6 text-sm leading-relaxed text-white/90">
+            The door profiles, inset styles, colours, and finishes shown across this page are a
+            small sample of what we've built — not a menu you have to choose from. Hempston is a{" "}
+            <strong className="text-white">100% custom cabinet maker</strong>. There are no fixed
+            sizes, no locked-in door catalogues, and no standard colours. Whatever style, profile,
+            wood species, paint, stain, or hardware you have in mind — whether it's a modern
             handleless slab, a classic beaded inset, or something you saw in a magazine — we design
             and build it from scratch, to the millimetre, for your home.
           </p>
           <div className="mt-10">
-            <a href="#consultation" className={btnLight}>Start Your Custom Design</a>
+            <a href="#consultation" className={btnLight}>
+              Start Your Custom Design
+            </a>
           </div>
         </div>
       </section>
@@ -745,7 +989,7 @@ function HalifaxPage() {
             <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
               Kitchen design, cabinet making &amp; renovation in Halifax
             </h2>
-            <p className="mt-3 text-[10px] font-light uppercase tracking-[0.22em] text-black/50">
+            <p className="mt-3 text-[10px] font-light uppercase tracking-[0.22em] text-black/75">
               <time dateTime="2026">Guide updated 2026</time>
             </p>
             <p className="mt-6 text-sm leading-relaxed text-black/70">
@@ -760,33 +1004,115 @@ function HalifaxPage() {
               {
                 h: "Working with a kitchen designer",
                 p: [
-                  <>A great <Link to="/services" className="underline decoration-black/30 underline-offset-4 hover:decoration-black"><strong>kitchen designer</strong></Link> does far more than pick cabinet doors. They study how you cook, entertain, and move through your space, then plan the layout — work triangle, island placement, traffic flow, lighting, and storage zones — so everything falls to hand. At Hempston, design and cabinet making live under one roof, so the person planning your Halifax kitchen is connected directly to the workshop building it. Nothing gets lost between a showroom drawing and the finished room.</>,
-                  <>Every project starts with an in-home consultation and precise measurements, followed by scaled drawings, 3D renderings, and real material samples. You'll see cabinet heights, appliance clearances, countertop overhangs, and door swings before a single board is cut — the surest way to avoid the costly surprises that derail so many kitchen renovations.</>,
+                  <>
+                    A great{" "}
+                    <Link
+                      to="/services"
+                      className="underline decoration-black/30 underline-offset-4 hover:decoration-black"
+                    >
+                      <strong>kitchen designer</strong>
+                    </Link>{" "}
+                    does far more than pick cabinet doors. They study how you cook, entertain, and
+                    move through your space, then plan the layout — work triangle, island placement,
+                    traffic flow, lighting, and storage zones — so everything falls to hand. At
+                    Hempston, design and cabinet making live under one roof, so the person planning
+                    your Halifax kitchen is connected directly to the workshop building it. Nothing
+                    gets lost between a showroom drawing and the finished room.
+                  </>,
+                  <>
+                    Every project starts with an in-home consultation and precise measurements,
+                    followed by scaled drawings, 3D renderings, and real material samples. You'll
+                    see cabinet heights, appliance clearances, countertop overhangs, and door swings
+                    before a single board is cut — the surest way to avoid the costly surprises that
+                    derail so many kitchen renovations.
+                  </>,
                 ],
               },
               {
                 h: "What custom cabinet making really means",
                 p: [
-                  <><strong>Custom cabinet making</strong> is the craft of building cabinetry specifically for your room rather than assembling factory boxes in fixed sizes. That means no filler panels, no wasted inches, and storage engineered around your exact needs — deep pot drawers, hidden appliance garages, pull-out pantries, spice dividers, and toe-kick storage. It also means real materials: solid hardwoods, dovetailed drawer boxes, furniture-grade plywood casework, and durable conversion finishes that stand up to Maritime humidity and salt air.</>,
-                  <>The difference shows in the details you touch every day — the weight of a door, the whisper of a soft-close drawer, the perfectly aligned grain across a run of cabinets. It's the gap between flat-pack furniture and cabinetry that becomes an heirloom.</>,
+                  <>
+                    <strong>Custom cabinet making</strong> is the craft of building cabinetry
+                    specifically for your room rather than assembling factory boxes in fixed sizes.
+                    That means no filler panels, no wasted inches, and storage engineered around
+                    your exact needs — deep pot drawers, hidden appliance garages, pull-out
+                    pantries, spice dividers, and toe-kick storage. It also means real materials:
+                    solid hardwoods, dovetailed drawer boxes, furniture-grade plywood casework, and
+                    durable conversion finishes that stand up to Maritime humidity and salt air.
+                  </>,
+                  <>
+                    The difference shows in the details you touch every day — the weight of a door,
+                    the whisper of a soft-close drawer, the perfectly aligned grain across a run of
+                    cabinets. It's the gap between flat-pack furniture and cabinetry that becomes an
+                    heirloom.
+                  </>,
                 ],
               },
               {
                 h: "Popular kitchen styles in Nova Scotia homes",
                 p: [
-                  <>Across Halifax and the province we build everything from timeless <Link to="/products/door-styles" className="underline decoration-black/30 underline-offset-4 hover:decoration-black"><strong>Shaker kitchens</strong></Link> and heritage inset cabinetry to warm <strong>white oak kitchens</strong>, two-tone islands, and sleek modern handleless designs. Popular choices right now include painted navy and sage-green cabinetry (see our <Link to="/products/colours-finishes" className="underline decoration-black/30 underline-offset-4 hover:decoration-black">custom paint colours and stains</Link>), natural rift-cut oak, brass and matte-black hardware, reeded and fluted detailing, integrated appliance panels, and butler's pantries. Whatever direction you lean — traditional, transitional, or contemporary — every finish is fully bespoke.</>,
+                  <>
+                    Across Halifax and the province we build everything from timeless{" "}
+                    <Link
+                      to="/products/door-styles"
+                      className="underline decoration-black/30 underline-offset-4 hover:decoration-black"
+                    >
+                      <strong>Shaker kitchens</strong>
+                    </Link>{" "}
+                    and heritage inset cabinetry to warm <strong>white oak kitchens</strong>,
+                    two-tone islands, and sleek modern handleless designs. Popular choices right now
+                    include painted navy and sage-green cabinetry (see our{" "}
+                    <Link
+                      to="/products/colours-finishes"
+                      className="underline decoration-black/30 underline-offset-4 hover:decoration-black"
+                    >
+                      custom paint colours and stains
+                    </Link>
+                    ), natural rift-cut oak, brass and matte-black hardware, reeded and fluted
+                    detailing, integrated appliance panels, and butler's pantries. Whatever
+                    direction you lean — traditional, transitional, or contemporary — every finish
+                    is fully bespoke.
+                  </>,
                 ],
               },
               {
                 h: "Planning a kitchen renovation or new build",
                 p: [
-                  <>Whether you're <strong>renovating a kitchen</strong>, remodelling a bathroom, or <strong>building a new home</strong>, the earlier custom cabinetry enters the conversation, the smoother the project runs. Involving your cabinet maker during design lets us coordinate with your builder, electrician, and plumber on appliance placement, outlet locations, and lighting so the finished cabinetry fits perfectly the first time. Learn more about our <Link to="/services" className="underline decoration-black/30 underline-offset-4 hover:decoration-black">design, shop drawings, and site-measure services</Link>, or explore the <Link to="/products/brands" className="underline decoration-black/30 underline-offset-4 hover:decoration-black">hardware and finish brands we specify</Link>.</>,
-                  <>Most full custom kitchens in Halifax run from concept to installation in about 8 to 14 weeks, with an honest budget range shared up front and an itemised, written quote before any deposit — so you can plan your renovation with confidence.</>,
+                  <>
+                    Whether you're <strong>renovating a kitchen</strong>, remodelling a bathroom, or{" "}
+                    <strong>building a new home</strong>, the earlier custom cabinetry enters the
+                    conversation, the smoother the project runs. Involving your cabinet maker during
+                    design lets us coordinate with your builder, electrician, and plumber on
+                    appliance placement, outlet locations, and lighting so the finished cabinetry
+                    fits perfectly the first time. Learn more about our{" "}
+                    <Link
+                      to="/services"
+                      className="underline decoration-black/30 underline-offset-4 hover:decoration-black"
+                    >
+                      design, shop drawings, and site-measure services
+                    </Link>
+                    , or explore the{" "}
+                    <Link
+                      to="/products/brands"
+                      className="underline decoration-black/30 underline-offset-4 hover:decoration-black"
+                    >
+                      hardware and finish brands we specify
+                    </Link>
+                    .
+                  </>,
+                  <>
+                    Most full custom kitchens in Halifax run from concept to installation in about 8
+                    to 14 weeks, with an honest budget range shared up front and an itemised,
+                    written quote before any deposit — so you can plan your renovation with
+                    confidence.
+                  </>,
                 ],
               },
             ].map((sec) => (
               <article key={sec.h}>
-                <h3 className="font-display text-xl font-light uppercase tracking-[0.14em]">{sec.h}</h3>
+                <h3 className="font-display text-xl font-light uppercase tracking-[0.14em]">
+                  {sec.h}
+                </h3>
                 <div className="mt-5 space-y-4 text-sm leading-relaxed text-black/70">
                   {sec.p.map((para, i) => (
                     <p key={i}>{para}</p>
@@ -806,7 +1132,7 @@ function HalifaxPage() {
             <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
               Why Halifax homeowners choose custom over stock
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-white/70">
+            <p className="mt-6 text-sm leading-relaxed text-white/90">
               Anyone can sell you boxes. We build cabinetry that fits your home perfectly, performs
               for decades, and looks like it belongs.
             </p>
@@ -814,9 +1140,11 @@ function HalifaxPage() {
           <div className="mt-14 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {reasons.map((r) => (
               <div key={r.title} className={`${darkBg} p-8`}>
-                <r.icon className="h-6 w-6 text-white/85" strokeWidth={1.2} />
-                <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em] text-white">{r.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/65">{r.body}</p>
+                <r.icon className="h-6 w-6 text-white" strokeWidth={1.2} aria-hidden="true" />
+                <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em] text-white">
+                  {r.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/90">{r.body}</p>
               </div>
             ))}
           </div>
@@ -840,10 +1168,12 @@ function HalifaxPage() {
             {process.map((p) => (
               <div key={p.step} className={`${lightBg} p-8`}>
                 <div className="flex items-center justify-between">
-                  <p.icon className="h-6 w-6 text-black/80" strokeWidth={1.2} />
-                  <span className="font-display text-3xl font-light text-black/25">{p.step}</span>
+                  <p.icon className="h-6 w-6 text-black" strokeWidth={1.2} aria-hidden="true" />
+                  <span className="font-display text-3xl font-light text-black/70">{p.step}</span>
                 </div>
-                <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em]">{p.title}</h3>
+                <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em]">
+                  {p.title}
+                </h3>
                 <p className="mt-3 text-sm leading-relaxed text-black/70">{p.body}</p>
               </div>
             ))}
@@ -863,12 +1193,12 @@ function HalifaxPage() {
         />
         <div className="absolute inset-0 -z-10 bg-black/65" />
         <div className="mx-auto max-w-3xl px-5 py-32 text-center sm:px-8">
-          <Quote className="mx-auto h-8 w-8 text-white/80" strokeWidth={1.2} />
+          <Quote className="mx-auto h-8 w-8 text-white" strokeWidth={1.2} aria-hidden="true" />
           <blockquote className="mt-8 font-display text-2xl font-light leading-snug text-white text-balance sm:text-3xl">
             "We obsess over the dovetail you'll never see and the drawer you'll open ten thousand
             times. That's the difference between furniture and cabinetry that lasts a lifetime."
           </blockquote>
-          <p className="mt-8 text-[10px] font-light uppercase tracking-[0.28em] text-white/70">
+          <p className="mt-8 text-[10px] font-light uppercase tracking-[0.28em] text-white/90">
             The Hempston Workshop
           </p>
         </div>
@@ -882,16 +1212,25 @@ function HalifaxPage() {
             <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
               Honest materials, finished to endure the Maritime climate
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-white/70">
+            <p className="mt-6 text-sm leading-relaxed text-white/90">
               Coastal humidity and salt air are hard on poorly built cabinetry. We specify and
               finish every project to stand up to Halifax weather for the long haul.
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { src: materialWidePlank, alt: "Wide-plank jet-black stained white oak cabinetry material sample" },
-              { src: projWhiteOakDetail, alt: "Detail of rift-cut white oak inset cabinet doors and drawers" },
-              { src: projFarmhouse, alt: "Custom white inset shaker cabinetry with painted recessed panel doors" },
+              {
+                src: materialWidePlank,
+                alt: "Wide-plank jet-black stained white oak cabinetry material sample",
+              },
+              {
+                src: projWhiteOakDetail,
+                alt: "Detail of rift-cut white oak inset cabinet doors and drawers",
+              },
+              {
+                src: projFarmhouse,
+                alt: "Custom white inset shaker cabinetry with painted recessed panel doors",
+              },
             ].map((img) => (
               <div key={img.alt} className="overflow-hidden">
                 <img
@@ -907,16 +1246,36 @@ function HalifaxPage() {
           </div>
           <div className="mt-10 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { t: "Solid Hardwoods", d: "Walnut, white oak, maple, cherry, and ash — selected for grain, stability, and longevity." },
-              { t: "Painted & Inset Styles", d: "Furniture-grade MDF and hardwood frames for crisp, durable painted finishes that resist chipping." },
-              { t: "Conversion Finishes", d: "Catalysed lacquers and conversion varnishes that shrug off moisture, heat, and daily wear." },
-              { t: "Dovetailed Drawers", d: "Solid-wood, dovetailed drawer boxes with full-extension soft-close runners as standard." },
-              { t: "Premium Hardware", d: "Concealed hinges, soft-close mechanisms, and tactile pulls from trusted European makers." },
-              { t: "Smart Storage", d: "Pull-outs, dividers, spice racks, and appliance garages engineered around your daily routine." },
+              {
+                t: "Solid Hardwoods",
+                d: "Walnut, white oak, maple, cherry, and ash — selected for grain, stability, and longevity.",
+              },
+              {
+                t: "Painted & Inset Styles",
+                d: "Furniture-grade MDF and hardwood frames for crisp, durable painted finishes that resist chipping.",
+              },
+              {
+                t: "Conversion Finishes",
+                d: "Catalysed lacquers and conversion varnishes that shrug off moisture, heat, and daily wear.",
+              },
+              {
+                t: "Dovetailed Drawers",
+                d: "Solid-wood, dovetailed drawer boxes with full-extension soft-close runners as standard.",
+              },
+              {
+                t: "Premium Hardware",
+                d: "Concealed hinges, soft-close mechanisms, and tactile pulls from trusted European makers.",
+              },
+              {
+                t: "Smart Storage",
+                d: "Pull-outs, dividers, spice racks, and appliance garages engineered around your daily routine.",
+              },
             ].map((m) => (
               <div key={m.t} className={`${darkBg} p-6`}>
-                <h3 className="font-display text-base font-light uppercase tracking-[0.18em] text-white">{m.t}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/65">{m.d}</p>
+                <h3 className="font-display text-base font-light uppercase tracking-[0.18em] text-white">
+                  {m.t}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/90">{m.d}</p>
               </div>
             ))}
           </div>
@@ -942,20 +1301,23 @@ function HalifaxPage() {
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-white/75">
               Hempston is proud to be a Nova Scotia custom cabinet maker. While Halifax and the
-              wider HRM are home, we design and install bespoke kitchens, vanities, and built-ins for
-              homeowners right across the province — from South Shore cottages and Annapolis Valley
-              farmhouses to new builds in Truro, Pictou County, and Cape Breton.
+              wider HRM are home, we design and install bespoke kitchens, vanities, and built-ins
+              for homeowners right across the province — from South Shore cottages and Annapolis
+              Valley farmhouses to new builds in Truro, Pictou County, and Cape Breton.
             </p>
           </div>
 
           <div className="mt-14">
-            <p className="text-center text-[10px] font-light uppercase tracking-[0.28em] text-white/70">
+            <p className="text-center text-[10px] font-light uppercase tracking-[0.28em] text-white/90">
               Halifax Regional Municipality
             </p>
             <ul className="mt-6 flex flex-wrap justify-center gap-3">
               {neighbourhoods.map((n) => (
-                <li key={n} className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90">
-                  <MapPin className="h-3.5 w-3.5" strokeWidth={1.2} />
+                <li
+                  key={n}
+                  className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90"
+                >
+                  <MapPin className="h-3.5 w-3.5" strokeWidth={1.2} aria-hidden="true" />
                   {n}
                 </li>
               ))}
@@ -963,13 +1325,16 @@ function HalifaxPage() {
           </div>
 
           <div className="mt-10">
-            <p className="text-center text-[10px] font-light uppercase tracking-[0.28em] text-white/70">
+            <p className="text-center text-[10px] font-light uppercase tracking-[0.28em] text-white/90">
               Across Nova Scotia
             </p>
             <ul className="mt-6 flex flex-wrap justify-center gap-3">
               {regions.map((n) => (
-                <li key={n} className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90">
-                  <MapPin className="h-3.5 w-3.5" strokeWidth={1.2} />
+                <li
+                  key={n}
+                  className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90"
+                >
+                  <MapPin className="h-3.5 w-3.5" strokeWidth={1.2} aria-hidden="true" />
                   {n}
                 </li>
               ))}
@@ -991,7 +1356,7 @@ function HalifaxPage() {
             items={faqs}
             className="mt-12"
             questionClassName="font-display text-base font-light uppercase tracking-[0.1em] text-white"
-            answerClassName="mt-3 text-sm leading-relaxed text-white/70"
+            answerClassName="mt-3 text-sm leading-relaxed text-white/90"
           />
         </div>
       </section>
@@ -1021,7 +1386,9 @@ function HalifaxPage() {
               ))}
             </ul>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="tel:+19027198497" className={btnDark}>Call (902) 719-8497</a>
+              <a href="tel:+19027198497" className={btnDark}>
+                Call (902) 719-8497
+              </a>
               <a
                 href="mailto:info@hempstonhome.com"
                 className="inline-block border border-black/70 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-black hover:text-white"

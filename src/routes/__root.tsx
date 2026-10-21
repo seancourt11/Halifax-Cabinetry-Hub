@@ -87,7 +87,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: BRAND },
       { property: "og:site_name", content: BRAND },
-      { property: "og:title", content: "Custom Cabinetry and Millwork Nova Scotia | Hempston Home" },
+      {
+        property: "og:title",
+        content: "Custom Cabinetry and Millwork Nova Scotia | Hempston Home",
+      },
       {
         property: "og:description",
         content:
@@ -95,7 +98,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Custom Cabinetry and Millwork Nova Scotia | Hempston Home" },
+      {
+        name: "twitter:title",
+        content: "Custom Cabinetry and Millwork Nova Scotia | Hempston Home",
+      },
       {
         name: "twitter:description",
         content:
@@ -117,10 +123,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         as: "style",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap",
       },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap",
-      },
     ],
     scripts: [
       {
@@ -135,11 +137,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const FONT_HREF =
+  "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap";
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Non-render-blocking font CSS. The preload above starts the download. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(()=>{var h=${JSON.stringify(FONT_HREF)};var l=document.createElement("link");l.rel="stylesheet";l.href=h;l.media="print";l.onload=function(){this.media="all"};document.head.appendChild(l)})();`,
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href={FONT_HREF} />
+        </noscript>
       </head>
       <body>
         {children}
@@ -155,7 +169,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </QueryClientProvider>
   );
 }

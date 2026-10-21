@@ -30,6 +30,7 @@ import { Route as CustomCabinetryTorontoRouteImport } from './routes/custom-cabi
 import { Route as CustomCabinetryVancouverRouteImport } from './routes/custom-cabinetry-vancouver'
 import { Route as CustomCabinetryWinnipegRouteImport } from './routes/custom-cabinetry-winnipeg'
 import { Route as LocationsRouteImport } from './routes/locations'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RushCustomKitchenCabinetsRouteImport } from './routes/rush-custom-kitchen-cabinets'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapImagesDotxmlRouteImport } from './routes/sitemap-images[.]xml'
@@ -153,6 +154,11 @@ const LocationsRoute = LocationsRouteImport.update({
   path: '/locations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RushCustomKitchenCabinetsRoute =
   RushCustomKitchenCabinetsRouteImport.update({
     id: '/rush-custom-kitchen-cabinets',
@@ -232,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
   '/locations': typeof LocationsRoute
+  '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
   '/services': typeof ServicesRoute
   '/sitemap-images.xml': typeof SitemapImagesDotxmlRoute
@@ -266,6 +273,7 @@ export interface FileRoutesByTo {
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
   '/locations': typeof LocationsRoute
+  '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
   '/services': typeof ServicesRoute
   '/sitemap-images.xml': typeof SitemapImagesDotxmlRoute
@@ -301,6 +309,7 @@ export interface FileRoutesById {
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
   '/locations': typeof LocationsRoute
+  '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
   '/services': typeof ServicesRoute
   '/sitemap-images.xml': typeof SitemapImagesDotxmlRoute
@@ -337,6 +346,7 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
     | '/locations'
+    | '/projects'
     | '/rush-custom-kitchen-cabinets'
     | '/services'
     | '/sitemap-images.xml'
@@ -371,6 +381,7 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
     | '/locations'
+    | '/projects'
     | '/rush-custom-kitchen-cabinets'
     | '/services'
     | '/sitemap-images.xml'
@@ -405,6 +416,7 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
     | '/locations'
+    | '/projects'
     | '/rush-custom-kitchen-cabinets'
     | '/services'
     | '/sitemap-images.xml'
@@ -440,6 +452,7 @@ export interface RootRouteChildren {
   CustomCabinetryVancouverRoute: typeof CustomCabinetryVancouverRoute
   CustomCabinetryWinnipegRoute: typeof CustomCabinetryWinnipegRoute
   LocationsRoute: typeof LocationsRoute
+  ProjectsRoute: typeof ProjectsRoute
   RushCustomKitchenCabinetsRoute: typeof RushCustomKitchenCabinetsRoute
   ServicesRoute: typeof ServicesRoute
   SitemapImagesDotxmlRoute: typeof SitemapImagesDotxmlRoute
@@ -602,6 +615,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rush-custom-kitchen-cabinets': {
       id: '/rush-custom-kitchen-cabinets'
       path: '/rush-custom-kitchen-cabinets'
@@ -704,6 +724,7 @@ const rootRouteChildren: RootRouteChildren = {
   CustomCabinetryVancouverRoute: CustomCabinetryVancouverRoute,
   CustomCabinetryWinnipegRoute: CustomCabinetryWinnipegRoute,
   LocationsRoute: LocationsRoute,
+  ProjectsRoute: ProjectsRoute,
   RushCustomKitchenCabinetsRoute: RushCustomKitchenCabinetsRoute,
   ServicesRoute: ServicesRoute,
   SitemapImagesDotxmlRoute: SitemapImagesDotxmlRoute,

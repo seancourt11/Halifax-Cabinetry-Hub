@@ -13,6 +13,7 @@ import {
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import heroKitchen from "@/assets/projects/gh-oak-island-painted-beams.jpg";
+import heroSmall from "@/assets/projects/gh-oak-island-painted-beams.jpg?w=800";
 import elevateRoom from "@/assets/projects/md-laundry-cabinetry.jpg";
 import featureLever from "@/assets/projects/nwc-marble-brass-faucet.jpg";
 import productPot from "@/assets/projects/grey-oak-bar-pantry.jpg";
@@ -67,7 +68,14 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: ABSOLUTE_URL },
-      { rel: "preload", as: "image", href: heroKitchen, fetchpriority: "high" },
+      {
+        rel: "preload",
+        as: "image",
+        href: heroSmall,
+        imageSrcSet: `${heroSmall} 800w, ${heroKitchen} 1600w`,
+        imageSizes: "100vw",
+        fetchPriority: "high",
+      },
     ],
     scripts: [
       {
@@ -94,19 +102,59 @@ export const Route = createFileRoute("/")({
 });
 
 const carouselProducts = [
-  { title: "Custom Kitchen Cabinetry", image: featureLever, alt: "Bespoke white inset kitchen cabinetry with painted shaker doors", designer: "31 Westgate" },
-  { title: "Cefalù — Cerused Washed Oak", image: productSconce, alt: "Cefalù cerused washed oak shaker door with white oak finish", designer: "Hempston Home" },
-  { title: "White Painted Cabinetry", image: featureLever, alt: "Custom white painted kitchen cabinetry with inset doors", designer: "31 Westgate" },
-  { title: "Navy Cabinetry", image: productCopper, alt: "Navy custom cabinetry with brass pulls", designer: "31 Westgate" },
+  {
+    title: "Custom Kitchen Cabinetry",
+    image: featureLever,
+    alt: "Bespoke white inset kitchen cabinetry with painted shaker doors",
+    designer: "31 Westgate",
+  },
+  {
+    title: "Cefalù — Cerused Washed Oak",
+    image: productSconce,
+    alt: "Cefalù cerused washed oak shaker door with white oak finish",
+    designer: "Hempston Home",
+  },
+  {
+    title: "White Painted Cabinetry",
+    image: featureLever,
+    alt: "Custom white painted kitchen cabinetry with inset doors",
+    designer: "31 Westgate",
+  },
+  {
+    title: "Navy Cabinetry",
+    image: productCopper,
+    alt: "Navy custom cabinetry with brass pulls",
+    designer: "31 Westgate",
+  },
 ];
 
 const exploreProducts = [
-  { title: "Reeded Oak Vanity", image: reededVanity, alt: "Reeded white oak vanity cabinetry with integrated storage and warm wood grain", tall: true,
-    blurb: "A reeded white oak vanity built for a coastal bathroom — tactile grain, soft light, and cabinetry made to feel like furniture.", designer: "Hen House" },
-  { title: "Bar & Pantry Cabinetry", image: productPot, alt: "Custom bar and pantry cabinetry", tall: false,
-    blurb: "Tailored pantry and bar cabinetry designed around how you entertain, store, and live.", designer: "31 Westgate" },
-  { title: "Navy Kitchen Cabinets", image: productCopper, alt: "Navy custom kitchen cabinets with painted shaker doors", tall: false,
-    blurb: "Painted inset cabinetry with hand-selected hardware — made to order for kitchens that feel considered.", designer: "31 Westgate" },
+  {
+    title: "Reeded Oak Vanity",
+    image: reededVanity,
+    alt: "Reeded white oak vanity cabinetry with integrated storage and warm wood grain",
+    tall: true,
+    blurb:
+      "A reeded white oak vanity built for a coastal bathroom — tactile grain, soft light, and cabinetry made to feel like furniture.",
+    designer: "Hen House",
+  },
+  {
+    title: "Bar & Pantry Cabinetry",
+    image: productPot,
+    alt: "Custom bar and pantry cabinetry",
+    tall: false,
+    blurb: "Tailored pantry and bar cabinetry designed around how you entertain, store, and live.",
+    designer: "31 Westgate",
+  },
+  {
+    title: "Navy Kitchen Cabinets",
+    image: productCopper,
+    alt: "Navy custom kitchen cabinets with painted shaker doors",
+    tall: false,
+    blurb:
+      "Painted inset cabinetry with hand-selected hardware — made to order for kitchens that feel considered.",
+    designer: "31 Westgate",
+  },
 ];
 
 const instagramTiles = [
@@ -125,11 +173,13 @@ function Index() {
       <section className="relative">
         <img
           src={heroKitchen}
+          srcSet={`${heroSmall} 800w, ${heroKitchen} 1600w`}
+          sizes="100vw"
           alt="Glen Haven custom white painted kitchen cabinetry with stained white oak island by Hempston Home"
-          width={1920}
-          height={1100}
+          width={1600}
+          height={1000}
           fetchPriority="high"
-          decoding="async"
+          decoding="sync"
           className="h-[86vh] min-h-[560px] w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
@@ -140,7 +190,10 @@ function Index() {
                 Custom Cabinetry and Millwork, Made in Nova Scotia
               </h1>
               <p id="home-summary" className="mt-6 max-w-md text-sm leading-relaxed text-white/80">
-                Hempston Home is a Halifax, Nova Scotia cabinet studio that designs, builds and installs 100% custom kitchens, vanities and built-ins. Built in Canada. Most kitchens take {LEAD_TIME_LABEL} and start around $25,000. We install across Canada and the United States.
+                Hempston Home is a Halifax, Nova Scotia cabinet studio that designs, builds and
+                installs 100% custom kitchens, vanities and built-ins. Built in Canada. Most
+                kitchens take {LEAD_TIME_LABEL} and start around $25,000. We install across Canada
+                and the United States.
               </p>
               <div className="mt-10">
                 <Link
@@ -164,7 +217,9 @@ function Index() {
             { k: "Consult", v: "Free in-home consult in HRM" },
           ].map((item) => (
             <div key={item.k}>
-              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-black/50">{item.k}</p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-black/70">
+                {item.k}
+              </p>
               <p className="mt-2 text-sm">{item.v}</p>
             </div>
           ))}
@@ -173,16 +228,28 @@ function Index() {
 
       <section className="border-b border-white/10 bg-[oklch(0.14_0_0)]">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-8 px-5 py-10 sm:px-8">
-          <Link to="/products/door-styles" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+          <Link
+            to="/products/door-styles"
+            className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70"
+          >
             Cabinet door styles
           </Link>
-          <Link to="/services" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+          <Link
+            to="/services"
+            className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70"
+          >
             Services
           </Link>
-          <Link to="/case-studies" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+          <Link
+            to="/projects"
+            className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70"
+          >
             Projects
           </Link>
-          <Link to="/about" className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70">
+          <Link
+            to="/about"
+            className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70"
+          >
             About
           </Link>
         </div>
@@ -203,13 +270,15 @@ function Index() {
             <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-transparent" />
             <div className="absolute inset-0 flex items-center">
               <div className="w-full max-w-md px-8 sm:px-14">
-                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/70">Hempston Home</p>
+                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/70">
+                  Hempston Home
+                </p>
                 <h2 className="mt-4 font-display text-3xl font-light uppercase tracking-[0.04em] text-white sm:text-5xl">
                   Cabinetry Built to Last
                 </h2>
                 <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/75">
-                  Custom kitchen cabinets, built-ins, vanities, and millwork — designed, built, and finished
-                  for homes that improve with age.
+                  Custom kitchen cabinets, built-ins, vanities, and millwork — designed, built, and
+                  finished for homes that improve with age.
                 </p>
                 <div className="mt-8">
                   <Link
@@ -267,17 +336,21 @@ function Index() {
                       {p.title}
                     </span>
                   </div>
-                  <div className={`absolute inset-x-0 flex justify-center px-4 ${isFocus ? "bottom-36" : "bottom-6"}`}>
+                  <div
+                    className={`absolute inset-x-0 flex justify-center px-4 ${isFocus ? "bottom-36" : "bottom-6"}`}
+                  >
                     <div className="flex items-center gap-2 rounded-full border border-white/40 bg-white/40 px-4 py-2 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] ring-1 ring-black/5 backdrop-blur-xl">
-                      <span className="text-[9px] font-light uppercase tracking-[0.2em] text-black/80">DESIGN by</span>
+                      <span className="text-[9px] font-light uppercase tracking-[0.2em] text-black/80">
+                        DESIGN by
+                      </span>
                       <span className="text-[11px] font-medium text-black">{p.designer}</span>
                     </div>
                   </div>
                   {isFocus && (
                     <div className="absolute inset-x-6 bottom-6 bg-white p-6 text-center text-black">
                       <p className="text-xs leading-relaxed text-black/70">
-                        Cefalù cerused washed oak shaker doors, hand-finished to highlight the grain and
-                        built to order for custom kitchens and built-ins.
+                        Cefalù cerused washed oak shaker doors, hand-finished to highlight the grain
+                        and built to order for custom kitchens and built-ins.
                       </p>
                       <Link
                         to="/products/door-styles"
@@ -313,8 +386,12 @@ function Index() {
                 />
                 <div className="absolute inset-x-0 bottom-4 flex justify-center px-4">
                   <div className="flex items-center gap-2 rounded-full border border-white/40 bg-white/40 px-4 py-2 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] ring-1 ring-black/5 backdrop-blur-xl">
-                    <span className="text-[9px] font-light uppercase tracking-[0.2em] text-black/80">DESIGN by</span>
-                    <span className="text-[11px] font-medium text-black">{exploreProducts[0].designer}</span>
+                    <span className="text-[9px] font-light uppercase tracking-[0.2em] text-black/80">
+                      DESIGN by
+                    </span>
+                    <span className="text-[11px] font-medium text-black">
+                      {exploreProducts[0].designer}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -341,7 +418,9 @@ function Index() {
                     />
                     <div className="absolute inset-x-0 bottom-4 flex justify-center px-4">
                       <div className="flex items-center gap-2 rounded-full border border-white/40 bg-white/40 px-4 py-2 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] ring-1 ring-black/5 backdrop-blur-xl">
-                        <span className="text-[9px] font-light uppercase tracking-[0.2em] text-black/80">DESIGN by</span>
+                        <span className="text-[9px] font-light uppercase tracking-[0.2em] text-black/80">
+                          DESIGN by
+                        </span>
                         <span className="text-[11px] font-medium text-black">{p.designer}</span>
                       </div>
                     </div>
@@ -351,7 +430,9 @@ function Index() {
                       {p.title}
                     </Link>
                   </h3>
-                  <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">{p.blurb}</p>
+                  <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">
+                    {p.blurb}
+                  </p>
                 </article>
               ))}
             </div>
@@ -379,10 +460,10 @@ function Index() {
           </div>
 
           <p className="mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-white/70">
-            Hempston Home was born out of a devotion to timeless cabinetry. Every cabinet is built to feel
-            like a permanent part of the home — from the first kitchen sketch to the final hardware
-            installation. We work with a small circle of makers who share our belief that good things
-            take time.
+            Hempston Home was born out of a devotion to timeless cabinetry. Every cabinet is built
+            to feel like a permanent part of the home — from the first kitchen sketch to the final
+            hardware installation. We work with a small circle of makers who share our belief that
+            good things take time.
           </p>
           <div className="mt-8 text-center">
             <Link
@@ -423,7 +504,9 @@ function Index() {
                 />
                 <div className="absolute inset-x-0 top-3 flex justify-center px-3">
                   <div className="flex items-center gap-2 rounded-full border border-white/40 bg-white/40 px-3 py-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] ring-1 ring-black/5 backdrop-blur-xl">
-                    <span className="text-[8px] font-light uppercase tracking-[0.2em] text-black/80">DESIGN by</span>
+                    <span className="text-[8px] font-light uppercase tracking-[0.2em] text-black/80">
+                      DESIGN by
+                    </span>
                     <span className="text-[10px] font-medium text-black">{tile.designer}</span>
                   </div>
                 </div>
@@ -450,30 +533,66 @@ function Index() {
             <p>
               Hempston Home is a custom cabinet maker designing and handcrafting bespoke kitchens,
               bathroom vanities, built-in millwork, and pantry cabinetry for architects, interior
-              designers, and homeowners. Every project is drawn, built, and finished under one roof —
-              from the first site measure to white-glove installation.
+              designers, and homeowners. Every project is drawn, built, and finished under one roof
+              — from the first site measure to white-glove installation.
             </p>
             <p>
               We specialise in Shaker kitchens, inset face-frame cabinetry, rift-cut white oak
               vanities, painted slab cabinets, and reeded walnut millwork — hand-finished with
-              conversion varnish or <a href="https://www.rubiomonocoat.com/" target="_blank" rel="noopener" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">Rubio Monocoat</a> hardwax oil. If you can draw it, we can build it.
+              conversion varnish or{" "}
+              <a
+                href="https://www.rubiomonocoat.com/"
+                target="_blank"
+                rel="noopener"
+                className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+              >
+                Rubio Monocoat
+              </a>{" "}
+              hardwax oil. If you can draw it, we can build it.
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            <Link to="/products/door-styles" className="border border-white/15 p-5 transition-colors hover:border-white/40">
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">01</p>
-              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">Cabinet Door Styles</p>
-              <p className="mt-2 text-sm text-white/60">Shaker, slab, beaded inset, raised & recessed panel, reeded.</p>
+            <Link
+              to="/products/door-styles"
+              className="border border-white/15 p-5 transition-colors hover:border-white/40"
+            >
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                01
+              </p>
+              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">
+                Cabinet Door Styles
+              </p>
+              <p className="mt-2 text-sm text-white/60">
+                Shaker, slab, beaded inset, raised & recessed panel, reeded.
+              </p>
             </Link>
-            <Link to="/products/cabinet-styles" className="border border-white/15 p-5 transition-colors hover:border-white/40">
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">02</p>
-              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">Cabinet Construction</p>
-              <p className="mt-2 text-sm text-white/60">Inset face frame, full and partial overlay, frameless European.</p>
+            <Link
+              to="/products/cabinet-styles"
+              className="border border-white/15 p-5 transition-colors hover:border-white/40"
+            >
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                02
+              </p>
+              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">
+                Cabinet Construction
+              </p>
+              <p className="mt-2 text-sm text-white/60">
+                Inset face frame, full and partial overlay, frameless European.
+              </p>
             </Link>
-            <Link to="/products/colours-finishes" className="border border-white/15 p-5 transition-colors hover:border-white/40">
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">03</p>
-              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">Colours & Finishes</p>
-              <p className="mt-2 text-sm text-white/60">Hand-sprayed paints and hand-rubbed hardwax-oil stains.</p>
+            <Link
+              to="/products/colours-finishes"
+              className="border border-white/15 p-5 transition-colors hover:border-white/40"
+            >
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                03
+              </p>
+              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">
+                Colours & Finishes
+              </p>
+              <p className="mt-2 text-sm text-white/60">
+                Hand-sprayed paints and hand-rubbed hardwax-oil stains.
+              </p>
             </Link>
           </div>
         </div>
@@ -494,7 +613,9 @@ function Index() {
 
       <section className="border-t border-white/10 bg-[oklch(0.14_0_0)] py-20 text-white">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">Questions</h2>
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">
+            Questions
+          </h2>
           <VisibleFaq
             items={homeFaqs}
             className="mt-8"

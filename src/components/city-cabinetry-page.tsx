@@ -21,12 +21,17 @@ import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
-import {
-  showcaseGallery,
-  insetGallery2026,
-} from "@/data/door-gallery-2026";
+import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
 import { buildCityFaqs, cityPages, nearbyCitiesFor, type CityPageData } from "@/data/city-pages";
-import { breadcrumbSchema, cityServiceSchema, faqPageSchema, howToSchema, ORG_NAME, SITE_URL } from "@/lib/schema";
+import { cityServiceNotes } from "@/data/city-service-notes";
+import {
+  breadcrumbSchema,
+  cityServiceSchema,
+  faqPageSchema,
+  howToSchema,
+  ORG_NAME,
+  SITE_URL,
+} from "@/lib/schema";
 import {
   CITY_SEO,
   FOUNDING_YEAR,
@@ -38,20 +43,35 @@ import {
   mapsUrl,
 } from "@/lib/site";
 import projGlenHaven from "@/assets/projects/glen-haven-brass-hood-kitchen.jpg";
+import projGlenHavenSmall from "@/assets/projects/glen-haven-brass-hood-kitchen.jpg?w=800";
 import projNwcBrass from "@/assets/projects/nwc-brass-hood-white-cabinets.jpg";
+import projNwcBrassSmall from "@/assets/projects/nwc-brass-hood-white-cabinets.jpg?w=800";
 import projDbaPlIsland from "@/assets/projects/dba-pl-island-kitchen.jpg";
+import projDbaPlIslandSmall from "@/assets/projects/dba-pl-island-kitchen.jpg?w=800";
 import projGhWhite from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
+import projGhWhiteSmall from "@/assets/projects/gh-white-cabinets-brass-hood.jpg?w=800";
 import projDbaKentKitchen1 from "@/assets/projects/dba-kent-kitchen-1.jpg";
+import projDbaKentKitchen1Small from "@/assets/projects/dba-kent-kitchen-1.jpg?w=800";
 import projMdKitchen from "@/assets/projects/md-white-kitchen-brass-pendants.jpg";
+import projMdKitchenSmall from "@/assets/projects/md-white-kitchen-brass-pendants.jpg?w=800";
 import projDbaPlKitchen1 from "@/assets/projects/dba-pl-kitchen-1.jpg";
+import projDbaPlKitchen1Small from "@/assets/projects/dba-pl-kitchen-1.jpg?w=800";
 import projNwcOakIsland from "@/assets/projects/nwc-oak-island-kitchen.jpg";
+import projNwcOakIslandSmall from "@/assets/projects/nwc-oak-island-kitchen.jpg?w=800";
 import projDbaKentPantry from "@/assets/projects/dba-kent-pantry.jpg";
+import projDbaKentPantrySmall from "@/assets/projects/dba-kent-pantry.jpg?w=800";
 import projModernMarble from "@/assets/projects/modern-marble-kitchen.jpg";
+import projModernMarbleSmall from "@/assets/projects/modern-marble-kitchen.jpg?w=800";
 import projMdVanity from "@/assets/projects/md-oak-double-vanity.jpg";
+import projMdVanitySmall from "@/assets/projects/md-oak-double-vanity.jpg?w=800";
 import projGhButler from "@/assets/projects/gh-butler-pantry-glass.jpg";
+import projGhButlerSmall from "@/assets/projects/gh-butler-pantry-glass.jpg?w=800";
 import projNwcNavyTile from "@/assets/projects/nwc-navy-tile-backsplash.jpg";
+import projNwcNavyTileSmall from "@/assets/projects/nwc-navy-tile-backsplash.jpg?w=800";
 import projWhiteMarble from "@/assets/projects/white-marble-kitchen.jpg";
+import projWhiteMarbleSmall from "@/assets/projects/white-marble-kitchen.jpg?w=800";
 import projReededVanity from "@/assets/projects/reeded-oak-vanity.jpg";
+import projReededVanitySmall from "@/assets/projects/reeded-oak-vanity.jpg?w=800";
 
 // Mixed featured doors — slab / shaker / inset interleaved
 const mixedFeaturedDoors: typeof showcaseGallery = (() => {
@@ -67,64 +87,220 @@ const mixedFeaturedDoors: typeof showcaseGallery = (() => {
 })();
 
 const services = [
-  { icon: ChefHat, title: "Custom Kitchens", body: "Bespoke kitchen cabinetry designed around how you cook, gather, and entertain — from statement islands to floor-to-ceiling pantries." },
-  { icon: Bath, title: "Bathroom Vanities", body: "Made-to-measure vanities, linen towers, and storage that bring spa-level calm and order to ensuites and powder rooms." },
-  { icon: BookOpen, title: "Built-Ins & Shelving", body: "Custom bookcases, fireplace surrounds, window seats, and library walls that make a room feel finished and intentional." },
-  { icon: Hammer, title: "Mudrooms & Laundry", body: "Hard-working cabinetry, lockers, and benches that tame Canada's four seasons of coats, boots, and gear." },
-  { icon: Ruler, title: "Home Offices", body: "Integrated desks, file storage, and display built to the millimetre for a workspace that disappears into your home." },
-  { icon: Award, title: "Wine & Bar Cabinetry", body: "Refined entertaining spaces — wine walls, dry bars, and butler's pantries crafted for collectors and hosts." },
+  {
+    icon: ChefHat,
+    title: "Custom Kitchens",
+    body: "Bespoke kitchen cabinetry designed around how you cook, gather, and entertain — from statement islands to floor-to-ceiling pantries.",
+  },
+  {
+    icon: Bath,
+    title: "Bathroom Vanities",
+    body: "Made-to-measure vanities, linen towers, and storage that bring spa-level calm and order to ensuites and powder rooms.",
+  },
+  {
+    icon: BookOpen,
+    title: "Built-Ins & Shelving",
+    body: "Custom bookcases, fireplace surrounds, window seats, and library walls that make a room feel finished and intentional.",
+  },
+  {
+    icon: Hammer,
+    title: "Mudrooms & Laundry",
+    body: "Hard-working cabinetry, lockers, and benches that tame Canada's four seasons of coats, boots, and gear.",
+  },
+  {
+    icon: Ruler,
+    title: "Home Offices",
+    body: "Integrated desks, file storage, and display built to the millimetre for a workspace that disappears into your home.",
+  },
+  {
+    icon: Award,
+    title: "Wine & Bar Cabinetry",
+    body: "Refined entertaining spaces — wine walls, dry bars, and butler's pantries crafted for collectors and hosts.",
+  },
 ];
 
 const reasons = [
-  { icon: ShieldCheck, title: "Built to Last Generations", body: "Solid-wood construction, dovetailed drawers, and conversion finishes engineered to weather Canadian humidity and temperature swings." },
-  { icon: Leaf, title: "Built in Canada", body: "Built in Canada. We design, build and install custom cabinetry for your home, and we install across Canada and the United States." },
-  { icon: Clock, title: "On-Time, On-Budget", body: "Written timelines and itemised quotes before any deposit. No vague estimates, no moving targets." },
-  { icon: Award, title: "Heirloom Craftsmanship", body: "Decades of combined cabinet-making experience poured into every joint, edge, and finished surface." },
+  {
+    icon: ShieldCheck,
+    title: "Built to Last Generations",
+    body: "Solid-wood construction, dovetailed drawers, and conversion finishes engineered to weather Canadian humidity and temperature swings.",
+  },
+  {
+    icon: Leaf,
+    title: "Built in Canada",
+    body: "Built in Canada. We design, build and install custom cabinetry for your home, and we install across Canada and the United States.",
+  },
+  {
+    icon: Clock,
+    title: "On-Time, On-Budget",
+    body: "Written timelines and itemised quotes before any deposit. No vague estimates, no moving targets.",
+  },
+  {
+    icon: Award,
+    title: "Heirloom Craftsmanship",
+    body: "Decades of combined cabinet-making experience poured into every joint, edge, and finished surface.",
+  },
 ];
 
 // Gallery pool for recent work section (24 curated Hempston project images)
 const recentProjectsPool = [
-  { src: projNwcBrass, alt: "Custom overlay cabinetry with painted shaker doors and brass hood", title: "Coastal Cottage", subtitle: "Custom Overlay", designer: "31 Westgate" },
-  { src: projDbaPlIsland, alt: "Custom painted kitchen with dark stained oak island and white oak beams", title: "Dark Oak Island Kitchen", subtitle: "Painted + Stained Oak", designer: "DB Architecture" },
-  { src: projGhWhite, alt: "Custom white painted shaker kitchen cabinetry", title: "Painted Shaker Kitchen", subtitle: "White Painted Cabinetry", designer: "31 Westgate" },
-  { src: projDbaKentKitchen1, alt: "Inset custom cabinetry with white oak island and corner window", title: "Inset Oak Island Kitchen", subtitle: "Inset + Oak Island", designer: "DB Architecture" },
-  { src: projMdKitchen, alt: "Custom white kitchen cabinetry with panelled island", title: "White Panelled Kitchen", subtitle: "White Painted Cabinetry", designer: "31 Westgate" },
-  { src: projDbaPlKitchen1, alt: "Open-concept custom kitchen cabinetry with quartzite counters and timber ceiling", title: "Timber-Ceiling Kitchen", subtitle: "Open-Concept Cabinetry", designer: "DB Architecture" },
-  { src: projNwcOakIsland, alt: "Custom white oak island cabinetry with painted perimeter cabinets", title: "White Oak Island Kitchen", subtitle: "White Oak Island", designer: "31 Westgate" },
-  { src: projDbaKentPantry, alt: "Custom entry cabinetry with painted millwork and integrated storage", title: "Painted Entry Built-Ins", subtitle: "Custom Built-In Cabinetry", designer: "DB Architecture" },
-  { src: projModernMarble, alt: "Modern light oak custom kitchen with book-matched island", title: "Modern Oak Kitchen", subtitle: "Light Oak Cabinetry", designer: "Hempston" },
-  { src: projMdVanity, alt: "Light oak double vanity cabinetry", title: "Light Oak Double Vanity", subtitle: "Light Oak Vanity", designer: "31 Westgate" },
-  { src: projGhButler, alt: "Butler pantry with custom glass-front upper cabinetry", title: "Glass-Front Butler Pantry", subtitle: "Glass-Front Cabinetry", designer: "31 Westgate" },
-  { src: projReededVanity, alt: "Reeded walnut bathroom vanity", title: "Reeded Walnut Vanity", subtitle: "Reeded Walnut Cabinetry", designer: "Hen House" },
-  { src: projNwcNavyTile, alt: "Custom navy shaker cabinetry with recessed panel doors", title: "Navy Shaker Kitchen", subtitle: "Navy Shaker Cabinetry", designer: "31 Westgate" },
-  { src: projWhiteMarble, alt: "Custom white painted kitchen with glass-front uppers", title: "White Painted Kitchen", subtitle: "Glass-Front Cabinetry", designer: "31 Westgate" },
-  { src: projGlenHaven, alt: "Custom white painted perimeter with stained oak island", title: "White + Oak Island Kitchen", subtitle: "White Cabinets & Oak Island", designer: "31 Westgate" },
+  {
+    src: projNwcBrass,
+    alt: "Custom overlay cabinetry with painted shaker doors and brass hood",
+    title: "Coastal Cottage",
+    subtitle: "Custom Overlay",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaPlIsland,
+    alt: "Custom painted kitchen with dark stained oak island and white oak beams",
+    title: "Dark Oak Island Kitchen",
+    subtitle: "Painted + Stained Oak",
+    designer: "DB Architecture",
+  },
+  {
+    src: projGhWhite,
+    alt: "Custom white painted shaker kitchen cabinetry",
+    title: "Painted Shaker Kitchen",
+    subtitle: "White Painted Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaKentKitchen1,
+    alt: "Inset custom cabinetry with white oak island and corner window",
+    title: "Inset Oak Island Kitchen",
+    subtitle: "Inset + Oak Island",
+    designer: "DB Architecture",
+  },
+  {
+    src: projMdKitchen,
+    alt: "Custom white kitchen cabinetry with panelled island",
+    title: "White Panelled Kitchen",
+    subtitle: "White Painted Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaPlKitchen1,
+    alt: "Open-concept custom kitchen cabinetry with quartzite counters and timber ceiling",
+    title: "Timber-Ceiling Kitchen",
+    subtitle: "Open-Concept Cabinetry",
+    designer: "DB Architecture",
+  },
+  {
+    src: projNwcOakIsland,
+    alt: "Custom white oak island cabinetry with painted perimeter cabinets",
+    title: "White Oak Island Kitchen",
+    subtitle: "White Oak Island",
+    designer: "31 Westgate",
+  },
+  {
+    src: projDbaKentPantry,
+    alt: "Custom entry cabinetry with painted millwork and integrated storage",
+    title: "Painted Entry Built-Ins",
+    subtitle: "Custom Built-In Cabinetry",
+    designer: "DB Architecture",
+  },
+  {
+    src: projModernMarble,
+    alt: "Modern light oak custom kitchen with book-matched island",
+    title: "Modern Oak Kitchen",
+    subtitle: "Light Oak Cabinetry",
+    designer: "Hempston",
+  },
+  {
+    src: projMdVanity,
+    alt: "Light oak double vanity cabinetry",
+    title: "Light Oak Double Vanity",
+    subtitle: "Light Oak Vanity",
+    designer: "31 Westgate",
+  },
+  {
+    src: projGhButler,
+    alt: "Butler pantry with custom glass-front upper cabinetry",
+    title: "Glass-Front Butler Pantry",
+    subtitle: "Glass-Front Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projReededVanity,
+    alt: "Reeded walnut bathroom vanity",
+    title: "Reeded Walnut Vanity",
+    subtitle: "Reeded Walnut Cabinetry",
+    designer: "Hen House",
+  },
+  {
+    src: projNwcNavyTile,
+    alt: "Custom navy shaker cabinetry with recessed panel doors",
+    title: "Navy Shaker Kitchen",
+    subtitle: "Navy Shaker Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projWhiteMarble,
+    alt: "Custom white painted kitchen with glass-front uppers",
+    title: "White Painted Kitchen",
+    subtitle: "Glass-Front Cabinetry",
+    designer: "31 Westgate",
+  },
+  {
+    src: projGlenHaven,
+    alt: "Custom white painted perimeter with stained oak island",
+    title: "White + Oak Island Kitchen",
+    subtitle: "White Cabinets & Oak Island",
+    designer: "31 Westgate",
+  },
 ];
 
 const process = [
-  { icon: Pencil, step: "01", title: "Design Consultation", body: "We meet, take precise measurements, and learn how you live. You leave with a clear direction and an honest budget range." },
-  { icon: Ruler, step: "02", title: "Detailed Design", body: "You receive scaled drawings, 3D renderings, and curated material samples so you can see and feel every decision before we build." },
-  { icon: Factory, step: "03", title: "Built in Canada", body: "Your cabinetry is built in Canada, using solid hardwoods, dovetailed drawers, and conversion-grade finishes." },
-  { icon: Truck, step: "04", title: "White-Glove Installation", body: "Our installers fit, level, and finish every detail on site, then walk you through care so your investment lasts for generations." },
+  {
+    icon: Pencil,
+    step: "01",
+    title: "Design Consultation",
+    body: "We meet in person or by video call, measure the room, and learn how you live.",
+  },
+  {
+    icon: Ruler,
+    step: "02",
+    title: "Detailed Design",
+    body: "You receive scaled drawings, 3D renderings, and curated material samples so you can see and feel every decision before we build.",
+  },
+  {
+    icon: Factory,
+    step: "03",
+    title: "Built in Canada",
+    body: "Your cabinetry is built in Canada, using solid hardwoods, dovetailed drawers, and conversion-grade finishes.",
+  },
+  {
+    icon: Truck,
+    step: "04",
+    title: "White-Glove Installation",
+    body: "Our installers fit, level, and finish every detail on site, then walk you through care so your investment lasts for generations.",
+  },
 ];
 
 const shareImages = [
-  projNwcBrass,
-  projDbaPlIsland,
-  projGhWhite,
-  projDbaKentKitchen1,
-  projMdKitchen,
-  projDbaPlKitchen1,
-  projNwcOakIsland,
-  projDbaKentPantry,
-  projModernMarble,
-  projMdVanity,
-  projGhButler,
-  projReededVanity,
-  projNwcNavyTile,
-  projWhiteMarble,
-  projGlenHaven,
+  { full: projNwcBrass, small: projNwcBrassSmall },
+  { full: projDbaPlIsland, small: projDbaPlIslandSmall },
+  { full: projGhWhite, small: projGhWhiteSmall },
+  { full: projDbaKentKitchen1, small: projDbaKentKitchen1Small },
+  { full: projMdKitchen, small: projMdKitchenSmall },
+  { full: projDbaPlKitchen1, small: projDbaPlKitchen1Small },
+  { full: projNwcOakIsland, small: projNwcOakIslandSmall },
+  { full: projDbaKentPantry, small: projDbaKentPantrySmall },
+  { full: projModernMarble, small: projModernMarbleSmall },
+  { full: projMdVanity, small: projMdVanitySmall },
+  { full: projGhButler, small: projGhButlerSmall },
+  { full: projReededVanity, small: projReededVanitySmall },
+  { full: projNwcNavyTile, small: projNwcNavyTileSmall },
+  { full: projWhiteMarble, small: projWhiteMarbleSmall },
+  { full: projGlenHaven, small: projGlenHavenSmall },
 ];
+
+function originLine(city: CityPageData) {
+  return city.countryCode === "CA"
+    ? "Built in Canada. We install across Canada and the United States."
+    : "We install across Canada and the United States.";
+}
 
 function cityIndex(city: CityPageData) {
   const i = cityPages.findIndex((c) => c.slug === city.slug);
@@ -138,7 +314,7 @@ export function cityHead(city: CityPageData) {
   const title = seo?.title ?? `Custom Kitchen Cabinets ${city.city} | Hempston Home`;
   const desc = seo?.description ?? city.heroLead;
   const share = shareImages[cityIndex(city) % shareImages.length];
-  const absoluteImage = `${SITE_URL}${share}`;
+  const absoluteImage = `${SITE_URL}${share.full}`;
   const faqs = buildCityFaqs(city);
 
   return {
@@ -160,7 +336,14 @@ export function cityHead(city: CityPageData) {
     ],
     links: [
       { rel: "canonical", href: absoluteUrl },
-      { rel: "preload", as: "image", href: share, fetchpriority: "high" },
+      {
+        rel: "preload",
+        as: "image",
+        href: share.small,
+        imageSrcSet: `${share.small} 800w, ${share.full} 1600w`,
+        imageSizes: "100vw",
+        fetchpriority: "high",
+      },
     ],
     scripts: [
       {
@@ -194,7 +377,14 @@ export function cityHead(city: CityPageData) {
           howToSchema({
             name: `Custom cabinetry process for ${city.city}`,
             description: `How Hempston Home designs, builds, and installs custom kitchen cabinetry for ${city.city} homes. Most kitchens take ${LEAD_TIME_LABEL}.`,
-            steps: process.map((p) => ({ name: p.title, text: p.body })),
+            steps: process.map((p) =>
+              p.step === "03" && city.countryCode !== "CA"
+                ? {
+                    name: "Built to order",
+                    text: "Your cabinetry is built to order, using solid hardwoods, dovetailed drawers, and conversion-grade finishes.",
+                  }
+                : { name: p.title, text: p.body },
+            ),
           }),
         ),
       },
@@ -205,11 +395,20 @@ export function cityHead(city: CityPageData) {
 export function CityCabinetryPage({ city }: { city: CityPageData }) {
   const faqs = buildCityFaqs(city);
   const nearby = nearbyCitiesFor(city, 4);
+  const serviceNote = cityServiceNotes[city.slug];
   const seo = CITY_SEO[city.slug];
   const idx = cityIndex(city);
   const heroImg = shareImages[idx % shareImages.length];
-  const shownProjects = Array.from({ length: 6 }, (_, i) => recentProjectsPool[(idx + i) % recentProjectsPool.length]);
-  const shownDoors = Array.from({ length: 8 }, (_, i) => mixedFeaturedDoors[(idx + i) % mixedFeaturedDoors.length]);
+  const inCanada = city.countryCode === "CA";
+  const madeLine = originLine(city);
+  const shownProjects = Array.from(
+    { length: 6 },
+    (_, i) => recentProjectsPool[(idx + i) % recentProjectsPool.length],
+  );
+  const shownDoors = Array.from(
+    { length: 8 },
+    (_, i) => mixedFeaturedDoors[(idx + i) % mixedFeaturedDoors.length],
+  );
   const torontoStudio = city.slug === "custom-cabinetry-toronto" ? LOCATIONS.toronto : null;
   const darkBg = "bg-[oklch(0.14_0_0)]";
   const lightBg = "bg-[oklch(0.98_0_0)]";
@@ -230,7 +429,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
       {/* HERO */}
       <section className="relative">
         <img
-          src={heroImg}
+          src={heroImg.full}
+          srcSet={`${heroImg.small} 800w, ${heroImg.full} 1600w`}
+          sizes="100vw"
           alt="Custom kitchen cabinetry by Hempston Home"
           width={1600}
           height={1000}
@@ -243,7 +444,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
             <div className="max-w-xl">
               <nav aria-label="Breadcrumb" className={`${eyebrowDark} mb-6`}>
-                <Link to="/" className="hover:text-white">Home</Link>
+                <Link to="/" className="hover:text-white">
+                  Home
+                </Link>
                 <span className="mx-2 opacity-60">/</span>
                 <span className="text-white">Custom Cabinetry {city.city}</span>
               </nav>
@@ -251,9 +454,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               <h1 className="mt-5 font-display text-4xl font-light uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-6xl">
                 {seo?.h1 ?? `Custom Kitchen Cabinets in ${city.city}`}
               </h1>
-              <p className="mt-8 max-w-md text-sm leading-relaxed text-white/75">
-                Built in Canada. Hempston Home designs, builds and installs custom kitchen cabinets, vanities and built-ins for {city.city} homes. We install across Canada and the United States.
-              </p>
+              <p className="mt-8 max-w-md text-sm leading-relaxed text-white">{city.heroLead}</p>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/90">{madeLine}</p>
               <div className="mt-10 flex flex-wrap gap-3">
                 <a
                   href="#consultation"
@@ -270,16 +472,29 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
                   View Recent Kitchens
                 </a>
               </div>
-              <nav aria-label="On this page" className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-light uppercase tracking-[0.22em] text-white/55">
-                <a href="#services" className="hover:text-white">What we build</a>
+              <nav
+                aria-label="On this page"
+                className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-light uppercase tracking-[0.22em] text-white/55"
+              >
+                <a href="#services" className="hover:text-white">
+                  What we build
+                </a>
                 <span aria-hidden="true">·</span>
-                <a href="#recent-work" className="hover:text-white">Recent work</a>
+                <a href="#recent-work" className="hover:text-white">
+                  Recent work
+                </a>
                 <span aria-hidden="true">·</span>
-                <a href="#doors" className="hover:text-white">Doors &amp; finishes</a>
+                <a href="#doors" className="hover:text-white">
+                  Doors &amp; finishes
+                </a>
                 <span aria-hidden="true">·</span>
-                <a href="#process" className="hover:text-white">Process</a>
+                <a href="#process" className="hover:text-white">
+                  Process
+                </a>
                 <span aria-hidden="true">·</span>
-                <a href="#faq" className="hover:text-white">FAQ</a>
+                <a href="#faq" className="hover:text-white">
+                  FAQ
+                </a>
               </nav>
             </div>
           </div>
@@ -293,14 +508,28 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
             {city.introHeadline}
           </h2>
-          <BuiltInCanadaLine className="mt-6 text-sm leading-relaxed text-white/80" />
-          <div className="mt-8 space-y-5 text-sm leading-relaxed text-white/70">
+          {inCanada ? (
+            <BuiltInCanadaLine className="mt-6 text-sm leading-relaxed text-white/80" />
+          ) : null}
+          <div className="mt-8 space-y-5 text-sm leading-relaxed text-white/90">
             {city.introBody.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
         </div>
       </section>
+
+      {serviceNote ? (
+        <section className={`${lightBg} ${darkText} border-y border-black/10 py-20`}>
+          <div className="mx-auto max-w-3xl px-5 sm:px-8">
+            <p className={eyebrowLight}>How service works</p>
+            <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
+              A {city.city} project, from consult to install
+            </h2>
+            <p className="mt-6 text-sm leading-relaxed text-black/80">{serviceNote}</p>
+          </div>
+        </section>
+      ) : null}
 
       {/* AT A GLANCE — 2026 GEO answer-first block. Structured for AI answer
           engines (Google AI Overviews, ChatGPT, Perplexity) to lift verbatim.
@@ -313,8 +542,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/70">
             {ORG_NAME} designs, builds and installs custom kitchen cabinets, bathroom vanities and
-            built-in millwork for homes in {city.city} and {city.region}. Built in Canada. Every project
-            is fully custom. We install across Canada and the United States.
+            built-in millwork for homes in {city.city} and {city.region}. {madeLine} Every project
+            is fully custom.
           </p>
           <dl className="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -324,15 +553,13 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               { k: "Vanities and built-ins", v: `Usually ${VANITY_PRICE_LABEL}` },
               { k: "Timeline", v: `${LEAD_TIME_LABEL} from consultation to install` },
               { k: "Warranty", v: WARRANTY_LABEL },
-              { k: "Origin", v: "Built in Canada" },
+              ...(inCanada ? [{ k: "Origin", v: "Built in Canada" }] : []),
               { k: "Founded", v: FOUNDING_YEAR },
               { k: "Applicable tax", v: `${city.taxNote} (${city.province})` },
               { k: "Consultation", v: "Free" },
               { k: "Phone", v: "(902) 719-8497" },
               { k: "Email", v: "info@hempstonhome.com" },
-              ...(torontoStudio
-                ? [{ k: "Toronto studio", v: torontoStudio.copyLabel }]
-                : []),
+              ...(torontoStudio ? [{ k: "Toronto studio", v: torontoStudio.copyLabel }] : []),
             ].map((row) => (
               <div key={row.k} className="border-t border-black/15 pt-4">
                 <dt className="text-[10px] font-medium uppercase tracking-[0.24em] text-black/55">
@@ -345,20 +572,23 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
         </div>
       </section>
 
-
-
       {/* STATS */}
       <section className="border-y border-white/10">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-5 py-16 sm:px-8 md:grid-cols-4">
           {[
             { n: "10+", l: "Years of cabinetmaking" },
-            { n: "Canada", l: "Built in Canada" },
+            {
+              n: inCanada ? "Canada" : "Custom",
+              l: inCanada ? "Built in Canada" : "Built to order",
+            },
             { n: "8 to 14", l: "Weeks, concept to install" },
             { n: "5 yr", l: "Workmanship warranty" },
           ].map((s) => (
             <div key={s.l} className="text-center">
               <p className="font-display text-4xl font-light text-white sm:text-5xl">{s.n}</p>
-              <p className="mt-3 text-[10px] font-light uppercase tracking-[0.22em] text-white/60">{s.l}</p>
+              <p className="mt-3 text-[10px] font-light uppercase tracking-[0.22em] text-white/60">
+                {s.l}
+              </p>
             </div>
           ))}
         </div>
@@ -373,19 +603,30 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Custom cabinetry for every room
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-white/70">
-              Whether you are renovating a single room in {city.city} or building from scratch, we craft
-              cohesive, made-to-measure cabinetry that carries your home's character from one space
-              to the next.
+              Whether you are renovating a single room in {city.city} or building from scratch, we
+              craft cohesive, made-to-measure cabinetry that carries your home's character from one
+              space to the next.
             </p>
           </div>
           <div className="mt-14 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <article key={s.title} className={`${darkBg} p-8`}>
-                <s.icon className="h-6 w-6 text-white/85" strokeWidth={1.2} />
-                <h3 className="mt-6 font-display text-lg font-light uppercase tracking-[0.18em] text-white">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/65">{s.body}</p>
-              </article>
-            ))}
+            {services.map((s) => {
+              const item =
+                !inCanada && s.title === "Mudrooms & Laundry"
+                  ? {
+                      ...s,
+                      body: "Hard-working cabinetry, lockers, and benches for coats, boots, and everyday gear.",
+                    }
+                  : s;
+              return (
+                <article key={item.title} className={`${darkBg} p-8`}>
+                  <item.icon className="h-6 w-6 text-white/85" strokeWidth={1.2} />
+                  <h3 className="mt-6 font-display text-lg font-light uppercase tracking-[0.18em] text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/65">{item.body}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -398,8 +639,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] sm:text-4xl">
               Kitchens & millwork we've built
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-black/70">
-              A selection of Hempston Home kitchens and millwork. The same design and build process is used for {city.city} homes.
+            <p className="mt-6 text-sm leading-relaxed text-black/80">
+              These photographs show Hempston cabinetry from other commissions. They are examples of
+              the work, not {city.city} projects.
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -420,7 +662,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
                 </div>
                 <figcaption className="mt-4">
                   <p className="font-display text-sm uppercase tracking-[0.16em]">{p.title}</p>
-                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/55">{p.subtitle}</p>
+                  <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/55">
+                    {p.subtitle}
+                  </p>
                 </figcaption>
               </figure>
             ))}
@@ -437,9 +681,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Signature doors, colours &amp; finishes
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-white/70">
-              These are just a few from our door collections. Because Hempston is 100% custom, you're
-              never limited to a catalogue — any door style, wood species, paint colour, or stain can
-              be built for your {city.city} kitchen.
+              These are just a few from our door collections. Because Hempston is 100% custom,
+              you're never limited to a catalogue — any door style, wood species, paint colour, or
+              stain can be built for your {city.city} kitchen.
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -454,7 +698,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
                   className="aspect-[4/5] w-full object-contain"
                 />
                 <figcaption className="mt-4 text-center">
-                  <p className="font-display text-sm uppercase tracking-[0.16em] text-black">{d.name}</p>
+                  <p className="font-display text-sm uppercase tracking-[0.16em] text-black">
+                    {d.name}
+                  </p>
                   <p className="mt-1 text-[10px] font-light uppercase tracking-[0.2em] text-black/55">
                     {d.profile}
                   </p>
@@ -479,19 +725,34 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               From first sketch to final install
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-black/70">
-              Every {city.city} project follows the same disciplined four-step process — so you always
-              know what happens next, what's due when, and what your total investment will be.
+              Every {city.city} project follows the same disciplined four-step process — so you
+              always know what happens next, what's due when, and what your total investment will
+              be.
             </p>
           </div>
           <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {process.map((p) => (
-              <article key={p.step} className="border-t border-black/15 pt-6">
-                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/50">{p.step}</p>
-                <p.icon className="mt-6 h-6 w-6" strokeWidth={1.2} />
-                <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em]">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-black/70">{p.body}</p>
-              </article>
-            ))}
+            {process.map((p) => {
+              const step =
+                p.step === "03" && !inCanada
+                  ? {
+                      ...p,
+                      title: "Built to order",
+                      body: "Your cabinetry is built to order, using solid hardwoods, dovetailed drawers, and conversion-grade finishes.",
+                    }
+                  : p;
+              return (
+                <article key={step.step} className="border-t border-black/15 pt-6">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/50">
+                    {step.step}
+                  </p>
+                  <step.icon className="mt-6 h-6 w-6" strokeWidth={1.2} />
+                  <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-black/70">{step.body}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -506,13 +767,30 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             </h2>
           </div>
           <div className="mt-14 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
-            {reasons.map((r) => (
-              <article key={r.title} className={`${darkBg} p-8`}>
-                <r.icon className="h-6 w-6 text-white/85" strokeWidth={1.2} />
-                <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em] text-white">{r.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/65">{r.body}</p>
-              </article>
-            ))}
+            {reasons.map((r) => {
+              const item =
+                !inCanada && r.title === "Built in Canada"
+                  ? {
+                      ...r,
+                      title: "Built to order",
+                      body: "We design, build and install custom cabinetry for your home, and we install across Canada and the United States.",
+                    }
+                  : !inCanada && r.title === "Built to Last Generations"
+                    ? {
+                        ...r,
+                        body: "Solid-wood construction, dovetailed drawers, and conversion finishes made for the climate of the house.",
+                      }
+                    : r;
+              return (
+                <article key={item.title} className={`${darkBg} p-8`}>
+                  <item.icon className="h-6 w-6 text-white/85" strokeWidth={1.2} />
+                  <h3 className="mt-6 font-display text-base font-light uppercase tracking-[0.18em] text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/65">{item.body}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -525,14 +803,16 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             The doors, colours &amp; finishes shown are just the start
           </h2>
           <p className="mt-6 text-sm leading-relaxed text-black/70">
-            Hempston is a <strong>100% custom cabinet maker</strong>. There are no fixed sizes,
-            no locked-in door catalogues, and no standard colours. Whatever style, profile, wood
+            Hempston is a <strong>100% custom cabinet maker</strong>. There are no fixed sizes, no
+            locked-in door catalogues, and no standard colours. Whatever style, profile, wood
             species, paint, stain, or hardware you have in mind for your {city.city} home — modern
             handleless slab, classic beaded inset, or something you saw in a magazine — we design
             and build it from scratch, to the millimetre.
           </p>
           <div className="mt-10">
-            <a href="#consultation" className={btnDark}>Start Your Custom Design</a>
+            <a href="#consultation" className={btnDark}>
+              Start Your Custom Design
+            </a>
           </div>
         </div>
       </section>
@@ -546,7 +826,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Serving {city.city} and homes across {city.province}
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-white/75">
-              Hempston Home designs, builds and installs custom cabinetry for {city.city} and {city.region}. Built in Canada. We install across Canada and the United States.
+              Hempston Home designs, builds and installs custom cabinetry for {city.city} and{" "}
+              {city.region}. {madeLine}
             </p>
           </div>
 
@@ -556,7 +837,10 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             </p>
             <ul className="mt-6 flex flex-wrap justify-center gap-3">
               {city.neighbourhoods.map((n) => (
-                <li key={n} className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90">
+                <li
+                  key={n}
+                  className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90"
+                >
                   <MapPin className="h-3.5 w-3.5" strokeWidth={1.2} />
                   {n}
                 </li>
@@ -570,7 +854,10 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             </p>
             <ul className="mt-6 flex flex-wrap justify-center gap-3">
               {city.regions.map((n) => (
-                <li key={n} className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90">
+                <li
+                  key={n}
+                  className="inline-flex items-center gap-2 border border-white/25 px-4 py-2 text-[11px] font-light uppercase tracking-[0.16em] text-white/90"
+                >
                   <MapPin className="h-3.5 w-3.5" strokeWidth={1.2} />
                   {n}
                 </li>
@@ -588,7 +875,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Visit the Toronto studio
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-black/75">
-              The Toronto studio is a local base for Greater Toronto Area projects. {torontoStudio.copyLabel}.
+              The Toronto studio is a local base for Greater Toronto Area projects.{" "}
+              {torontoStudio.copyLabel}.
             </p>
             <a href={mapsUrl(torontoStudio)} className="mt-6 inline-block text-sm underline">
               Map for the Toronto studio
@@ -606,8 +894,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               We also build for homes near {city.city}
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-black/70">
-              Hempston designs, fabricates and installs custom cabinetry across Canada. If you're
-              outside {city.city}, one of our other regional pages likely fits your project.
+              Hempston designs, fabricates and installs custom cabinetry for homes near {city.city}.
+              If you are outside {city.city}, one of our other regional pages likely fits your
+              project.
             </p>
           </div>
           <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -645,7 +934,6 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
 
       {/* FAQ */}
       <section id="faq" className={`${darkBg} scroll-mt-24 py-24`}>
-
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
           <div className="text-center">
             <p className={eyebrowDark}>Questions, Answered</p>
@@ -660,7 +948,11 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             answerClassName="mt-3 text-sm leading-relaxed text-white/75"
           />
           <p className="mt-8 text-sm leading-relaxed text-white/70">
-            Need it sooner? See <Link to="/rush-custom-kitchen-cabinets" className="underline">rush custom kitchen cabinets</Link>.
+            Need it sooner? See{" "}
+            <Link to="/rush-custom-kitchen-cabinets" className="underline">
+              rush custom kitchen cabinets
+            </Link>
+            .
           </p>
         </div>
       </section>
@@ -681,7 +973,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               {[
                 `Free design consultation across ${city.region}`,
                 "Itemised, written quote before any deposit",
-                "Built in Canada. We install across Canada and the United States.",
+                madeLine,
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-6 shrink-0 bg-black/50" />
@@ -690,7 +982,9 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               ))}
             </ul>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="tel:+19027198497" className={btnDark}>Call (902) 719-8497</a>
+              <a href="tel:+19027198497" className={btnDark}>
+                Call (902) 719-8497
+              </a>
               <a
                 href="mailto:info@hempstonhome.com"
                 className="inline-block border border-black/70 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-black hover:text-white"
@@ -699,7 +993,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               </a>
             </div>
           </div>
-          <HalifaxLeadForm />
+          <HalifaxLeadForm market={city.city} />
         </div>
       </section>
 
