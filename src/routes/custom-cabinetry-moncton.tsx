@@ -8,6 +8,7 @@ import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
 import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
+import { MONCTON_PHONE_DISPLAY, MONCTON_PHONE_E164, MONCTON_PHONE_TEL } from "@/lib/site";
 import monctonHero from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
 
 const PAGE_TITLE = "Custom Kitchen Cabinets Moncton | Hempston Home";
@@ -108,6 +109,7 @@ export const Route = createFileRoute("/custom-cabinetry-moncton")({
             name: "Custom kitchen cabinets in Moncton",
             description: PAGE_DESC,
             url: ABSOLUTE_URL,
+            telephone: MONCTON_PHONE_E164,
             areaServed: [
               {
                 "@type": "City",
@@ -325,10 +327,10 @@ function MonctonPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="tel:+19027198497"
+                href={MONCTON_PHONE_TEL}
                 className="inline-block border border-black bg-black px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white"
               >
-                Call (902) 719-8497
+                Call {MONCTON_PHONE_DISPLAY}
               </a>
               <a
                 href="mailto:info@hempstonhome.com"
@@ -338,7 +340,11 @@ function MonctonPage() {
               </a>
             </div>
           </div>
-          <HalifaxLeadForm market="Greater Moncton" />
+          <HalifaxLeadForm
+            market="Greater Moncton"
+            phoneDisplay={MONCTON_PHONE_DISPLAY}
+            phoneTel={MONCTON_PHONE_TEL}
+          />
         </div>
       </section>
 

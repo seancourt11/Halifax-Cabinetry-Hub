@@ -1,5 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { LOCATION_LIST, PHONE_DISPLAY, mapsUrl } from "@/lib/site";
+import {
+  LOCATION_LIST,
+  MONCTON_PHONE_DISPLAY,
+  MONCTON_PHONE_TEL,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  mapsUrl,
+} from "@/lib/site";
 
 const productLinks = [
   { label: "Cabinet Door Styles", to: "/products/door-styles" as const },
@@ -28,6 +35,8 @@ export function SiteFooter() {
   const locations = onMoncton
     ? LOCATION_LIST.filter((loc) => loc.key !== "halifax")
     : LOCATION_LIST;
+  const phoneDisplay = onMoncton ? MONCTON_PHONE_DISPLAY : PHONE_DISPLAY;
+  const phoneTel = onMoncton ? MONCTON_PHONE_TEL : PHONE_TEL;
 
   return (
     <footer className="border-t border-white/10 bg-[oklch(0.14_0_0)] text-white">
@@ -72,8 +81,8 @@ export function SiteFooter() {
                 </li>
               ))}
               <li>
-                <a href="tel:+19027198497" className="transition-colors hover:text-white">
-                  {PHONE_DISPLAY}
+                <a href={phoneTel} className="transition-colors hover:text-white">
+                  {phoneDisplay}
                 </a>
               </li>
               <li>

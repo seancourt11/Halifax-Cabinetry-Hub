@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { cityPages, type CityPageData } from "@/data/city-pages";
 import { ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, SITE_URL, breadcrumbSchema } from "@/lib/schema";
+import { PHONE_DISPLAY } from "@/lib/site";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 
@@ -135,7 +136,7 @@ function LocationsHub() {
             href={`tel:${ORG_PHONE.replace(/[^0-9+]/g, "")}`}
             className="inline-block border border-white/80 bg-white px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-transparent hover:text-white"
           >
-            Call (902) 719-8497
+            Call {PHONE_DISPLAY}
           </a>
           <a
             href={`mailto:${ORG_EMAIL}`}

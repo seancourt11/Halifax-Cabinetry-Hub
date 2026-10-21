@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB per file
 const MAX_FILES = 5;
@@ -42,7 +43,15 @@ const leadSchema = z.object({
 
 type LeadErrors = Partial<Record<keyof z.infer<typeof leadSchema>, string>>;
 
-export function HalifaxLeadForm({ market = "Halifax" }: { market?: string }) {
+export function HalifaxLeadForm({
+  market = "Halifax",
+  phoneDisplay = PHONE_DISPLAY,
+  phoneTel = PHONE_TEL,
+}: {
+  market?: string;
+  phoneDisplay?: string;
+  phoneTel?: string;
+}) {
   const [errors, setErrors] = useState<LeadErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [prefill, setPrefill] = useState<{ projectType?: string; message?: string }>({});
@@ -159,8 +168,8 @@ export function HalifaxLeadForm({ market = "Halifax" }: { market?: string }) {
         <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
           A Hempston designer will reach out within one business day to schedule your free {market}
           consultation. Prefer to talk now? Call{" "}
-          <a href="tel:+19027198497" className="font-medium text-foreground underline">
-            (902) 719-8497
+          <a href={phoneTel} className="font-medium text-foreground underline">
+            {phoneDisplay}
           </a>
           .
         </p>
@@ -229,7 +238,7 @@ export function HalifaxLeadForm({ market = "Halifax" }: { market?: string }) {
               name="phone"
               type="tel"
               autoComplete="tel"
-              placeholder="(902) 719-8497"
+              placeholder={phoneDisplay}
               aria-invalid={errors.phone ? true : undefined}
               aria-describedby={errors.phone ? "phone-error" : undefined}
             />

@@ -19,6 +19,7 @@ import {
   LEAD_TIME_LABEL,
   LOCATIONS,
   PHONE_DISPLAY,
+  PHONE_TEL,
   VANITY_PRICE_LABEL,
   WARRANTY_LABEL,
   mapsUrl,
@@ -649,7 +650,7 @@ function HalifaxPage() {
               {HALIFAX_SHOP_HOURS.label}
             </p>
             <p className="mt-3 text-sm text-black">
-              <a href={`tel:+19027198497`} className="underline">
+              <a href={PHONE_TEL} className="underline">
                 {PHONE_DISPLAY}
               </a>
             </p>
@@ -1383,8 +1384,8 @@ function HalifaxPage() {
               ))}
             </ul>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="tel:+19027198497" className={btnDark}>
-                Call (902) 719-8497
+              <a href={PHONE_TEL} className={btnDark}>
+                Call {PHONE_DISPLAY}
               </a>
               <a
                 href="mailto:info@hempstonhome.com"

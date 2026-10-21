@@ -1,4 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { MONCTON_PHONE_DISPLAY, MONCTON_PHONE_TEL, PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 import { ChevronDown, Menu, Phone } from "lucide-react";
 import {
   Sheet,
@@ -69,6 +70,8 @@ export function SiteHeader() {
   const locationLinks = onMoncton
     ? locations.filter((item) => item.label !== "Halifax")
     : locations;
+  const phoneDisplay = onMoncton ? MONCTON_PHONE_DISPLAY : PHONE_DISPLAY;
+  const phoneTel = onMoncton ? MONCTON_PHONE_TEL : PHONE_TEL;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[oklch(0.14_0_0)]/95 backdrop-blur">
@@ -88,11 +91,11 @@ export function SiteHeader() {
           </div>
           <div className="hidden items-center gap-6 sm:flex">
             <a
-              href="tel:+19027198497"
+              href={phoneTel}
               className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white/85 transition-colors hover:text-white"
             >
               <Phone className="h-3 w-3" aria-hidden="true" />
-              (902) 719-8497
+              {phoneDisplay}
             </a>
             <Link
               to="/contact"

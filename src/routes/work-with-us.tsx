@@ -18,6 +18,7 @@ import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { WorkWithUsForm } from "@/components/work-with-us-form";
 import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 import ogImg from "@/assets/og/og-about.jpg";
 
 const PAGE_TITLE = "Our Custom Cabinetry Process | Hempston Home";
@@ -31,57 +32,49 @@ const steps = [
     n: "01",
     icon: ClipboardList,
     title: "Submit the project form",
-    body:
-      "Share your name, contact info, project type, and a few notes about your space. It only takes a couple of minutes and gives our design team what they need to prepare for the first call.",
+    body: "Share your name, contact info, project type, and a few notes about your space. It only takes a couple of minutes and gives our design team what they need to prepare for the first call.",
   },
   {
     n: "02",
     icon: CalendarDays,
     title: "Add your preferred install date",
-    body:
-      "Tell us when you'd like the finished cabinetry installed. Most kitchens take 8 to 14 weeks. The earlier we know, the more precisely we can schedule shop time.",
+    body: "Tell us when you'd like the finished cabinetry installed. Most kitchens take 8 to 14 weeks. The earlier we know, the more precisely we can schedule shop time.",
   },
   {
     n: "03",
     icon: Paperclip,
     title: "Attach project files",
-    body:
-      "Upload floor plans, DWGs, photos of the existing space, or inspiration images. The more we see up front, the more focused the first conversation becomes.",
+    body: "Upload floor plans, DWGs, photos of the existing space, or inspiration images. The more we see up front, the more focused the first conversation becomes.",
   },
   {
     n: "04",
     icon: MapPin,
     title: "Confirm project logistics",
-    body:
-      "Share where the project will be installed so we can plan measure visits, freight, and white-glove install logistics from the start.",
+    body: "Share where the project will be installed so we can plan measure visits, freight, and white-glove install logistics from the start.",
   },
   {
     n: "05",
     icon: Video,
     title: "Schedule a Google Meet consultation",
-    body:
-      "We'll email you a Google Meet invite based on the window you prefer. In the call we review your space, materials, budget, and timeline — no pressure, no obligation.",
+    body: "We'll email you a Google Meet invite based on the window you prefer. In the call we review your space, materials, budget, and timeline — no pressure, no obligation.",
   },
   {
     n: "06",
     icon: PencilRuler,
     title: "Design, quote & material selection",
-    body:
-      "Our design team drafts elevations and 3D renderings, walks you through door styles, wood species, paints, and hardware, and delivers a clear itemised quote for approval.",
+    body: "Our design team drafts elevations and 3D renderings, walks you through door styles, wood species, paints, and hardware, and delivers a clear itemised quote for approval.",
   },
   {
     n: "07",
     icon: Hammer,
     title: "Shop build & pre-staging",
-    body:
-      "Every commission is built by hand in our shop. Before it ships we pre-stage the full project — cabinets assembled together — so alignment, reveals, and finish are perfect.",
+    body: "Every commission is built by hand in our shop. Before it ships we pre-stage the full project — cabinets assembled together — so alignment, reveals, and finish are perfect.",
   },
   {
     n: "08",
     icon: Truck,
     title: "Delivery & white-glove install",
-    body:
-      "Our install team crates, freights, and installs your cabinetry on site — scribing, aligning, and finishing so it looks like it grew out of the room.",
+    body: "Our install team crates, freights, and installs your cabinetry on site — scribing, aligning, and finishing so it looks like it grew out of the room.",
   },
 ];
 
@@ -175,7 +168,10 @@ function WorkWithUsPage() {
         <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/70">
           From the first message to install day, here is how a Hempston Home commission comes
           together. Most kitchens take 8 to 14 weeks. Qualifying projects can use the{" "}
-          <Link to="/rush-custom-kitchen-cabinets" className="underline">rush program</Link>, about 6 weeks.
+          <Link to="/rush-custom-kitchen-cabinets" className="underline">
+            rush program
+          </Link>
+          , about 6 weeks.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
@@ -185,10 +181,10 @@ function WorkWithUsPage() {
             Start Your Project <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="tel:+19027198497"
+            href={PHONE_TEL}
             className="inline-flex items-center gap-2 border border-white/25 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.25em] text-white transition-colors hover:bg-white hover:text-black"
           >
-            <Phone className="h-4 w-4" /> (902) 719-8497
+            <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
           </a>
         </div>
       </section>
@@ -207,19 +203,12 @@ function WorkWithUsPage() {
 
           <ol className="mt-16 grid gap-px bg-white/10 sm:grid-cols-2">
             {steps.map(({ n, icon: Icon, title, body }) => (
-              <li
-                key={n}
-                className="flex flex-col gap-5 bg-[oklch(0.14_0_0)] p-8 sm:p-10"
-              >
+              <li key={n} className="flex flex-col gap-5 bg-[oklch(0.14_0_0)] p-8 sm:p-10">
                 <div className="flex items-center justify-between">
-                  <span className="font-display text-4xl font-light text-white/40">
-                    {n}
-                  </span>
+                  <span className="font-display text-4xl font-light text-white/40">{n}</span>
                   <Icon className="h-6 w-6 text-white/70" strokeWidth={1.2} />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-white">
-                  {title}
-                </h3>
+                <h3 className="font-display text-xl font-semibold text-white">{title}</h3>
                 <p className="text-sm leading-relaxed text-white/70">{body}</p>
               </li>
             ))}
@@ -238,9 +227,8 @@ function WorkWithUsPage() {
               Tell Us About Your Project
             </h2>
             <p className="mt-6 text-base leading-relaxed text-white/70">
-              Share your contact info, a preferred install date, and any floor plans or
-              inspiration files. We'll email you a Google Meet invite based on the meeting window
-              you choose.
+              Share your contact info, a preferred install date, and any floor plans or inspiration
+              files. We'll email you a Google Meet invite based on the meeting window you choose.
             </p>
             <ul className="mt-8 space-y-4 text-sm text-white/70">
               <li className="flex items-start gap-3">
@@ -259,7 +247,9 @@ function WorkWithUsPage() {
             <div className="mt-10 space-y-2 border-t border-white/10 pt-8 text-sm text-white/70">
               <p className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-white/60" />
-                <a href="tel:+19027198497" className="hover:text-white">(902) 719-8497</a>
+                <a href={PHONE_TEL} className="hover:text-white">
+                  {PHONE_DISPLAY}
+                </a>
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-white/60" />
@@ -301,8 +291,8 @@ function WorkWithUsPage() {
           Ready When You Are
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/70">
-          Whether install is next season or two years out, the earlier the conversation
-          starts, the better the outcome. Book your Google Meet today.
+          Whether install is next season or two years out, the earlier the conversation starts, the
+          better the outcome. Book your Google Meet today.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a

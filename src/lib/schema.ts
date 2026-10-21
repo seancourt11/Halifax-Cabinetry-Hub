@@ -212,6 +212,7 @@ export function serviceSchema(opts: {
   url: string;
   areaServed?: unknown;
   providerId?: string;
+  telephone?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -219,6 +220,7 @@ export function serviceSchema(opts: {
     name: opts.name,
     description: opts.description,
     url: opts.url.startsWith("http") ? opts.url : `${SITE_URL}${opts.url}`,
+    ...(opts.telephone ? { telephone: opts.telephone } : {}),
     provider: { "@id": opts.providerId ?? ORG_ID },
     areaServed: opts.areaServed ?? [
       { "@type": "Country", name: "Canada" },

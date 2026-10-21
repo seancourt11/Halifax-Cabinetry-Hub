@@ -24,6 +24,7 @@ import {
 } from "@/lib/schema";
 import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 import heroImg from "@/assets/projects/modern-marble-kitchen.jpg";
 import processImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
@@ -236,10 +237,10 @@ function RushPage() {
               Get a Rush Quote <ArrowRight className="h-3 w-3" />
             </a>
             <a
-              href="tel:+19027198497"
+              href={PHONE_TEL}
               className="inline-flex items-center justify-center gap-2 border border-white/30 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.28em] text-white transition-colors hover:border-white"
             >
-              Call (902) 719-8497
+              Call {PHONE_DISPLAY}
             </a>
           </div>
           <p className="mt-6 text-xs text-white/40">
@@ -912,10 +913,10 @@ function RushPage() {
               Get a Rush Quote <ArrowRight className="h-3 w-3" />
             </a>
             <a
-              href="tel:+19027198497"
+              href={PHONE_TEL}
               className="inline-flex items-center gap-2 border border-white/30 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.28em] text-white hover:border-white"
             >
-              Call (902) 719-8497
+              Call {PHONE_DISPLAY}
             </a>
           </div>
         </div>

@@ -40,6 +40,8 @@ import {
   KITCHEN_PRICE_LABEL,
   LEAD_TIME_LABEL,
   LOCATIONS,
+  PHONE_DISPLAY,
+  PHONE_TEL,
   VANITY_PRICE_LABEL,
   WARRANTY_LABEL,
   mapsUrl,
@@ -548,7 +550,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               { k: "Founded", v: FOUNDING_YEAR },
               { k: "Applicable tax", v: `${city.taxNote} (${city.province})` },
               { k: "Consultation", v: "Free" },
-              { k: "Phone", v: "(902) 719-8497" },
+              { k: "Phone", v: PHONE_DISPLAY },
               { k: "Email", v: "info@hempstonhome.com" },
               ...(torontoStudio ? [{ k: "Toronto studio", v: torontoStudio.copyLabel }] : []),
             ].map((row) => (
@@ -975,8 +977,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               ))}
             </ul>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="tel:+19027198497" className={btnDark}>
-                Call (902) 719-8497
+              <a href={PHONE_TEL} className={btnDark}>
+                Call {PHONE_DISPLAY}
               </a>
               <a
                 href="mailto:info@hempstonhome.com"

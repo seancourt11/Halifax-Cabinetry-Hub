@@ -1,7 +1,8 @@
 /**
  * Single config for Hempston Home facts.
  * Address, price, lead time, and warranty are defined here so every page stays
- * consistent. Do not add a phone number that is not already published.
+ * consistent. The main number is PHONE_*. The Moncton page uses MONCTON_PHONE_*
+ * for its visible links and Service schema only.
  *
  * Build location (Bayne St / Halifax shop) may be stated on the Halifax page,
  * the About page, and the global FAQ / llms.txt only. Other Canadian pages say
@@ -21,9 +22,15 @@ export const ENTITY_SENTENCE =
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const EMAIL = "info@hempstonhome.com";
-/** Already published on every page. Do not add other numbers. */
-export const PHONE_E164 = "+1-902-719-8497";
-export const PHONE_DISPLAY = "(902) 719-8497";
+/** Main business number. Organization JSON-LD uses this on every page. */
+export const PHONE_E164 = "+1-902-442-0543";
+export const PHONE_DISPLAY = "(902) 442-0543";
+export const PHONE_TEL = "tel:+19024420543";
+
+/** Visible number and Service schema on /custom-cabinetry-moncton only. */
+export const MONCTON_PHONE_E164 = "+1-506-973-6067";
+export const MONCTON_PHONE_DISPLAY = "(506) 973-6067";
+export const MONCTON_PHONE_TEL = "tel:+15069736067";
 export const FOUNDING_YEAR = "2015";
 export const INSTAGRAM_URL = "https://www.instagram.com/hempstonhome";
 export const LOGO_PATH = "/logo-512.png";
