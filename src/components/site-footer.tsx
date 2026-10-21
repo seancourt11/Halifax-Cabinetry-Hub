@@ -1,5 +1,12 @@
-import { Link } from "@tanstack/react-router";
-import { LOCATION_LIST, PHONE_DISPLAY, mapsUrl } from "@/lib/site";
+import { Link, useRouterState } from "@tanstack/react-router";
+import {
+  LOCATION_LIST,
+  MONCTON_PHONE_DISPLAY,
+  MONCTON_PHONE_TEL,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  mapsUrl,
+} from "@/lib/site";
 
 const productLinks = [
   { label: "Cabinet Door Styles", to: "/products/door-styles" as const },
@@ -12,6 +19,7 @@ const studioLinks = [
   { label: "About", to: "/about" as const },
   { label: "Services", to: "/services" as const },
   { label: "Case Studies", to: "/case-studies" as const },
+  { label: "Projects", to: "/projects" as const },
   { label: "How We Work", to: "/work-with-us" as const },
   { label: "Rush Cabinets", to: "/rush-custom-kitchen-cabinets" as const },
   { label: "Halifax", to: "/custom-cabinetry-halifax" as const },
@@ -20,6 +28,16 @@ const studioLinks = [
 ];
 
 export function SiteFooter() {
+  const onMoncton = useRouterState({
+    select: (s) => s.location.pathname === "/custom-cabinetry-moncton",
+  });
+  const studios = onMoncton ? studioLinks.filter((item) => item.label !== "Halifax") : studioLinks;
+  const locations = onMoncton
+    ? LOCATION_LIST.filter((loc) => loc.key !== "halifax")
+    : LOCATION_LIST;
+  const phoneDisplay = onMoncton ? MONCTON_PHONE_DISPLAY : PHONE_DISPLAY;
+  const phoneTel = onMoncton ? MONCTON_PHONE_TEL : PHONE_TEL;
+
   return (
     <footer className="border-t border-white/10 bg-[oklch(0.14_0_0)] text-white">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
@@ -32,7 +50,7 @@ export function SiteFooter() {
             >
               Hempston Home
             </Link>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/85">
               Custom kitchen cabinets, vanities and built-in millwork. We install across Canada and
               the United States.
             </p>
@@ -45,28 +63,33 @@ export function SiteFooter() {
           </div>
 
           <FooterColumn eyebrow="01 Products" items={productLinks} />
-          <FooterColumn eyebrow="02 Studio" items={studioLinks} />
+          <FooterColumn eyebrow="02 Studio" items={studios} />
 
           <div>
-            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/85">
               03 Contact
             </p>
-            <ul className="mt-6 space-y-4 text-sm text-white/70">
-              {LOCATION_LIST.map((loc) => (
+            <ul className="mt-6 space-y-4 text-sm text-white/90">
+              {locations.map((loc) => (
                 <li key={loc.key}>
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-white/45">{loc.role}</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-white/85">
+                    {loc.role}
+                  </p>
                   <a href={mapsUrl(loc)} className="mt-1 block transition-colors hover:text-white">
                     {loc.copyLabel}
                   </a>
                 </li>
               ))}
               <li>
-                <a href="tel:+19027198497" className="transition-colors hover:text-white">
-                  {PHONE_DISPLAY}
+                <a href={phoneTel} className="transition-colors hover:text-white">
+                  {phoneDisplay}
                 </a>
               </li>
               <li>
-                <a href="mailto:info@hempstonhome.com" className="transition-colors hover:text-white">
+                <a
+                  href="mailto:info@hempstonhome.com"
+                  className="transition-colors hover:text-white"
+                >
                   info@hempstonhome.com
                 </a>
               </li>
@@ -86,10 +109,10 @@ export function SiteFooter() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/45">
+          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/85">
             We install across Canada and the United States.
           </p>
-          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/45">
+          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/85">
             © {new Date().getFullYear()} Hempston Home
           </p>
         </div>
@@ -107,8 +130,8 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">{eyebrow}</p>
-      <ul className="mt-6 space-y-3 text-sm text-white/70">
+      <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/85">{eyebrow}</p>
+      <ul className="mt-6 space-y-3 text-sm text-white/90">
         {items.map((item) => (
           <li key={item.label}>
             <Link to={item.to} className="transition-colors hover:text-white">

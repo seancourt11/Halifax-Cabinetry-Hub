@@ -9,13 +9,26 @@ import { insetGallery2026 as faceFrameGallery } from "@/data/door-gallery-2026";
 import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import { ResponsiveImg } from "@/components/responsive-img";
 import ogImg from "@/assets/og/og-cabinet-styles.jpg";
 
 const cabinetFaqs = [
-  { q: "What's the difference between inset and frameless cabinets?", a: "Inset cabinet doors sit flush inside a face frame with a small even reveal around each door. Frameless (European) cabinets have no face frame — doors mount directly to the box for full interior access and a seamless modern face." },
-  { q: "Is inset face-frame cabinetry worth the extra cost?", a: "Inset takes more shop time because every reveal has to be even. The difference shows up in the quote for that kitchen, not as a flat percentage. Painted Shaker and modern slab move fastest. A rush timeline is a separate program." },
-  { q: "Do you build frameless (European) cabinets?", a: "Yes. Frameless construction maximises interior storage and pairs beautifully with modern slab doors. We build in both frameless and face-frame construction." },
-  { q: "Can I mix construction styles in one kitchen?", a: "Yes — it's common to run frameless perimeter cabinetry with an inset face-frame island, or vice versa. Everything is custom, so the construction style can be tuned to each piece." },
+  {
+    q: "What's the difference between inset and frameless cabinets?",
+    a: "Inset cabinet doors sit flush inside a face frame with a small even reveal around each door. Frameless (European) cabinets have no face frame — doors mount directly to the box for full interior access and a seamless modern face.",
+  },
+  {
+    q: "Is inset face-frame cabinetry worth the extra cost?",
+    a: "Inset takes more shop time because every reveal has to be even. The difference shows up in the quote for that kitchen, not as a flat percentage. Painted Shaker and modern slab move fastest. A rush timeline is a separate program.",
+  },
+  {
+    q: "Do you build frameless (European) cabinets?",
+    a: "Yes. Frameless construction maximises interior storage and pairs beautifully with modern slab doors. We build in both frameless and face-frame construction.",
+  },
+  {
+    q: "Can I mix construction styles in one kitchen?",
+    a: "Yes — it's common to run frameless perimeter cabinetry with an inset face-frame island, or vice versa. Everything is custom, so the construction style can be tuned to each piece.",
+  },
 ];
 
 const PAGE_TITLE = "Inset vs Frameless Cabinets | Hempston Home";
@@ -77,7 +90,10 @@ function CabinetStylesPage() {
 
       {/* HERO */}
       <section className={`relative overflow-hidden ${darkBg}`}>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80" aria-hidden="true" />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80"
+          aria-hidden="true"
+        />
         <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 sm:pt-20 sm:pb-28">
           <div className="text-white/80">
             <ProductBreadcrumb label="Cabinetry Construction Styles" />
@@ -89,8 +105,8 @@ function CabinetStylesPage() {
           <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             Before the door style and finish, there's the construction — how the doors meet the
-            cabinet box. It's the single biggest driver of a kitchen's character, from crisp
-            modern to furniture-grade heritage.
+            cabinet box. It's the single biggest driver of a kitchen's character, from crisp modern
+            to furniture-grade heritage.
           </p>
         </div>
       </section>
@@ -117,12 +133,13 @@ function CabinetStylesPage() {
               <article key={c.id} className="border border-black/10 bg-white p-8">
                 <div className="flex items-start gap-6">
                   <div className="h-28 w-28 shrink-0 overflow-hidden bg-white">
-                    <img
+                    <ResponsiveImg
                       src={c.thumbnail}
                       alt={`${c.name} cabinetry construction example`}
                       width={224}
                       height={224}
                       loading="lazy"
+                      sizes="112px"
                       className="h-full w-full object-contain"
                     />
                   </div>
@@ -145,7 +162,9 @@ function CabinetStylesPage() {
                   ))}
                 </ul>
                 <p className="mt-5 text-xs leading-relaxed text-black/70">
-                  <span className="font-medium uppercase tracking-[0.16em] text-black/50">Best for </span>
+                  <span className="font-medium uppercase tracking-[0.16em] text-black/50">
+                    Best for{" "}
+                  </span>
                   {c.bestFor}
                 </p>
               </article>
@@ -163,8 +182,8 @@ function CabinetStylesPage() {
               Inset Face Frame Cabinetry Examples
             </h2>
             <p className="mt-6 text-base leading-relaxed text-white/70 sm:text-lg">
-              Our most exacting construction — doors fitted flush within a hand-built face frame
-              for furniture-grade shadow lines. Here are inset doors across shaker, recessed-panel,
+              Our most exacting construction — doors fitted flush within a hand-built face frame for
+              furniture-grade shadow lines. Here are inset doors across shaker, recessed-panel,
               beaded and slab profiles, finished in a range of paint colours.
             </p>
           </div>
@@ -172,12 +191,13 @@ function CabinetStylesPage() {
             {faceFrameGallery.map((d) => (
               <figure key={d.src} className="border border-white/10 bg-black/40">
                 <div className="aspect-[3/4] overflow-hidden bg-white/[0.02]">
-                  <img
+                  <ResponsiveImg
                     src={d.src}
                     alt={`${d.name} — inset face frame ${d.profile} door in ${d.finish}`}
                     width={600}
                     height={800}
                     loading="lazy"
+                    sizes="(min-width: 1024px) 25vw, 50vw"
                     className="h-full w-full object-cover"
                   />
                 </div>
@@ -211,9 +231,9 @@ function CabinetStylesPage() {
             </p>
             <p>
               <strong className="text-white">Inset face frame</strong> construction is the most
-              labour-intensive and exacting — the gaps around every door must be perfect — which
-              is why it carries a premium and a distinctly high-end, furniture-like character.
-              It's the classic choice for heritage homes and bespoke builds.
+              labour-intensive and exacting — the gaps around every door must be perfect — which is
+              why it carries a premium and a distinctly high-end, furniture-like character. It's the
+              classic choice for heritage homes and bespoke builds.
             </p>
             <p>
               Both are built to order in our shop. Whether you need the full-access efficiency of
@@ -226,10 +246,16 @@ function CabinetStylesPage() {
 
       <section className={`border-t border-white/10 ${lightBg} text-black`}>
         <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8">
-          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">How the two builds compare</h2>
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">
+            How the two builds compare
+          </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/70">
-            Inset takes more shop time. The difference is in the quote for your kitchen, not a flat percentage. Painted Shaker and modern slab are the styles that move fastest.{" "}
-            <Link to="/rush-custom-kitchen-cabinets" className="underline">See the rush program</Link>.
+            Inset takes more shop time. The difference is in the quote for your kitchen, not a flat
+            percentage. Painted Shaker and modern slab are the styles that move fastest.{" "}
+            <Link to="/rush-custom-kitchen-cabinets" className="underline">
+              See the rush program
+            </Link>
+            .
           </p>
           <div className="mt-8 overflow-x-auto">
             <table className="w-full min-w-[640px] border-collapse text-left text-sm">

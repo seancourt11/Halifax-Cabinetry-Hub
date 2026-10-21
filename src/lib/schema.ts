@@ -5,7 +5,9 @@ import {
   BRAND,
   CITY_SEO,
   EMAIL,
+  ENTITY_SENTENCE,
   FOUNDING_YEAR,
+  HALIFAX_SHOP_HOURS,
   HOURS,
   INSTAGRAM_URL,
   KITCHEN_PRICE_MAX,
@@ -52,13 +54,26 @@ function openingHours() {
   ];
 }
 
+function halifaxOpeningHours() {
+  return [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [...HALIFAX_SHOP_HOURS.days],
+      opens: HALIFAX_SHOP_HOURS.opens,
+      closes: HALIFAX_SHOP_HOURS.closes,
+    },
+  ];
+}
+
 function locationEntity(loc: ShopLocation) {
+  const isHalifax = loc.key === "halifax";
   return {
-    "@type": "HomeAndConstructionBusiness",
+    // LocalBusiness, not a store or building-supplies type.
+    "@type": "LocalBusiness",
     "@id": loc.id,
     name: loc.name,
     description: loc.schemaDescription,
-    url: `${SITE_URL}/`,
+    url: isHalifax ? `${SITE_URL}/custom-cabinetry-halifax` : `${SITE_URL}/`,
     image: LOGO_URL,
     logo: LOGO_URL,
     parentOrganization: { "@id": ORG_ID },
@@ -69,8 +84,13 @@ function locationEntity(loc: ShopLocation) {
       longitude: loc.longitude,
     },
     // One published phone, on the organization and the Halifax studio only.
-    ...(loc.key === "halifax" ? { telephone: PHONE_E164, email: EMAIL } : { email: EMAIL }),
-    openingHoursSpecification: openingHours(),
+    ...(isHalifax ? { telephone: PHONE_E164, email: EMAIL } : { email: EMAIL }),
+    ...(isHalifax
+      ? {
+          openingHours: HALIFAX_SHOP_HOURS.openingHours,
+          openingHoursSpecification: halifaxOpeningHours(),
+        }
+      : { openingHoursSpecification: openingHours() }),
     priceRange: "$$$",
     currenciesAccepted: loc.addressCountry === "US" ? "USD" : "CAD",
     areaServed:
@@ -92,47 +112,63 @@ function locationEntity(loc: ShopLocation) {
   };
 }
 
-/** One Organization plus three location branches. Rendered once from the root. */
-export function organizationJsonLd() {
+/**
+ * Service-area city pages (every cabinetry city except the Halifax and Toronto
+ * offices) must not carry LocalBusiness or a street address.
+ */
+export function isServiceAreaPath(pathname: string) {
+  const path = pathname.replace(/\/$/, "") || "/";
+  return (
+    path.startsWith("/custom-cabinetry-") &&
+    path !== "/custom-cabinetry-halifax" &&
+    path !== "/custom-cabinetry-toronto"
+  );
+}
+
+/** One Organization. Office pages also include the three real locations. */
+export function organizationJsonLd(opts?: { includeOffices?: boolean }) {
+  const includeOffices = opts?.includeOffices !== false;
+  const organization: Record<string, unknown> = {
+    "@type": "Organization",
+    "@id": ORG_ID,
+    name: BRAND,
+    url: `${SITE_URL}/`,
+    logo: {
+      "@type": "ImageObject",
+      url: LOGO_URL,
+      width: 512,
+      height: 512,
+    },
+    image: LOGO_URL,
+    description: ENTITY_SENTENCE,
+    email: EMAIL,
+    telephone: PHONE_E164,
+    foundingDate: FOUNDING_YEAR,
+    priceRange: "$$$",
+    areaServed: [
+      { "@type": "Country", name: "Canada" },
+      { "@type": "Country", name: "United States" },
+    ],
+    sameAs: ORG_SAMEAS,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: EMAIL,
+      telephone: PHONE_E164,
+      areaServed: ["CA", "US"],
+      availableLanguage: ["English"],
+    },
+    openingHoursSpecification: openingHours(),
+  };
+  if (includeOffices) {
+    organization.address = postalAddress(LOCATION_LIST[0]);
+    organization.location = LOCATION_LIST.map((loc) => ({ "@id": loc.id }));
+  }
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        "@id": ORG_ID,
-        name: BRAND,
-        url: `${SITE_URL}/`,
-        logo: {
-          "@type": "ImageObject",
-          url: LOGO_URL,
-          width: 512,
-          height: 512,
-        },
-        image: LOGO_URL,
-        description:
-          "Custom kitchen cabinets, vanities and built-in millwork. Studios in Halifax, Toronto and the Long Beach area. Installs across Canada and the United States.",
-        email: EMAIL,
-        telephone: PHONE_E164,
-        foundingDate: FOUNDING_YEAR,
-        priceRange: "$$$",
-        address: postalAddress(LOCATION_LIST[0]),
-        location: LOCATION_LIST.map((loc) => ({ "@id": loc.id })),
-        areaServed: [
-          { "@type": "Country", name: "Canada" },
-          { "@type": "Country", name: "United States" },
-        ],
-        sameAs: ORG_SAMEAS,
-        contactPoint: {
-          "@type": "ContactPoint",
-          contactType: "customer support",
-          email: EMAIL,
-          telephone: PHONE_E164,
-          areaServed: ["CA", "US"],
-          availableLanguage: ["English"],
-        },
-        openingHoursSpecification: openingHours(),
-      },
-      ...LOCATION_LIST.map(locationEntity),
+      organization,
+      ...(includeOffices ? LOCATION_LIST.map(locationEntity) : []),
       {
         "@type": "WebSite",
         "@id": WEBSITE_ID,
@@ -176,6 +212,7 @@ export function serviceSchema(opts: {
   url: string;
   areaServed?: unknown;
   providerId?: string;
+  telephone?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -183,13 +220,12 @@ export function serviceSchema(opts: {
     name: opts.name,
     description: opts.description,
     url: opts.url.startsWith("http") ? opts.url : `${SITE_URL}${opts.url}`,
+    ...(opts.telephone ? { telephone: opts.telephone } : {}),
     provider: { "@id": opts.providerId ?? ORG_ID },
-    areaServed:
-      opts.areaServed ??
-      [
-        { "@type": "Country", name: "Canada" },
-        { "@type": "Country", name: "United States" },
-      ],
+    areaServed: opts.areaServed ?? [
+      { "@type": "Country", name: "Canada" },
+      { "@type": "Country", name: "United States" },
+    ],
     serviceType: "Custom cabinetry",
   };
 }
@@ -281,17 +317,13 @@ export function howToSchema(opts: {
   };
 }
 
-export function imageObjectsSchema(
-  items: { url: string; caption: string; creator?: string }[],
-) {
+export function imageObjectsSchema(items: { url: string; caption: string; creator?: string }[]) {
   return items.map((it) => ({
     "@context": "https://schema.org",
     "@type": "ImageObject",
     contentUrl: it.url,
     caption: it.caption,
-    ...(it.creator
-      ? { creator: { "@type": "Person", name: it.creator } }
-      : {}),
+    ...(it.creator ? { creator: { "@type": "Person", name: it.creator } } : {}),
     copyrightHolder: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
   }));
 }

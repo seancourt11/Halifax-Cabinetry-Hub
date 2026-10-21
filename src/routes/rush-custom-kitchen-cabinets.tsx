@@ -1,10 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Clock, CalendarCheck, ShieldCheck, Zap, CheckCircle2, ArrowRight, AlertTriangle, Hammer, Ruler, Truck } from "lucide-react";
+import {
+  Clock,
+  CalendarCheck,
+  ShieldCheck,
+  Zap,
+  CheckCircle2,
+  ArrowRight,
+  AlertTriangle,
+  Hammer,
+  Ruler,
+  Truck,
+} from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
-import { breadcrumbSchema, faqPageSchema, serviceSchema, howToSchema, SITE_URL } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  serviceSchema,
+  howToSchema,
+  SITE_URL,
+} from "@/lib/schema";
+import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 import heroImg from "@/assets/projects/modern-marble-kitchen.jpg";
 import processImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
@@ -70,19 +90,54 @@ const faqs = [
   },
 ];
 
-
 const timeline = [
-  { step: "Deadline Call", when: "Day 0", detail: "Tell us your install date. In one call we confirm whether it's achievable and what door styles / finishes fit the window." },
-  { step: "Rush Design & Signoff", when: "Week 1", detail: "Compressed design sprint — plans, elevations, and finish samples delivered fast. Signoff triggers shop scheduling." },
-  { step: "Expedited Fabrication", when: "Weeks 2–5", detail: "Your project moves to the front of the queue. Painted and stained finishes run in parallel with box construction." },
-  { step: "Delivery & Install", when: "Week 6", detail: "Coordinated freight and install crew hit your deadline. Punch list handled the same week." },
+  {
+    step: "Deadline Call",
+    when: "Day 0",
+    detail:
+      "Tell us your install date. In one call we confirm whether it's achievable and what door styles / finishes fit the window.",
+  },
+  {
+    step: "Rush Design & Signoff",
+    when: "Week 1",
+    detail:
+      "Compressed design sprint — plans, elevations, and finish samples delivered fast. Signoff triggers shop scheduling.",
+  },
+  {
+    step: "Expedited Fabrication",
+    when: "Weeks 2–5",
+    detail:
+      "Your project moves to the front of the queue. Painted and stained finishes run in parallel with box construction.",
+  },
+  {
+    step: "Delivery & Install",
+    when: "Week 6",
+    detail:
+      "Coordinated freight and install crew hit your deadline. Punch list handled the same week.",
+  },
 ];
 
 const rushFitStyles = [
-  { title: "Painted Shaker", img: shakerImg, alt: "Painted white Shaker kitchen cabinetry — fast rush timeline" },
-  { title: "Modern Slab", img: heroImg, alt: "Modern slab kitchen cabinetry in light oak — expedited lead time" },
-  { title: "White Oak Frameless", img: islandImg, alt: "White oak frameless island cabinetry available on rush timeline" },
-  { title: "Painted Panel", img: panelImg, alt: "Painted panel kitchen cabinetry with brass hardware, rush-friendly" },
+  {
+    title: "Painted Shaker",
+    img: shakerImg,
+    alt: "Painted white Shaker kitchen cabinetry — fast rush timeline",
+  },
+  {
+    title: "Modern Slab",
+    img: heroImg,
+    alt: "Modern slab kitchen cabinetry in light oak — expedited lead time",
+  },
+  {
+    title: "White Oak Frameless",
+    img: islandImg,
+    alt: "White oak frameless island cabinetry available on rush timeline",
+  },
+  {
+    title: "Painted Panel",
+    img: panelImg,
+    alt: "Painted panel kitchen cabinetry with brass hardware, rush-friendly",
+  },
 ];
 
 export const Route = createFileRoute("/rush-custom-kitchen-cabinets")({
@@ -90,7 +145,11 @@ export const Route = createFileRoute("/rush-custom-kitchen-cabinets")({
     meta: [
       { title: PAGE_TITLE },
       { name: "description", content: PAGE_DESC },
-      { name: "keywords", content: "fast custom kitchen cabinets, rush kitchen cabinet order, quick turnaround kitchen cabinets, expedited cabinetry, short lead time cabinets, bespoke kitchen cabinets, luxury custom cabinets, cabinets for tight deadline" },
+      {
+        name: "keywords",
+        content:
+          "fast custom kitchen cabinets, rush kitchen cabinet order, quick turnaround kitchen cabinets, expedited cabinetry, short lead time cabinets, bespoke kitchen cabinets, luxury custom cabinets, cabinets for tight deadline",
+      },
       { property: "og:title", content: PAGE_TITLE },
       { property: "og:description", content: PAGE_DESC },
       { property: "og:type", content: "website" },
@@ -101,7 +160,7 @@ export const Route = createFileRoute("/rush-custom-kitchen-cabinets")({
       { name: "twitter:description", content: PAGE_DESC },
       { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: CANONICAL }],
+    links: [{ rel: "canonical", href: CANONICAL }, heroImagePreload(heroImg)],
     scripts: [
       {
         type: "application/ld+json",
@@ -129,7 +188,8 @@ export const Route = createFileRoute("/rush-custom-kitchen-cabinets")({
         children: JSON.stringify(
           howToSchema({
             name: "How to get custom kitchen cabinets on a rush timeline",
-            description: "A four-step process to expedite a custom kitchen cabinetry order without compromising quality.",
+            description:
+              "A four-step process to expedite a custom kitchen cabinetry order without compromising quality.",
             totalTime: "P42D",
             steps: timeline.map((t) => ({ name: t.step, text: t.detail })),
           }),
@@ -148,7 +208,13 @@ function RushPage() {
       {/* HERO */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <img src={heroImg} alt="Custom kitchen cabinetry delivered on a rush timeline" className="h-full w-full object-cover opacity-30" />
+          <ResponsiveImg
+            src={heroImg}
+            sizes="100vw"
+            alt="Custom kitchen cabinetry delivered on a rush timeline"
+            fetchPriority="high"
+            className="h-full w-full object-cover opacity-30"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.14_0_0)]/60 via-[oklch(0.14_0_0)]/70 to-[oklch(0.14_0_0)]" />
         </div>
         <div className="mx-auto max-w-6xl px-5 py-28 sm:px-8 sm:py-40">
@@ -159,8 +225,9 @@ function RushPage() {
             Rush Custom Kitchen Cabinets in About 6 Weeks
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-            Custom kitchen cabinetry in <strong className="text-white">about 6 weeks</strong> for qualifying projects.
-            Built for move-in dates, delayed renovations, and deadlines other high-end shops can't hit — without compressing quality, materials, or fit.
+            Custom kitchen cabinetry in <strong className="text-white">about 6 weeks</strong> for
+            qualifying projects. Built for move-in dates, delayed renovations, and deadlines other
+            high-end shops can't hit — without compressing quality, materials, or fit.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a
@@ -170,33 +237,55 @@ function RushPage() {
               Get a Rush Quote <ArrowRight className="h-3 w-3" />
             </a>
             <a
-              href="tel:+19027198497"
+              href={PHONE_TEL}
               className="inline-flex items-center justify-center gap-2 border border-white/30 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.28em] text-white transition-colors hover:border-white"
             >
-              Call (902) 719-8497
+              Call {PHONE_DISPLAY}
             </a>
           </div>
-          <p className="mt-6 text-xs text-white/40">Tell us your deadline — we'll tell you honestly if we can hit it.</p>
+          <p className="mt-6 text-xs text-white/40">
+            Tell us your deadline — we'll tell you honestly if we can hit it.
+          </p>
         </div>
       </section>
 
       {/* WHO THIS IS FOR */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Who this is for</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Who this is for
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             When the calendar is the constraint — not the design brief.
           </h2>
           <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: CalendarCheck, title: "Move-In Date Locked", body: "Closing, tenants, or family arriving. The kitchen needs to be in and functional." },
-              { icon: AlertTriangle, title: "Delayed Renovation", body: "Existing cabinet supplier missed dates. You need a shop that can pick up drawings and finish the project." },
-              { icon: Zap, title: "Event Timeline", body: "Wedding, holiday, listing photos, short-term rental launch. A hard external date." },
-              { icon: Hammer, title: "Contractor Schedule Slip", body: "Trades stacked. The GC needs cabinets in-place next month to keep the whole build on track." },
+              {
+                icon: CalendarCheck,
+                title: "Move-In Date Locked",
+                body: "Closing, tenants, or family arriving. The kitchen needs to be in and functional.",
+              },
+              {
+                icon: AlertTriangle,
+                title: "Delayed Renovation",
+                body: "Existing cabinet supplier missed dates. You need a shop that can pick up drawings and finish the project.",
+              },
+              {
+                icon: Zap,
+                title: "Event Timeline",
+                body: "Wedding, holiday, listing photos, short-term rental launch. A hard external date.",
+              },
+              {
+                icon: Hammer,
+                title: "Contractor Schedule Slip",
+                body: "Trades stacked. The GC needs cabinets in-place next month to keep the whole build on track.",
+              },
             ].map((it) => (
               <div key={it.title} className="border border-white/10 p-8">
                 <it.icon className="h-5 w-5 text-white/70" />
-                <h3 className="mt-6 text-sm font-medium uppercase tracking-[0.2em] text-white">{it.title}</h3>
+                <h3 className="mt-6 text-sm font-medium uppercase tracking-[0.2em] text-white">
+                  {it.title}
+                </h3>
                 <p className="mt-4 text-sm leading-relaxed text-white/60">{it.body}</p>
               </div>
             ))}
@@ -209,16 +298,25 @@ function RushPage() {
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
           <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr]">
             <div>
-              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">How the rush process works</p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+                How the rush process works
+              </p>
               <h2 className="mt-4 font-display text-3xl font-light leading-tight sm:text-4xl">
                 Six weeks from deadline call to installed kitchen — for qualifying projects.
               </h2>
               <p className="mt-6 text-sm leading-relaxed text-white/60">
-                Rush timelines aren't a discount on process — they're a reshuffle of shop capacity. We move
-                your project to the front of the queue, run finishing in parallel with construction, and
-                assign a dedicated project lead to keep every hand-off inside 24 hours.
+                Rush timelines aren't a discount on process — they're a reshuffle of shop capacity.
+                We move your project to the front of the queue, run finishing in parallel with
+                construction, and assign a dedicated project lead to keep every hand-off inside 24
+                hours.
               </p>
-              <img src={processImg} alt="Hempston workshop expediting a custom kitchen cabinetry order" className="mt-10 aspect-[4/3] w-full object-cover" />
+              <ResponsiveImg
+                src={processImg}
+                alt="Hempston workshop expediting a custom kitchen cabinetry order"
+                loading="lazy"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="mt-10 aspect-[4/3] w-full object-cover"
+              />
             </div>
             <ol className="space-y-6">
               {timeline.map((t, i) => (
@@ -226,7 +324,9 @@ function RushPage() {
                   <div className="flex items-baseline gap-6">
                     <span className="font-display text-4xl font-light text-white/30">0{i + 1}</span>
                     <div>
-                      <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">{t.when}</p>
+                      <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                        {t.when}
+                      </p>
                       <h3 className="mt-2 text-lg font-medium text-white">{t.step}</h3>
                       <p className="mt-3 text-sm leading-relaxed text-white/60">{t.detail}</p>
                     </div>
@@ -241,15 +341,18 @@ function RushPage() {
       {/* QUALITY DIFFERENTIATOR */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">What "fast" means at Hempston</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            What "fast" means at Hempston
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             Speed comes from process — never from cut corners.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            A Hempston rush order is still fully bespoke — designed to your millimetre-accurate site dimensions, built with
-            dovetailed drawer boxes, soft-close hardware, and hand-applied finishes. What we compress is scheduling, drafting,
-            and finishing sequencing — never build quality, materials, or fit. Every cabinet is made-to-measure in our shop,
-            then pre-staged and inspected before it leaves for site.
+            A Hempston rush order is still fully bespoke — designed to your millimetre-accurate site
+            dimensions, built with dovetailed drawer boxes, soft-close hardware, and hand-applied
+            finishes. What we compress is scheduling, drafting, and finishing sequencing — never
+            build quality, materials, or fit. Every cabinet is made-to-measure in our shop, then
+            pre-staged and inspected before it leaves for site.
           </p>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -260,7 +363,10 @@ function RushPage() {
               "Construction-grade shop drawings before fabrication",
               "In-shop pre-staging on complex runs",
             ].map((line) => (
-              <div key={line} className="flex items-start gap-3 border border-white/10 p-6 text-sm text-white/70">
+              <div
+                key={line}
+                className="flex items-start gap-3 border border-white/10 p-6 text-sm text-white/70"
+              >
                 <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-white" />
                 <span>{line}</span>
               </div>
@@ -272,28 +378,45 @@ function RushPage() {
       {/* RUSH-FRIENDLY STYLES */}
       <section className="border-t border-white/10 bg-black/40">
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Rush-friendly styles</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Rush-friendly styles
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             Door styles and finishes that expedite fastest.
           </h2>
           <p className="mt-6 max-w-2xl text-sm leading-relaxed text-white/60">
-            Every Hempston door is available on a standard timeline. These four expedite fastest because materials are
-            stocked and finishing runs cleanly. Explore the full range in{" "}
-            <Link to="/products/door-styles" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">
+            Every Hempston door is available on a standard timeline. These four expedite fastest
+            because materials are stocked and finishing runs cleanly. Explore the full range in{" "}
+            <Link
+              to="/products/door-styles"
+              className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+            >
               door styles
             </Link>{" "}
             and{" "}
-            <Link to="/products/colours-finishes" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">
+            <Link
+              to="/products/colours-finishes"
+              className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+            >
               colours and finishes
-            </Link>.
+            </Link>
+            .
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {rushFitStyles.map((s) => (
               <div key={s.title} className="group">
                 <div className="aspect-[4/5] overflow-hidden bg-white/5">
-                  <img src={s.img} alt={s.alt} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <ResponsiveImg
+                    src={s.img}
+                    alt={s.alt}
+                    loading="lazy"
+                    sizes="(min-width: 768px) 25vw, 50vw"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
-                <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.28em] text-white/40">Rush-friendly</p>
+                <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.28em] text-white/40">
+                  Rush-friendly
+                </p>
                 <h3 className="mt-2 text-base font-medium text-white">{s.title}</h3>
               </div>
             ))}
@@ -305,23 +428,48 @@ function RushPage() {
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
           <div className="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-            <img src={proofImg} alt="Custom kitchen cabinetry delivered on a compressed timeline for a move-in deadline" className="aspect-[4/3] w-full object-cover" />
+            <ResponsiveImg
+              src={proofImg}
+              alt="Custom kitchen cabinetry delivered on a compressed timeline for a move-in deadline"
+              loading="lazy"
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="aspect-[4/3] w-full object-cover"
+            />
             <div>
-              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Recent rush project</p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+                Recent rush project
+              </p>
               <h2 className="mt-4 font-display text-3xl font-light leading-tight sm:text-4xl">
                 A painted Shaker kitchen delivered in 42 days.
               </h2>
               <p className="mt-6 text-sm leading-relaxed text-white/65">
-                Existing supplier missed a summer move-in. Hempston picked up the client's drawings, re-detailed for our
-                shop, and delivered a fully installed painted Shaker kitchen — dovetailed boxes, soft-close hardware,
-                conversion-finished doors — six weeks after design signoff. Family moved in on the original date.
+                Existing supplier missed a summer move-in. Hempston picked up the client's drawings,
+                re-detailed for our shop, and delivered a fully installed painted Shaker kitchen —
+                dovetailed boxes, soft-close hardware, conversion-finished doors — six weeks after
+                design signoff. Family moved in on the original date.
               </p>
               <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
-                <div><dt className="text-[10px] uppercase tracking-[0.24em] text-white/40">Timeline</dt><dd className="mt-2 font-display text-2xl font-light text-white">42 days</dd></div>
-                <div><dt className="text-[10px] uppercase tracking-[0.24em] text-white/40">Style</dt><dd className="mt-2 font-display text-2xl font-light text-white">Shaker</dd></div>
-                <div><dt className="text-[10px] uppercase tracking-[0.24em] text-white/40">Deadline</dt><dd className="mt-2 font-display text-2xl font-light text-white">Hit</dd></div>
+                <div>
+                  <dt className="text-[10px] uppercase tracking-[0.24em] text-white/40">
+                    Timeline
+                  </dt>
+                  <dd className="mt-2 font-display text-2xl font-light text-white">42 days</dd>
+                </div>
+                <div>
+                  <dt className="text-[10px] uppercase tracking-[0.24em] text-white/40">Style</dt>
+                  <dd className="mt-2 font-display text-2xl font-light text-white">Shaker</dd>
+                </div>
+                <div>
+                  <dt className="text-[10px] uppercase tracking-[0.24em] text-white/40">
+                    Deadline
+                  </dt>
+                  <dd className="mt-2 font-display text-2xl font-light text-white">Hit</dd>
+                </div>
               </dl>
-              <Link to="/case-studies" className="mt-10 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.28em] text-white/70 hover:text-white">
+              <Link
+                to="/case-studies"
+                className="mt-10 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.28em] text-white/70 hover:text-white"
+              >
                 See more Hempston projects <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
@@ -332,23 +480,27 @@ function RushPage() {
       {/* RUSH PRICING */}
       <section className="border-t border-white/10 bg-black/40">
         <div className="mx-auto max-w-4xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Rush pricing — no surprises</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Rush pricing — no surprises
+          </p>
           <h2 className="mt-4 font-display text-3xl font-light leading-tight sm:text-4xl">
             What a rush timeline actually costs.
           </h2>
           <div className="mt-10 space-y-6 text-base leading-relaxed text-white/70">
             <p>
-              Rush pricing is standard practice in custom cabinetry — reshuffling shop capacity and running finishing in
-              parallel carries real cost. Industry rush premiums run <strong className="text-white">10–20%</strong> on the
-              cabinetry line depending on how tight the timeline is.
+              Rush pricing is standard practice in custom cabinetry — reshuffling shop capacity and
+              running finishing in parallel carries real cost. Industry rush premiums run{" "}
+              <strong className="text-white">10–20%</strong> on the cabinetry line depending on how
+              tight the timeline is.
             </p>
             <p>
-              We quote it transparently up front, alongside the standard-timeline price, so you can compare and decide.
-              There's no back-end surcharge, no expedited freight surprise, and no "materials adjustment" invoice.
+              We quote it transparently up front, alongside the standard-timeline price, so you can
+              compare and decide. There's no back-end surcharge, no expedited freight surprise, and
+              no "materials adjustment" invoice.
             </p>
             <p>
-              For most projects, the tradeoff is worth it — the cost of missing a move-in date, holding a mortgage, or
-              extending a rental almost always exceeds the rush premium.
+              For most projects, the tradeoff is worth it — the cost of missing a move-in date,
+              holding a mortgage, or extending a rental almost always exceeds the rush premium.
             </p>
           </div>
         </div>
@@ -359,14 +511,17 @@ function RushPage() {
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr]">
             <div>
-              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Tell us your deadline</p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+                Tell us your deadline
+              </p>
               <h2 className="mt-4 font-display text-3xl font-light leading-tight sm:text-4xl">
                 We'll tell you honestly if we can hit it.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/65">
-                Send us your target install date, the size of your kitchen, and any existing drawings or appliance
-                specs. Within one business day we'll come back with either a rush quote and confirmed schedule, or a
-                straight answer that the window isn't safely achievable — and what the closest realistic date looks like.
+                Send us your target install date, the size of your kitchen, and any existing
+                drawings or appliance specs. Within one business day we'll come back with either a
+                rush quote and confirmed schedule, or a straight answer that the window isn't safely
+                achievable — and what the closest realistic date looks like.
               </p>
               <ul className="mt-10 space-y-4">
                 {[
@@ -389,14 +544,17 @@ function RushPage() {
       {/* LEAD TIMES DEEP DIVE */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Rush kitchen cabinet lead times</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Rush kitchen cabinet lead times
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             Short lead time cabinets — what is actually achievable.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            Every custom cabinet shop in North America runs on the same physics — hardwood has to be milled, boxes have to be
-            assembled, finishes have to cure, and installers have to be scheduled. Standard custom kitchen cabinet lead times
-            run 10–16 weeks. A true rush custom kitchen cabinet order compresses that to 4–8 weeks by reshuffling shop capacity,
+            Every custom cabinet shop in North America runs on the same physics — hardwood has to be
+            milled, boxes have to be assembled, finishes have to cure, and installers have to be
+            scheduled. Standard custom kitchen cabinet lead times run 10–16 weeks. A true rush
+            custom kitchen cabinet order compresses that to 4–8 weeks by reshuffling shop capacity,
             not by skipping steps. Here is how the lead-time bands break down in practice.
           </p>
           <div className="mt-14 space-y-8">
@@ -422,10 +580,15 @@ function RushPage() {
                 body: "Industry standard for custom kitchen cabinetry. Full design development, unlimited style and finish options, complex millwork, hand-glazed finishes, and specialty veneers all fit comfortably inside this window.",
               },
             ].map((row) => (
-              <div key={row.band} className="grid gap-4 border-t border-white/10 pt-8 sm:grid-cols-[180px_1fr]">
+              <div
+                key={row.band}
+                className="grid gap-4 border-t border-white/10 pt-8 sm:grid-cols-[180px_1fr]"
+              >
                 <div>
                   <p className="font-display text-2xl font-light text-white">{row.band}</p>
-                  <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.24em] text-white/50">{row.label}</p>
+                  <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.24em] text-white/50">
+                    {row.label}
+                  </p>
                 </div>
                 <p className="text-sm leading-relaxed text-white/65">{row.body}</p>
               </div>
@@ -437,15 +600,18 @@ function RushPage() {
       {/* BESPOKE RUSH CRAFTSMANSHIP */}
       <section className="border-t border-white/10 bg-black/40">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Bespoke rush craftsmanship</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Bespoke rush craftsmanship
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             Luxury custom kitchen cabinets on an urgent timeline.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            Most custom shops treat rush work as an afterthought. We built our process so that high-end detailing — inset
-            face frames, custom range hoods, integrated appliance panels, matched veneer, hand-applied conversion finishes —
-            can still move quickly. Our project lead, shop foreman, and finishing team review every rush job daily, not weekly,
-            so decisions happen in hours instead of days.
+            Most custom shops treat rush work as an afterthought. We built our process so that
+            high-end detailing — inset face frames, custom range hoods, integrated appliance panels,
+            matched veneer, hand-applied conversion finishes — can still move quickly. Our project
+            lead, shop foreman, and finishing team review every rush job daily, not weekly, so
+            decisions happen in hours instead of days.
           </p>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -456,7 +622,10 @@ function RushPage() {
               "Full shop drawings and 3D approval before fabrication",
               "In-shop pre-staging and fit check on complex runs",
             ].map((line) => (
-              <div key={line} className="flex items-start gap-3 border border-white/10 p-6 text-sm text-white/70">
+              <div
+                key={line}
+                className="flex items-start gap-3 border border-white/10 p-6 text-sm text-white/70"
+              >
                 <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-white" />
                 <span>{line}</span>
               </div>
@@ -468,7 +637,9 @@ function RushPage() {
       {/* RUSH BY PROJECT TYPE */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Rush cabinetry by project type</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Rush cabinetry by project type
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             Expedited custom cabinets for the deadlines we see most.
           </h2>
@@ -511,14 +682,17 @@ function RushPage() {
       {/* HOW TO PREPARE */}
       <section className="border-t border-white/10 bg-black/40">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">How to prepare for a rush cabinet order</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            How to prepare for a rush cabinet order
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             What to have ready before you call about a last minute kitchen cabinets order.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            The single fastest way to shave a week off a rush custom kitchen cabinet order is to arrive at the first call
-            with the information a shop needs to quote and schedule. Every item below is optional, but every item you can
-            provide compresses the front end of the timeline.
+            The single fastest way to shave a week off a rush custom kitchen cabinet order is to
+            arrive at the first call with the information a shop needs to quote and schedule. Every
+            item below is optional, but every item you can provide compresses the front end of the
+            timeline.
           </p>
           <ol className="mt-12 space-y-4">
             {[
@@ -533,7 +707,9 @@ function RushPage() {
               "Site access notes for install: stairs, elevators, parking, condo booking rules.",
             ].map((line, i) => (
               <li key={line} className="flex items-start gap-6 border-t border-white/10 pt-4">
-                <span className="font-display text-xl font-light text-white/30">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-xl font-light text-white/30">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <span className="text-sm leading-relaxed text-white/70">{line}</span>
               </li>
             ))}
@@ -544,22 +720,24 @@ function RushPage() {
       {/* SIGNS OF DELAY */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-4xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Cabinet order delays</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Cabinet order delays
+          </p>
           <h2 className="mt-4 font-display text-3xl font-light leading-tight sm:text-4xl">
             Signs your existing kitchen cabinet order is about to be delayed.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-white/65">
-            Most rush cabinet calls we get come from homeowners whose original supplier is quietly slipping. If any of these
-            are true, call a rush-capable shop now — not in three weeks when the ship date is officially missed and your
-            options have narrowed.
+            Most rush cabinet calls we get come from homeowners whose original supplier is quietly
+            slipping. If any of these are true, call a rush-capable shop now — not in three weeks
+            when the ship date is officially missed and your options have narrowed.
           </p>
           <ul className="mt-10 space-y-4">
             {[
-              "Your ship date has been \"confirmed\" verbally but not in writing.",
+              'Your ship date has been "confirmed" verbally but not in writing.',
               "Your shop has not asked for a template or final site measure and install is under 6 weeks away.",
               "Finish samples are late or have changed batch without explanation.",
               "Your project manager is slow to reply or has been reassigned.",
-              "Hardware or appliance panels are still marked \"TBD\" on the order confirmation.",
+              'Hardware or appliance panels are still marked "TBD" on the order confirmation.',
               "Your GC or designer is quietly sourcing backup quotes on your behalf.",
             ].map((line) => (
               <li key={line} className="flex items-start gap-3 text-sm text-white/70">
@@ -574,29 +752,45 @@ function RushPage() {
       {/* SERVICE AREAS */}
       <section className="border-t border-white/10 bg-black/40">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Rush cabinet service areas</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Rush cabinet service areas
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             Fast custom kitchen cabinets near you — coast to coast.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            We design, build and install rush cabinetry for homes across Canada and the United States.
-            Freight and installation are sequenced around your deadline.
+            We design, build and install rush cabinetry for homes across Canada and the United
+            States. Freight and installation are sequenced around your deadline.
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {[
-              { city: "Halifax and Nova Scotia", detail: "Home market. Site measure often within 48 hours of the deadline call. HRM, Dartmouth, Bedford, Chester, Lunenburg, South Shore." },
-              { city: "Toronto and GTA", detail: "Install crew in market. Rush install windows are planned around your deadline." },
-              { city: "Long Beach and the US", detail: "Custom cabinetry designed, built and installed for Long Beach and Southern California. Freight and install are sequenced around your deadline." },
+              {
+                city: "Halifax and Nova Scotia",
+                detail:
+                  "Home market. Site measure often within 48 hours of the deadline call. HRM, Dartmouth, Bedford, Chester, Lunenburg, South Shore.",
+              },
+              {
+                city: "Toronto and GTA",
+                detail:
+                  "Install crew in market. Rush install windows are planned around your deadline.",
+              },
+              {
+                city: "Long Beach and the US",
+                detail:
+                  "Custom cabinetry designed, built and installed for Long Beach and Southern California. Freight and install are sequenced around your deadline.",
+              },
             ].map((area) => (
               <div key={area.city} className="border border-white/10 p-8">
-                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-white">{area.city}</h3>
+                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-white">
+                  {area.city}
+                </h3>
                 <p className="mt-4 text-sm leading-relaxed text-white/60">{area.detail}</p>
               </div>
             ))}
           </div>
           <p className="mt-10 text-sm text-white/60">
-            Installing coast to coast — if your project is outside these markets, tell us your deadline and we'll confirm
-            whether we can hit it within one business day.
+            Installing coast to coast — if your project is outside these markets, tell us your
+            deadline and we'll confirm whether we can hit it within one business day.
           </p>
         </div>
       </section>
@@ -604,15 +798,18 @@ function RushPage() {
       {/* LUXURY FINISHES ON A DEADLINE */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Finishes and detailing</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Finishes and detailing
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             High-end finishes that still move quickly.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            A compressed timeline does not mean a compressed design vocabulary. We regularly expedite painted kitchens in
-            Farrow and Ball and Benjamin Moore colours, white oak kitchens in Rubio Monocoat stains, and custom-matched
-            conversion finishes for designers with exacting standards. The key is deciding early — every finish sample approved
-            at signoff keeps the schedule intact.
+            A compressed timeline does not mean a compressed design vocabulary. We regularly
+            expedite painted kitchens in Farrow and Ball and Benjamin Moore colours, white oak
+            kitchens in Rubio Monocoat stains, and custom-matched conversion finishes for designers
+            with exacting standards. The key is deciding early — every finish sample approved at
+            signoff keeps the schedule intact.
           </p>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {[
@@ -645,14 +842,17 @@ function RushPage() {
       {/* DESIGNER / ARCHITECT RUSH PARTNERSHIPS */}
       <section className="border-t border-white/10 bg-black/40">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">For designers and architects</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            For designers and architects
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             A cabinet shop that keeps pace with your project timeline.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            Designers and architects often bring us rush cabinetry after another shop falls behind. We work directly from your
-            drawings, elevations, and finish schedules — no redesign required unless you want it. Our shop speaks the same
-            language: sight lines, reveal consistency, hardware specs, appliance panels, and flush inset tolerances.
+            Designers and architects often bring us rush cabinetry after another shop falls behind.
+            We work directly from your drawings, elevations, and finish schedules — no redesign
+            required unless you want it. Our shop speaks the same language: sight lines, reveal
+            consistency, hardware specs, appliance panels, and flush inset tolerances.
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {[
@@ -663,7 +863,10 @@ function RushPage() {
               "White-glove install crews in Halifax, Toronto, and Long Beach",
               "Full pre-staging so site install is fast and clean",
             ].map((line) => (
-              <div key={line} className="flex items-start gap-3 border border-white/10 p-6 text-sm text-white/70">
+              <div
+                key={line}
+                className="flex items-start gap-3 border border-white/10 p-6 text-sm text-white/70"
+              >
                 <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-white" />
                 <span>{line}</span>
               </div>
@@ -685,7 +888,9 @@ function RushPage() {
               <details key={f.q} className="group py-6">
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-base font-medium text-white">
                   <span>{f.q}</span>
-                  <span className="mt-1 flex-none text-white/40 transition-transform group-open:rotate-45">+</span>
+                  <span className="mt-1 flex-none text-white/40 transition-transform group-open:rotate-45">
+                    +
+                  </span>
                 </summary>
                 <p className="mt-4 text-sm leading-relaxed text-white/65">{f.a}</p>
               </details>
@@ -708,10 +913,10 @@ function RushPage() {
               Get a Rush Quote <ArrowRight className="h-3 w-3" />
             </a>
             <a
-              href="tel:+19027198497"
+              href={PHONE_TEL}
               className="inline-flex items-center gap-2 border border-white/30 px-8 py-4 text-[11px] font-medium uppercase tracking-[0.28em] text-white hover:border-white"
             >
-              Call (902) 719-8497
+              Call {PHONE_DISPLAY}
             </a>
           </div>
         </div>

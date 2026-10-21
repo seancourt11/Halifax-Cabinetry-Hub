@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const MAX_FILES = 8;
@@ -14,19 +15,11 @@ const schema = z.object({
   name: z.string().trim().nonempty({ message: "Please enter your name" }).max(100),
   email: z.string().trim().email({ message: "Please enter a valid email" }).max(255),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
-  location: z
-    .string()
-    .trim()
-    .nonempty({ message: "Where is the project located?" })
-    .max(160),
+  location: z.string().trim().nonempty({ message: "Where is the project located?" }).max(160),
   projectType: z.string().trim().max(80).optional().or(z.literal("")),
   installDate: z.string().trim().max(40).optional().or(z.literal("")),
   meetingPref: z.string().trim().max(40).optional().or(z.literal("")),
-  message: z
-    .string()
-    .trim()
-    .nonempty({ message: "Tell us a little about your project" })
-    .max(1500),
+  message: z.string().trim().nonempty({ message: "Tell us a little about your project" }).max(1500),
 });
 
 type FormErrors = Partial<Record<keyof z.infer<typeof schema>, string>>;
@@ -124,18 +117,20 @@ export function WorkWithUsForm() {
     return (
       <div className="flex flex-col items-center justify-center rounded-lg border border-white/15 bg-white/[0.03] p-10 text-center">
         <CheckCircle2 className="h-12 w-12 text-white" />
-        <h3 className="mt-5 font-display text-2xl font-semibold text-white">
-          Request received
-        </h3>
+        <h3 className="mt-5 font-display text-2xl font-semibold text-white">Request received</h3>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-white/70">
-          A Hempston designer will email you within one business day with a Google Meet
-          invite and next steps. Prefer to talk now? Call{" "}
-          <a href="tel:+19027198497" className="font-medium text-white underline">
-            (902) 719-8497
+          A Hempston designer will email you within one business day with a Google Meet invite and
+          next steps. Prefer to talk now? Call{" "}
+          <a href={PHONE_TEL} className="font-medium text-white underline">
+            {PHONE_DISPLAY}
           </a>
           .
         </p>
-        <Button variant="outline" className="mt-7 border-white/30 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => setSubmitted(false)}>
+        <Button
+          variant="outline"
+          className="mt-7 border-white/30 bg-transparent text-white hover:bg-white hover:text-black"
+          onClick={() => setSubmitted(false)}
+        >
           Submit another project
         </Button>
       </div>
@@ -148,9 +143,7 @@ export function WorkWithUsForm() {
       noValidate
       className="rounded-lg border border-white/15 bg-white/[0.03] p-7 sm:p-9"
     >
-      <h3 className="font-display text-2xl font-semibold text-white">
-        Start your project
-      </h3>
+      <h3 className="font-display text-2xl font-semibold text-white">Start your project</h3>
       <p className="mt-2 text-sm text-white/60">
         Share the details below and we'll follow up with a Google Meet invite.
       </p>
@@ -158,21 +151,39 @@ export function WorkWithUsForm() {
       <div className="mt-7 grid gap-5">
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="grid gap-2">
-            <Label htmlFor="name" className="text-white/80">Full name</Label>
+            <Label htmlFor="name" className="text-white/80">
+              Full name
+            </Label>
             <Input id="name" name="name" autoComplete="name" placeholder="Jane Doe" />
             {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="email" className="text-white/80">Email</Label>
-            <Input id="email" name="email" type="email" autoComplete="email" placeholder="jane@email.com" />
+            <Label htmlFor="email" className="text-white/80">
+              Email
+            </Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="jane@email.com"
+            />
             {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
           </div>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="grid gap-2">
-            <Label htmlFor="phone" className="text-white/80">Phone (optional)</Label>
-            <Input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="(902) 719-8497" />
+            <Label htmlFor="phone" className="text-white/80">
+              Phone (optional)
+            </Label>
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder={PHONE_DISPLAY}
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="location" className="flex items-center gap-1.5 text-white/80">
@@ -185,7 +196,9 @@ export function WorkWithUsForm() {
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="grid gap-2">
-            <Label htmlFor="projectType" className="text-white/80">Project type</Label>
+            <Label htmlFor="projectType" className="text-white/80">
+              Project type
+            </Label>
             <Input id="projectType" name="projectType" placeholder="Kitchen, vanity, built-ins…" />
           </div>
           <div className="grid gap-2">
@@ -200,18 +213,16 @@ export function WorkWithUsForm() {
           <Label htmlFor="meetingPref" className="flex items-center gap-1.5 text-white/80">
             <Video className="h-3.5 w-3.5" /> Preferred meeting time (Google Meet)
           </Label>
-          <Input
-            id="meetingPref"
-            name="meetingPref"
-            placeholder="e.g. Weekday mornings, AST"
-          />
+          <Input id="meetingPref" name="meetingPref" placeholder="e.g. Weekday mornings, AST" />
           <p className="text-xs text-white/50">
             We'll email you a Google Meet invite based on this window.
           </p>
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="message" className="text-white/80">Tell us about your project</Label>
+          <Label htmlFor="message" className="text-white/80">
+            Tell us about your project
+          </Label>
           <Textarea
             id="message"
             name="message"

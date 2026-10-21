@@ -1,9 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PencilRuler, Scan, HardHat, FileText, Palette, Gem, Hammer, PackageCheck, ArrowRight } from "lucide-react";
+import {
+  PencilRuler,
+  Scan,
+  HardHat,
+  FileText,
+  Palette,
+  Gem,
+  Hammer,
+  PackageCheck,
+  ArrowRight,
+} from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
+import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import ogImg from "@/assets/og/og-services.jpg";
 import heroImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 import kitchenImg from "@/assets/projects/modern-marble-kitchen.jpg";
@@ -55,7 +67,7 @@ export const Route = createFileRoute("/services")({
       { name: "twitter:description", content: PAGE_DESC },
       { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(heroImg)],
     scripts: [
       {
         type: "application/ld+json",
@@ -75,14 +87,54 @@ export const Route = createFileRoute("/services")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
-            serviceSchema({ name: "Kitchen Design", description: "Full custom kitchen design led by a Hempston designer — layouts, elevations, appliance and plumbing coordination, and material curation.", url: "/services#kitchen-design" }),
-            serviceSchema({ name: "3D Laser Site Measures", description: "Millimetre-accurate 3D laser scanning of your space to drive precision cabinetry design and inset construction.", url: "/services#3d-site-measure" }),
-            serviceSchema({ name: "Site Visits & Trade Coordination", description: "Pre-construction, mid-build, and punch-list site meetings with your builder, designer, and trades.", url: "/services#site-visits" }),
-            serviceSchema({ name: "Shop Drawings", description: "Construction-grade plans, elevations, sections, and joinery details for every cabinet before fabrication.", url: "/services#shop-drawings" }),
-            serviceSchema({ name: "Custom Samples", description: "Hand-made door, wood, paint, and stain samples in your specific finish so you approve exactly what gets built.", url: "/services#custom-samples" }),
-            serviceSchema({ name: "Millwork Fabrication", description: "In-house millwork fabrication — custom cabinetry, panelling, built-ins, and architectural millwork built by Hempston craftsmen on our own machines.", url: "/services#millwork-fabrication" }),
-            serviceSchema({ name: "Pre-Staging & Full Shop Assembly", description: "Every project is fully assembled and pre-staged in our facility before it ships — cabinetry, panels, mouldings, and hardware dry-fit and aligned so install day is flawless. Stone is prepped and templated for install, not pre-staged.", url: "/services#pre-staging" }),
-            serviceSchema({ name: "Solid Surface Procurement & Management", description: "Full stone and solid-surface management — selection, layout, templating, fabrication oversight, and installation coordination.", url: "/services#solid-surfaces" }),
+            serviceSchema({
+              name: "Kitchen Design",
+              description:
+                "Full custom kitchen design led by a Hempston designer — layouts, elevations, appliance and plumbing coordination, and material curation.",
+              url: "/services#kitchen-design",
+            }),
+            serviceSchema({
+              name: "3D Laser Site Measures",
+              description:
+                "Millimetre-accurate 3D laser scanning of your space to drive precision cabinetry design and inset construction.",
+              url: "/services#3d-site-measure",
+            }),
+            serviceSchema({
+              name: "Site Visits & Trade Coordination",
+              description:
+                "Pre-construction, mid-build, and punch-list site meetings with your builder, designer, and trades.",
+              url: "/services#site-visits",
+            }),
+            serviceSchema({
+              name: "Shop Drawings",
+              description:
+                "Construction-grade plans, elevations, sections, and joinery details for every cabinet before fabrication.",
+              url: "/services#shop-drawings",
+            }),
+            serviceSchema({
+              name: "Custom Samples",
+              description:
+                "Hand-made door, wood, paint, and stain samples in your specific finish so you approve exactly what gets built.",
+              url: "/services#custom-samples",
+            }),
+            serviceSchema({
+              name: "Millwork Fabrication",
+              description:
+                "In-house millwork fabrication — custom cabinetry, panelling, built-ins, and architectural millwork built by Hempston craftsmen on our own machines.",
+              url: "/services#millwork-fabrication",
+            }),
+            serviceSchema({
+              name: "Pre-Staging & Full Shop Assembly",
+              description:
+                "Every project is fully assembled and pre-staged in our facility before it ships — cabinetry, panels, mouldings, and hardware dry-fit and aligned so install day is flawless. Stone is prepped and templated for install, not pre-staged.",
+              url: "/services#pre-staging",
+            }),
+            serviceSchema({
+              name: "Solid Surface Procurement & Management",
+              description:
+                "Full stone and solid-surface management — selection, layout, templating, fabrication oversight, and installation coordination.",
+              url: "/services#solid-surfaces",
+            }),
           ],
         }),
       },
@@ -222,11 +274,13 @@ function ServicesPage() {
 
       {/* Hero */}
       <section className="relative">
-        <img
+        <ResponsiveImg
           src={heroImg}
+          sizes="100vw"
           alt="Custom white painted Hempston kitchen with stained white oak island"
           width={1600}
           height={1000}
+          fetchPriority="high"
           className="h-[70vh] min-h-[500px] w-full object-cover"
         />
         <div className="absolute inset-0 bg-black/45" />
@@ -243,8 +297,12 @@ function ServicesPage() {
               run from $25,000 to $75,000, and most projects take 8 to 14 weeks.
             </p>
             <p className="mt-6 flex flex-wrap gap-4 text-sm">
-              <Link to="/work-with-us" className="underline">See the full process</Link>
-              <Link to="/rush-custom-kitchen-cabinets" className="underline">Need a rush timeline?</Link>
+              <Link to="/work-with-us" className="underline">
+                See the full process
+              </Link>
+              <Link to="/rush-custom-kitchen-cabinets" className="underline">
+                Need a rush timeline?
+              </Link>
             </p>
           </div>
         </div>
@@ -255,7 +313,8 @@ function ServicesPage() {
         <div className="mx-auto max-w-2xl border border-border bg-card p-12 text-center shadow-[var(--shadow-soft)] sm:p-16">
           <p className="tracked text-xs font-medium text-accent">Full-service cabinetry</p>
           <h2 className="mt-5 font-display text-3xl font-semibold uppercase tracking-[0.14em] text-foreground sm:text-4xl">
-            One team,<br /> start to install
+            One team,
+            <br /> start to install
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground">
             The services below are how we deliver a Hempston project — bundled into every
@@ -284,10 +343,11 @@ function ServicesPage() {
                 className="grid items-center gap-10 md:grid-cols-2 md:gap-16"
               >
                 <div className={reverse ? "md:order-2" : ""}>
-                  <img
+                  <ResponsiveImg
                     src={s.image}
                     alt={s.alt}
                     loading="lazy"
+                    sizes="(min-width: 768px) 50vw, 100vw"
                     className="aspect-[4/5] w-full object-cover"
                   />
                 </div>
