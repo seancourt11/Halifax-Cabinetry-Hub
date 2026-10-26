@@ -12,10 +12,13 @@ import {
   SITE_URL,
   breadcrumbSchema,
 } from "@/lib/schema";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import ogImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 
-const PAGE_TITLE = "Custom Cabinetry Across Canada — Locations We Serve | Hempston";
+const PAGE_TITLE = "Custom Cabinetry Service Areas | Hempston Home";
 const PAGE_DESC =
-  "Hempston designs and hand-builds custom kitchen cabinetry, vanities and built-in millwork for cities across Canada — from Halifax and Toronto to Vancouver and Calgary. Free design consultation.";
+  "Hempston Home builds custom cabinetry in Canada, with installs in Atlantic Canada, Toronto and beyond. Built in Canada. Find your area and book a consult.";
+const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 const ABSOLUTE_URL = `${SITE_URL}/locations`;
 
 // Group cities by province for a clean hub structure — Google & AI answer
@@ -58,7 +61,9 @@ export const Route = createFileRoute("/locations")({
       { property: "og:url", content: ABSOLUTE_URL },
       { property: "og:site_name", content: ORG_NAME },
       { property: "og:locale", content: "en_CA" },
+      { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
     ],
@@ -124,12 +129,13 @@ function LocationsHub() {
           Locations we serve
         </p>
         <h1 className="mt-5 font-display text-4xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-6xl">
-          Custom Cabinetry, Coast to Coast
+          Where We Build: Halifax, Nova Scotia and Beyond
         </h1>
+        <BuiltInCanadaLine className="mx-auto mt-6 max-w-xl text-sm text-white/80" />
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/75">
-          Hempston designs and hand-builds bespoke kitchens, vanities and built-in millwork for
-          homes across Canada. Studios in Halifax, Toronto and Long Beach — install crews coast to
-          coast.
+          Hempston Home designs, builds and installs custom cabinetry for homes in Nova Scotia first,
+          and across Atlantic Canada, Toronto, and the rest of Canada. We install across Canada and
+          the United States. Choose your area below.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a

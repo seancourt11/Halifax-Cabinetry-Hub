@@ -5,12 +5,14 @@ import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { breadcrumbSchema, ORG_EMAIL, ORG_PHONE, SITE_URL } from "@/lib/schema";
+import { HOURS, LOCATION_LIST, mapsUrl } from "@/lib/site";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 
 import ogImg from "@/assets/og/og-contact.jpg";
 
-const PAGE_TITLE = "Book a Custom Cabinetry Consultation | Hempston Home";
+const PAGE_TITLE = "Book a Cabinetry Consultation | Hempston Home";
 const PAGE_DESC =
-  "Free custom cabinetry consultation — kitchens, vanities & built-ins. Call (902) 719-8497 or email info@hempstonhome.com. Halifax · Toronto · Long Beach.";
+  "Book a free cabinetry consultation with Hempston Home. Built in Canada. Call (902) 719-8497 or email info@hempstonhome.com. We reply in one business day.";
 const ABSOLUTE_URL = `${SITE_URL}/contact`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -83,8 +85,8 @@ const contactBlocks = [
   },
   {
     icon: MapPin,
-    label: "Studio",
-    value: "Halifax · Toronto · Long Beach",
+    label: "Hours",
+    value: HOURS.label,
     href: undefined,
   },
 ];
@@ -97,13 +99,15 @@ function ContactPage() {
       {/* Hero */}
       <section className="border-b border-white/10 bg-[oklch(0.14_0_0)] px-5 py-24 text-center sm:px-8 sm:py-32">
         <p className="tracked text-xs font-medium text-white/60">Get in touch</p>
-        <h1 className="mt-6 font-display text-4xl font-semibold uppercase tracking-[0.18em] text-white sm:text-6xl">
-          Contact Us
+        <h1 className="mt-6 font-display text-4xl font-semibold uppercase tracking-[0.12em] text-white sm:text-5xl">
+          Book a Free Custom Cabinetry Consultation
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/70">
-          Every Hempston project begins with a conversation. Tell us about your space and a
-          designer will guide you from first sketch to final install.
+          Every Hempston Home project begins with a conversation. Tell us about your space and a
+          designer will reply within one business day. Have photos of the room, a floor plan if you
+          have one, and a preferred install date.
         </p>
+        <BuiltInCanadaLine className="mx-auto mt-4 max-w-xl text-sm text-white/70" />
 
         {/* Contact info tiles */}
         <div className="mx-auto mt-16 grid max-w-4xl gap-6 sm:grid-cols-3">
@@ -124,6 +128,16 @@ function ContactPage() {
             );
           })}
         </div>
+        <ul className="mx-auto mt-12 grid max-w-4xl gap-6 text-left sm:grid-cols-3">
+          {LOCATION_LIST.map((loc) => (
+            <li key={loc.key} className="border border-white/20 px-6 py-8">
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/50">{loc.role}</p>
+              <a href={mapsUrl(loc)} className="mt-3 block text-sm leading-relaxed text-white hover:text-white/80">
+                {loc.copyLabel}
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Form on light ground */}

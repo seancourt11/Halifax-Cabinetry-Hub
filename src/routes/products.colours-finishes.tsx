@@ -10,6 +10,8 @@ import { SampleRequestLink } from "@/components/sample-request-link";
 import { paintColors, woodStains } from "@/data/finishes";
 import { insetGallery2026 } from "@/data/door-gallery-2026";
 import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
+import { VisibleFaq } from "@/components/visible-faq";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/og/og-colours-finishes.jpg";
 
 const finishFaqs = [
@@ -19,9 +21,9 @@ const finishFaqs = [
   { q: "Can I get a real painted or stained sample before I decide?", a: "Yes. We produce hand-made samples in your exact wood species, paint colour, or hardwax-oil stain before fabrication." },
 ];
 
-const PAGE_TITLE = "Custom Cabinet Paint Colours & Wood Stains — Hempston";
+const PAGE_TITLE = "Cabinet Paint Colours and Stains | Hempston Home";
 const PAGE_DESC =
-  "Hempston's curated cabinet paint palette and hardwax-oil wood stain range — hand-sprayed conversion finishes and hand-rubbed oils for white oak, walnut and painted cabinetry.";
+  "Cabinet paint colours from Farrow & Ball and Benjamin Moore, plus Rubio Monocoat stains for oak and walnut. Built in Canada. Order a sample.";
 const ABSOLUTE_URL = `${SITE_URL}/products/colours-finishes`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -89,13 +91,15 @@ function ColoursFinishesPage() {
           </div>
           <p className={`${eyebrowDark} mt-10`}>Colours & Finishes</p>
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-light uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-6xl">
-            Cabinet Paint Colours & Wood Stains
+            Cabinet Paint Colours and Wood Stains
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Hempston is a 100% custom cabinet maker. The colours and stains below are from our
-            signature palette collection — not a fixed catalogue. We can match virtually any paint
-            colour or wood tone you bring to us.
+            The painted palette includes Noto White, Cefalù Linen, Vieux-Port Plaster, Cassis Mist,
+            Exmoor Berry, El Hierro Green, Salcombe Green, Aeolian Blue, La Palma Navy and Palermo Noir.
+            Stains include Etna Oak, Lanzarote Oak and Tenerife Walnut. The palette is matched to
+            Farrow and Ball and Benjamin Moore.
           </p>
+          <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/55">
             Hand-sprayed conversion finishes for painted cabinetry, and hand-rubbed hardwax-oil
             stains for solid hardwoods — specified, mixed and applied under one roof.
@@ -301,6 +305,17 @@ function ColoursFinishesPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className={`border-t border-white/10 ${darkBg}`}>
+        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">Finish questions</h2>
+          <VisibleFaq
+            items={finishFaqs}
+            questionClassName="font-display text-base uppercase tracking-[0.08em] text-white"
+            answerClassName="mt-3 text-sm leading-relaxed text-white/70"
+          />
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
@@ -7,18 +7,20 @@ import { CustomRequestCTA } from "@/components/custom-request-cta";
 import { cabinetStyles } from "@/data/finishes";
 import { insetGallery2026 as faceFrameGallery } from "@/data/door-gallery-2026";
 import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
+import { VisibleFaq } from "@/components/visible-faq";
+import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/og/og-cabinet-styles.jpg";
 
 const cabinetFaqs = [
   { q: "What's the difference between inset and frameless cabinets?", a: "Inset cabinet doors sit flush inside a face frame with a small even reveal around each door. Frameless (European) cabinets have no face frame — doors mount directly to the box for full interior access and a seamless modern face." },
-  { q: "Is inset face-frame cabinetry worth the extra cost?", a: "For heritage homes and high-end kitchens where reveal lines matter, yes — inset construction is the mark of true custom cabinetry. It requires more precise fabrication and a 3D laser site measure." },
+  { q: "Is inset face-frame cabinetry worth the extra cost?", a: "Inset takes more shop time because every reveal has to be even. The difference shows up in the quote for that kitchen, not as a flat percentage. Painted Shaker and modern slab move fastest. A rush timeline is a separate program." },
   { q: "Do you build frameless (European) cabinets?", a: "Yes. Frameless construction maximises interior storage and pairs beautifully with modern slab doors. We build in both frameless and face-frame construction." },
   { q: "Can I mix construction styles in one kitchen?", a: "Yes — it's common to run frameless perimeter cabinetry with an inset face-frame island, or vice versa. Everything is custom, so the construction style can be tuned to each piece." },
 ];
 
-const PAGE_TITLE = "Cabinetry Construction: Frameless vs Inset Face Frame — Hempston";
+const PAGE_TITLE = "Inset vs Frameless Cabinets | Hempston Home";
 const PAGE_DESC =
-  "Compare frameless European cabinetry and inset face-frame construction. See real door examples and learn which build style suits your custom kitchen.";
+  "Inset face frame vs frameless cabinets: look, cost, storage and shop time compared. Built in Canada by Hempston Home. The price difference is in the quote.";
 const ABSOLUTE_URL = `${SITE_URL}/products/cabinet-styles`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -82,8 +84,9 @@ function CabinetStylesPage() {
           </div>
           <p className={`${eyebrowDark} mt-10`}>Cabinetry Construction</p>
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-light uppercase leading-[1.05] tracking-[0.04em] text-white sm:text-6xl">
-            Frameless vs Inset Face Frame
+            Inset Face Frame vs Frameless Cabinet Construction
           </h1>
+          <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             Before the door style and finish, there's the construction — how the doors meet the
             cabinet box. It's the single biggest driver of a kitchen's character, from crisp
@@ -218,6 +221,48 @@ function CabinetStylesPage() {
               every box, door and drawer front to suit the project.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className={`border-t border-white/10 ${lightBg} text-black`}>
+        <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8">
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em]">How the two builds compare</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/70">
+            Inset takes more shop time. The difference is in the quote for your kitchen, not a flat percentage. Painted Shaker and modern slab are the styles that move fastest.{" "}
+            <Link to="/rush-custom-kitchen-cabinets" className="underline">See the rush program</Link>.
+          </p>
+          <div className="mt-8 overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-black/15 text-[10px] uppercase tracking-[0.18em] text-black/50">
+                  <th className="py-3 pr-4 font-medium"> </th>
+                  <th className="py-3 pr-4 font-medium">Frameless</th>
+                  <th className="py-3 font-medium">Inset face frame</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Look", "Seamless modern face", "Even reveal, furniture-like"],
+                  ["Cost", "Lower shop time", "More shop time, quoted per project"],
+                  ["Storage", "Full box access", "Slightly reduced opening"],
+                  ["Tolerance", "Overlay hides small gaps", "Reveals must stay even"],
+                  ["Best for", "Contemporary kitchens", "Heritage and tailored rooms"],
+                ].map((row) => (
+                  <tr key={row[0]} className="border-b border-black/10">
+                    <th className="py-3 pr-4 font-medium">{row[0]}</th>
+                    <td className="py-3 pr-4">{row[1]}</td>
+                    <td className="py-3">{row[2]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <VisibleFaq
+            items={cabinetFaqs}
+            className="mt-12"
+            questionClassName="font-display text-base uppercase tracking-[0.08em]"
+            answerClassName="mt-3 text-sm leading-relaxed text-black/70"
+          />
         </div>
       </section>
 

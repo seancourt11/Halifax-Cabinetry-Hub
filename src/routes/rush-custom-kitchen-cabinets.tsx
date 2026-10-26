@@ -13,16 +13,16 @@ import islandImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 import panelImg from "@/assets/projects/md-white-kitchen-brass-pendants.jpg";
 import proofImg from "@/assets/projects/glen-haven-brass-hood-kitchen.jpg";
 
-const PAGE_TITLE = "Fast Custom Kitchen Cabinets | Rush Timeline | Hempston";
+const PAGE_TITLE = "Rush Custom Kitchen Cabinets | Hempston Home";
 const PAGE_DESC =
-  "Expedited bespoke kitchen cabinetry for high-end renovations, move-in dates and delayed projects. Custom-quality millwork on a compressed timeline without compromise.";
+  "Need custom kitchen cabinets fast? Hempston Home can design, build and install qualifying kitchens in about 6 weeks, with the rush premium quoted up front.";
 const CANONICAL = `${SITE_URL}/rush-custom-kitchen-cabinets`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${heroImg}`;
 
 const faqs = [
   {
     q: "How fast can I get custom kitchen cabinets?",
-    a: "For qualifying projects, Hempston can deliver bespoke kitchen cabinetry in as little as 4–6 weeks from a signed design — roughly half our standard timeline. The exact lead time depends on the door style, finish, and current shop capacity. Painted Shaker and slab doors in a stocked species (white oak, maple, painted MDF) expedite fastest.",
+    a: "For qualifying projects, Hempston Home can design, build and install a kitchen in about 6 weeks from a signed design. The exact lead time depends on the door style, finish, and current shop capacity. Painted Shaker and slab doors in a stocked species (white oak, maple, painted MDF) move fastest.",
   },
   {
     q: "Can I get kitchen cabinets in 2 weeks or 3 weeks?",
@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: "What is a rush cabinet lead time?",
-    a: "A rush lead time is any custom cabinetry order fabricated and installed faster than a shop's standard queue. Industry standard for high-end custom cabinetry is 10–16 weeks. Rush lead time typically means 4–8 weeks and requires shop capacity, simplified specification, and a rush premium (industry standard is roughly 10–20%).",
+    a: "A rush lead time is a custom cabinetry order built and installed faster than the standard queue. Most Hempston Home kitchens take 8 to 14 weeks. The rush program is about 6 weeks for qualifying projects, and the rush premium is quoted up front.",
   },
   {
     q: "What are the fastest high-end kitchen cabinets to install?",
@@ -45,8 +45,8 @@ const faqs = [
     a: "Yes — expediting a bespoke project means reshuffling shop capacity, prioritising finishing, and often overtime. Rush pricing is typically a 10–20% premium on the cabinetry line depending on how tight the timeline is. We quote the premium transparently up front, not after the fact.",
   },
   {
-    q: "Do you serve rush projects outside Halifax?",
-    a: "Yes. Hempston ships and installs coast to coast across Canada and the United States. For out-of-market rush projects, we coordinate freight and installation around your deadline.",
+    q: "Do you serve rush projects in other cities?",
+    a: "Yes. We design, build and install rush cabinetry for homes across Canada and the United States. Freight and installation are sequenced around your deadline.",
   },
   {
     q: "What is the fastest way to replace kitchen cabinets?",
@@ -156,10 +156,10 @@ function RushPage() {
             <Clock className="h-3 w-3" /> Rush · Fast-Timeline Cabinetry
           </div>
           <h1 className="mt-6 max-w-4xl font-display text-4xl font-light leading-[1.05] sm:text-6xl md:text-7xl">
-            Fast Custom Kitchen Cabinets — On a Tight Deadline?
+            Rush Custom Kitchen Cabinets in About 6 Weeks
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-            Bespoke kitchen cabinetry in as little as <strong className="text-white">4–6 weeks</strong> for qualifying projects.
+            Custom kitchen cabinetry in <strong className="text-white">about 6 weeks</strong> for qualifying projects.
             Built for move-in dates, delayed renovations, and deadlines other high-end shops can't hit — without compressing quality, materials, or fit.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -284,7 +284,7 @@ function RushPage() {
             </Link>{" "}
             and{" "}
             <Link to="/products/colours-finishes" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">
-              colours &amp; finishes
+              colours and finishes
             </Link>.
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -407,9 +407,9 @@ function RushPage() {
                 body: "Not achievable as a full fully-custom kitchen if quality matters. We can often help with a phased rush install: main sink and range run first so the kitchen is functional, remaining cabinetry (pantry, island, tall cabinets, built-ins) shipped within a few weeks after.",
               },
               {
-                band: "4–6 weeks",
+                band: "About 6 weeks",
                 label: "Fast custom rush",
-                body: "Achievable for painted Shaker, painted slab, and stained white oak or maple in frameless construction with standard box sizes. Requires signed design at day zero, stocked materials, and a rush premium. This is the sweet spot for most Hempston rush kitchen cabinet orders.",
+                body: "Achievable for painted Shaker, painted slab, and stained white oak or maple in frameless construction with standard box sizes. Requires a signed design at the start, stocked materials, and a rush premium quoted up front. This is the window for most Hempston rush kitchen cabinet orders.",
               },
               {
                 band: "7–9 weeks",
@@ -579,19 +579,17 @@ function RushPage() {
             Fast custom kitchen cabinets near you — coast to coast.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
-            Hempston is headquartered in <Link to="/custom-cabinetry-halifax" className="underline decoration-white/30 underline-offset-4 hover:decoration-white">Halifax, Nova Scotia</Link>{" "}
-            with install crews in Toronto and Long Beach and coordinated freight and installation across Canada and the
-            continental United States. Rush projects outside our home market are handled by the same in-house shop —
-            freight and install are sequenced around your deadline, not the other way around.
+            We design, build and install rush cabinetry for homes across Canada and the United States.
+            Freight and installation are sequenced around your deadline.
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {[
-              { city: "Halifax &amp; Nova Scotia", detail: "Home market. Site measure often within 48 hours of the deadline call. HRM, Dartmouth, Bedford, Chester, Lunenburg, South Shore." },
-              { city: "Toronto &amp; GTA", detail: "Install crew in-market. Coordinated freight from the Halifax shop; typical rush install windows the same as home market." },
-              { city: "Long Beach &amp; US", detail: "US install crew for California, Pacific Northwest, and cross-border rush projects. Customs and freight handled in-house." },
+              { city: "Halifax and Nova Scotia", detail: "Home market. Site measure often within 48 hours of the deadline call. HRM, Dartmouth, Bedford, Chester, Lunenburg, South Shore." },
+              { city: "Toronto and GTA", detail: "Install crew in market. Rush install windows are planned around your deadline." },
+              { city: "Long Beach and the US", detail: "Custom cabinetry designed, built and installed for Long Beach and Southern California. Freight and install are sequenced around your deadline." },
             ].map((area) => (
               <div key={area.city} className="border border-white/10 p-8">
-                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-white" dangerouslySetInnerHTML={{ __html: area.city }} />
+                <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-white">{area.city}</h3>
                 <p className="mt-4 text-sm leading-relaxed text-white/60">{area.detail}</p>
               </div>
             ))}
@@ -606,13 +604,13 @@ function RushPage() {
       {/* LUXURY FINISHES ON A DEADLINE */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Finishes &amp; detailing</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">Finishes and detailing</p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             High-end finishes that still move quickly.
           </h2>
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
             A compressed timeline does not mean a compressed design vocabulary. We regularly expedite painted kitchens in
-            Farrow &amp; Ball and Benjamin Moore colours, white oak kitchens in Rubio Monocoat stains, and custom-matched
+            Farrow and Ball and Benjamin Moore colours, white oak kitchens in Rubio Monocoat stains, and custom-matched
             conversion finishes for designers with exacting standards. The key is deciding early — every finish sample approved
             at signoff keeps the schedule intact.
           </p>
@@ -623,7 +621,7 @@ function RushPage() {
                 body: "Shaker, slab, and raised-panel doors in any paint colour. Painted MDF and painted hardwood expedite fastest and deliver the crisp, furniture-grade look expected in luxury kitchens.",
               },
               {
-                title: "Stained White Oak &amp; Walnut",
+                title: "Stained White Oak and Walnut",
                 body: "Natural wood kitchens in stocked species. Rubio Monocoat and conversion-varnish stains cure predictably and age beautifully — ideal for rush projects that still need warmth.",
               },
               {
@@ -631,7 +629,7 @@ function RushPage() {
                 body: "The most refined cabinet construction type can be expedited in the 7–9 week band. Perfect for traditional homes, coastal estates, and architect-driven renovations.",
               },
               {
-                title: "Custom Islands &amp; Range Hoods",
+                title: "Custom Islands and Range Hoods",
                 body: "Statement millwork — paneled hoods, waterfall islands, appliance garages — can be built on the same rush schedule when detailed early and signed off fast.",
               },
             ].map((row) => (
@@ -647,7 +645,7 @@ function RushPage() {
       {/* DESIGNER / ARCHITECT RUSH PARTNERSHIPS */}
       <section className="border-t border-white/10 bg-black/40">
         <div className="mx-auto max-w-5xl px-5 py-24 sm:px-8">
-          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">For designers &amp; architects</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">For designers and architects</p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-light leading-tight sm:text-4xl">
             A cabinet shop that keeps pace with your project timeline.
           </h2>

@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { organizationJsonLd } from "../lib/schema";
+import { BRAND } from "../lib/site";
 
 function NotFoundComponent() {
   return (
@@ -77,30 +79,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hempston Home — Custom Cabinetry & Kitchen Design" },
+      { title: "Custom Cabinetry and Millwork Nova Scotia | Hempston Home" },
       {
         name: "description",
         content:
-          "Hempston Home designs and builds custom cabinetry, bespoke kitchens, vanities and built-in millwork — Halifax, Toronto, Long Beach + install coast to coast.",
+          "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.",
       },
-      { name: "author", content: "Hempston Home" },
-      { property: "og:title", content: "Hempston Home — Custom Cabinetry & Kitchen Design" },
+      { name: "author", content: BRAND },
+      { property: "og:site_name", content: BRAND },
+      { property: "og:title", content: "Custom Cabinetry and Millwork Nova Scotia | Hempston Home" },
       {
         property: "og:description",
         content:
-          "Custom cabinetry, bespoke kitchens, vanities and built-in millwork — designed and handcrafted by Hempston Home.",
+          "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Hempston Home" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Hempston Home — Custom Cabinetry & Kitchen Design" },
+      { name: "twitter:title", content: "Custom Cabinetry and Millwork Nova Scotia | Hempston Home" },
       {
         name: "twitter:description",
         content:
-          "Custom cabinetry, bespoke kitchens, vanities and built-in millwork by Hempston Home.",
+          "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.",
       },
     ],
     links: [
+      { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -120,56 +125,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "@id": "https://hempstonhome.com/#organization",
-          name: "Hempston Home",
-          alternateName: "Hempston",
-          url: "/",
-          logo: "/favicon.ico",
-          description:
-            "Custom cabinetry, bespoke kitchens, vanities and built-in millwork. Studios in Halifax, Toronto and Long Beach with install coast to coast.",
-          foundingDate: "2015",
-          slogan: "100% custom cabinetry, coast to coast.",
-          areaServed: [
-            { "@type": "AdministrativeArea", name: "Nova Scotia" },
-            { "@type": "AdministrativeArea", name: "Ontario" },
-            { "@type": "Country", name: "Canada" },
-            { "@type": "Country", name: "United States" },
-          ],
-          knowsAbout: [
-            "Custom kitchen cabinetry",
-            "Bespoke millwork",
-            "Inset face-frame cabinetry",
-            "Painted Shaker cabinets",
-            "White oak cabinetry",
-            "Butler's pantries",
-            "Custom vanities",
-            "Built-in millwork",
-          ],
-          sameAs: ["https://www.instagram.com/hempstonhome"],
-          contactPoint: {
-            "@type": "ContactPoint",
-            contactType: "customer support",
-            email: "info@hempstonhome.com",
-            telephone: "+1-902-719-8497",
-            areaServed: ["CA", "US"],
-            availableLanguage: ["English"],
-          },
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "@id": "https://hempstonhome.com/#website",
-          name: "Hempston Home",
-          url: "/",
-          publisher: { "@id": "https://hempstonhome.com/#organization" },
-          inLanguage: "en",
-        }),
+        children: JSON.stringify(organizationJsonLd()),
       },
     ],
   }),
