@@ -5,14 +5,13 @@ import { SiteFooter } from "@/components/site-footer";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { breadcrumbSchema, ORG_EMAIL, ORG_PHONE, SITE_URL } from "@/lib/schema";
-import { HOURS, LOCATION_LIST, mapsUrl } from "@/lib/site";
+import { HOURS, LOCATION_LIST, PHONE_DISPLAY, PHONE_TEL, mapsUrl } from "@/lib/site";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 
 import ogImg from "@/assets/og/og-contact.jpg";
 
 const PAGE_TITLE = "Book a Cabinetry Consultation | Hempston Home";
-const PAGE_DESC =
-  "Book a free cabinetry consultation with Hempston Home. Built in Canada. Call (902) 719-8497 or email info@hempstonhome.com. We reply in one business day.";
+const PAGE_DESC = `Book a free cabinetry consultation with Hempston Home. Built in Canada. Call ${PHONE_DISPLAY} or email info@hempstonhome.com. We reply in one business day.`;
 const ABSOLUTE_URL = `${SITE_URL}/contact`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -74,8 +73,8 @@ const contactBlocks = [
   {
     icon: Phone,
     label: "Phone",
-    value: "(902) 719-8497",
-    href: "tel:+19027198497",
+    value: PHONE_DISPLAY,
+    href: PHONE_TEL,
   },
   {
     icon: Mail,
@@ -131,8 +130,13 @@ function ContactPage() {
         <ul className="mx-auto mt-12 grid max-w-4xl gap-6 text-left sm:grid-cols-3">
           {LOCATION_LIST.map((loc) => (
             <li key={loc.key} className="border border-white/20 px-6 py-8">
-              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/50">{loc.role}</p>
-              <a href={mapsUrl(loc)} className="mt-3 block text-sm leading-relaxed text-white hover:text-white/80">
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/50">
+                {loc.role}
+              </p>
+              <a
+                href={mapsUrl(loc)}
+                className="mt-3 block text-sm leading-relaxed text-white hover:text-white/80"
+              >
                 {loc.copyLabel}
               </a>
             </li>

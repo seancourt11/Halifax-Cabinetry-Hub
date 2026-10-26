@@ -4,14 +4,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { cityPages, type CityPageData } from "@/data/city-pages";
-import {
-  ORG_ID,
-  ORG_NAME,
-  ORG_EMAIL,
-  ORG_PHONE,
-  SITE_URL,
-  breadcrumbSchema,
-} from "@/lib/schema";
+import { ORG_ID, ORG_NAME, ORG_EMAIL, ORG_PHONE, SITE_URL, breadcrumbSchema } from "@/lib/schema";
+import { PHONE_DISPLAY } from "@/lib/site";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 
@@ -129,20 +123,20 @@ function LocationsHub() {
           Locations we serve
         </p>
         <h1 className="mt-5 font-display text-4xl font-light uppercase leading-[1.02] tracking-[0.04em] text-white sm:text-6xl">
-          Where We Build: Halifax, Nova Scotia and Beyond
+          Custom cabinetry service areas across Canada
         </h1>
         <BuiltInCanadaLine className="mx-auto mt-6 max-w-xl text-sm text-white/80" />
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/75">
-          Hempston Home designs, builds and installs custom cabinetry for homes in Nova Scotia first,
-          and across Atlantic Canada, Toronto, and the rest of Canada. We install across Canada and
-          the United States. Choose your area below.
+          Hempston Home designs, builds and installs custom cabinetry for homes in Nova Scotia
+          first, and across Atlantic Canada, Toronto, and the rest of Canada. We install across
+          Canada and the United States. Choose your area below.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a
             href={`tel:${ORG_PHONE.replace(/[^0-9+]/g, "")}`}
             className="inline-block border border-white/80 bg-white px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-transparent hover:text-white"
           >
-            Call (902) 719-8497
+            Call {PHONE_DISPLAY}
           </a>
           <a
             href={`mailto:${ORG_EMAIL}`}

@@ -8,6 +8,7 @@ import { SampleRequestLink } from "@/components/sample-request-link";
 import { breadcrumbSchema, faqPageSchema, ORG_ID, ORG_NAME, SITE_URL } from "@/lib/schema";
 import { VisibleFaq } from "@/components/visible-faq";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
+import { ResponsiveImg } from "@/components/responsive-img";
 import ogImg from "@/assets/og/og-door-styles.jpg";
 
 import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
@@ -125,7 +126,10 @@ function DoorStylesPage() {
           }}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85" aria-hidden="true" />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85"
+          aria-hidden="true"
+        />
         <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 sm:pt-20 sm:pb-28">
           <div className="text-white/80">
             <ProductBreadcrumb label="Cabinet Door Styles" />
@@ -174,12 +178,13 @@ function DoorStylesPage() {
             {visible.map((d) => (
               <figure key={d.src} className="border border-black/10 bg-white">
                 <div className="aspect-[3/4] overflow-hidden bg-white p-4 sm:p-6">
-                  <img
+                  <ResponsiveImg
                     src={d.src}
                     alt={`${d.name} — ${d.profile} custom cabinet door in ${d.finish}`}
                     width={600}
                     height={800}
                     loading="lazy"
+                    sizes="(min-width: 1024px) 25vw, 50vw"
                     className="h-full w-full object-contain"
                   />
                 </div>
@@ -213,8 +218,8 @@ function DoorStylesPage() {
                 {expanded ? "Show fewer examples" : `Show all ${allDoors.length} examples`}
               </button>
               <p className="max-w-md text-xs leading-relaxed text-black/55">
-                A selection from our door collections. Every Hempston kitchen is 100% custom —
-                your door can be any profile, wood, colour or stain.
+                A selection from our door collections. Every Hempston kitchen is 100% custom — your
+                door can be any profile, wood, colour or stain.
               </p>
             </div>
           )}
@@ -254,7 +259,9 @@ function DoorStylesPage() {
 
       <section className={`border-t border-white/10 ${darkBg}`}>
         <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
-          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em] text-white">Door style questions</h2>
+          <h2 className="font-display text-3xl font-light uppercase tracking-[0.06em] text-white">
+            Door style questions
+          </h2>
           <VisibleFaq
             items={doorFaqs}
             questionClassName="font-display text-base uppercase tracking-[0.08em] text-white"

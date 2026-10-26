@@ -10,7 +10,7 @@ interface SitemapEntry {
   priority?: string;
 }
 
-const LASTMOD = "2026-10-20";
+const LASTMOD = "2026-10-21";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -43,6 +43,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/products/colours-finishes", changefreq: "monthly", priority: "0.8" },
           { path: "/products/brands", changefreq: "monthly", priority: "0.7" },
           { path: "/case-studies", changefreq: "monthly", priority: "0.8" },
+          { path: "/projects", changefreq: "monthly", priority: "0.6" },
           { path: "/work-with-us", changefreq: "monthly", priority: "0.8" },
           { path: "/rush-custom-kitchen-cabinets", changefreq: "monthly", priority: "0.7" },
         ];

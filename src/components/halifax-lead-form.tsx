@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB per file
 const MAX_FILES = 5;
 const ACCEPT = "image/*,application/pdf,.doc,.docx,.heic,.heif";
-
 
 const leadSchema = z.object({
   name: z
@@ -43,7 +43,15 @@ const leadSchema = z.object({
 
 type LeadErrors = Partial<Record<keyof z.infer<typeof leadSchema>, string>>;
 
-export function HalifaxLeadForm() {
+export function HalifaxLeadForm({
+  market = "Halifax",
+  phoneDisplay = PHONE_DISPLAY,
+  phoneTel = PHONE_TEL,
+}: {
+  market?: string;
+  phoneDisplay?: string;
+  phoneTel?: string;
+}) {
   const [errors, setErrors] = useState<LeadErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [prefill, setPrefill] = useState<{ projectType?: string; message?: string }>({});
@@ -95,7 +103,6 @@ export function HalifaxLeadForm() {
     window.addEventListener("hashchange", readHash);
     return () => window.removeEventListener("hashchange", readHash);
   }, []);
-
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -159,18 +166,14 @@ export function HalifaxLeadForm() {
           Thank you — request received
         </h3>
         <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          A Hempston designer will reach out within one business day to schedule your free Halifax
+          A Hempston designer will reach out within one business day to schedule your free {market}
           consultation. Prefer to talk now? Call{" "}
-          <a href="tel:+19027198497" className="font-medium text-foreground underline">
-            (902) 719-8497
+          <a href={phoneTel} className="font-medium text-foreground underline">
+            {phoneDisplay}
           </a>
           .
         </p>
-        <Button
-          variant="outline"
-          className="mt-7"
-          onClick={() => setSubmitted(false)}
-        >
+        <Button variant="outline" className="mt-7" onClick={() => setSubmitted(false)}>
           Send another request
         </Button>
       </div>
@@ -188,15 +191,26 @@ export function HalifaxLeadForm() {
         Request your free consultation
       </h3>
 
-      <p className="mt-2 text-sm text-muted-foreground">
+      <p className="mt-2 text-sm text-black/80">
         No pressure, no obligation — just expert guidance and an honest budget.
       </p>
 
       <div className="mt-7 grid gap-5">
         <div className="grid gap-2">
           <Label htmlFor="name">Full name</Label>
-          <Input id="name" name="name" autoComplete="name" placeholder="Jane Doe" />
-          {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+          <Input
+            id="name"
+            name="name"
+            autoComplete="name"
+            placeholder="Jane Doe"
+            aria-invalid={errors.name ? true : undefined}
+            aria-describedby={errors.name ? "name-error" : undefined}
+          />
+          {errors.name && (
+            <p id="name-error" role="alert" className="text-sm text-destructive">
+              {errors.name}
+            </p>
+          )}
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
@@ -208,8 +222,14 @@ export function HalifaxLeadForm() {
               type="email"
               autoComplete="email"
               placeholder="jane@email.com"
+              aria-invalid={errors.email ? true : undefined}
+              aria-describedby={errors.email ? "email-error" : undefined}
             />
-            {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+            {errors.email && (
+              <p id="email-error" role="alert" className="text-sm text-destructive">
+                {errors.email}
+              </p>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="phone">Phone (optional)</Label>
@@ -218,9 +238,15 @@ export function HalifaxLeadForm() {
               name="phone"
               type="tel"
               autoComplete="tel"
-              placeholder="(902) 719-8497"
+              placeholder={phoneDisplay}
+              aria-invalid={errors.phone ? true : undefined}
+              aria-describedby={errors.phone ? "phone-error" : undefined}
             />
-            {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+            {errors.phone && (
+              <p id="phone-error" role="alert" className="text-sm text-destructive">
+                {errors.phone}
+              </p>
+            )}
           </div>
         </div>
 
@@ -231,9 +257,13 @@ export function HalifaxLeadForm() {
             name="projectType"
             defaultValue={prefill.projectType ?? ""}
             placeholder="Kitchen, vanity, built-ins, sample request…"
+            aria-invalid={errors.projectType ? true : undefined}
+            aria-describedby={errors.projectType ? "project-type-error" : undefined}
           />
           {errors.projectType && (
-            <p className="text-sm text-destructive">{errors.projectType}</p>
+            <p id="project-type-error" role="alert" className="text-sm text-destructive">
+              {errors.projectType}
+            </p>
           )}
         </div>
 
@@ -244,14 +274,19 @@ export function HalifaxLeadForm() {
             name="message"
             rows={4}
             defaultValue={prefill.message ?? ""}
-            placeholder="Your space, your timeline, and what you have in mind…"
+            placeholder="Your space and what you have in mind…"
+            aria-invalid={errors.message ? true : undefined}
+            aria-describedby={errors.message ? "message-error" : undefined}
           />
-
-          {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
+          {errors.message && (
+            <p id="message-error" role="alert" className="text-sm text-destructive">
+              {errors.message}
+            </p>
+          )}
         </div>
 
         <div className="grid gap-2">
-          <Label>Attachments (optional)</Label>
+          <Label htmlFor="attachments">Attachments (optional)</Label>
           <div>
             <input
               ref={fileInputRef}
@@ -260,6 +295,7 @@ export function HalifaxLeadForm() {
               type="file"
               multiple
               accept={ACCEPT}
+              aria-describedby="attachments-help"
               className="sr-only"
               onChange={(e) => {
                 handleFiles(e.target.files);
@@ -275,8 +311,9 @@ export function HalifaxLeadForm() {
               Attach files
             </Button>
           </div>
-          <p className="text-xs text-muted-foreground">
-            Photos, floor plans, or inspiration — PDF, DOC, or images up to 10 MB each (max {MAX_FILES}).
+          <p id="attachments-help" className="text-xs text-black/75">
+            Photos, floor plans, or inspiration — PDF, DOC, or images up to 10 MB each (max{" "}
+            {MAX_FILES}).
           </p>
           {files.length > 0 && (
             <ul className="mt-1 grid gap-1.5">
@@ -303,15 +340,23 @@ export function HalifaxLeadForm() {
               ))}
             </ul>
           )}
-          {fileError && <p className="text-sm text-destructive">{fileError}</p>}
+          {fileError && (
+            <p role="alert" className="text-sm text-destructive">
+              {fileError}
+            </p>
+          )}
         </div>
 
-        {submitError && <p className="text-sm text-destructive">{submitError}</p>}
+        {submitError && (
+          <p role="alert" className="text-sm text-destructive">
+            {submitError}
+          </p>
+        )}
 
         <Button type="submit" variant="hero" size="xl" className="w-full" disabled={isSubmitting}>
           {isSubmitting ? "Sending…" : "Book My Free Consultation"}
         </Button>
-        <p className="text-center text-xs text-muted-foreground">
+        <p className="text-center text-xs text-black/75">
           We typically respond within one business day.
         </p>
       </div>
