@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { trackGenerateLead } from "@/lib/ga4";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB per file
@@ -145,6 +146,7 @@ export function HalifaxLeadForm({
         throw new Error(json?.error || "Something went wrong. Please try again or call us.");
       }
 
+      trackGenerateLead("consultation");
       setSubmitted(true);
       form.reset();
       setFiles([]);

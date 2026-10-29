@@ -9,7 +9,9 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { GoogleAnalytics } from "../components/google-analytics";
 import appCss from "../styles.css?url";
+import { GA_BOOTSTRAP_SCRIPT } from "../lib/ga4";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { isServiceAreaPath, organizationJsonLd } from "../lib/schema";
 import { BRAND } from "../lib/site";
@@ -158,6 +160,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <noscript>
           <link rel="stylesheet" href={FONT_HREF} />
         </noscript>
+        <script dangerouslySetInnerHTML={{ __html: GA_BOOTSTRAP_SCRIPT }} />
       </head>
       <body>
         {children}
@@ -172,6 +175,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <GoogleAnalytics />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <main>
         <Outlet />
