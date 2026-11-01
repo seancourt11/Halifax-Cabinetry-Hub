@@ -74,6 +74,23 @@ export function clientIpFromHeaders(headers: Headers): string | null {
   return parts[parts.length - 1] ?? null;
 }
 
+export function readTimestamps(value: unknown): number[] {
+  if (typeof value === "string") {
+    try {
+      return readTimestamps(JSON.parse(value));
+    } catch {
+      return [];
+    }
+  }
+  if (Array.isArray(value) && value.every((stamp) => typeof stamp === "number")) return value;
+  if (value && typeof value === "object") {
+    const record = value as { timestamps?: unknown; stamps?: unknown };
+    if ("timestamps" in record) return readTimestamps(record.timestamps);
+    if ("stamps" in record) return readTimestamps(record.stamps);
+  }
+  return [];
+}
+
 export function evaluateRateLimit(
   timestamps: number[],
   now: number,

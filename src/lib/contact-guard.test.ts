@@ -10,6 +10,7 @@ import {
   evaluateRateLimit,
   resolveMailCc,
   spamReason,
+  readTimestamps,
   turnstileConfig,
 } from "./contact-guard.ts";
 
@@ -89,6 +90,15 @@ test("client IP prefers x-real-ip, otherwise the last forwarded hop", () => {
     "203.0.113.20",
   );
   assert.equal(clientIpFromHeaders(new Headers()), null);
+});
+
+test("cached rate-limit values can be an array, a JSON string, or an object", () => {
+  assert.deepEqual(readTimestamps([10, 20]), [10, 20]);
+  assert.deepEqual(readTimestamps("[10,20]"), [10, 20]);
+  assert.deepEqual(readTimestamps({ stamps: [10] }), [10]);
+  assert.deepEqual(readTimestamps({ timestamps: [4, 5] }), [4, 5]);
+  assert.deepEqual(readTimestamps("nope"), []);
+  assert.deepEqual(readTimestamps(null), []);
 });
 
 test("rate limit copy names the inbox and phone", () => {
