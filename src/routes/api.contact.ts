@@ -4,6 +4,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import {
+  RATE_LIMIT_MESSAGE,
+  TURNSTILE_REJECT_MESSAGE,
+  clientIpFromHeaders,
+  resolveMailCc,
+  spamReason,
+  turnstileConfig,
+} from "@/lib/contact-guard";
+import { consumeContactRateLimit } from "@/lib/contact-rate-limit";
+import { verifyTurnstile, warnIfTurnstileMisconfigured } from "@/lib/turnstile.server";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB per file
 const MAX_FILES = 8;
@@ -42,6 +52,14 @@ function getTransporter() {
 export const Route = createFileRoute("/api/contact")({
   server: {
     handlers: {
+      GET: async () => {
+        warnIfTurnstileMisconfigured();
+        const config = turnstileConfig();
+        return Response.json(
+          { turnstileSiteKey: config.enabled ? config.siteKey : null },
+          { headers: { "cache-control": "no-store" } },
+        );
+      },
       POST: async ({ request }) => {
         let formData: FormData;
         try {
@@ -92,6 +110,30 @@ export const Route = createFileRoute("/api/contact")({
           );
         }
         const data = result.data;
+        const spam = spamReason(fields);
+        const ip = clientIpFromHeaders(request.headers);
+        let withinLimit = true;
+        if (ip) {
+          try {
+            withinLimit = await consumeContactRateLimit(ip);
+          } catch (error) {
+            console.error("Contact rate limit failed open:", error);
+            withinLimit = true;
+          }
+        }
+        if (!withinLimit && !spam) {
+          return Response.json({ ok: false, error: RATE_LIMIT_MESSAGE }, { status: 429 });
+        }
+        if (spam) {
+          console.info(`Dropped contact submission (spam signal: ${spam})`);
+          return Response.json({ ok: true });
+        }
+
+        warnIfTurnstileMisconfigured();
+        const turnstileOk = await verifyTurnstile(fields["cf-turnstile-response"] ?? "", ip);
+        if (!turnstileOk) {
+          return Response.json({ ok: false, error: TURNSTILE_REJECT_MESSAGE }, { status: 400 });
+        }
 
         const from = process.env.MAIL_FROM || process.env.SMTP_USER;
         if (!from) {
@@ -124,6 +166,7 @@ export const Route = createFileRoute("/api/contact")({
         try {
           await getTransporter().sendMail({
             to,
+            cc: resolveMailCc(),
             from,
             replyTo: data.email,
             subject,

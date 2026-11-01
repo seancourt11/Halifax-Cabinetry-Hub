@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useFormProtection } from "@/components/form-protection";
 import { trackGenerateLead } from "@/lib/ga4";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
@@ -33,6 +34,7 @@ export function WorkWithUsForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const protection = useFormProtection("dark");
 
   function handleFiles(selected: FileList | null) {
     if (!selected) return;
@@ -95,6 +97,7 @@ export function WorkWithUsForm() {
       body.set("meetingPref", result.data.meetingPref ?? "");
       body.set("message", result.data.message);
       for (const file of files) body.append("attachments", file);
+      protection.appendTo(body);
 
       const res = await fetch("/api/contact", { method: "POST", body });
       const json = (await res.json().catch(() => null)) as { ok: boolean; error?: string } | null;
@@ -107,6 +110,7 @@ export function WorkWithUsForm() {
       form.reset();
       setFiles([]);
     } catch (err) {
+      protection.resetChallenge();
       setSubmitError(
         err instanceof Error ? err.message : "Something went wrong. Please try again or call us.",
       );
@@ -285,6 +289,8 @@ export function WorkWithUsForm() {
           )}
           {fileError && <p className="text-sm text-destructive">{fileError}</p>}
         </div>
+
+        {protection.fields}
 
         {submitError && <p className="text-sm text-destructive">{submitError}</p>}
 
