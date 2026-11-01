@@ -4,10 +4,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
 import { ResponsiveImg } from "@/components/responsive-img";
 import monctonHero from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
-import ghImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
-import nwcImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
-import kentImg from "@/assets/projects/dba-kent-kitchen-1.jpg";
-import peterLoweImg from "@/assets/projects/dba-pl-island-kitchen.jpg";
 
 const PAGE_TITLE = "Cabinetry Projects | Hempston Home";
 const PAGE_DESC =
@@ -52,7 +48,9 @@ const projects = [
     place: "Dieppe, New Brunswick",
     title: "Built-ins and fireplace surround, Dieppe, NB",
     image: monctonHero,
-    alt: "Custom painted built-in cabinets and fireplace surround for a home in Dieppe, NB by Hempston Home",
+    alt: "Painted Shaker built-ins and a fireplace surround, photographed in the Hempston shop before delivery to Dieppe, NB",
+    width: 2000,
+    height: 1500,
     body: "Painted white built-in cabinets stand on both sides of a fireplace mantel, with Shaker doors, drawers and open upper shelving, for a home in Dieppe, NB. Hempston built the cabinetry. The photograph was taken when the piece was finished, before delivery. No client name and no designer credit are published for this project.",
     href: "/custom-cabinetry-moncton" as const,
     linkLabel: "Custom kitchen cabinets in Moncton",
@@ -61,9 +59,7 @@ const projects = [
     id: "glen-haven",
     place: "Glen Haven, Nova Scotia",
     title: "Glen Haven kitchen",
-    image: ghImg,
-    alt: "Glen Haven kitchen with white painted cabinets and a stained white oak island",
-    body: "31 Westgate publishes this as Glen Haven, Nova Scotia. Our photographs show white painted Shaker cabinets, a stained white oak island, a brass hood and a glass-front butler's pantry. Hempston built that cabinetry. Their page credits photography to Janet Kimber and is the place for the rest of the house story.",
+    body: "31 Westgate publishes this as Glen Haven, Nova Scotia, and credits the photography to Janet Kimber. Those photographs stay on their page. Captions already on this site describe white painted Shaker cabinets, a stained white oak island, a brass hood and a glass-front butler's pantry. Hempston built that cabinetry.",
     href: "/case-studies" as const,
     hash: "glen-haven",
     linkLabel: "Glen Haven note and designer link",
@@ -74,9 +70,7 @@ const projects = [
     id: "northwest-cove",
     place: "North West Cove, Nova Scotia",
     title: "North West Cove kitchen",
-    image: nwcImg,
-    alt: "North West Cove kitchen with a stained white oak island and painted white cabinets",
-    body: "31 Westgate publishes this as North West Cove, Nova Scotia, and credits the photography to their studio. Our photograph shows painted white perimeter cabinets and a stained white oak island. Other views in our library show a brass hood, integrated appliance panels, a marble waterfall edge and a navy tile backsplash. Hempston built the cabinetry.",
+    body: "31 Westgate publishes this as North West Cove, Nova Scotia, and credits the photography to their studio. Those photographs stay on their page. Captions already on this site describe painted white perimeter cabinets, a stained white oak island, a brass hood, integrated appliance panels, a marble waterfall edge and a navy tile backsplash. Hempston built the cabinetry.",
     href: "/case-studies" as const,
     hash: "northwest-cove",
     linkLabel: "North West Cove note and designer link",
@@ -87,9 +81,7 @@ const projects = [
     id: "house-on-kent",
     place: "Rockingham, Nova Scotia",
     title: "House on Kent",
-    image: kentImg,
-    alt: "House on Kent inset kitchen with a white oak island and a corner window",
-    body: "DB Architecture lists House on Kent as a 3,000 square foot renovation and addition in Rockingham, at the edge of Hemlock Ravine Park, and credits Hempston for the cabinets. They describe inset cabinetry, a white oak island, custom-panel appliances and a coffee station. Our photograph shows that kitchen. Beams, stone and the fireplace are part of their description of the house, not a Hempston credit.",
+    body: "DB Architecture lists House on Kent as a 3,000 square foot renovation and addition in Rockingham, at the edge of Hemlock Ravine Park, and credits Hempston for the cabinets. They describe inset cabinetry, a white oak island, custom-panel appliances and a coffee station. Their photographs are not repeated here. Beams, stone and the fireplace are part of their description of the house, not a Hempston credit.",
     href: "/case-studies" as const,
     hash: "house-on-kent",
     linkLabel: "House on Kent note",
@@ -100,9 +92,7 @@ const projects = [
     id: "house-on-peter-lowe",
     place: "Westmount, Halifax",
     title: "House on Peter Lowe",
-    image: peterLoweImg,
-    alt: "House on Peter Lowe kitchen with a dark stained oak island and white oak beams",
-    body: "DB Architecture lists House on Peter Lowe as a 4,200 square foot renovation and addition in Westmount, Halifax, and credits Hempston Home for the cabinets. They describe a kitchen with a full-size pantry, colour on the island, mudroom millwork and built-in foyer doors. Our photograph shows the kitchen, including the dark stained oak island. Living Stone is credited for the countertops.",
+    body: "DB Architecture lists House on Peter Lowe as a 4,200 square foot renovation and addition in Westmount, Halifax, and credits Hempston Home for the cabinets. They describe a kitchen with a full-size pantry, colour on the island, mudroom millwork and built-in foyer doors. Their photographs are not repeated here. Living Stone is credited for the countertops.",
     href: "/case-studies" as const,
     hash: "house-on-peter-lowe",
     linkLabel: "House on Peter Lowe note",
@@ -130,9 +120,10 @@ function ProjectsPage() {
           Published cabinetry projects
         </h1>
         <p className="mt-6 text-sm leading-relaxed text-white/90">
-          Only work we can show is listed here. Cabinetry is built in Canada. Client names, prices
-          and timelines for these rooms are not published. The longer notes, and the links to 31
-          Westgate and DB Architecture, are on the case studies page.
+          Only work we can describe from published sources is listed here. The Dieppe photograph
+          was taken in our shop. Designer photographs of the Nova Scotia kitchens stay on the
+          designers' pages. Cabinetry is built in Canada. Client names, prices and timelines for
+          these rooms are not published.
         </p>
       </section>
 
@@ -141,18 +132,20 @@ function ProjectsPage() {
           <article
             key={project.id}
             id={project.id}
-            className="grid items-center gap-10 lg:grid-cols-2"
+            className="grid items-center gap-10 border-t border-white/10 pt-12 lg:grid-cols-2"
           >
-            <ResponsiveImg
-              src={project.image}
-              alt={project.alt}
-              width={1600}
-              height={1200}
-              loading="lazy"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="aspect-[4/3] w-full object-cover"
-            />
-            <div>
+            {"image" in project && project.image ? (
+              <ResponsiveImg
+                src={project.image}
+                alt={project.alt}
+                width={project.width}
+                height={project.height}
+                loading="lazy"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            ) : null}
+            <div className={"image" in project && project.image ? "" : "lg:col-span-2"}>
               <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/85">
                 {project.place}
               </p>
