@@ -7,7 +7,6 @@ import {
   EMAIL,
   ENTITY_SENTENCE,
   FOUNDING_YEAR,
-  HALIFAX_SHOP_HOURS,
   HOURS,
   INSTAGRAM_URL,
   KITCHEN_PRICE_MAX,
@@ -54,22 +53,12 @@ function openingHours() {
   ];
 }
 
-function halifaxOpeningHours() {
-  return [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [...HALIFAX_SHOP_HOURS.days],
-      opens: HALIFAX_SHOP_HOURS.opens,
-      closes: HALIFAX_SHOP_HOURS.closes,
-    },
-  ];
-}
-
 function locationEntity(loc: ShopLocation) {
   const isHalifax = loc.key === "halifax";
   return {
-    // LocalBusiness, not a store or building-supplies type.
-    "@type": "LocalBusiness",
+    // HomeAndConstructionBusiness, not a store or building-supplies type.
+    // Telephone stays on the organization and the Halifax studio only.
+    "@type": "HomeAndConstructionBusiness",
     "@id": loc.id,
     name: loc.name,
     description: loc.schemaDescription,
@@ -85,12 +74,8 @@ function locationEntity(loc: ShopLocation) {
     },
     // One published phone, on the organization and the Halifax studio only.
     ...(isHalifax ? { telephone: PHONE_E164, email: EMAIL } : { email: EMAIL }),
-    ...(isHalifax
-      ? {
-          openingHours: HALIFAX_SHOP_HOURS.openingHours,
-          openingHoursSpecification: halifaxOpeningHours(),
-        }
-      : { openingHoursSpecification: openingHours() }),
+    openingHours: HOURS.openingHours,
+    openingHoursSpecification: openingHours(),
     priceRange: "$$$",
     currenciesAccepted: loc.addressCountry === "US" ? "USD" : "CAD",
     areaServed:
@@ -114,7 +99,7 @@ function locationEntity(loc: ShopLocation) {
 
 /**
  * Service-area city pages (every cabinetry city except the Halifax and Toronto
- * offices) must not carry LocalBusiness or a street address.
+ * offices) must not carry HomeAndConstructionBusiness or a street address.
  */
 export function isServiceAreaPath(pathname: string) {
   const path = pathname.replace(/\/$/, "") || "/";

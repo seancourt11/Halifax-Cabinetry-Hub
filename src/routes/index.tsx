@@ -13,7 +13,6 @@ import {
 import { VisibleFaq } from "@/components/visible-faq";
 import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
-import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import heroKitchen from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 import elevateRoom from "@/assets/projects/md-laundry-cabinetry.jpg";
 import featureLever from "@/assets/projects/nwc-marble-brass-faucet.jpg";
@@ -29,12 +28,12 @@ import ig4 from "@/assets/door-gallery-2026/04_cerused_oak_shaker.png";
 
 const PAGE_TITLE = "Custom Cabinetry and Millwork Nova Scotia | Hempston Home";
 const PAGE_DESC =
-  "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.";
+  "Custom kitchen cabinets and millwork in Halifax, Nova Scotia. Hempston Home designs, builds and installs kitchens, vanities and built-ins. Book a consult.";
 
 const homeFaqs = [
   {
     q: "Where are Hempston Home cabinets built?",
-    a: `${HALIFAX_BUILD_SENTENCE} Built in Canada. We install across Canada and the United States.`,
+    a: `${HALIFAX_BUILD_SENTENCE} We install across Canada and the United States.`,
   },
   {
     q: "How much does a Hempston Home kitchen cost?",
@@ -181,9 +180,8 @@ function Index() {
               </h1>
               <p id="home-summary" className="mt-6 max-w-md text-sm leading-relaxed text-white/80">
                 Hempston Home is a Halifax, Nova Scotia cabinet studio that designs, builds and
-                installs 100% custom kitchens, vanities and built-ins. Built in Canada. Most
-                kitchens take {LEAD_TIME_LABEL} and start around $25,000. We install across Canada
-                and the United States.
+                installs 100% custom kitchens, vanities and built-ins. Cabinetry is built in Canada.
+                Most kitchens take {LEAD_TIME_LABEL} and start around $25,000.
               </p>
               <div className="mt-10">
                 <Link
@@ -241,6 +239,12 @@ function Index() {
             className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70"
           >
             About
+          </Link>
+          <Link
+            to="/custom-kitchen-cabinet-cost-halifax"
+            className="text-[11px] font-medium uppercase tracking-[0.26em] text-white hover:text-white/70"
+          >
+            Halifax cost guide
           </Link>
         </div>
       </section>
@@ -318,6 +322,8 @@ function Index() {
                   <ResponsiveImg
                     src={p.image}
                     alt={p.alt}
+                    width={800}
+                    height={1000}
                     loading="lazy"
                     sizes="(min-width: 640px) 420px, 80vw"
                     className={`w-full ${isDoorRender ? "object-contain p-4 sm:p-6" : "object-cover"} ${isFocus ? "h-[520px]" : "h-[520px] blur-sm"}`}
@@ -373,6 +379,8 @@ function Index() {
                 <ResponsiveImg
                   src={exploreProducts[0].image}
                   alt={exploreProducts[0].alt}
+                  width={1200}
+                  height={1600}
                   loading="lazy"
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="h-[640px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
@@ -406,6 +414,8 @@ function Index() {
                     <ResponsiveImg
                       src={p.image}
                       alt={p.alt}
+                      width={1600}
+                      height={900}
                       loading="lazy"
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
@@ -494,6 +504,8 @@ function Index() {
                 <ResponsiveImg
                   src={tile.asset}
                   alt={`Custom Hempston Home cabinetry project ${i + 1} on Instagram`}
+                  width={800}
+                  height={800}
                   loading="lazy"
                   sizes="(min-width: 768px) 25vw, 50vw"
                   className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -603,7 +615,10 @@ function Index() {
           <p className="mt-4 font-display text-2xl font-light uppercase tracking-[0.12em] text-white sm:text-3xl">
             Halifax, Toronto and Long Beach
           </p>
-          <BuiltInCanadaLine className="mt-4 text-sm text-white/70" />
+          <p className="mt-4 text-sm text-white/70">
+            Studios in Halifax, Toronto and the Long Beach area. We install across Canada and the
+            United States.
+          </p>
         </div>
       </section>
 

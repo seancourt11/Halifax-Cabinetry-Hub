@@ -212,6 +212,8 @@ function RushPage() {
             src={heroImg}
             sizes="100vw"
             alt="Custom kitchen cabinetry delivered on a rush timeline"
+            width={1600}
+            height={1000}
             fetchPriority="high"
             className="h-full w-full object-cover opacity-30"
           />
@@ -313,6 +315,8 @@ function RushPage() {
               <ResponsiveImg
                 src={processImg}
                 alt="Hempston workshop expediting a custom kitchen cabinetry order"
+                width={1200}
+                height={900}
                 loading="lazy"
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="mt-10 aspect-[4/3] w-full object-cover"
@@ -409,6 +413,8 @@ function RushPage() {
                   <ResponsiveImg
                     src={s.img}
                     alt={s.alt}
+                    width={800}
+                    height={1000}
                     loading="lazy"
                     sizes="(min-width: 768px) 25vw, 50vw"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -431,6 +437,8 @@ function RushPage() {
             <ResponsiveImg
               src={proofImg}
               alt="Custom kitchen cabinetry delivered on a compressed timeline for a move-in deadline"
+              width={1200}
+              height={900}
               loading="lazy"
               sizes="(min-width: 768px) 50vw, 100vw"
               className="aspect-[4/3] w-full object-cover"
@@ -553,7 +561,7 @@ function RushPage() {
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
             Every custom cabinet shop in North America runs on the same physics — hardwood has to be
             milled, boxes have to be assembled, finishes have to cure, and installers have to be
-            scheduled. Standard custom kitchen cabinet lead times run 10–16 weeks. A true rush
+            scheduled. Standard custom kitchen cabinet lead times run 8 to 14 weeks. A true rush
             custom kitchen cabinet order compresses that to 4–8 weeks by reshuffling shop capacity,
             not by skipping steps. Here is how the lead-time bands break down in practice.
           </p>
@@ -575,9 +583,9 @@ function RushPage() {
                 body: "Room for inset face-frame construction, more complex door profiles, glazed or specialty finishes, and appliance-panel integration. Still meaningfully faster than a standard queue and typically the right window for a fully-detailed custom kitchen renovation on a real deadline.",
               },
               {
-                band: "10–16 weeks",
+                band: "8 to 14 weeks",
                 label: "Standard custom",
-                body: "Industry standard for custom kitchen cabinetry. Full design development, unlimited style and finish options, complex millwork, hand-glazed finishes, and specialty veneers all fit comfortably inside this window.",
+                body: "Hempston Home's standard window for a custom kitchen, from the first consultation to install. Full design development, the full range of styles and finishes, complex millwork, hand-glazed finishes, and specialty veneers fit inside this window.",
               },
             ].map((row) => (
               <div

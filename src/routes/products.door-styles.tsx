@@ -15,7 +15,7 @@ import { showcaseGallery, insetGallery2026 } from "@/data/door-gallery-2026";
 
 const PAGE_TITLE = "Custom Cabinet Door Styles | Hempston Home";
 const PAGE_DESC =
-  "Shaker, slim Shaker, slab, raised panel, beaded and reeded cabinet doors, built to order in any wood, paint or stain. Built in Canada. Request a door sample.";
+  "Shaker, slim Shaker, slab, raised panel, beaded and reeded cabinet doors, built to order in any wood, paint or stain by Hempston Home. Request a door sample.";
 const ABSOLUTE_URL = `${SITE_URL}/products/door-styles`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 

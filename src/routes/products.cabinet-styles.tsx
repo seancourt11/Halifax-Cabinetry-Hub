@@ -33,7 +33,7 @@ const cabinetFaqs = [
 
 const PAGE_TITLE = "Inset vs Frameless Cabinets | Hempston Home";
 const PAGE_DESC =
-  "Inset face frame vs frameless cabinets: look, cost, storage and shop time compared. Built in Canada by Hempston Home. The price difference is in the quote.";
+  "Inset face frame and frameless cabinets compared for look, cost, storage and shop time. Hempston Home builds both. The difference is in the written quote.";
 const ABSOLUTE_URL = `${SITE_URL}/products/cabinet-styles`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 

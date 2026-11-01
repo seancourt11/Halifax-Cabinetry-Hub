@@ -1,0 +1,107 @@
+/* Above-the-fold rules so the hero can paint before the full stylesheet arrives. */
+html,
+body {
+  margin: 0;
+  background: oklch(0.14 0 0);
+  color: oklch(0.96 0 0);
+}
+body {
+  font-family: Jost, system-ui, sans-serif;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+.font-display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 300;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.inset-0 {
+  inset: 0;
+}
+.sticky {
+  position: sticky;
+}
+.top-0 {
+  top: 0;
+}
+.z-50 {
+  z-index: 50;
+}
+.flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.items-end {
+  align-items: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.w-full {
+  width: 100%;
+}
+.max-w-6xl {
+  max-width: 72rem;
+}
+.max-w-7xl {
+  max-width: 80rem;
+}
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.object-cover {
+  object-fit: cover;
+}
+.h-\[86vh\],
+.h-\[78vh\],
+.h-\[70vh\],
+.h-\[68vh\] {
+  width: 100%;
+}
+.h-\[86vh\] {
+  height: 86vh;
+}
+.h-\[78vh\] {
+  height: 78vh;
+}
+.h-\[70vh\] {
+  height: 70vh;
+}
+.h-\[68vh\] {
+  height: 68vh;
+}
+.min-h-\[560px\] {
+  min-height: 560px;
+}
+.min-h-\[520px\] {
+  min-height: 520px;
+}
+.min-h-\[500px\] {
+  min-height: 500px;
+}
+.min-h-\[460px\] {
+  min-height: 460px;
+}
+.text-white {
+  color: #fff;
+}
+header {
+  background: oklch(0.14 0 0);
+}

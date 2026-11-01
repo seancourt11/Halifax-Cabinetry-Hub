@@ -11,7 +11,6 @@ import {
 import { VisibleFaq } from "@/components/visible-faq";
 import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
-import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import {
   HALIFAX_BUILD_SENTENCE,
   HALIFAX_SHOP_HOURS,
@@ -293,7 +292,7 @@ const faqs = [
   },
   {
     q: "Are your cabinets made locally?",
-    a: `${HALIFAX_BUILD_SENTENCE} Built in Canada. We install across Canada and the United States.`,
+    a: `${HALIFAX_BUILD_SENTENCE} We install across Canada and the United States.`,
   },
   {
     q: "Do you work with contractors and designers?",
@@ -421,7 +420,7 @@ const reasons = [
   },
   {
     icon: Leaf,
-    title: "Built in Canada",
+    title: "Halifax shop",
     body: "Cabinets are built in Halifax at our Bayne St shop. Toronto and the Long Beach area facility are studios and service bases.",
   },
   {
@@ -619,7 +618,6 @@ function HalifaxPage() {
               will open every day. The result is cabinetry that feels inevitable — like it was
               always meant to be there.
             </p>
-            <BuiltInCanadaLine className="text-sm text-white/90" />
           </div>
         </div>
       </section>
@@ -649,6 +647,24 @@ function HalifaxPage() {
               <span className="font-medium">Hours: </span>
               {HALIFAX_SHOP_HOURS.label}
             </p>
+            <p className="mt-4 text-sm leading-relaxed text-black/80">
+              <Link to="/custom-cabinets-dartmouth-bedford" className="underline">
+                Dartmouth and Bedford
+              </Link>
+              ,{" "}
+              <Link to="/custom-bathroom-vanities-halifax" className="underline">
+                bathroom vanities
+              </Link>
+              ,{" "}
+              <Link to="/built-ins-millwork-nova-scotia" className="underline">
+                built-ins and millwork
+              </Link>{" "}
+              and the{" "}
+              <Link to="/custom-kitchen-cabinet-cost-halifax" className="underline">
+                Halifax cost guide
+              </Link>{" "}
+              are covered on their own pages.
+            </p>
             <p className="mt-3 text-sm text-black">
               <a href={PHONE_TEL} className="underline">
                 {PHONE_DISPLAY}
@@ -676,7 +692,7 @@ function HalifaxPage() {
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-5 py-16 sm:px-8 md:grid-cols-4">
           {[
             { n: "2015", l: "Founded" },
-            { n: "Canada", l: "Built in Canada" },
+            { n: "100%", l: "Custom, made to the room" },
             { n: "8 to 14", l: "Weeks, concept to install" },
             { n: "5 yr", l: "Workmanship warranty" },
           ].map((s) => (

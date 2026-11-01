@@ -21,7 +21,7 @@ import workshopImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
 
 const PAGE_TITLE = "About Our Halifax Cabinet Makers | Hempston Home";
 const PAGE_DESC =
-  "Meet Hempston Home, a Halifax cabinet studio founded in 2015. Built in Canada at our Bayne St shop. One team designs, builds, finishes and installs.";
+  "Meet Hempston Home, a Halifax cabinet studio founded in 2015. One team designs, builds, finishes and installs every kitchen, vanity and built-in.";
 const ABSOLUTE_URL = `${SITE_URL}/about`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 

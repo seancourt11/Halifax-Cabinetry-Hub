@@ -10,7 +10,7 @@ import calacattaBg from "@/assets/materials/detail_13_calacatta_viola_bookmatch.
 
 const PAGE_TITLE = "Cabinet Hardware and Finish Brands | Hempston Home";
 const PAGE_DESC =
-  "The hardware, finish, stone and appliance brands Hempston Home uses, including Blum, Rubio Monocoat, Caesarstone, Emtek and Sub-Zero. Built in Canada.";
+  "Hardware, finish, stone and appliance brands Hempston Home uses, including Blum, Rubio Monocoat, Caesarstone, Emtek and Sub-Zero. See how they are specified.";
 const ABSOLUTE_URL = `${SITE_URL}/products/brands`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 

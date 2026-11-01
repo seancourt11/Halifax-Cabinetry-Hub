@@ -4,16 +4,21 @@ import { SiteFooter } from "@/components/site-footer";
 import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { HalifaxLeadForm } from "@/components/halifax-lead-form";
 import { VisibleFaq } from "@/components/visible-faq";
-import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
 import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
 import { MONCTON_PHONE_DISPLAY, MONCTON_PHONE_E164, MONCTON_PHONE_TEL } from "@/lib/site";
 import monctonHero from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
+import vanityImg from "@/assets/projects/reeded-oak-vanity.jpg";
+import doubleVanityImg from "@/assets/projects/md-oak-double-vanity.jpg";
+import pantryImg from "@/assets/projects/gh-butler-pantry-glass.jpg";
+import kitchenImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
+import entryImg from "@/assets/projects/dba-kent-pantry.jpg";
+import shakerImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 
 const PAGE_TITLE = "Custom Kitchen Cabinets Moncton | Hempston Home";
 const PAGE_DESC =
-  "Custom kitchen cabinets and kitchen design for Moncton, Dieppe, Riverview and Shediac. Built in Canada. Consult in person or by video call.";
+  "Custom kitchen cabinets and kitchen design for Moncton, Dieppe, Riverview and Shediac. Hempston Home designs, delivers and installs. Book a free consult.";
 const ABSOLUTE_URL = `${SITE_URL}/custom-cabinetry-moncton`;
 const HERO_ALT =
   "Custom painted built-in cabinets and fireplace surround for a home in Dieppe, NB by Hempston Home";
@@ -38,8 +43,8 @@ const serviceSteps = [
   },
   {
     n: "03",
-    title: "Built in Canada",
-    body: "Cabinetry for Moncton homes is built in Canada. This page does not publish a Moncton street address because there is not a Moncton shop.",
+    title: "Halifax shop",
+    body: "Cabinets are built at our Halifax shop, then our own install team brings them to the house.",
   },
   {
     n: "04",
@@ -56,7 +61,7 @@ const serviceSteps = [
 const faqs = [
   {
     q: "Do you build custom kitchen cabinets in Moncton?",
-    a: "Yes. Hempston Home designs and builds custom kitchen cabinets for homes in Moncton, Dieppe, Riverview and Shediac. Built in Canada. A designer meets you in person or by video call, the room is measured, and the cabinets are delivered and installed. There is no Moncton showroom address.",
+    a: "Yes. Hempston Home designs and builds custom kitchen cabinets for homes in Moncton, Dieppe, Riverview and Shediac. A designer meets you in person or by video call, the room is measured, and our own team delivers and installs the cabinets.",
   },
   {
     q: "Do you offer kitchen design in Moncton?",
@@ -68,7 +73,7 @@ const faqs = [
   },
   {
     q: "How does cabinetry service work in Greater Moncton?",
-    a: "It is a service-area visit, not a local shop. Design consult in person or by video call, then measuring, then cabinetry built in Canada, then delivery and installation in Moncton, Dieppe, Riverview or Shediac. Workmanship is covered by a 5-year warranty.",
+    a: "A designer meets you in Greater Moncton in person or by video call, then we measure the room. Cabinets are built at our Halifax shop and our own team installs them in Moncton, Dieppe, Riverview or Shediac. Workmanship is covered by a 5-year warranty.",
   },
   {
     q: "Which communities around Moncton do you serve?",
@@ -76,7 +81,56 @@ const faqs = [
   },
   {
     q: "Where are the cabinets made?",
-    a: "Built in Canada. We design, deliver and install them for Greater Moncton homes. We also install across Canada and the United States.",
+    a: "Cabinets for Greater Moncton are built in Canada at our Halifax shop. We design them for the room, deliver them, and install them with our own team. We also install across Canada and the United States.",
+  },
+  {
+    q: "Do you deliver cabinets to Moncton?",
+    a: "Yes. Finished cabinets are delivered from our Halifax shop to homes in Moncton, Dieppe, Riverview and Shediac. Our own install team comes with the delivery.",
+  },
+  {
+    q: "Do you measure on site, or is the visit only a video call?",
+    a: "Both can happen. The design consult is in person in Greater Moncton or by video call. The room is then measured on site, including out-of-square walls, and the drawings follow that measure.",
+  },
+  {
+    q: "How long does a custom kitchen take for a Moncton home?",
+    a: "Most kitchens take 8 to 14 weeks from the first design consultation to installation. We confirm the timeline in writing before any deposit. Qualifying rush projects are a separate program.",
+  },
+  {
+    q: "Who installs the cabinets in Moncton?",
+    a: "Our own in-house install team installs the cabinets in Moncton, Dieppe, Riverview and Shediac.",
+  },
+];
+
+const examplePhotos = [
+  {
+    src: kitchenImg,
+    alt: "White painted perimeter cabinets with a stained white oak island, an example of Hempston kitchen cabinetry",
+    caption: "Kitchen cabinetry, white painted perimeter and a stained white oak island",
+  },
+  {
+    src: shakerImg,
+    alt: "White painted Shaker kitchen cabinets with a brass hood, an example of Hempston cabinetry",
+    caption: "Painted Shaker kitchen with a brass hood",
+  },
+  {
+    src: pantryImg,
+    alt: "Butler pantry with glass-front upper cabinets, an example of Hempston built-in millwork",
+    caption: "Butler pantry with glass-front upper cabinets",
+  },
+  {
+    src: entryImg,
+    alt: "Painted entry built-ins with a bench and open storage, an example of Hempston millwork",
+    caption: "Painted entry built-ins",
+  },
+  {
+    src: vanityImg,
+    alt: "Reeded white oak bathroom vanity, an example of Hempston vanity cabinetry",
+    caption: "Reeded oak bathroom vanity",
+  },
+  {
+    src: doubleVanityImg,
+    alt: "Light oak double bathroom vanity, an example of Hempston vanity cabinetry",
+    caption: "Light oak double vanity",
   },
 ];
 
@@ -182,9 +236,9 @@ function MonctonPage() {
               Custom Kitchen Cabinets in Moncton
             </h1>
             <p className="mt-6 max-w-xl text-sm leading-relaxed text-white">
-              Hempston Home designs custom kitchen cabinets, kitchen layouts and custom kitchen
-              doors for Greater Moncton. Built in Canada. The consult is in person or by video call,
-              then we measure, deliver and install.
+              We serve the Greater Moncton, Dieppe and Riverview area. Cabinets are built at our
+              Halifax shop, and we send our own in-house install teams. The consult is in person or
+              by video call, then we measure, deliver and install.
             </p>
           </div>
         </div>
@@ -193,7 +247,7 @@ function MonctonPage() {
       <figure className="border-b border-white/10 bg-[oklch(0.16_0_0)]">
         <figcaption className="mx-auto max-w-3xl px-5 py-6 text-sm leading-relaxed text-white/90 sm:px-8">
           Built-ins and fireplace surround, Dieppe, NB. Painted shaker doors, drawers and open upper
-          shelving, photographed finished before delivery. Built in Canada.
+          shelving, photographed finished before delivery.
         </figcaption>
       </figure>
 
@@ -203,14 +257,13 @@ function MonctonPage() {
             Service area
           </p>
           <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.06em] text-white sm:text-4xl">
-            Greater Moncton, without a local shop address
+            Greater Moncton, Dieppe and Riverview
           </h2>
           <div className="mt-8 space-y-5 text-sm leading-relaxed text-white/90">
             <p>
-              This is a service-area page for custom kitchen cabinets in Moncton. Hempston does not
-              publish a Moncton street address, and this page does not describe a Moncton
-              storefront. You book a design consult, we measure the house, and the finished
-              cabinetry is delivered and installed.
+              Hempston Home designs and installs custom kitchen cabinets across Greater Moncton,
+              Dieppe and Riverview, and out to Shediac. You book a design consult, we measure the
+              house, and our own team delivers and installs the finished cabinetry.
             </p>
             <p>
               Kitchen design in Moncton covers the layout, the storage and the appliances. Custom
@@ -219,7 +272,12 @@ function MonctonPage() {
               one option. Slab, inset and other profiles are built the same way, to the room rather
               than from a stock size.
             </p>
-            <BuiltInCanadaLine className="text-sm text-white/90" />
+            <p>
+              Most kitchens take 8 to 14 weeks from the first consultation to installation. Vanities
+              and built-ins are usually quoted between $4,000 and $12,000, and a full kitchen
+              typically runs from $25,000 to $75,000. The timeline and the price are confirmed in
+              writing before any deposit.
+            </p>
           </div>
         </div>
       </section>
@@ -263,12 +321,42 @@ function MonctonPage() {
             The photograph at the top of this page is a real Hempston project for a home in Dieppe,
             NB: painted white built-in cabinets on both sides of a fireplace mantel, with shaker
             doors, drawers and open upper shelving. It was photographed finished, before delivery.
+            The full note is on the{" "}
+            <Link to="/projects" className="underline">
+              projects
+            </Link>{" "}
+            page.
           </p>
-          {/*
-            TODO(sean): Add further Greater Moncton project photos and captions below when Sean
-            provides them. Do not invent client names, prices, or timelines. The Dieppe fireplace
-            built-ins above are the first published Moncton-area project.
-          */}
+        </div>
+        <div className="mx-auto mt-14 max-w-6xl px-5 sm:px-8">
+          <h3 className="font-display text-2xl font-light uppercase tracking-[0.06em] text-white">
+            Kitchens, vanities and built-ins
+          </h3>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/90">
+            These photographs are from Hempston's own library. They show the kinds of kitchens,
+            vanities and built-ins we build. Aside from the Dieppe fireplace wall above, they are
+            not Moncton projects.
+          </p>
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {examplePhotos.map((photo) => (
+              <li key={photo.caption}>
+                <figure>
+                  <ResponsiveImg
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={1200}
+                    height={900}
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                  <figcaption className="mt-3 text-sm leading-relaxed text-white/90">
+                    {photo.caption}
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -322,8 +410,8 @@ function MonctonPage() {
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-black/80">
               Tell us about the kitchen, the doors, or the built-in. We will set a design consult in
-              person or by video call. Built in Canada. Installation is in Moncton, Dieppe,
-              Riverview or Shediac, and the cabinetry carries a 5-year workmanship warranty.
+              person or by video call. Installation is in Moncton, Dieppe, Riverview or Shediac, and
+              the cabinetry carries a 5-year workmanship warranty.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
