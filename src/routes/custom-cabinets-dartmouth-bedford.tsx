@@ -16,8 +16,8 @@ import {
   VANITY_PRICE_LABEL,
   mapsUrl,
 } from "@/lib/site";
-import heroImg from "@/assets/door-gallery-2026/08_cambridge_navy_shaker.png";
-import secondImg from "@/assets/door-gallery-2026/06_smoked_oak_slab.png";
+import heroImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
+import secondImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 
 const PAGE_TITLE = "Custom Cabinets Dartmouth and Bedford | Hempston Home";
 const PAGE_DESC =
@@ -102,12 +102,12 @@ function DartmouthPage() {
       <section className="relative">
         <ResponsiveImg
           src={heroImg}
-          alt="Hempston door render of a painted Shaker cabinet door in Cambridge Navy"
-          width={1037}
-          height={1517}
+          alt="Example of Hempston custom kitchen cabinetry with a stained oak island and painted beams"
+          width={1600}
+          height={1000}
           fetchPriority="high"
           sizes="100vw"
-          className="h-[68vh] min-h-[460px] w-full bg-white object-contain"
+          className="h-[68vh] min-h-[460px] w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-end">
@@ -166,8 +166,9 @@ function DartmouthPage() {
           have, which is the same approach the Halifax page describes.
         </p>
         <p>
-          The images on this page are Hempston door renders, not photographs of Dartmouth or Bedford
-          kitchens. Published Nova Scotia kitchens are described on the{" "}
+          The photographs on this page are examples of Hempston kitchens from other commissions.
+          They are not labelled as Dartmouth or Bedford projects. Published Nova Scotia kitchens are
+          on the{" "}
           <Link to="/case-studies" className="underline">
             case studies
           </Link>{" "}
@@ -183,29 +184,29 @@ function DartmouthPage() {
         <figure>
           <ResponsiveImg
             src={heroImg}
-            alt="Hempston door render of a painted Shaker cabinet door in Cambridge Navy"
-            width={1037}
-            height={1517}
+            alt="Example Hempston kitchen with painted cabinets, a white oak island and painted beams"
+            width={1200}
+            height={900}
             loading="lazy"
             sizes="(min-width: 640px) 50vw, 100vw"
-            className="aspect-[3/4] w-full bg-white object-contain"
+            className="aspect-[4/3] w-full object-cover"
           />
           <figcaption className="mt-3 text-sm text-white/80">
-            Painted Shaker door render, Cambridge Navy. Not a Dartmouth or Bedford kitchen.
+            Example kitchen from the Hempston library, not a Dartmouth or Bedford address.
           </figcaption>
         </figure>
         <figure>
           <ResponsiveImg
             src={secondImg}
-            alt="Hempston door render of a white oak slab cabinet door with a smoked oak stain"
-            width={1037}
-            height={1517}
+            alt="Example Hempston kitchen with a white oak island and painted perimeter cabinets"
+            width={1200}
+            height={900}
             loading="lazy"
             sizes="(min-width: 640px) 50vw, 100vw"
-            className="aspect-[3/4] w-full bg-white object-contain"
+            className="aspect-[4/3] w-full object-cover"
           />
           <figcaption className="mt-3 text-sm text-white/80">
-            White oak slab door render. Not a Dartmouth or Bedford kitchen.
+            Another example from the library, shown for the kind of cabinetry we build.
           </figcaption>
         </figure>
       </section>

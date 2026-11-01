@@ -8,6 +8,9 @@ import { heroImagePreload } from "@/lib/image-srcset";
 import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
 import { LEAD_TIME_LABEL, PHONE_DISPLAY, PHONE_TEL, VANITY_PRICE_LABEL } from "@/lib/site";
 import heroImg from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
+import pantryImg from "@/assets/projects/gh-butler-pantry-glass.jpg";
+import entryImg from "@/assets/projects/dba-kent-pantry.jpg";
+import laundryImg from "@/assets/projects/md-laundry-cabinetry.jpg";
 
 const PAGE_TITLE = "Built-ins and Millwork Nova Scotia | Hempston Home";
 const PAGE_DESC =
@@ -37,10 +40,23 @@ const faqs = [
 const photos = [
   {
     src: heroImg,
-    alt: "Painted Shaker built-in cabinets and open shelves on both sides of a fireplace, photographed in the Hempston shop before delivery to Dieppe, New Brunswick",
-    caption: "Dieppe, NB. Painted Shaker fireplace built-ins, photographed in the shop before delivery.",
-    width: 2000,
-    height: 1500,
+    alt: "Painted Shaker built-in cabinets and open shelves on both sides of a fireplace in Dieppe, New Brunswick",
+    caption: "Dieppe, NB. Painted Shaker fireplace built-ins, photographed before delivery.",
+  },
+  {
+    src: pantryImg,
+    alt: "Butler's pantry with glass-front upper cabinets",
+    caption: "Glass-front butler's pantry from the Hempston photo library.",
+  },
+  {
+    src: entryImg,
+    alt: "Painted entry built-ins with a bench and integrated storage",
+    caption: "Painted entry built-ins. This photograph is from House on Kent.",
+  },
+  {
+    src: laundryImg,
+    alt: "Laundry room with full-height painted cabinetry",
+    caption: "Laundry cabinetry from the Hempston photo library.",
   },
 ];
 
@@ -97,9 +113,9 @@ function BuiltInsPage() {
       <section className="relative">
         <ResponsiveImg
           src={heroImg}
-          alt="Painted Shaker built-ins and a fireplace surround, photographed in the Hempston shop before delivery to Dieppe"
-          width={2000}
-          height={1500}
+          alt="Painted built-in cabinets and a fireplace surround for a home in Dieppe, New Brunswick"
+          width={1600}
+          height={1200}
           fetchPriority="high"
           sizes="100vw"
           className="h-[68vh] min-h-[460px] w-full object-cover"
@@ -169,8 +185,8 @@ function BuiltInsPage() {
             <ResponsiveImg
               src={photo.src}
               alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
+              width={1200}
+              height={900}
               loading="lazy"
               sizes="(min-width: 640px) 50vw, 100vw"
               className="aspect-[4/3] w-full object-cover"

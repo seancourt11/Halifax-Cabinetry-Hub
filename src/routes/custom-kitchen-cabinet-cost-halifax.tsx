@@ -14,7 +14,7 @@ import {
   RUSH_LEAD_TIME_LABEL,
   VANITY_PRICE_LABEL,
 } from "@/lib/site";
-import heroImg from "@/assets/door-gallery-2026/11_setting_plaster_shaker.png";
+import heroImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 
 const PAGE_TITLE = "Kitchen Cabinet Cost in Halifax | Hempston Home";
 const PAGE_DESC =
@@ -109,16 +109,16 @@ function CostGuidePage() {
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <ResponsiveImg
           src={heroImg}
-          alt="Hempston door render of a painted Shaker cabinet door in Setting Plaster"
-          width={1037}
-          height={1517}
+          alt="White painted Shaker kitchen cabinetry with a brass hood, an example of Hempston work"
+          width={1600}
+          height={1000}
           fetchPriority="high"
-          sizes="(min-width: 768px) 480px, 100vw"
-          className="mx-auto aspect-[3/4] max-w-md bg-white object-contain"
+          sizes="(min-width: 768px) 768px, 100vw"
+          className="aspect-[16/10] w-full object-cover"
         />
         <p className="mt-3 text-sm text-white/70">
-          Hempston painted Shaker door render, Setting Plaster. It is not a photograph of a priced
-          Halifax kitchen.
+          An example of painted Shaker cabinetry from the Hempston library. It is not a priced
+          Halifax quote.
         </p>
       </div>
 

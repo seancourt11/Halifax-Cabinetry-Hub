@@ -13,8 +13,8 @@ import {
   PHONE_TEL,
   VANITY_PRICE_LABEL,
 } from "@/lib/site";
-import heroImg from "@/assets/door-profiles/reeded.png";
-import shakerDoor from "@/assets/door-gallery-2026/11_setting_plaster_shaker.png";
+import heroImg from "@/assets/projects/reeded-oak-vanity.jpg";
+import doubleVanity from "@/assets/projects/md-oak-double-vanity.jpg";
 
 const PAGE_TITLE = "Custom Bathroom Vanities Halifax | Hempston Home";
 const PAGE_DESC =
@@ -97,12 +97,12 @@ function VanitiesPage() {
       <section className="relative">
         <ResponsiveImg
           src={heroImg}
-          alt="Hempston door render of a reeded cabinet door in a grey-green paint"
-          width={928}
-          height={1152}
+          alt="Reeded white oak bathroom vanity built by Hempston Home"
+          width={1600}
+          height={1200}
           fetchPriority="high"
           sizes="100vw"
-          className="h-[68vh] min-h-[460px] w-full bg-white object-contain"
+          className="h-[68vh] min-h-[460px] w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/20" />
         <div className="absolute inset-0 flex items-end">
@@ -142,9 +142,9 @@ function VanitiesPage() {
         </p>
         <p>
           Woods already offered for Hempston cabinetry include walnut, white oak, maple and cherry,
-          plus painted doors. The images below are Hempston door renders: a reeded door and a
-          painted Shaker door. They are not photographs of a finished Halifax bathroom, and no
-          client name is attached.
+          plus painted doors. The photographs below are examples from our library: a reeded oak
+          vanity and a light oak double vanity. They are not labelled as a specific Halifax
+          bathroom, and no client name is attached.
         </p>
         <p>
           Workmanship is covered for 5 years. If the bathroom is part of a larger kitchen project,
@@ -164,29 +164,29 @@ function VanitiesPage() {
         <figure>
           <ResponsiveImg
             src={heroImg}
-            alt="Hempston door render of a reeded cabinet door in a grey-green paint"
-            width={928}
-            height={1152}
+            alt="Reeded oak bathroom vanity with vertical fluting and a warm wood finish"
+            width={1200}
+            height={900}
             loading="lazy"
             sizes="(min-width: 640px) 50vw, 100vw"
-            className="aspect-[3/4] w-full bg-white object-contain"
+            className="aspect-[4/3] w-full object-cover"
           />
           <figcaption className="mt-3 text-sm text-white/80">
-            Reeded door render. Not a photograph of an installed vanity.
+            Reeded oak vanity from the Hempston photo library.
           </figcaption>
         </figure>
         <figure>
           <ResponsiveImg
-            src={shakerDoor}
-            alt="Hempston door render of a painted Shaker cabinet door in Setting Plaster"
-            width={1037}
-            height={1517}
+            src={doubleVanity}
+            alt="Light oak double bathroom vanity with two sinks"
+            width={1200}
+            height={900}
             loading="lazy"
             sizes="(min-width: 640px) 50vw, 100vw"
-            className="aspect-[3/4] w-full bg-white object-contain"
+            className="aspect-[4/3] w-full object-cover"
           />
           <figcaption className="mt-3 text-sm text-white/80">
-            Painted Shaker door render, Setting Plaster.
+            Light oak double vanity from the Hempston photo library.
           </figcaption>
         </figure>
       </section>

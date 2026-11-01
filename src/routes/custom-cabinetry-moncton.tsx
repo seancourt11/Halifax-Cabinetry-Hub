@@ -9,10 +9,12 @@ import { heroImagePreload } from "@/lib/image-srcset";
 import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
 import { MONCTON_PHONE_DISPLAY, MONCTON_PHONE_E164, MONCTON_PHONE_TEL } from "@/lib/site";
 import monctonHero from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
-import shakerRender from "@/assets/door-gallery-2026/11_setting_plaster_shaker.png";
-import slabRender from "@/assets/door-gallery-2026/12_hague_blue_slab.png";
-import oakRender from "@/assets/door-gallery-2026/06_smoked_oak_slab.png";
-import reededRender from "@/assets/door-profiles/reeded.png";
+import vanityImg from "@/assets/projects/reeded-oak-vanity.jpg";
+import doubleVanityImg from "@/assets/projects/md-oak-double-vanity.jpg";
+import pantryImg from "@/assets/projects/gh-butler-pantry-glass.jpg";
+import kitchenImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
+import entryImg from "@/assets/projects/dba-kent-pantry.jpg";
+import shakerImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 
 const PAGE_TITLE = "Custom Kitchen Cabinets Moncton | Hempston Home";
 const PAGE_DESC =
@@ -101,32 +103,34 @@ const faqs = [
 
 const examplePhotos = [
   {
-    src: shakerRender,
-    alt: "Hempston door render of a painted Shaker cabinet door in Setting Plaster",
-    caption: "Painted Shaker door render, Setting Plaster",
-    width: 1037,
-    height: 1517,
+    src: kitchenImg,
+    alt: "White painted perimeter cabinets with a stained white oak island, an example of Hempston kitchen cabinetry",
+    caption: "Kitchen cabinetry, white painted perimeter and a stained white oak island",
   },
   {
-    src: slabRender,
-    alt: "Hempston door render of a painted slab cabinet door in Hague Blue",
-    caption: "Painted slab door render, Hague Blue",
-    width: 1037,
-    height: 1517,
+    src: shakerImg,
+    alt: "White painted Shaker kitchen cabinets with a brass hood, an example of Hempston cabinetry",
+    caption: "Painted Shaker kitchen with a brass hood",
   },
   {
-    src: oakRender,
-    alt: "Hempston door render of a white oak slab cabinet door with a smoked oak stain",
-    caption: "White oak slab door render, smoked oak stain",
-    width: 1037,
-    height: 1517,
+    src: pantryImg,
+    alt: "Butler pantry with glass-front upper cabinets, an example of Hempston built-in millwork",
+    caption: "Butler pantry with glass-front upper cabinets",
   },
   {
-    src: reededRender,
-    alt: "Hempston door render of a reeded cabinet door in a grey-green paint",
-    caption: "Reeded door render",
-    width: 928,
-    height: 1152,
+    src: entryImg,
+    alt: "Painted entry built-ins with a bench and open storage, an example of Hempston millwork",
+    caption: "Painted entry built-ins",
+  },
+  {
+    src: vanityImg,
+    alt: "Reeded white oak bathroom vanity, an example of Hempston vanity cabinetry",
+    caption: "Reeded oak bathroom vanity",
+  },
+  {
+    src: doubleVanityImg,
+    alt: "Light oak double bathroom vanity, an example of Hempston vanity cabinetry",
+    caption: "Light oak double vanity",
   },
 ];
 
@@ -326,12 +330,12 @@ function MonctonPage() {
         </div>
         <div className="mx-auto mt-14 max-w-6xl px-5 sm:px-8">
           <h3 className="font-display text-2xl font-light uppercase tracking-[0.06em] text-white">
-            Door renders
+            Kitchens, vanities and built-ins
           </h3>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/90">
-            These are Hempston door renders, not photographs of Moncton kitchens. They show profiles
-            we build: painted Shaker, painted slab, white oak slab, and reeded. The Dieppe fireplace
-            wall above is the project photo on this page.
+            These photographs are from Hempston's own library. They show the kinds of kitchens,
+            vanities and built-ins we build. Aside from the Dieppe fireplace wall above, they are
+            not Moncton projects.
           </p>
           <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {examplePhotos.map((photo) => (
@@ -340,11 +344,11 @@ function MonctonPage() {
                   <ResponsiveImg
                     src={photo.src}
                     alt={photo.alt}
-                    width={photo.width}
-                    height={photo.height}
+                    width={1200}
+                    height={900}
                     loading="lazy"
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                    className="aspect-[3/4] w-full bg-white object-contain"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="aspect-[4/3] w-full object-cover"
                   />
                   <figcaption className="mt-3 text-sm leading-relaxed text-white/90">
                     {photo.caption}
