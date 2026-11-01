@@ -48,10 +48,6 @@ export async function consumeContactRateLimit(ip: string, now = Date.now()): Pro
   const allowed = dayCount < MAX_SUBMITS_PER_DAY && known.length < MAX_SUBMITS_PER_WEEK;
   memory.set(ip, freshStamps([...known, now], now).slice(-20));
 
-  if (!allowed) {
-    console.info(`Contact rate limit blocked stored=${known.length + 1}`);
-  }
-
   if (cache) {
     const emptySlot = slotStamps.findIndex((stamp) => stamp === null);
     const oldestSlot =
@@ -66,6 +62,10 @@ export async function consumeContactRateLimit(ip: string, now = Date.now()): Pro
         slotKey(ip, oldestSlot),
         { stamps: [now] },
         { ttl: CACHE_TTL_SECONDS, name: "contact-rate-limit" },
+      );
+      const readBack = readTimestamps(await cache.get(slotKey(ip, oldestSlot))).length;
+      console.info(
+        `Contact rate slots=${remote.length} allowed=${allowed} wrote=${oldestSlot} readBack=${readBack}`,
       );
     } catch (error) {
       console.error("Contact rate limit write failed:", error);
