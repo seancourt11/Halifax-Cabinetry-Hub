@@ -58,11 +58,8 @@ export async function consumeContactRateLimit(ip: string, now = Date.now()): Pro
             return (stamp ?? Number.POSITIVE_INFINITY) < oldestStamp ? index : oldest;
           }, 0);
     try {
-      await cache.set(
-        slotKey(ip, oldestSlot),
-        { stamps: [now] },
-        { ttl: CACHE_TTL_SECONDS, name: "contact-rate-limit" },
-      );
+      const key = slotKey(ip, oldestSlot);
+      await cache.set(key, { stamps: [now] }, { ttl: CACHE_TTL_SECONDS, name: key });
       const readBack = readTimestamps(await cache.get(slotKey(ip, oldestSlot))).length;
       console.info(
         `Contact rate slots=${remote.length} allowed=${allowed} wrote=${oldestSlot} readBack=${readBack}`,
