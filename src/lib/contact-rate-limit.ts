@@ -59,11 +59,15 @@ export async function consumeContactRateLimit(ip: string, now = Date.now()): Pro
           }, 0);
     try {
       const key = slotKey(ip, oldestSlot);
-      await cache.set(key, { stamps: [now] }, { ttl: CACHE_TTL_SECONDS, name: key });
-      const readBack = readTimestamps(await cache.get(slotKey(ip, oldestSlot))).length;
-      console.info(
-        `Contact rate slots=${remote.length} allowed=${allowed} wrote=${oldestSlot} readBack=${readBack}`,
+      await cache.set(
+        key,
+        { stamps: [now] },
+        {
+          ttl: CACHE_TTL_SECONDS,
+          name: key,
+        },
       );
+      console.info(`Contact rate limit allowed=${allowed} slots=${remote.length}`);
     } catch (error) {
       console.error("Contact rate limit write failed:", error);
     }
