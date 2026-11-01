@@ -1,58 +1,76 @@
 import { getCache } from "@vercel/functions";
-import { WEEK_MS, evaluateRateLimit, readTimestamps } from "@/lib/contact-guard";
+import {
+  DAY_MS,
+  MAX_SUBMITS_PER_DAY,
+  MAX_SUBMITS_PER_WEEK,
+  WEEK_MS,
+  readTimestamps,
+} from "@/lib/contact-guard";
 
 const memory = new Map<string, number[]>();
 const CACHE_TTL_SECONDS = Math.floor(WEEK_MS / 1000);
-
-function mergeTimestamps(left: number[], right: number[]): number[] {
-  return Array.from(new Set([...left, ...right])).sort((a, b) => a - b);
-}
+const SLOT_COUNT = MAX_SUBMITS_PER_WEEK;
 
 /**
- * Light per-IP limit. Runtime Cache shares counts across instances in a region.
- * The in-memory copy covers local dev and a cache miss on the same instance.
- * A cache outage fails open so a real lead is not blocked.
+ * One cache entry per recent submission. A stale read can miss a slot, but it
+ * cannot replace the other slots with a shorter list.
  */
+function slotKey(ip: string, slot: number) {
+  return `ip:${ip}:slot:${slot}`;
+}
+
+function freshStamps(stamps: number[], now: number) {
+  return stamps.filter((stamp) => now - stamp < WEEK_MS && stamp <= now);
+}
+
 export async function consumeContactRateLimit(ip: string, now = Date.now()): Promise<boolean> {
-  const key = `ip:${ip}`;
-  const local = memory.get(ip) ?? [];
-  let remote: number[] = [];
+  const local = freshStamps(memory.get(ip) ?? [], now);
   let cache: ReturnType<typeof getCache> | null = null;
+  const slotStamps: Array<number | null> = [];
 
   try {
     cache = getCache({ namespace: "hempston-contact" });
-    remote = readTimestamps(await cache.get(key));
+    const stored = await Promise.all(
+      Array.from({ length: SLOT_COUNT }, (_, slot) => cache!.get(slotKey(ip, slot))),
+    );
+    for (const value of stored) {
+      const [stamp] = freshStamps(readTimestamps(value), now);
+      slotStamps.push(stamp ?? null);
+    }
   } catch (error) {
     console.error("Contact rate limit read failed open:", error);
     return true;
   }
 
-  const decision = evaluateRateLimit(mergeTimestamps(local, remote), now);
-  memory.set(ip, decision.timestamps);
-  const hasRuntimeEndpoint = Boolean(process.env.RUNTIME_CACHE_ENDPOINT);
-  const hasRequestContext = Boolean(
-    (globalThis as Record<symbol, { get?: () => { cache?: unknown } } | undefined>)[
-      Symbol.for("@vercel/request-context")
-    ]?.get?.()?.cache,
-  );
-  console.info(
-    `Contact rate limit ${decision.allowed ? "allowed" : "blocked"} stored=${decision.timestamps.length} remote=${remote.length} endpoint=${hasRuntimeEndpoint} context=${hasRequestContext}`,
-  );
+  const remote = slotStamps.filter((stamp): stamp is number => stamp !== null);
+  const known = freshStamps(Array.from(new Set([...local, ...remote])), now);
+  const dayCount = known.filter((stamp) => now - stamp < DAY_MS).length;
+  const allowed = dayCount < MAX_SUBMITS_PER_DAY && known.length < MAX_SUBMITS_PER_WEEK;
+  memory.set(ip, freshStamps([...known, now], now).slice(-20));
+
+  if (!allowed) {
+    console.info(`Contact rate limit blocked stored=${known.length + 1}`);
+  }
 
   if (cache) {
+    const emptySlot = slotStamps.findIndex((stamp) => stamp === null);
+    const oldestSlot =
+      emptySlot >= 0
+        ? emptySlot
+        : slotStamps.reduce<number>((oldest, stamp, index, all) => {
+            const oldestStamp = all[oldest] ?? Number.POSITIVE_INFINITY;
+            return (stamp ?? Number.POSITIVE_INFINITY) < oldestStamp ? index : oldest;
+          }, 0);
     try {
       await cache.set(
-        key,
-        { stamps: decision.timestamps },
-        {
-          ttl: CACHE_TTL_SECONDS,
-          name: "contact-rate-limit",
-        },
+        slotKey(ip, oldestSlot),
+        { stamps: [now] },
+        { ttl: CACHE_TTL_SECONDS, name: "contact-rate-limit" },
       );
     } catch (error) {
       console.error("Contact rate limit write failed:", error);
     }
   }
 
-  return decision.allowed;
+  return allowed;
 }
