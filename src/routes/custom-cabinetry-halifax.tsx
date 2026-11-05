@@ -82,14 +82,14 @@ import materialWidePlank from "@/assets/materials/detail_10_wideplank_jetblack.p
 const recentProjects = [
   {
     src: projNwcBrass,
-    alt: "Coastal Cottage custom overlay cabinetry with painted shaker doors and brass hood",
+    alt: "Painted shaker overlay kitchen cabinetry with a brass hood, Halifax",
     title: "Coastal Cottage",
     subtitle: "Custom Overlay",
     designer: "31 Westgate",
   },
   {
     src: projDbaPlIsland,
-    alt: "Custom painted kitchen with dark stained oak island and white oak beams — House on Peter Lowe",
+    alt: "Painted kitchen cabinetry with a dark stained oak island and white oak beams, Halifax",
     title: "Dark Oak Island Kitchen",
     subtitle: "Painted + Stained Oak",
     designer: "DB Architecture",
@@ -103,7 +103,7 @@ const recentProjects = [
   },
   {
     src: projDbaKentKitchen1,
-    alt: "Inset custom cabinetry with white oak island and corner window — House on Kent",
+    alt: "Inset kitchen cabinetry with a white oak island and corner window, Halifax",
     title: "Inset Oak Island Kitchen",
     subtitle: "Inset Cabinetry + Oak Island",
     designer: "DB Architecture",
@@ -117,7 +117,7 @@ const recentProjects = [
   },
   {
     src: projDbaPlKitchen1,
-    alt: "Open-concept custom kitchen cabinetry with quartzite counters and timber ceiling — House on Peter Lowe",
+    alt: "Open-concept kitchen cabinetry with quartzite counters and a timber ceiling, Halifax",
     title: "Timber-Ceiling Kitchen",
     subtitle: "Open-Concept Cabinetry",
     designer: "DB Architecture",
@@ -131,7 +131,7 @@ const recentProjects = [
   },
   {
     src: projDbaKentPantry,
-    alt: "Custom entry cabinetry with painted millwork, upholstered bench and integrated storage — House on Kent",
+    alt: "Painted entry built-in cabinetry with an upholstered bench and integrated storage, Halifax",
     title: "Painted Entry Built-Ins",
     subtitle: "Custom Built-In Cabinetry",
     designer: "DB Architecture",
@@ -159,7 +159,7 @@ const recentProjects = [
   },
   {
     src: projDbaKentKitchen2,
-    alt: "Custom inset kitchen cabinetry with hemlock beams and hidden coffee station — House on Kent",
+    alt: "Inset kitchen cabinetry with hemlock beams and a hidden coffee station, Halifax",
     title: "Hidden Coffee Station",
     subtitle: "Inset Custom Cabinetry",
     designer: "DB Architecture",
@@ -187,7 +187,7 @@ const recentProjects = [
   },
   {
     src: projDbaPlKitchen2,
-    alt: "Custom sage green mudroom cabinetry with brass hardware and checkered floor — House on Peter Lowe",
+    alt: "Sage green mudroom cabinetry with brass hardware and a checkered floor, Halifax",
     title: "Sage Green Mudroom",
     subtitle: "Painted Mudroom Cabinetry",
     designer: "DB Architecture",
@@ -764,7 +764,8 @@ function HalifaxPage() {
           <div className="overflow-hidden">
             <ResponsiveImg
               src={projGlenHaven}
-              alt="Glen Haven custom white painted perimeter cabinetry with stained white oak island by Hempston"
+              alt="Painted white kitchen cabinetry with a stained oak island, Halifax"
+              title="Painted white kitchen cabinetry with a stained oak island, Halifax"
               width={1200}
               height={1200}
               loading="lazy"

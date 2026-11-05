@@ -123,7 +123,8 @@ function AboutPage() {
         <ResponsiveImg
           src={heroImg}
           sizes="100vw"
-          alt="Hempston Home custom white painted shaker kitchen cabinetry with brass hood in Glen Haven, Nova Scotia"
+          alt="Painted shaker kitchen cabinetry with a brass hood, Halifax"
+          title="Painted shaker kitchen with a brass hood, Halifax"
           width={1600}
           height={1000}
           fetchPriority="high"

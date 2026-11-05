@@ -137,6 +137,7 @@ function NovaScotiaKitchensPage() {
             src={heroImg}
             sizes="100vw"
             alt="Painted custom kitchen cabinets with a white oak island"
+            title="Oak island painted kitchen cabinetry, Halifax"
             width={1600}
             height={1000}
             fetchPriority="high"

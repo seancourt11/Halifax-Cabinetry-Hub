@@ -24,9 +24,8 @@ const entries: ImageEntry[] = [
     images: [
       {
         loc: `${SITE_URL}${homeHero}`,
-        title: "Custom cabinetry by Hempston Home",
-        caption:
-          "Glen Haven custom white painted kitchen cabinetry with a stained white oak island",
+        title: "Oak island painted kitchen cabinetry, Halifax",
+        caption: "Painted oak island kitchen cabinetry with a stained white oak island, Halifax",
       },
     ],
   },
