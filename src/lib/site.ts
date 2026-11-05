@@ -5,9 +5,10 @@
  * for its visible links and Service schema only.
  *
  * Build location (Bayne St / Halifax shop) may be stated on the Halifax page,
- * the About page, and the global FAQ / llms.txt only. Other Canadian pages say
- * "Built in Canada" and do not name the shop. US-facing copy stays neutral
- * about where cabinets are made.
+ * the About page, the Moncton service-area page, the Dartmouth and Bedford
+ * page, and the global FAQ / llms.txt. Other Canadian pages may say
+ * "Built in Canada" once, in one natural sentence, and do not name the shop.
+ * US-facing copy stays neutral about where cabinets are made.
  */
 
 export const BRAND = "Hempston Home";
@@ -138,17 +139,12 @@ export const HOURS = {
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
   opens: "09:00",
   closes: "17:00",
-  label: "Monday to Friday, 9am to 5pm, by appointment",
+  openingHours: "Mo-Fr 09:00-17:00",
+  label: "Monday to Friday, 9:00 AM to 5:00 PM",
 };
 
-/** Shop hours shown on the Halifax page and on the Halifax LocalBusiness schema. */
-export const HALIFAX_SHOP_HOURS = {
-  days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
-  opens: "07:00",
-  closes: "17:00",
-  openingHours: "Mo-Fr 07:00-17:00",
-  label: "Monday to Friday, 7:00 AM to 5:00 PM",
-};
+/** Halifax uses the same hours as the rest of the business. */
+export const HALIFAX_SHOP_HOURS = HOURS;
 
 export type PageSeo = { title: string; description: string; h1: string };
 
@@ -156,91 +152,91 @@ export const CITY_SEO: Record<string, PageSeo> = {
   "custom-cabinetry-moncton": {
     title: "Custom Kitchen Cabinets Moncton NB | Hempston Home",
     description:
-      "Custom kitchen cabinets and kitchen design for Moncton, Dieppe, Riverview and Shediac. Built in Canada. Consult in person or by video call.",
+      "Custom kitchen cabinets and kitchen design for Moncton, Dieppe, Riverview and Shediac. Hempston Home designs, delivers and installs. Book a free consult.",
     h1: "Custom Kitchen Cabinets in Moncton",
   },
   "custom-cabinetry-charlottetown": {
     title: "Custom Kitchen Cabinets Charlottetown | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Charlottetown and PEI homes. Built in Canada by Hempston Home. Book a free consultation.",
+      "Custom kitchen cabinets, vanities and built-ins for Charlottetown and PEI homes. Hempston Home designs and installs. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Charlottetown, PEI",
   },
   "custom-cabinetry-fredericton": {
     title: "Custom Kitchen Cabinets Fredericton | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Fredericton and capital region homes. Built in Canada by Hempston Home. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Fredericton and the capital region. Hempston Home designs, builds and installs. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Fredericton, New Brunswick",
   },
   "custom-cabinetry-saint-john": {
     title: "Custom Kitchen Cabinets Saint John NB | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Saint John, Rothesay and Quispamsis homes. Built in Canada by Hempston Home. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Saint John, Rothesay and Quispamsis. Hempston Home designs and installs. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Saint John, New Brunswick",
   },
   "custom-cabinetry-st-johns": {
     title: "Custom Kitchen Cabinets St. John's | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for St. John's and Northeast Avalon homes. Built in Canada by Hempston Home. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for St. John's and the Northeast Avalon. Hempston Home designs and installs. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in St. John's, Newfoundland",
   },
   "custom-cabinetry-toronto": {
     title: "Custom Kitchen Cabinets Toronto | Hempston Home",
     description:
-      "Custom kitchen cabinets and built-in millwork for Toronto and GTA homes, from inset Shaker to white oak. Built in Canada. Book a free consult.",
+      "Custom kitchen cabinets and built-in millwork for Toronto and GTA homes, from inset Shaker to white oak. Hempston Home designs and installs. Book a consult.",
     h1: "Custom Kitchen Cabinets in Toronto and the GTA",
   },
   "custom-cabinetry-montreal": {
     title: "Custom Kitchen Cabinets Montreal | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Montreal homes. Built in Canada by Hempston Home and installed by our crew. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Montreal homes. Hempston Home designs, builds and installs with our own crew. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Montreal, Quebec",
   },
   "custom-cabinetry-vancouver": {
     title: "Custom Kitchen Cabinets Vancouver | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Metro Vancouver homes. Built in Canada by Hempston Home and installed by our crew. Book a consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Metro Vancouver homes. Hempston Home designs, builds and installs with our crew. Book a free consult.",
     h1: "Custom Kitchen Cabinets in Vancouver, BC",
   },
   "custom-cabinetry-calgary": {
     title: "Custom Kitchen Cabinets Calgary | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Calgary homes. Built in Canada by Hempston Home and installed by our own crew. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Calgary homes. Hempston Home designs, builds and installs with our own crew. Book a free consult.",
     h1: "Custom Kitchen Cabinets in Calgary, Alberta",
   },
   "custom-cabinetry-ottawa": {
     title: "Custom Kitchen Cabinets Ottawa | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Ottawa and National Capital Region homes. Built in Canada by Hempston Home. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Ottawa and National Capital Region homes. Hempston Home designs and installs. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Ottawa, Ontario",
   },
   "custom-cabinetry-edmonton": {
     title: "Custom Kitchen Cabinets Edmonton | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Edmonton homes. Built in Canada by Hempston Home and installed by our own crew. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Edmonton homes. Hempston Home designs, builds and installs with our own crew. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Edmonton, Alberta",
   },
   "custom-cabinetry-winnipeg": {
     title: "Custom Kitchen Cabinets Winnipeg | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Winnipeg homes. Built in Canada by Hempston Home and installed by our own crew. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Winnipeg homes. Hempston Home designs, builds and installs with our own crew. Book a free consult.",
     h1: "Custom Kitchen Cabinets in Winnipeg, Manitoba",
   },
   "custom-cabinetry-quebec-city": {
     title: "Custom Kitchen Cabinets Quebec City | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Quebec City homes. Built in Canada by Hempston Home and installed by our crew. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Quebec City homes. Hempston Home designs, builds and installs with our crew. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Quebec City",
   },
   "custom-cabinetry-hamilton": {
     title: "Custom Kitchen Cabinets Hamilton | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Hamilton, Burlington and Oakville homes. Built in Canada by Hempston Home. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Hamilton, Burlington and Oakville homes. Hempston Home designs and installs. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Hamilton, Ontario",
   },
   "custom-cabinetry-kitchener": {
     title: "Custom Kitchen Cabinets Kitchener | Hempston Home",
     description:
-      "Custom kitchen cabinets, vanities and built-ins for Kitchener, Waterloo and Cambridge. Built in Canada by Hempston Home. Book a free consult.",
+      "Custom kitchen cabinets, vanities and built-ins for Kitchener, Waterloo and Cambridge. Hempston Home designs and installs. Book a free consultation.",
     h1: "Custom Kitchen Cabinets in Kitchener-Waterloo",
   },
 };

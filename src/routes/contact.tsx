@@ -11,7 +11,7 @@ import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import ogImg from "@/assets/og/og-contact.jpg";
 
 const PAGE_TITLE = "Book a Cabinetry Consultation | Hempston Home";
-const PAGE_DESC = `Book a free cabinetry consultation with Hempston Home. Built in Canada. Call ${PHONE_DISPLAY} or email info@hempstonhome.com. We reply in one business day.`;
+const PAGE_DESC = `Book a free cabinetry consultation with Hempston Home in Halifax. Call ${PHONE_DISPLAY} or email info@hempstonhome.com. We reply within one business day.`;
 const ABSOLUTE_URL = `${SITE_URL}/contact`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 

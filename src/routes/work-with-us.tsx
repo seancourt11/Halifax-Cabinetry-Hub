@@ -23,7 +23,7 @@ import ogImg from "@/assets/og/og-about.jpg";
 
 const PAGE_TITLE = "Our Custom Cabinetry Process | Hempston Home";
 const PAGE_DESC =
-  "How a Hempston Home project works: form, video consult, design, quote, shop build and install. Built in Canada. Most kitchens take 8 to 14 weeks.";
+  "How a Hempston Home project works, from the form and video consult through design, quote, shop build and install. Most kitchens take 8 to 14 weeks.";
 const ABSOLUTE_URL = `${SITE_URL}/work-with-us`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 

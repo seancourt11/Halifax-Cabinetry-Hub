@@ -29,7 +29,7 @@ import preStageImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
 
 const PAGE_TITLE = "Kitchen Design and Cabinetry Services | Hempston Home";
 const PAGE_DESC =
-  "Kitchen design, shop drawings, samples, stone management and installation. Built in Canada by Hempston Home. Every project includes all of it.";
+  "Kitchen design, shop drawings, samples, stone management and installation from Hempston Home in Halifax. Every commission includes the full service.";
 const ABSOLUTE_URL = `${SITE_URL}/services`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -346,6 +346,8 @@ function ServicesPage() {
                   <ResponsiveImg
                     src={s.image}
                     alt={s.alt}
+                    width={800}
+                    height={1000}
                     loading="lazy"
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="aspect-[4/5] w-full object-cover"

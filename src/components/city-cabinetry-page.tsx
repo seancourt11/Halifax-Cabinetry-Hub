@@ -131,8 +131,8 @@ const reasons = [
   },
   {
     icon: Leaf,
-    title: "Built in Canada",
-    body: "Built in Canada. We design, build and install custom cabinetry for your home, and we install across Canada and the United States.",
+    title: "Designed for the home",
+    body: "We design, build and install custom cabinetry for your home, and we install across Canada and the United States.",
   },
   {
     icon: Clock,
@@ -271,8 +271,8 @@ const process = [
   {
     icon: Factory,
     step: "03",
-    title: "Built in Canada",
-    body: "Your cabinetry is built in Canada, using solid hardwoods, dovetailed drawers, and conversion-grade finishes.",
+    title: "Shop build",
+    body: "Your cabinetry is built to order, using solid hardwoods, dovetailed drawers, and conversion-grade finishes.",
   },
   {
     icon: Truck,
@@ -300,10 +300,19 @@ const shareImages = [
   { full: projGlenHaven, small: projGlenHavenSmall },
 ];
 
-function originLine(city: CityPageData) {
-  return city.countryCode === "CA"
-    ? "Built in Canada. We install across Canada and the United States."
-    : "We install across Canada and the United States.";
+function regionNamesCity(city: CityPageData) {
+  return city.region.toLowerCase().includes(city.city.toLowerCase());
+}
+
+/** Avoid "Winnipeg and Winnipeg and area" when the region already names the city. */
+export function homesInArea(city: CityPageData) {
+  if (regionNamesCity(city)) return city.region;
+  return `${city.city} and ${city.region}`;
+}
+
+function serviceAreaLabel(city: CityPageData) {
+  if (regionNamesCity(city)) return `${city.region}, ${city.province}`;
+  return `${city.city}, ${city.region} and ${city.province}`;
 }
 
 function cityIndex(city: CityPageData) {
@@ -394,7 +403,6 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
   const idx = cityIndex(city);
   const heroImg = shareImages[idx % shareImages.length];
   const inCanada = city.countryCode === "CA";
-  const madeLine = originLine(city);
   const shownProjects = Array.from(
     { length: 6 },
     (_, i) => recentProjectsPool[(idx + i) % recentProjectsPool.length],
@@ -448,7 +456,6 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
                 {seo?.h1 ?? `Custom Kitchen Cabinets in ${city.city}`}
               </h1>
               <p className="mt-8 max-w-md text-sm leading-relaxed text-white">{city.heroLead}</p>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/90">{madeLine}</p>
               <div className="mt-10 flex flex-wrap gap-3">
                 <a
                   href="#consultation"
@@ -535,18 +542,16 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/70">
             {ORG_NAME} designs, builds and installs custom kitchen cabinets, bathroom vanities and
-            built-in millwork for homes in {city.city} and {city.region}. {madeLine} Every project
-            is fully custom.
+            built-in millwork for homes in {homesInArea(city)}. Every project is fully custom.
           </p>
           <dl className="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { k: "Service", v: "Custom kitchen cabinets, vanities and built-in millwork" },
-              { k: "Service area", v: `${city.city}, ${city.region} and ${city.province}` },
+              { k: "Service area", v: serviceAreaLabel(city) },
               { k: "Typical kitchen", v: `CAD ${KITCHEN_PRICE_LABEL}` },
               { k: "Vanities and built-ins", v: `Usually ${VANITY_PRICE_LABEL}` },
               { k: "Timeline", v: `${LEAD_TIME_LABEL} from consultation to install` },
               { k: "Warranty", v: WARRANTY_LABEL },
-              ...(inCanada ? [{ k: "Origin", v: "Built in Canada" }] : []),
               { k: "Founded", v: FOUNDING_YEAR },
               { k: "Applicable tax", v: `${city.taxNote} (${city.province})` },
               { k: "Consultation", v: "Free" },
@@ -570,10 +575,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-5 py-16 sm:px-8 md:grid-cols-4">
           {[
             { n: "10+", l: "Years of cabinetmaking" },
-            {
-              n: inCanada ? "Canada" : "Custom",
-              l: inCanada ? "Built in Canada" : "Built to order",
-            },
+            { n: "100%", l: "Custom, made to the room" },
             { n: "8 to 14", l: "Weeks, concept to install" },
             { n: "5 yr", l: "Workmanship warranty" },
           ].map((s) => (
@@ -685,7 +687,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               <figure key={d.name} className="group border border-white/15 bg-white p-4 sm:p-6">
                 <ResponsiveImg
                   src={d.src}
-                  alt={`${d.name} — ${d.profile} custom door render for ${city.city} kitchen cabinetry`}
+                  alt={`${d.name}, ${d.profile} custom door render for ${city.city} kitchen cabinetry`}
                   width={800}
                   height={1000}
                   loading="lazy"
@@ -764,13 +766,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           <div className="mt-14 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {reasons.map((r) => {
               const item =
-                !inCanada && r.title === "Built in Canada"
-                  ? {
-                      ...r,
-                      title: "Built to order",
-                      body: "We design, build and install custom cabinetry for your home, and we install across Canada and the United States.",
-                    }
-                  : !inCanada && r.title === "Built to Last Generations"
+                !inCanada && r.title === "Built to Last Generations"
                     ? {
                         ...r,
                         body: "Solid-wood construction, dovetailed drawers, and conversion finishes made for the climate of the house.",
@@ -821,8 +817,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Serving {city.city} and homes across {city.province}
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-white/75">
-              Hempston Home designs, builds and installs custom cabinetry for {city.city} and{" "}
-              {city.region}. {madeLine}
+              Hempston Home designs, builds and installs custom cabinetry for {homesInArea(city)}.
             </p>
           </div>
 
@@ -961,14 +956,15 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               Let's design custom cabinetry for your {city.city} home
             </h2>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-black/70">
-              Tell us about your space and we'll arrange a free, no-obligation design consultation —
-              precise measurements, fresh ideas, and an honest budget for your {city.city} project.
+              Tell us about your space and we'll arrange a free, no-obligation design consultation,
+              with precise measurements, fresh ideas, and an honest budget for your {city.city}{" "}
+              project.
             </p>
             <ul className="mt-8 space-y-3">
               {[
                 `Free design consultation across ${city.region}`,
                 "Itemised, written quote before any deposit",
-                madeLine,
+                `${LEAD_TIME_LABEL} for most kitchens, confirmed in writing`,
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-6 shrink-0 bg-black/50" />

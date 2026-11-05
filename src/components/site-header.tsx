@@ -16,6 +16,10 @@ const customCabinets = [
   { label: "Colours & Finishes", to: "/products/colours-finishes" as const },
   { label: "Brands We Work With", to: "/products/brands" as const },
   { label: "Services", to: "/services" as const },
+  { label: "Bathroom Vanities", to: "/custom-bathroom-vanities-halifax" as const },
+  { label: "Built-ins and Millwork", to: "/built-ins-millwork-nova-scotia" as const },
+  { label: "Dartmouth and Bedford", to: "/custom-cabinets-dartmouth-bedford" as const },
+  { label: "Halifax Cost Guide", to: "/custom-kitchen-cabinet-cost-halifax" as const },
   { label: "Rush / Fast Timeline", to: "/rush-custom-kitchen-cabinets" as const },
 ];
 

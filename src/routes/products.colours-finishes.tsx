@@ -36,7 +36,7 @@ const finishFaqs = [
 
 const PAGE_TITLE = "Cabinet Paint Colours and Stains | Hempston Home";
 const PAGE_DESC =
-  "Cabinet paint colours from Farrow & Ball and Benjamin Moore, plus Rubio Monocoat stains for oak and walnut. Built in Canada. Order a sample.";
+  "Cabinet paint colours from Farrow & Ball and Benjamin Moore, plus Rubio Monocoat stains for oak and walnut. Finished to order. Order a sample.";
 const ABSOLUTE_URL = `${SITE_URL}/products/colours-finishes`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 

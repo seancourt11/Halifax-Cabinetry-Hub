@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as BuiltInsMillworkNovaScotiaRouteImport } from './routes/built-ins-millwork-nova-scotia'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CustomBathroomVanitiesHalifaxRouteImport } from './routes/custom-bathroom-vanities-halifax'
 import { Route as CustomCabinetryCalgaryRouteImport } from './routes/custom-cabinetry-calgary'
 import { Route as CustomCabinetryCharlottetownRouteImport } from './routes/custom-cabinetry-charlottetown'
 import { Route as CustomCabinetryEdmontonRouteImport } from './routes/custom-cabinetry-edmonton'
@@ -29,6 +31,8 @@ import { Route as CustomCabinetryStJohnsRouteImport } from './routes/custom-cabi
 import { Route as CustomCabinetryTorontoRouteImport } from './routes/custom-cabinetry-toronto'
 import { Route as CustomCabinetryVancouverRouteImport } from './routes/custom-cabinetry-vancouver'
 import { Route as CustomCabinetryWinnipegRouteImport } from './routes/custom-cabinetry-winnipeg'
+import { Route as CustomCabinetsDartmouthBedfordRouteImport } from './routes/custom-cabinets-dartmouth-bedford'
+import { Route as CustomKitchenCabinetCostHalifaxRouteImport } from './routes/custom-kitchen-cabinet-cost-halifax'
 import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RushCustomKitchenCabinetsRouteImport } from './routes/rush-custom-kitchen-cabinets'
@@ -53,6 +57,12 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuiltInsMillworkNovaScotiaRoute =
+  BuiltInsMillworkNovaScotiaRouteImport.update({
+    id: '/built-ins-millwork-nova-scotia',
+    path: '/built-ins-millwork-nova-scotia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CaseStudiesRoute = CaseStudiesRouteImport.update({
   id: '/case-studies',
   path: '/case-studies',
@@ -63,6 +73,12 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomBathroomVanitiesHalifaxRoute =
+  CustomBathroomVanitiesHalifaxRouteImport.update({
+    id: '/custom-bathroom-vanities-halifax',
+    path: '/custom-bathroom-vanities-halifax',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CustomCabinetryCalgaryRoute = CustomCabinetryCalgaryRouteImport.update({
   id: '/custom-cabinetry-calgary',
   path: '/custom-cabinetry-calgary',
@@ -149,6 +165,18 @@ const CustomCabinetryWinnipegRoute = CustomCabinetryWinnipegRouteImport.update({
   path: '/custom-cabinetry-winnipeg',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomCabinetsDartmouthBedfordRoute =
+  CustomCabinetsDartmouthBedfordRouteImport.update({
+    id: '/custom-cabinets-dartmouth-bedford',
+    path: '/custom-cabinets-dartmouth-bedford',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CustomKitchenCabinetCostHalifaxRoute =
+  CustomKitchenCabinetCostHalifaxRouteImport.update({
+    id: '/custom-kitchen-cabinet-cost-halifax',
+    path: '/custom-kitchen-cabinet-cost-halifax',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LocationsRoute = LocationsRouteImport.update({
   id: '/locations',
   path: '/locations',
@@ -219,8 +247,10 @@ const ProductsDoorStylesRoute = ProductsDoorStylesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/built-ins-millwork-nova-scotia': typeof BuiltInsMillworkNovaScotiaRoute
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
+  '/custom-bathroom-vanities-halifax': typeof CustomBathroomVanitiesHalifaxRoute
   '/custom-cabinetry-calgary': typeof CustomCabinetryCalgaryRoute
   '/custom-cabinetry-charlottetown': typeof CustomCabinetryCharlottetownRoute
   '/custom-cabinetry-edmonton': typeof CustomCabinetryEdmontonRoute
@@ -237,6 +267,8 @@ export interface FileRoutesByFullPath {
   '/custom-cabinetry-toronto': typeof CustomCabinetryTorontoRoute
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
+  '/custom-cabinets-dartmouth-bedford': typeof CustomCabinetsDartmouthBedfordRoute
+  '/custom-kitchen-cabinet-cost-halifax': typeof CustomKitchenCabinetCostHalifaxRoute
   '/locations': typeof LocationsRoute
   '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
@@ -254,8 +286,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/built-ins-millwork-nova-scotia': typeof BuiltInsMillworkNovaScotiaRoute
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
+  '/custom-bathroom-vanities-halifax': typeof CustomBathroomVanitiesHalifaxRoute
   '/custom-cabinetry-calgary': typeof CustomCabinetryCalgaryRoute
   '/custom-cabinetry-charlottetown': typeof CustomCabinetryCharlottetownRoute
   '/custom-cabinetry-edmonton': typeof CustomCabinetryEdmontonRoute
@@ -272,6 +306,8 @@ export interface FileRoutesByTo {
   '/custom-cabinetry-toronto': typeof CustomCabinetryTorontoRoute
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
+  '/custom-cabinets-dartmouth-bedford': typeof CustomCabinetsDartmouthBedfordRoute
+  '/custom-kitchen-cabinet-cost-halifax': typeof CustomKitchenCabinetCostHalifaxRoute
   '/locations': typeof LocationsRoute
   '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
@@ -290,8 +326,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/built-ins-millwork-nova-scotia': typeof BuiltInsMillworkNovaScotiaRoute
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
+  '/custom-bathroom-vanities-halifax': typeof CustomBathroomVanitiesHalifaxRoute
   '/custom-cabinetry-calgary': typeof CustomCabinetryCalgaryRoute
   '/custom-cabinetry-charlottetown': typeof CustomCabinetryCharlottetownRoute
   '/custom-cabinetry-edmonton': typeof CustomCabinetryEdmontonRoute
@@ -308,6 +346,8 @@ export interface FileRoutesById {
   '/custom-cabinetry-toronto': typeof CustomCabinetryTorontoRoute
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
+  '/custom-cabinets-dartmouth-bedford': typeof CustomCabinetsDartmouthBedfordRoute
+  '/custom-kitchen-cabinet-cost-halifax': typeof CustomKitchenCabinetCostHalifaxRoute
   '/locations': typeof LocationsRoute
   '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
@@ -327,8 +367,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/built-ins-millwork-nova-scotia'
     | '/case-studies'
     | '/contact'
+    | '/custom-bathroom-vanities-halifax'
     | '/custom-cabinetry-calgary'
     | '/custom-cabinetry-charlottetown'
     | '/custom-cabinetry-edmonton'
@@ -345,6 +387,8 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-toronto'
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
+    | '/custom-cabinets-dartmouth-bedford'
+    | '/custom-kitchen-cabinet-cost-halifax'
     | '/locations'
     | '/projects'
     | '/rush-custom-kitchen-cabinets'
@@ -362,8 +406,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/built-ins-millwork-nova-scotia'
     | '/case-studies'
     | '/contact'
+    | '/custom-bathroom-vanities-halifax'
     | '/custom-cabinetry-calgary'
     | '/custom-cabinetry-charlottetown'
     | '/custom-cabinetry-edmonton'
@@ -380,6 +426,8 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-toronto'
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
+    | '/custom-cabinets-dartmouth-bedford'
+    | '/custom-kitchen-cabinet-cost-halifax'
     | '/locations'
     | '/projects'
     | '/rush-custom-kitchen-cabinets'
@@ -397,8 +445,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/built-ins-millwork-nova-scotia'
     | '/case-studies'
     | '/contact'
+    | '/custom-bathroom-vanities-halifax'
     | '/custom-cabinetry-calgary'
     | '/custom-cabinetry-charlottetown'
     | '/custom-cabinetry-edmonton'
@@ -415,6 +465,8 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-toronto'
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
+    | '/custom-cabinets-dartmouth-bedford'
+    | '/custom-kitchen-cabinet-cost-halifax'
     | '/locations'
     | '/projects'
     | '/rush-custom-kitchen-cabinets'
@@ -433,8 +485,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BuiltInsMillworkNovaScotiaRoute: typeof BuiltInsMillworkNovaScotiaRoute
   CaseStudiesRoute: typeof CaseStudiesRoute
   ContactRoute: typeof ContactRoute
+  CustomBathroomVanitiesHalifaxRoute: typeof CustomBathroomVanitiesHalifaxRoute
   CustomCabinetryCalgaryRoute: typeof CustomCabinetryCalgaryRoute
   CustomCabinetryCharlottetownRoute: typeof CustomCabinetryCharlottetownRoute
   CustomCabinetryEdmontonRoute: typeof CustomCabinetryEdmontonRoute
@@ -451,6 +505,8 @@ export interface RootRouteChildren {
   CustomCabinetryTorontoRoute: typeof CustomCabinetryTorontoRoute
   CustomCabinetryVancouverRoute: typeof CustomCabinetryVancouverRoute
   CustomCabinetryWinnipegRoute: typeof CustomCabinetryWinnipegRoute
+  CustomCabinetsDartmouthBedfordRoute: typeof CustomCabinetsDartmouthBedfordRoute
+  CustomKitchenCabinetCostHalifaxRoute: typeof CustomKitchenCabinetCostHalifaxRoute
   LocationsRoute: typeof LocationsRoute
   ProjectsRoute: typeof ProjectsRoute
   RushCustomKitchenCabinetsRoute: typeof RushCustomKitchenCabinetsRoute
@@ -482,6 +538,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/built-ins-millwork-nova-scotia': {
+      id: '/built-ins-millwork-nova-scotia'
+      path: '/built-ins-millwork-nova-scotia'
+      fullPath: '/built-ins-millwork-nova-scotia'
+      preLoaderRoute: typeof BuiltInsMillworkNovaScotiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/case-studies': {
       id: '/case-studies'
       path: '/case-studies'
@@ -494,6 +557,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-bathroom-vanities-halifax': {
+      id: '/custom-bathroom-vanities-halifax'
+      path: '/custom-bathroom-vanities-halifax'
+      fullPath: '/custom-bathroom-vanities-halifax'
+      preLoaderRoute: typeof CustomBathroomVanitiesHalifaxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/custom-cabinetry-calgary': {
@@ -608,6 +678,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CustomCabinetryWinnipegRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/custom-cabinets-dartmouth-bedford': {
+      id: '/custom-cabinets-dartmouth-bedford'
+      path: '/custom-cabinets-dartmouth-bedford'
+      fullPath: '/custom-cabinets-dartmouth-bedford'
+      preLoaderRoute: typeof CustomCabinetsDartmouthBedfordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-kitchen-cabinet-cost-halifax': {
+      id: '/custom-kitchen-cabinet-cost-halifax'
+      path: '/custom-kitchen-cabinet-cost-halifax'
+      fullPath: '/custom-kitchen-cabinet-cost-halifax'
+      preLoaderRoute: typeof CustomKitchenCabinetCostHalifaxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/locations': {
       id: '/locations'
       path: '/locations'
@@ -705,8 +789,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BuiltInsMillworkNovaScotiaRoute: BuiltInsMillworkNovaScotiaRoute,
   CaseStudiesRoute: CaseStudiesRoute,
   ContactRoute: ContactRoute,
+  CustomBathroomVanitiesHalifaxRoute: CustomBathroomVanitiesHalifaxRoute,
   CustomCabinetryCalgaryRoute: CustomCabinetryCalgaryRoute,
   CustomCabinetryCharlottetownRoute: CustomCabinetryCharlottetownRoute,
   CustomCabinetryEdmontonRoute: CustomCabinetryEdmontonRoute,
@@ -723,6 +809,8 @@ const rootRouteChildren: RootRouteChildren = {
   CustomCabinetryTorontoRoute: CustomCabinetryTorontoRoute,
   CustomCabinetryVancouverRoute: CustomCabinetryVancouverRoute,
   CustomCabinetryWinnipegRoute: CustomCabinetryWinnipegRoute,
+  CustomCabinetsDartmouthBedfordRoute: CustomCabinetsDartmouthBedfordRoute,
+  CustomKitchenCabinetCostHalifaxRoute: CustomKitchenCabinetCostHalifaxRoute,
   LocationsRoute: LocationsRoute,
   ProjectsRoute: ProjectsRoute,
   RushCustomKitchenCabinetsRoute: RushCustomKitchenCabinetsRoute,

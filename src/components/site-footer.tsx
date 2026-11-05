@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
+  HOURS,
   LOCATION_LIST,
   MONCTON_PHONE_DISPLAY,
   MONCTON_PHONE_TEL,
@@ -20,6 +21,10 @@ const studioLinks = [
   { label: "Services", to: "/services" as const },
   { label: "Case Studies", to: "/case-studies" as const },
   { label: "Projects", to: "/projects" as const },
+  { label: "Bathroom Vanities", to: "/custom-bathroom-vanities-halifax" as const },
+  { label: "Built-ins and Millwork", to: "/built-ins-millwork-nova-scotia" as const },
+  { label: "Dartmouth and Bedford", to: "/custom-cabinets-dartmouth-bedford" as const },
+  { label: "Halifax Cost Guide", to: "/custom-kitchen-cabinet-cost-halifax" as const },
   { label: "How We Work", to: "/work-with-us" as const },
   { label: "Rush Cabinets", to: "/rush-custom-kitchen-cabinets" as const },
   { label: "Halifax", to: "/custom-cabinetry-halifax" as const },
@@ -93,7 +98,7 @@ export function SiteFooter() {
                   info@hempstonhome.com
                 </a>
               </li>
-              <li>Monday to Friday, 9am to 5pm, by appointment</li>
+              <li>{HOURS.label}</li>
               <li>
                 <a
                   href="https://www.instagram.com/hempstonhome"

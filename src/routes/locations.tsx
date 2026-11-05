@@ -11,7 +11,7 @@ import ogImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
 
 const PAGE_TITLE = "Custom Cabinetry Service Areas | Hempston Home";
 const PAGE_DESC =
-  "Hempston Home builds custom cabinetry in Canada, with installs in Atlantic Canada, Toronto and beyond. Built in Canada. Find your area and book a consult.";
+  "Custom cabinetry service areas for Hempston Home, from Halifax and Atlantic Canada to Toronto and cities across Canada. Find your area and book a consult.";
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 const ABSOLUTE_URL = `${SITE_URL}/locations`;
 
@@ -172,7 +172,7 @@ function LocationsHub() {
                         Custom Cabinetry in {c.city}
                       </span>
                       <span className="mt-2 block text-xs leading-relaxed text-white/60">
-                        Serving {c.region} — kitchens, vanities & built-ins.
+                        Serving {c.region}: kitchens, vanities and built-ins.
                       </span>
                     </span>
                     <span className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/70 transition-colors group-hover:text-white">

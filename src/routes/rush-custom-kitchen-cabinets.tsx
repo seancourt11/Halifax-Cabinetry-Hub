@@ -26,12 +26,12 @@ import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
 
-import heroImg from "@/assets/projects/modern-marble-kitchen.jpg";
-import processImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
-import shakerImg from "@/assets/projects/gh-white-cabinets-brass-hood.jpg";
-import islandImg from "@/assets/projects/nwc-oak-island-kitchen.jpg";
-import panelImg from "@/assets/projects/md-white-kitchen-brass-pendants.jpg";
-import proofImg from "@/assets/projects/glen-haven-brass-hood-kitchen.jpg";
+import heroImg from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
+import processImg from "@/assets/hempston-workshop-layout.jpg";
+import shakerImg from "@/assets/door-gallery-2026/11_setting_plaster_shaker.png";
+import slabImg from "@/assets/door-gallery-2026/12_hague_blue_slab.png";
+import oakSlabImg from "@/assets/door-gallery-2026/06_smoked_oak_slab.png";
+import panelImg from "@/assets/door-gallery-2026/door_barcelona_phantom_mist.png";
 
 const PAGE_TITLE = "Rush Custom Kitchen Cabinets | Hempston Home";
 const PAGE_DESC =
@@ -121,22 +121,30 @@ const rushFitStyles = [
   {
     title: "Painted Shaker",
     img: shakerImg,
-    alt: "Painted white Shaker kitchen cabinetry — fast rush timeline",
+    alt: "Hempston door render of a painted Shaker cabinet door in Setting Plaster",
+    width: 1037,
+    height: 1517,
   },
   {
     title: "Modern Slab",
-    img: heroImg,
-    alt: "Modern slab kitchen cabinetry in light oak — expedited lead time",
+    img: slabImg,
+    alt: "Hempston door render of a painted slab cabinet door in Hague Blue",
+    width: 1037,
+    height: 1517,
   },
   {
-    title: "White Oak Frameless",
-    img: islandImg,
-    alt: "White oak frameless island cabinetry available on rush timeline",
+    title: "White Oak Slab",
+    img: oakSlabImg,
+    alt: "Hempston door render of a white oak slab cabinet door with a smoked oak stain",
+    width: 1037,
+    height: 1517,
   },
   {
-    title: "Painted Panel",
+    title: "Painted Raised Panel",
     img: panelImg,
-    alt: "Painted panel kitchen cabinetry with brass hardware, rush-friendly",
+    alt: "Hempston door render of a painted raised-panel cabinet door in Phantom Mist",
+    width: 1037,
+    height: 1517,
   },
 ];
 
@@ -211,7 +219,9 @@ function RushPage() {
           <ResponsiveImg
             src={heroImg}
             sizes="100vw"
-            alt="Custom kitchen cabinetry delivered on a rush timeline"
+            alt="Painted Shaker built-ins and a fireplace surround, photographed in the Hempston shop before delivery"
+            width={2000}
+            height={1500}
             fetchPriority="high"
             className="h-full w-full object-cover opacity-30"
           />
@@ -312,10 +322,12 @@ function RushPage() {
               </p>
               <ResponsiveImg
                 src={processImg}
-                alt="Hempston workshop expediting a custom kitchen cabinetry order"
+                alt="Plywood cabinet layout marked in pencil on the bench in the Hempston shop"
+                width={1152}
+                height={2048}
                 loading="lazy"
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="mt-10 aspect-[4/3] w-full object-cover"
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="mt-10 aspect-[9/16] w-full bg-white object-contain"
               />
             </div>
             <ol className="space-y-6">
@@ -405,13 +417,15 @@ function RushPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {rushFitStyles.map((s) => (
               <div key={s.title} className="group">
-                <div className="aspect-[4/5] overflow-hidden bg-white/5">
+                <div className="aspect-[4/5] overflow-hidden bg-white">
                   <ResponsiveImg
                     src={s.img}
                     alt={s.alt}
+                    width={s.width}
+                    height={s.height}
                     loading="lazy"
                     sizes="(min-width: 768px) 25vw, 50vw"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-full w-full object-contain"
                   />
                 </div>
                 <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.28em] text-white/40">
@@ -427,14 +441,7 @@ function RushPage() {
       {/* PROOF */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
-          <div className="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-            <ResponsiveImg
-              src={proofImg}
-              alt="Custom kitchen cabinetry delivered on a compressed timeline for a move-in deadline"
-              loading="lazy"
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="aspect-[4/3] w-full object-cover"
-            />
+          <div className="max-w-3xl">
             <div>
               <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
                 Recent rush project
@@ -553,7 +560,7 @@ function RushPage() {
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/65">
             Every custom cabinet shop in North America runs on the same physics — hardwood has to be
             milled, boxes have to be assembled, finishes have to cure, and installers have to be
-            scheduled. Standard custom kitchen cabinet lead times run 10–16 weeks. A true rush
+            scheduled. Standard custom kitchen cabinet lead times run 8 to 14 weeks. A true rush
             custom kitchen cabinet order compresses that to 4–8 weeks by reshuffling shop capacity,
             not by skipping steps. Here is how the lead-time bands break down in practice.
           </p>
@@ -575,9 +582,9 @@ function RushPage() {
                 body: "Room for inset face-frame construction, more complex door profiles, glazed or specialty finishes, and appliance-panel integration. Still meaningfully faster than a standard queue and typically the right window for a fully-detailed custom kitchen renovation on a real deadline.",
               },
               {
-                band: "10–16 weeks",
+                band: "8 to 14 weeks",
                 label: "Standard custom",
-                body: "Industry standard for custom kitchen cabinetry. Full design development, unlimited style and finish options, complex millwork, hand-glazed finishes, and specialty veneers all fit comfortably inside this window.",
+                body: "Hempston Home's standard window for a custom kitchen, from the first consultation to install. Full design development, the full range of styles and finishes, complex millwork, hand-glazed finishes, and specialty veneers fit inside this window.",
               },
             ].map((row) => (
               <div

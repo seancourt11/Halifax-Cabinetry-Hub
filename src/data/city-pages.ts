@@ -67,7 +67,7 @@ function baseFaqs(d: {
       q: "Where are your cabinets made?",
       a:
         d.countryCode === "CA"
-          ? `Cabinetry for ${d.city} homes is built in Canada. We design it for the room, deliver it, and install it. We install across Canada and the United States.`
+          ? `We design cabinetry for ${d.city} homes, deliver it, and install it. We also install across Canada and the United States.`
           : `We design cabinetry for ${d.city} homes, then deliver and install it. We install across Canada and the United States.`,
     },
     {
@@ -194,7 +194,7 @@ const fredericton: CityPageData = {
   eyebrow: "Fredericton · New Brunswick",
   heroTitle: ["Custom Kitchen", "Cabinetry in", "Fredericton"],
   heroLead:
-    "Made-to-measure custom kitchens, vanities and built-ins for Fredericton, Oromocto, Hanwell and homes along the Saint John River — built in Canada, never flat-packed.",
+    "Made-to-measure custom kitchens, vanities and built-ins for Fredericton, Oromocto, Hanwell and homes along the Saint John River, never flat-packed.",
   introHeadline: "Cabinetry built for Fredericton homes",
   introBody: [
     "From historic homes downtown near the river to new builds in Hanwell and Skyline Acres, Fredericton kitchens deserve cabinetry that fits the space and the way you actually live. Hempston designs and hand-builds every piece — no fixed door catalogues, no filler panels.",

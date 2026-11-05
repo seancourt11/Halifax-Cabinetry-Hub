@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import { GoogleAnalytics } from "../components/google-analytics";
 import appCss from "../styles.css?url";
+import criticalCss from "../critical.css?raw";
 import { GA_BOOTSTRAP_SCRIPT } from "../lib/ga4";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { isServiceAreaPath, organizationJsonLd } from "../lib/schema";
@@ -85,7 +86,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.",
+          "Custom kitchen cabinets and millwork in Halifax, Nova Scotia. Hempston Home designs, builds and installs kitchens, vanities and built-ins. Book a consult.",
       },
       { name: "author", content: BRAND },
       { property: "og:site_name", content: BRAND },
@@ -96,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.",
+          "Custom kitchen cabinets and millwork in Halifax, Nova Scotia. Hempston Home designs, builds and installs kitchens, vanities and built-ins. Book a consult.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -107,17 +108,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:description",
         content:
-          "Hempston Home designs and builds 100% custom kitchen cabinets and millwork in Halifax, Nova Scotia. Built in Canada. Book a free consultation.",
+          "Custom kitchen cabinets and millwork in Halifax, Nova Scotia. Hempston Home designs, builds and installs kitchens, vanities and built-ins. Book a consult.",
       },
     ],
     links: [
       { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "preload", href: appCss, as: "style" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -151,6 +149,20 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
+        {/* media=print keeps this sheet from blocking first paint. The script
+            flips it to all. An HTML onload attribute is required: React's
+            onLoad is not present in the server HTML, so a cached sheet can
+            finish before hydration and never switch. */}
+        <link id="app-css" rel="stylesheet" href={appCss} media="print" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(()=>{var l=document.getElementById("app-css");if(!l)return;function go(){l.media="all"}if(l.sheet)go();else l.onload=go})();`,
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href={appCss} />
+        </noscript>
         {/* Non-render-blocking font CSS. The preload above starts the download. */}
         <script
           dangerouslySetInnerHTML={{
