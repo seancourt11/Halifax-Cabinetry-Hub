@@ -183,7 +183,7 @@ function AboutPage() {
           </p>
           <p>
             Cabinets are built in Halifax, Nova Scotia at our Bayne St shop. Toronto and the Long
-            Beach area facility are facilities and service bases, not manufacturing sites. Built in
+            Beach area are facilities and service bases. Built in
             Canada. We install across Canada and the United States. One team still takes a project
             from concept to install, with laser-measured shop drawings and finishes sprayed or
             hand-rubbed.
