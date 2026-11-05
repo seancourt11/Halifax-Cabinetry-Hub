@@ -1,7 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import {
+  novaScotiaHero,
+  novaScotiaProjectPhotos,
+  uniqueImages,
+  type SeoImage,
+} from "@/data/seo-page-images";
 
 const BASE_URL = "https://www.hempstonhome.com";
+
+const pageImages: Record<string, SeoImage[]> = {
+  "/custom-kitchen-cabinets-nova-scotia": uniqueImages([
+    novaScotiaHero,
+    ...novaScotiaProjectPhotos,
+  ]),
+};
 
 interface SitemapEntry {
   path: string;
@@ -67,6 +80,15 @@ export const Route = createFileRoute("/sitemap.xml")({
             `    <lastmod>${e.lastmod ?? LASTMOD}</lastmod>`,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
+            ...(pageImages[e.path] ?? []).map((image) =>
+              [
+                `    <image:image>`,
+                `      <image:loc>${BASE_URL}${image.src}</image:loc>`,
+                `      <image:title>${escapeXml(image.title)}</image:title>`,
+                `      <image:caption>${escapeXml(image.caption)}</image:caption>`,
+                `    </image:image>`,
+              ].join("\n"),
+            ),
             `  </url>`,
           ]
             .filter(Boolean)
@@ -75,7 +97,7 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,
-          `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+          `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`,
           ...urls,
           `</urlset>`,
         ].join("\n");
@@ -90,3 +112,12 @@ export const Route = createFileRoute("/sitemap.xml")({
     },
   },
 });
+
+function escapeXml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
