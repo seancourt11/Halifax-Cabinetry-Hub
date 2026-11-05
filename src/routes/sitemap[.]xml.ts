@@ -46,6 +46,18 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/projects", changefreq: "monthly", priority: "0.6" },
           { path: "/work-with-us", changefreq: "monthly", priority: "0.8" },
           { path: "/rush-custom-kitchen-cabinets", changefreq: "monthly", priority: "0.7" },
+          {
+            path: "/custom-kitchen-cabinets-nova-scotia",
+            changefreq: "monthly",
+            priority: "0.8",
+            lastmod: "2026-11-05",
+          },
+          {
+            path: "/inset-face-frame-cabinets",
+            changefreq: "monthly",
+            priority: "0.8",
+            lastmod: "2026-11-05",
+          },
         ];
 
         const urls = entries.map((e) =>

@@ -186,6 +186,17 @@ function CabinetStylesPage() {
               furniture-grade shadow lines. Here are inset doors across shaker, recessed-panel,
               beaded and slab profiles, finished in a range of paint colours.
             </p>
+            <p className="mt-6 text-sm text-white/80">
+              <Link to="/inset-face-frame-cabinets" className="underline">
+                Inset face-frame cabinets
+              </Link>
+              <span className="mx-2 text-white/40" aria-hidden="true">
+                /
+              </span>
+              <Link to="/custom-kitchen-cabinets-nova-scotia" className="underline">
+                Custom kitchen cabinets in Nova Scotia
+              </Link>
+            </p>
           </div>
           <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
             {faceFrameGallery.map((d) => (

@@ -134,20 +134,26 @@ export const LOCATION_LIST: ShopLocation[] = [
   LOCATIONS.longBeach,
 ];
 
+/** Public business hours. Visible copy and schema both use this window. */
+export const PUBLIC_HOURS_LABEL = "Monday to Friday, 9:00 AM to 5:00 PM";
+
 export const HOURS = {
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
   opens: "09:00",
   closes: "17:00",
-  label: "Monday to Friday, 9am to 5pm, by appointment",
+  label: PUBLIC_HOURS_LABEL,
 };
 
-/** Shop hours shown on the Halifax page and on the Halifax LocalBusiness schema. */
+/**
+ * Public business hours on the Halifax page and in the Halifax LocalBusiness
+ * schema. Same window as HOURS. This is not a staff shop-shift schedule.
+ */
 export const HALIFAX_SHOP_HOURS = {
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
-  opens: "07:00",
+  opens: "09:00",
   closes: "17:00",
-  openingHours: "Mo-Fr 07:00-17:00",
-  label: "Monday to Friday, 7:00 AM to 5:00 PM",
+  openingHours: "Mo-Fr 09:00-17:00",
+  label: PUBLIC_HOURS_LABEL,
 };
 
 export type PageSeo = { title: string; description: string; h1: string };
