@@ -15,7 +15,7 @@ import kentPantry from "@/assets/projects/dba-kent-pantry.jpg";
 import plKitchen from "@/assets/projects/dba-pl-kitchen-1.jpg";
 import oakVanityFluted from "@/assets/projects/face-frame/white-oak-face-frame-vanity-fluted-drawers.webp";
 import oakVanitySide from "@/assets/projects/face-frame/white-oak-face-frame-vanity-side-slatted-shelf.webp";
-import oakSlattedShelf from "@/assets/projects/face-frame/stained-oak-slatted-shelf-rounded-edge.webp";
+import oakKnifeBlock from "@/assets/projects/face-frame/stained-oak-custom-knife-block-shop.webp";
 import navyPantryLadder from "@/assets/projects/face-frame/navy-painted-face-frame-pantry-library-ladder.webp";
 import navyPantryShelves from "@/assets/projects/face-frame/navy-painted-face-frame-pantry-open-shelves.webp";
 import ashCabinet from "@/assets/projects/face-frame/unfinished-ash-face-frame-cabinet-crown-slats.webp";
@@ -206,10 +206,10 @@ export const otherFaceFrameJobs: { job: string; photos: InsetPhoto[] }[] = [
         1600,
       ),
       project(
-        oakSlattedShelf,
-        "stained-oak-slatted-shelf-rounded-edge.webp",
-        "Stained oak slatted shelf",
-        "Close-up of a stained oak slatted shelf with a rounded edge",
+        oakKnifeBlock,
+        "stained-oak-custom-knife-block-shop.webp",
+        "Custom stained oak knife block",
+        "Custom stained oak knife block with a slatted, rounded-edge design, made in the Hempston Home shop",
         736,
         1600,
       ),
