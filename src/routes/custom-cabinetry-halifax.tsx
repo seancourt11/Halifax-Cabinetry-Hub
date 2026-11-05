@@ -422,7 +422,7 @@ const reasons = [
   {
     icon: Leaf,
     title: "Built in Canada",
-    body: "Cabinets are built in Halifax at our Bayne St shop. Toronto and the Long Beach area facility are facilities and service bases.",
+    body: "Cabinets are built in Halifax at our Bayne St shop. Toronto and the Long Beach area are facilities and service bases.",
   },
   {
     icon: Clock,

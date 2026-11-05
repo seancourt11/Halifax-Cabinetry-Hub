@@ -50,7 +50,7 @@ export const INSTALL_LINE = "We install across Canada and the United States.";
 
 /** Allowed on the Halifax page, About, and the global FAQ / llms.txt. */
 export const HALIFAX_BUILD_SENTENCE =
-  "Cabinets are built in Halifax, Nova Scotia at our Bayne St shop, 6359 Bayne St, Halifax, NS B3K 2V6. Toronto and the Long Beach area facility are facilities and service bases, not manufacturing sites.";
+  "Cabinets are built in Halifax, Nova Scotia at our Bayne St shop, 6359 Bayne St, Halifax, NS B3K 2V6. Toronto and the Long Beach area are facilities and service bases.";
 
 export type ShopLocation = {
   id: string;
