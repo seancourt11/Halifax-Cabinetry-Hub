@@ -1,15 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { SITE_URL } from "@/lib/schema";
-import {
-  insetHero,
-  insetNamedDoors,
-  insetProfileIllustrations,
-  insetProjectPhotos,
-  novaScotiaHero,
-  novaScotiaProjectPhotos,
-  uniqueImages,
-} from "@/data/seo-page-images";
+import { novaScotiaHero, novaScotiaProjectPhotos, uniqueImages } from "@/data/seo-page-images";
 import homeHero from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 import ogHalifax from "@/assets/og/og-halifax.jpg";
 import ogAbout from "@/assets/og/og-about.jpg";
@@ -110,19 +102,6 @@ const entries: ImageEntry[] = [
   {
     pageUrl: `${SITE_URL}/custom-kitchen-cabinets-nova-scotia`,
     images: uniqueImages([novaScotiaHero, ...novaScotiaProjectPhotos]).map((image) => ({
-      loc: `${SITE_URL}${image.src}`,
-      title: image.title,
-      caption: image.caption,
-    })),
-  },
-  {
-    pageUrl: `${SITE_URL}/inset-face-frame-cabinets`,
-    images: uniqueImages([
-      ...insetProfileIllustrations,
-      ...insetNamedDoors,
-      ...insetProjectPhotos,
-      insetHero,
-    ]).map((image) => ({
       loc: `${SITE_URL}${image.src}`,
       title: image.title,
       caption: image.caption,

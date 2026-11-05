@@ -1,10 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import {
-  insetHero,
-  insetNamedDoors,
-  insetProfileIllustrations,
-  insetProjectPhotos,
   novaScotiaHero,
   novaScotiaProjectPhotos,
   uniqueImages,
@@ -17,12 +13,6 @@ const pageImages: Record<string, SeoImage[]> = {
   "/custom-kitchen-cabinets-nova-scotia": uniqueImages([
     novaScotiaHero,
     ...novaScotiaProjectPhotos,
-  ]),
-  "/inset-face-frame-cabinets": uniqueImages([
-    ...insetProfileIllustrations,
-    ...insetNamedDoors,
-    ...insetProjectPhotos,
-    insetHero,
   ]),
 };
 
