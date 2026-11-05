@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
+  HOURS,
   LOCATION_LIST,
   MONCTON_PHONE_DISPLAY,
   MONCTON_PHONE_TEL,
@@ -93,7 +94,7 @@ export function SiteFooter() {
                   info@hempstonhome.com
                 </a>
               </li>
-              <li>Monday to Friday, 9am to 5pm, by appointment</li>
+              <li>{HOURS.label}</li>
               <li>
                 <a
                   href="https://www.instagram.com/hempstonhome"

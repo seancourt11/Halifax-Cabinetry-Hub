@@ -591,6 +591,23 @@ function Index() {
               </p>
             </Link>
           </div>
+          <p className="mt-8 text-sm text-white/70">
+            <Link
+              to="/custom-kitchen-cabinets-nova-scotia"
+              className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+            >
+              Custom kitchen cabinets in Nova Scotia
+            </Link>
+            <span className="mx-3 text-white/40" aria-hidden="true">
+              /
+            </span>
+            <Link
+              to="/inset-face-frame-cabinets"
+              className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+            >
+              Inset face-frame cabinets
+            </Link>
+          </p>
         </div>
       </section>
 

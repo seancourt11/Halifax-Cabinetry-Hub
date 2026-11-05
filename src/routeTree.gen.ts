@@ -29,6 +29,8 @@ import { Route as CustomCabinetryStJohnsRouteImport } from './routes/custom-cabi
 import { Route as CustomCabinetryTorontoRouteImport } from './routes/custom-cabinetry-toronto'
 import { Route as CustomCabinetryVancouverRouteImport } from './routes/custom-cabinetry-vancouver'
 import { Route as CustomCabinetryWinnipegRouteImport } from './routes/custom-cabinetry-winnipeg'
+import { Route as CustomKitchenCabinetsNovaScotiaRouteImport } from './routes/custom-kitchen-cabinets-nova-scotia'
+import { Route as InsetFaceFrameCabinetsRouteImport } from './routes/inset-face-frame-cabinets'
 import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RushCustomKitchenCabinetsRouteImport } from './routes/rush-custom-kitchen-cabinets'
@@ -149,6 +151,17 @@ const CustomCabinetryWinnipegRoute = CustomCabinetryWinnipegRouteImport.update({
   path: '/custom-cabinetry-winnipeg',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomKitchenCabinetsNovaScotiaRoute =
+  CustomKitchenCabinetsNovaScotiaRouteImport.update({
+    id: '/custom-kitchen-cabinets-nova-scotia',
+    path: '/custom-kitchen-cabinets-nova-scotia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const InsetFaceFrameCabinetsRoute = InsetFaceFrameCabinetsRouteImport.update({
+  id: '/inset-face-frame-cabinets',
+  path: '/inset-face-frame-cabinets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LocationsRoute = LocationsRouteImport.update({
   id: '/locations',
   path: '/locations',
@@ -237,6 +250,8 @@ export interface FileRoutesByFullPath {
   '/custom-cabinetry-toronto': typeof CustomCabinetryTorontoRoute
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
+  '/custom-kitchen-cabinets-nova-scotia': typeof CustomKitchenCabinetsNovaScotiaRoute
+  '/inset-face-frame-cabinets': typeof InsetFaceFrameCabinetsRoute
   '/locations': typeof LocationsRoute
   '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
@@ -272,6 +287,8 @@ export interface FileRoutesByTo {
   '/custom-cabinetry-toronto': typeof CustomCabinetryTorontoRoute
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
+  '/custom-kitchen-cabinets-nova-scotia': typeof CustomKitchenCabinetsNovaScotiaRoute
+  '/inset-face-frame-cabinets': typeof InsetFaceFrameCabinetsRoute
   '/locations': typeof LocationsRoute
   '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
@@ -308,6 +325,8 @@ export interface FileRoutesById {
   '/custom-cabinetry-toronto': typeof CustomCabinetryTorontoRoute
   '/custom-cabinetry-vancouver': typeof CustomCabinetryVancouverRoute
   '/custom-cabinetry-winnipeg': typeof CustomCabinetryWinnipegRoute
+  '/custom-kitchen-cabinets-nova-scotia': typeof CustomKitchenCabinetsNovaScotiaRoute
+  '/inset-face-frame-cabinets': typeof InsetFaceFrameCabinetsRoute
   '/locations': typeof LocationsRoute
   '/projects': typeof ProjectsRoute
   '/rush-custom-kitchen-cabinets': typeof RushCustomKitchenCabinetsRoute
@@ -345,6 +364,8 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-toronto'
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
+    | '/custom-kitchen-cabinets-nova-scotia'
+    | '/inset-face-frame-cabinets'
     | '/locations'
     | '/projects'
     | '/rush-custom-kitchen-cabinets'
@@ -380,6 +401,8 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-toronto'
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
+    | '/custom-kitchen-cabinets-nova-scotia'
+    | '/inset-face-frame-cabinets'
     | '/locations'
     | '/projects'
     | '/rush-custom-kitchen-cabinets'
@@ -415,6 +438,8 @@ export interface FileRouteTypes {
     | '/custom-cabinetry-toronto'
     | '/custom-cabinetry-vancouver'
     | '/custom-cabinetry-winnipeg'
+    | '/custom-kitchen-cabinets-nova-scotia'
+    | '/inset-face-frame-cabinets'
     | '/locations'
     | '/projects'
     | '/rush-custom-kitchen-cabinets'
@@ -451,6 +476,8 @@ export interface RootRouteChildren {
   CustomCabinetryTorontoRoute: typeof CustomCabinetryTorontoRoute
   CustomCabinetryVancouverRoute: typeof CustomCabinetryVancouverRoute
   CustomCabinetryWinnipegRoute: typeof CustomCabinetryWinnipegRoute
+  CustomKitchenCabinetsNovaScotiaRoute: typeof CustomKitchenCabinetsNovaScotiaRoute
+  InsetFaceFrameCabinetsRoute: typeof InsetFaceFrameCabinetsRoute
   LocationsRoute: typeof LocationsRoute
   ProjectsRoute: typeof ProjectsRoute
   RushCustomKitchenCabinetsRoute: typeof RushCustomKitchenCabinetsRoute
@@ -608,6 +635,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CustomCabinetryWinnipegRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/custom-kitchen-cabinets-nova-scotia': {
+      id: '/custom-kitchen-cabinets-nova-scotia'
+      path: '/custom-kitchen-cabinets-nova-scotia'
+      fullPath: '/custom-kitchen-cabinets-nova-scotia'
+      preLoaderRoute: typeof CustomKitchenCabinetsNovaScotiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inset-face-frame-cabinets': {
+      id: '/inset-face-frame-cabinets'
+      path: '/inset-face-frame-cabinets'
+      fullPath: '/inset-face-frame-cabinets'
+      preLoaderRoute: typeof InsetFaceFrameCabinetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/locations': {
       id: '/locations'
       path: '/locations'
@@ -723,6 +764,8 @@ const rootRouteChildren: RootRouteChildren = {
   CustomCabinetryTorontoRoute: CustomCabinetryTorontoRoute,
   CustomCabinetryVancouverRoute: CustomCabinetryVancouverRoute,
   CustomCabinetryWinnipegRoute: CustomCabinetryWinnipegRoute,
+  CustomKitchenCabinetsNovaScotiaRoute: CustomKitchenCabinetsNovaScotiaRoute,
+  InsetFaceFrameCabinetsRoute: InsetFaceFrameCabinetsRoute,
   LocationsRoute: LocationsRoute,
   ProjectsRoute: ProjectsRoute,
   RushCustomKitchenCabinetsRoute: RushCustomKitchenCabinetsRoute,

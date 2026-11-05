@@ -563,6 +563,17 @@ function HalifaxPage() {
                   Need cabinets in about 6 weeks?
                 </Link>
               </p>
+              <p className="mt-3 text-sm text-white/90">
+                <Link to="/custom-kitchen-cabinets-nova-scotia" className="underline">
+                  Custom kitchen cabinets in Nova Scotia
+                </Link>
+                <span className="mx-2 text-white/50" aria-hidden="true">
+                  /
+                </span>
+                <Link to="/inset-face-frame-cabinets" className="underline">
+                  Inset face-frame cabinets
+                </Link>
+              </p>
               <div className="mt-10 flex flex-wrap gap-3">
                 <a href="#consultation" className={btnLight}>
                   Book a Free Design Consultation
