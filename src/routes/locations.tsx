@@ -142,7 +142,7 @@ function LocationsHub() {
             href={`mailto:${ORG_EMAIL}`}
             className="inline-block border border-white/60 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-white transition-colors hover:bg-white hover:text-black"
           >
-            Email Our Studio
+            Email Us
           </a>
         </div>
       </section>

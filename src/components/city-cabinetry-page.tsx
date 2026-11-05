@@ -984,7 +984,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
                 href="mailto:info@hempstonhome.com"
                 className="inline-block border border-black/70 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-black hover:text-white"
               >
-                Email Our Studio
+                Email Us
               </a>
             </div>
           </div>

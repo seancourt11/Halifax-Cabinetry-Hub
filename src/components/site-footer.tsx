@@ -64,7 +64,7 @@ export function SiteFooter() {
           </div>
 
           <FooterColumn eyebrow="01 Products" items={productLinks} />
-          <FooterColumn eyebrow="02 Studio" items={studios} />
+          <FooterColumn eyebrow="02 Company" items={studios} />
 
           <div>
             <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/85">

@@ -127,7 +127,7 @@ export function SiteHeader() {
               Home
             </Link>
             <NavMenu label="Custom Cabinets" links={customCabinets} />
-            <NavMenu label="Studio" links={studioLinks} />
+            <NavMenu label="Company" links={studioLinks} />
             <NavMenu label="Locations" links={locationLinks} />
             <Link
               to="/contact"
@@ -184,7 +184,7 @@ export function SiteHeader() {
                   </SheetClose>
                 ))}
                 <div className="mt-4 pt-2 text-[10px] font-medium uppercase tracking-[0.25em] text-white/85">
-                  Studio
+                  Company
                 </div>
                 {studioLinks.map((l) => (
                   <SheetClose asChild key={l.label}>
