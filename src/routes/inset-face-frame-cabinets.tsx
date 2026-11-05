@@ -5,8 +5,22 @@ import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { VisibleFaq } from "@/components/visible-faq";
 import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
-import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  imageObjectGraph,
+  serviceSchema,
+  SITE_URL,
+} from "@/lib/schema";
 import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
+import { LabeledPhoto } from "@/components/labeled-photo";
+import {
+  doorSamples,
+  glenHavenPhotos,
+  insetPagePhotos,
+  otherFaceFrameJobs,
+  uniqueInsetPhotos,
+} from "@/data/inset-page-photos";
 import heroImg from "@/assets/door-gallery-2026/inset_malibu_school_house_white.png";
 
 const PAGE_TITLE = "Inset Face-Frame Kitchen Cabinets in Canada | Hempston Home";
@@ -76,6 +90,20 @@ export const Route = createFileRoute("/inset-face-frame-cabinets")({
         ),
       },
       { type: "application/ld+json", children: JSON.stringify(faqPageSchema(faqs)) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          imageObjectGraph(
+            uniqueInsetPhotos(insetPagePhotos).map((photo) => ({
+              url: `${SITE_URL}${photo.src}`,
+              caption: photo.caption,
+              name: photo.title,
+              width: photo.schemaWidth,
+              height: photo.schemaHeight,
+            })),
+          ),
+        ),
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify(
@@ -189,6 +217,85 @@ function InsetFaceFramePage() {
               </Link>
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[oklch(0.98_0_0)] py-20 text-[oklch(0.15_0_0)]">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/60">
+            Door samples
+          </p>
+          <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.04em] sm:text-4xl">
+            Named inset and door samples
+          </h2>
+          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
+            {doorSamples.map((photo) => (
+              <LabeledPhoto
+                key={photo.fileName}
+                src={photo.src}
+                alt={photo.alt}
+                title={photo.title}
+                caption={photo.caption}
+                width={photo.width}
+                height={photo.height}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                frameClassName="aspect-[3/4] overflow-hidden bg-white p-3 sm:p-5"
+                imgClassName="h-full w-full object-contain"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 py-20">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+            Glen Haven
+          </p>
+          <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.04em] sm:text-4xl">
+            Face-frame kitchen angles
+          </h2>
+          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {glenHavenPhotos.map((photo) => (
+              <LabeledPhoto
+                key={photo.fileName}
+                src={photo.src}
+                alt={photo.alt}
+                title={photo.title}
+                caption={photo.caption}
+                width={photo.width}
+                height={photo.height}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                tone="dark"
+                frameClassName="overflow-hidden bg-neutral-100"
+                imgClassName="aspect-[4/3] h-full w-full object-cover"
+              />
+            ))}
+          </div>
+          {otherFaceFrameJobs.map((group) => (
+            <div key={group.job} className="mt-16">
+              <h2 className="font-display text-3xl font-light uppercase tracking-[0.04em] sm:text-4xl">
+                {group.job}
+              </h2>
+              <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                {group.photos.map((photo) => (
+                  <LabeledPhoto
+                    key={photo.fileName}
+                    src={photo.src}
+                    alt={photo.alt}
+                    title={photo.title}
+                    caption={photo.caption}
+                    width={photo.width}
+                    height={photo.height}
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    tone="dark"
+                    frameClassName="overflow-hidden bg-neutral-100"
+                    imgClassName="aspect-[4/3] h-full w-full object-cover"
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
