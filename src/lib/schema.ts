@@ -327,3 +327,21 @@ export function imageObjectsSchema(items: { url: string; caption: string; creato
     copyrightHolder: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
   }));
 }
+
+/** ImageObject nodes for photos on a page. Width and height are the served file size. */
+export function imageObjectGraph(
+  items: { url: string; caption: string; name: string; width: number; height: number }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": items.map((it) => ({
+      "@type": "ImageObject",
+      contentUrl: it.url,
+      caption: it.caption,
+      name: it.name,
+      width: it.width,
+      height: it.height,
+      copyrightHolder: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
+    })),
+  };
+}

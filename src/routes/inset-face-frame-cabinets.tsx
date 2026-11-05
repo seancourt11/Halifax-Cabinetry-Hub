@@ -5,8 +5,22 @@ import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { VisibleFaq } from "@/components/visible-faq";
 import { ResponsiveImg } from "@/components/responsive-img";
 import { heroImagePreload } from "@/lib/image-srcset";
-import { breadcrumbSchema, faqPageSchema, serviceSchema, SITE_URL } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  imageObjectGraph,
+  serviceSchema,
+  SITE_URL,
+} from "@/lib/schema";
 import { EMAIL, PHONE_DISPLAY, PHONE_TEL } from "@/lib/site";
+import { LabeledPhoto } from "@/components/labeled-photo";
+import {
+  imageObjectInputs,
+  insetHero,
+  insetNamedDoors,
+  insetProfileIllustrations,
+  insetProjectPhotos,
+} from "@/data/seo-page-images";
 import heroImg from "@/assets/door-gallery-2026/inset_malibu_school_house_white.png";
 
 const PAGE_TITLE = "Inset Face-Frame Kitchen Cabinets in Canada | Hempston Home";
@@ -76,6 +90,17 @@ export const Route = createFileRoute("/inset-face-frame-cabinets")({
         ),
       },
       { type: "application/ld+json", children: JSON.stringify(faqPageSchema(faqs)) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          imageObjectGraph(
+            imageObjectInputs(
+              [...insetProfileIllustrations, ...insetNamedDoors, ...insetProjectPhotos, insetHero],
+              SITE_URL,
+            ),
+          ),
+        ),
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify(
@@ -188,6 +213,81 @@ function InsetFaceFramePage() {
                 Cabinet styles
               </Link>
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 py-20">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+            Face-frame profiles
+          </p>
+          <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.04em] sm:text-4xl">
+            Door profiles
+          </h2>
+          <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+            {insetProfileIllustrations.map((photo) => (
+              <LabeledPhoto
+                key={photo.src}
+                src={photo.src}
+                alt={photo.alt}
+                title={photo.title}
+                caption={photo.caption}
+                width={photo.width}
+                height={photo.height}
+                sizes="(min-width: 1024px) 25vw, 50vw"
+                tone="dark"
+                frameClassName="aspect-[3/4] overflow-hidden bg-white p-4 sm:p-6"
+                imgClassName="h-full w-full object-contain"
+              />
+            ))}
+          </div>
+          <h2 className="mt-16 font-display text-3xl font-light uppercase tracking-[0.04em] sm:text-4xl">
+            Inset raised panel doors
+          </h2>
+          <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+            {insetNamedDoors.map((photo) => (
+              <LabeledPhoto
+                key={photo.title}
+                src={photo.src}
+                alt={photo.alt}
+                title={photo.title}
+                caption={photo.caption}
+                width={photo.width}
+                height={photo.height}
+                sizes="(min-width: 1024px) 25vw, 50vw"
+                tone="dark"
+                frameClassName="aspect-[3/4] overflow-hidden bg-white/[0.02]"
+                imgClassName="h-full w-full object-cover"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[oklch(0.98_0_0)] py-20 text-[oklch(0.15_0_0)]">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/60">
+            Project photos
+          </p>
+          <h2 className="mt-5 font-display text-3xl font-light uppercase tracking-[0.04em] sm:text-4xl">
+            Inset cabinetry
+          </h2>
+          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {insetProjectPhotos.map((photo) => (
+              <LabeledPhoto
+                key={photo.src}
+                src={photo.src}
+                alt={photo.alt}
+                title={photo.title}
+                caption={photo.caption}
+                width={photo.width}
+                height={photo.height}
+                sizes="(min-width: 640px) 50vw, 100vw"
+                frameClassName="overflow-hidden bg-neutral-100"
+                imgClassName="aspect-[4/3] h-full w-full object-cover"
+              />
+            ))}
           </div>
         </div>
       </section>
