@@ -150,105 +150,105 @@ const reasons = [
 const recentProjectsPool = [
   {
     src: projNwcBrass,
-    alt: "Custom overlay cabinetry with painted shaker doors and brass hood",
-    title: "Coastal Cottage",
+    alt: "Painted shaker overlay kitchen cabinetry with a brass hood, Halifax",
+    title: "Painted Shaker Overlay Kitchen",
     subtitle: "Custom Overlay",
     designer: "31 Westgate",
   },
   {
     src: projDbaPlIsland,
-    alt: "Custom painted kitchen with dark stained oak island and white oak beams",
+    alt: "Painted kitchen cabinetry with a dark stained oak island and white oak beams, Halifax",
     title: "Dark Oak Island Kitchen",
     subtitle: "Painted + Stained Oak",
     designer: "DB Architecture",
   },
   {
     src: projGhWhite,
-    alt: "Custom white painted shaker kitchen cabinetry",
+    alt: "Painted white shaker kitchen cabinetry, Halifax",
     title: "Painted Shaker Kitchen",
     subtitle: "White Painted Cabinetry",
     designer: "31 Westgate",
   },
   {
     src: projDbaKentKitchen1,
-    alt: "Inset custom cabinetry with white oak island and corner window",
+    alt: "Inset kitchen cabinetry with a white oak island and corner window, Halifax",
     title: "Inset Oak Island Kitchen",
     subtitle: "Inset + Oak Island",
     designer: "DB Architecture",
   },
   {
     src: projMdKitchen,
-    alt: "Custom white kitchen cabinetry with panelled island",
+    alt: "Painted white kitchen cabinetry with a panelled island, Halifax",
     title: "White Panelled Kitchen",
     subtitle: "White Painted Cabinetry",
     designer: "31 Westgate",
   },
   {
     src: projDbaPlKitchen1,
-    alt: "Open-concept custom kitchen cabinetry with quartzite counters and timber ceiling",
+    alt: "Open-concept kitchen cabinetry with quartzite counters and a timber ceiling, Halifax",
     title: "Timber-Ceiling Kitchen",
     subtitle: "Open-Concept Cabinetry",
     designer: "DB Architecture",
   },
   {
     src: projNwcOakIsland,
-    alt: "Custom white oak island cabinetry with painted perimeter cabinets",
+    alt: "White oak island kitchen cabinetry with painted perimeter cabinets, Halifax",
     title: "White Oak Island Kitchen",
     subtitle: "White Oak Island",
     designer: "31 Westgate",
   },
   {
     src: projDbaKentPantry,
-    alt: "Custom entry cabinetry with painted millwork and integrated storage",
+    alt: "Painted entry built-in cabinetry with integrated storage, Halifax",
     title: "Painted Entry Built-Ins",
     subtitle: "Custom Built-In Cabinetry",
     designer: "DB Architecture",
   },
   {
     src: projModernMarble,
-    alt: "Modern light oak custom kitchen with book-matched island",
+    alt: "Light oak kitchen cabinetry with a book-matched island, Halifax",
     title: "Modern Oak Kitchen",
     subtitle: "Light Oak Cabinetry",
     designer: "Hempston",
   },
   {
     src: projMdVanity,
-    alt: "Light oak double vanity cabinetry",
+    alt: "Light oak double vanity cabinetry, Halifax",
     title: "Light Oak Double Vanity",
     subtitle: "Light Oak Vanity",
     designer: "31 Westgate",
   },
   {
     src: projGhButler,
-    alt: "Butler pantry with custom glass-front upper cabinetry",
+    alt: "Glass-front butler pantry cabinetry, Halifax",
     title: "Glass-Front Butler Pantry",
     subtitle: "Glass-Front Cabinetry",
     designer: "31 Westgate",
   },
   {
     src: projReededVanity,
-    alt: "Reeded walnut bathroom vanity",
+    alt: "Reeded walnut bathroom vanity cabinetry, Halifax",
     title: "Reeded Walnut Vanity",
     subtitle: "Reeded Walnut Cabinetry",
     designer: "Hen House",
   },
   {
     src: projNwcNavyTile,
-    alt: "Custom navy shaker cabinetry with recessed panel doors",
+    alt: "Navy shaker kitchen cabinetry with recessed panel doors, Halifax",
     title: "Navy Shaker Kitchen",
     subtitle: "Navy Shaker Cabinetry",
     designer: "31 Westgate",
   },
   {
     src: projWhiteMarble,
-    alt: "Custom white painted kitchen with glass-front uppers",
+    alt: "Painted white kitchen cabinetry with glass-front uppers, Halifax",
     title: "White Painted Kitchen",
     subtitle: "Glass-Front Cabinetry",
     designer: "31 Westgate",
   },
   {
     src: projGlenHaven,
-    alt: "Custom white painted perimeter with stained oak island",
+    alt: "Painted white kitchen cabinetry with a stained oak island, Halifax",
     title: "White + Oak Island Kitchen",
     subtitle: "White Cabinets & Oak Island",
     designer: "31 Westgate",
@@ -428,7 +428,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           src={heroImg.full}
           sizes="100vw"
           alt={heroProject.alt}
-          title={`${heroProject.title} — ${heroProject.designer}`}
+          title={heroProject.alt}
           width={1600}
           height={1000}
           fetchPriority="high"

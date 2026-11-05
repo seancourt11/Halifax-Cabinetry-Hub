@@ -23,20 +23,37 @@ const SLUG_OVERRIDES: Record<string, string> = {
   "hempston-kitchen-3.jpg": "hempston-custom-kitchen-cabinetry-third-view",
   "hempston-kitchen-4.jpg": "hempston-custom-kitchen-cabinetry-fourth-view",
 
-  "projects/gh-oak-island-painted-beams.jpg":
-    "glen-haven-oak-island-painted-beam-kitchen-cabinetry",
+  "projects/gh-oak-island-painted-beams.jpg": "oak-island-painted-kitchen-cabinetry-halifax",
+  "projects/glen-haven-brass-hood-kitchen.jpg": "painted-shaker-kitchen-brass-hood-halifax",
+  "projects/gh-white-cabinets-brass-hood.jpg": "painted-white-kitchen-brass-hood-halifax",
+  "projects/gh-butler-pantry-glass.jpg": "glass-front-butler-pantry-cabinetry-halifax",
+  "projects/gh-marble-farmhouse-sink.jpg": "marble-farmhouse-sink-kitchen-halifax",
+  "projects/nwc-oak-island-kitchen.jpg": "white-oak-island-kitchen-cabinetry-halifax",
+  "projects/nwc-brass-hood-white-cabinets.jpg": "painted-overlay-kitchen-brass-hood-halifax",
+  "projects/nwc-marble-brass-faucet.jpg": "marble-brass-faucet-kitchen-detail-halifax",
+  "projects/nwc-navy-tile-backsplash.jpg": "navy-tile-backsplash-kitchen-cabinetry-halifax",
+  "projects/md-laundry-cabinetry.jpg": "painted-shaker-laundry-cabinetry-halifax",
+  "projects/md-oak-double-vanity.jpg": "light-oak-double-vanity-cabinetry-halifax",
+  "projects/md-white-kitchen-brass-pendants.jpg":
+    "painted-white-kitchen-brass-pendant-cabinetry-halifax",
+  "projects/md-dining-mirror.jpg": "dining-room-framed-mirror-millwork-halifax",
+  "projects/dba-kent-kitchen-1.jpg": "inset-white-oak-island-kitchen-cabinetry-halifax",
+  "projects/dba-kent-kitchen-2.jpg": "inset-kitchen-hemlock-beam-coffee-station-halifax",
+  "projects/dba-kent-pantry.jpg": "painted-entry-built-in-cabinetry-halifax",
+  "projects/dba-pl-kitchen-1.jpg": "timber-ceiling-kitchen-cabinetry-halifax",
+  "projects/dba-pl-kitchen-2.jpg": "sage-green-mudroom-cabinetry-halifax",
+  "projects/dba-pl-island-kitchen.jpg": "dark-stained-oak-island-kitchen-cabinetry-halifax",
+  "projects/grey-oak-bar-pantry.jpg": "grey-oak-bar-pantry-cabinetry-halifax",
+  "projects/modern-marble-kitchen.jpg": "light-oak-marble-island-kitchen-cabinetry-halifax",
+  "projects/reeded-oak-vanity.jpg": "reeded-oak-vanity-cabinetry-halifax",
+  "projects/navy-cabinetry-brass-pulls.jpg": "navy-painted-shaker-kitchen-brass-pulls-halifax",
+  "projects/white-marble-kitchen.jpg": "white-painted-kitchen-glass-front-uppers-halifax",
+  "projects/white-oak-cabinet-detail.jpg": "rift-cut-white-oak-cabinet-detail-halifax",
+  "projects/farmhouse-sink-blue-tile.jpg": "farmhouse-sink-blue-tile-kitchen-halifax",
+  "projects/transitional-navy-island-kitchen.jpg": "navy-island-kitchen-cabinetry-halifax",
   "projects/moncton-built-ins-fireplace-wall.jpg":
     "dieppe-painted-shaker-built-ins-fireplace-surround",
-  "projects/modern-marble-kitchen.jpg": "light-oak-kitchen-marble-island-cabinetry",
-  "projects/md-laundry-cabinetry.jpg": "modern-drift-painted-shaker-laundry-cabinetry",
-  "projects/grey-oak-bar-pantry.jpg": "grey-oak-bar-and-pantry-cabinetry",
-  "projects/dba-kent-kitchen-1.jpg": "house-on-kent-inset-white-oak-island-kitchen",
-  "projects/dba-kent-kitchen-2.jpg": "house-on-kent-inset-kitchen-hemlock-beams",
-  "projects/dba-kent-pantry.jpg": "house-on-kent-painted-entry-built-in-cabinetry",
-  "projects/dba-pl-kitchen-1.jpg": "house-on-peter-lowe-timber-ceiling-kitchen",
-  "projects/dba-pl-kitchen-2.jpg": "house-on-peter-lowe-sage-mudroom-cabinetry",
-  "projects/dba-pl-island-kitchen.jpg": "house-on-peter-lowe-dark-oak-island-kitchen",
-  "projects/crombie-warm-oak-stairwell.jpg": "warm-oak-stair-millwork-and-framed-mirror",
+  "projects/crombie-warm-oak-stairwell.jpg": "warm-oak-stair-millwork-framed-mirror-halifax",
 
   "door-gallery-2026/01_driftwood_walnut_shaker.png":
     "marseille-driftwood-walnut-shaker-cabinet-door",
@@ -76,67 +93,69 @@ const SLUG_OVERRIDES: Record<string, string> = {
   "materials/detail_15_verde_alpi.png": "verde-alpi-stone-material-sample",
 
   "projects/gallery/gh-31westgate-IndianRd-1683-fc.jpg":
-    "glen-haven-gallery-painted-cabinetry-stained-oak-island",
+    "painted-cabinetry-stained-oak-island-kitchen-halifax",
   "projects/gallery/gh-31westgate-IndianRd-1695-f2-paintedbeams-1.jpg":
-    "glen-haven-painted-ceiling-beams-over-kitchen",
+    "painted-ceiling-beams-kitchen-halifax",
   "projects/gallery/gh-31westgate-IndianRd-1711-f-v2-no-beams.jpg":
-    "glen-haven-great-room-and-custom-kitchen",
+    "great-room-custom-kitchen-halifax",
   "projects/gallery/gh-31westgate-IndianRd-17260-f.jpg":
-    "glen-haven-range-hood-marble-backsplash-detail",
+    "range-hood-marble-backsplash-kitchen-halifax",
   "projects/gallery/gh-31westgate-IndianRd-1761-f-paintedbeams.jpg":
-    "glen-haven-island-seating-brass-pendants",
+    "island-seating-brass-pendants-kitchen-halifax",
   "projects/gallery/gh-31westgate-IndianRd-1776-fv2-paintedbeams.jpg":
-    "glen-haven-painted-beam-ceiling-cased-openings",
-  "projects/gallery/gh-31westgate-IndianRd-1798-f.jpg":
-    "glen-haven-gallery-butler-pantry-glass-uppers",
+    "painted-beam-ceiling-cased-openings-halifax",
+  "projects/gallery/gh-31westgate-IndianRd-1798-f.jpg": "glass-upper-butler-pantry-kitchen-halifax",
   "projects/gallery/gh-31westgate-IndianRd-1819-f3-paintedbeams.jpg":
-    "glen-haven-coastal-light-millwork-detail",
-  "projects/gallery/gh-31westgate-IndianRd-1839-f.jpg":
-    "glen-haven-living-area-beyond-custom-kitchen",
-  "projects/gallery/crombie-1.jpg": "crombie-house-kitchen-panelled-cabinetry",
-  "projects/gallery/crombie-2.jpg": "crombie-house-warm-oak-stair-millwork",
-  "projects/gallery/crombie-3.jpg": "crombie-house-painted-cabinetry-brass-hardware",
-  "projects/gallery/crombie-4.jpg": "crombie-house-pantry-prep-zone",
-  "projects/gallery/crombie-5.jpg": "crombie-house-reeded-oak-vanity",
-  "projects/gallery/crombie-6.jpg": "crombie-house-marble-waterfall-island",
-  "projects/gallery/crombie-7.jpg": "crombie-house-dining-millwork",
-  "projects/gallery/crombie-8.jpg": "crombie-house-range-hood-cabinetry-surround",
-  "projects/gallery/crombie-9.jpg": "crombie-house-integrated-appliance-panels",
-  "projects/gallery/crombie-10.jpg": "crombie-house-lighting-over-island",
-  "projects/gallery/crombie-11.jpg": "crombie-house-interior-finishing-detail",
-  "projects/gallery/keep-01.jpg": "modern-drift-gallery-white-kitchen-brass-pendants",
-  "projects/gallery/keep-02.jpg": "modern-drift-island-seating-integrated-appliance-panels",
-  "projects/gallery/keep-03.jpg": "modern-drift-custom-range-hood-millwork",
-  "projects/gallery/keep-04.jpg": "modern-drift-prep-zone-marble-countertop",
-  "projects/gallery/keep-05.jpg": "modern-drift-butler-pantry-cabinetry",
-  "projects/gallery/keep-06.jpg": "modern-drift-laundry-room-cabinetry",
-  "projects/gallery/keep-07.jpg": "modern-drift-gallery-oak-double-vanity",
-  "projects/gallery/keep-08.jpg": "modern-drift-dining-mirrored-millwork",
-  "projects/gallery/keep-09.jpg": "modern-drift-painted-cabinetry-hardware-detail",
-  "projects/gallery/keep-10.jpg": "modern-drift-natural-light-over-island",
-  "projects/gallery/keep-11.jpg": "modern-drift-cabinetry-to-ceiling-crown",
-  "projects/gallery/keep-12.jpg": "modern-drift-integrated-fridge-panels",
-  "projects/gallery/keep-13.jpg": "modern-drift-powder-room-cabinetry",
-  "projects/gallery/keep-14.jpg": "modern-drift-living-area-beyond-kitchen",
-  "projects/gallery/keep-15.jpg": "modern-drift-cabinetry-hardware-closeup",
-  "projects/gallery/keep-16.jpg": "modern-drift-coffee-station-millwork",
-  "projects/gallery/keep-17.jpg": "modern-drift-primary-bath-vanity",
-  "projects/gallery/keep-18.jpg": "modern-drift-bedroom-built-in-cabinetry",
-  "projects/gallery/keep-19.jpg": "modern-drift-mudroom-cabinetry-bench",
-  "projects/gallery/keep-20.jpg": "modern-drift-kitchen-wide-view",
-  "projects/gallery/keep-21.jpg": "modern-drift-exterior-evening-view",
-  "projects/gallery/nwc-CANDREWS-1.jpg": "northwest-cove-gallery-oak-island-kitchen",
-  "projects/gallery/nwc-CANDREWS-2.jpg": "northwest-cove-gallery-white-cabinetry-brass-hood",
-  "projects/gallery/nwc-CANDREWS-3.jpg": "northwest-cove-gallery-navy-tile-backsplash",
-  "projects/gallery/nwc-CANDREWS-4.jpg": "northwest-cove-island-seating-coastal-light",
-  "projects/gallery/nwc-CANDREWS-5.jpg": "northwest-cove-gallery-integrated-appliance-panels",
-  "projects/gallery/nwc-CANDREWS-7.jpg": "northwest-cove-prep-zone-marble-counter",
-  "projects/gallery/nwc-CANDREWS-8.jpg": "northwest-cove-cabinetry-to-ceiling",
-  "projects/gallery/nwc-CANDREWS-8-2.jpg": "northwest-cove-kitchen-wide-view",
+    "layered-millwork-detail-halifax",
+  "projects/gallery/gh-31westgate-IndianRd-1839-f.jpg": "living-area-beyond-custom-kitchen-halifax",
+  "projects/gallery/crombie-1.jpg": "panelled-kitchen-cabinetry-halifax",
+  "projects/gallery/crombie-2.jpg": "warm-oak-stair-millwork-halifax",
+  "projects/gallery/crombie-3.jpg": "painted-cabinetry-brass-hardware-halifax",
+  "projects/gallery/crombie-4.jpg": "pantry-prep-zone-cabinetry-halifax",
+  "projects/gallery/crombie-5.jpg": "reeded-oak-vanity-detail-halifax",
+  "projects/gallery/crombie-6.jpg": "marble-waterfall-island-edge-halifax",
+  "projects/gallery/crombie-7.jpg": "dining-room-millwork-halifax",
+  "projects/gallery/crombie-8.jpg": "range-hood-cabinetry-surround-halifax",
+  "projects/gallery/crombie-9.jpg": "integrated-appliance-panel-kitchen-halifax",
+  "projects/gallery/crombie-10.jpg": "island-lighting-kitchen-millwork-halifax",
+  "projects/gallery/crombie-11.jpg": "interior-finish-detail-cabinetry-halifax",
+  "projects/gallery/keep-01.jpg": "white-kitchen-brass-pendants-halifax",
+  "projects/gallery/keep-02.jpg": "island-seating-appliance-panels-kitchen-halifax",
+  "projects/gallery/keep-03.jpg": "range-hood-millwork-detail-halifax",
+  "projects/gallery/keep-04.jpg": "marble-countertop-prep-zone-kitchen-halifax",
+  "projects/gallery/keep-05.jpg": "butler-pantry-cabinetry-halifax",
+  "projects/gallery/keep-06.jpg": "laundry-room-cabinetry-halifax",
+  "projects/gallery/keep-07.jpg": "oak-double-vanity-bathroom-halifax",
+  "projects/gallery/keep-08.jpg": "dining-mirrored-millwork-halifax",
+  "projects/gallery/keep-09.jpg": "painted-cabinetry-hardware-detail-halifax",
+  "projects/gallery/keep-10.jpg": "natural-light-kitchen-island-halifax",
+  "projects/gallery/keep-11.jpg": "cabinetry-to-ceiling-crown-moulding-halifax",
+  "projects/gallery/keep-12.jpg": "integrated-fridge-panels-kitchen-halifax",
+  "projects/gallery/keep-13.jpg": "powder-room-cabinetry-halifax",
+  "projects/gallery/keep-14.jpg": "open-living-area-beyond-kitchen-halifax",
+  "projects/gallery/keep-15.jpg": "cabinetry-hardware-closeup-halifax",
+  "projects/gallery/keep-16.jpg": "coffee-station-millwork-halifax",
+  "projects/gallery/keep-17.jpg": "primary-bath-vanity-cabinetry-halifax",
+  "projects/gallery/keep-18.jpg": "bedroom-built-in-cabinetry-halifax",
+  "projects/gallery/keep-19.jpg": "mudroom-cabinetry-bench-halifax",
+  "projects/gallery/keep-20.jpg": "white-kitchen-wide-view-halifax",
+  "projects/gallery/keep-21.jpg": "house-exterior-evening-view-halifax",
+  "projects/gallery/nwc-CANDREWS-1.jpg": "white-oak-island-kitchen-wide-halifax",
+  "projects/gallery/nwc-CANDREWS-2.jpg": "white-kitchen-brass-range-hood-halifax",
+  "projects/gallery/nwc-CANDREWS-3.jpg": "navy-tile-backsplash-detail-halifax",
+  "projects/gallery/nwc-CANDREWS-4.jpg": "island-seating-coastal-light-kitchen-halifax",
+  "projects/gallery/nwc-CANDREWS-5.jpg": "integrated-appliance-panels-kitchen-halifax",
+  "projects/gallery/nwc-CANDREWS-7.jpg": "marble-counter-prep-zone-kitchen-halifax",
+  "projects/gallery/nwc-CANDREWS-8.jpg": "cabinetry-to-ceiling-kitchen-halifax",
+  "projects/gallery/nwc-CANDREWS-8-2.jpg": "open-kitchen-wide-view-halifax",
 };
 
 const SUBJECT =
-  /(kitchen|cabinetr|cabinet|door|oak|vanity|halifax|millwork|pantry|laundry|stone|walnut|shaker|inset|painted|fireplace|built-in|dieppe|waterfront|workshop|dovetail|material|sample|share|stair|hood|island|beam|tile|sink|brass|navy|plaster|profile|glen-haven|northwest-cove|modern-drift|house-on|crombie|mirror|marble|finish|mudroom|hempston)/;
+  /(kitchen|cabinetr|cabinet|door|oak|vanity|halifax|millwork|pantry|laundry|stone|walnut|shaker|inset|painted|fireplace|built-in|dieppe|waterfront|workshop|dovetail|material|sample|share|stair|hood|island|beam|tile|sink|brass|navy|plaster|profile|mirror|marble|finish|mudroom|hempston)/;
+
+/** Project and client names are not allowed in a public image slug. */
+export const PROJECT_NAME_IN_SLUG =
+  /(glen-haven|northwest-cove|north-west|house-on-kent|house-on-peter|peter-lowe|modern-drift|crombie|coastal-cottage|westgate|candrews)/;
 
 export function hasExplicitSlug(relativePath: string) {
   return Object.prototype.hasOwnProperty.call(SLUG_OVERRIDES, assetKey(relativePath));
@@ -159,13 +178,15 @@ function fallbackSlug(key: string) {
   base = base.replace(/^\d+_/, "");
   base = base.replace(/_/g, "-").toLowerCase();
   base = base.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  if (key.startsWith("projects/") && !key.startsWith("projects/gallery/")) {
+  if (key.startsWith("projects/")) {
     base = base
-      .replace(/^gh-/, "glen-haven-")
-      .replace(/^nwc-/, "northwest-cove-")
-      .replace(/^md-/, "modern-drift-")
-      .replace(/^dba-kent-/, "house-on-kent-")
-      .replace(/^dba-pl-/, "house-on-peter-lowe-");
+      .replace(/^gh-/, "")
+      .replace(/^nwc-/, "")
+      .replace(/^md-/, "")
+      .replace(/^dba-kent-/, "")
+      .replace(/^dba-pl-/, "")
+      .replace(/^glen-haven-/, "");
+    if (!/(halifax|dieppe)/.test(base)) base = `${base}-halifax`;
   }
   if (key.startsWith("og/")) base = `${base.replace(/^og-/, "hempston-")}-share-image`;
   if (key.startsWith("door-profiles/")) base = `${base}-cabinet-door-profile`;
@@ -197,7 +218,7 @@ export function assertAssetSlugs(relativePaths: string[]) {
   const seen = new Map<string, string>();
   for (const rel of relativePaths) {
     const slug = assetSlug(rel);
-    if (!isDescriptiveSlug(slug)) {
+    if (!isDescriptiveSlug(slug) || PROJECT_NAME_IN_SLUG.test(slug)) {
       throw new Error(`Image slug is not keyword-descriptive: ${rel} -> ${slug}`);
     }
     const prev = seen.get(slug);

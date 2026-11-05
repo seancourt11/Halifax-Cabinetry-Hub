@@ -9,6 +9,7 @@ import {
   derivativeFileName,
   hasExplicitSlug,
   isDescriptiveSlug,
+  PROJECT_NAME_IN_SLUG,
   publicImagePath,
 } from "./image-slugs.ts";
 
@@ -48,10 +49,11 @@ test("opaque camera and catalogue names are overridden", () => {
 
 test("public names stay stable and are not hashes", () => {
   const slug = assetSlug("projects/gh-oak-island-painted-beams.jpg");
-  assert.equal(slug, "glen-haven-oak-island-painted-beam-kitchen-cabinetry");
+  assert.equal(slug, "oak-island-painted-kitchen-cabinetry-halifax");
   assert.equal(assetSlug("projects/gh-oak-island-painted-beams.jpg"), slug);
   const avif = derivativeFileName(slug, 1600, "avif");
-  assert.equal(avif, "glen-haven-oak-island-painted-beam-kitchen-cabinetry-1600.avif");
+  assert.equal(avif, "oak-island-painted-kitchen-cabinetry-halifax-1600.avif");
+  assert.equal(PROJECT_NAME_IN_SLUG.test(slug), false);
   assert.equal(publicImagePath(avif), `/assets/img/${avif}`);
   assert.doesNotMatch(avif, /[0-9a-f]{12,}/);
   assert.equal(isDescriptiveSlug("6819d606962cab08"), false);

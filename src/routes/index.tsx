@@ -152,26 +152,26 @@ const instagramTiles = [
   {
     asset: ig1,
     designer: "31 Westgate",
-    alt: "Farmhouse sink with blue tile and custom cabinetry by Hempston Home",
-    title: "Farmhouse sink cabinetry — 31 Westgate",
+    alt: "Farmhouse sink with blue tile and custom cabinetry, Halifax",
+    title: "Farmhouse sink cabinetry, Halifax",
   },
   {
     asset: ig2,
     designer: "Sara McKeenan",
-    alt: "White oak cabinet door and drawer detail by Hempston Home",
-    title: "White oak cabinet detail — Sara McKeenan",
+    alt: "White oak cabinet door and drawer detail, Halifax",
+    title: "White oak cabinet detail, Halifax",
   },
   {
     asset: ig3,
     designer: "31 Westgate",
-    alt: "Navy tile backsplash with custom cabinetry at Northwest Cove",
-    title: "Navy tile backsplash — 31 Westgate",
+    alt: "Navy tile backsplash with custom kitchen cabinetry, Halifax",
+    title: "Navy tile backsplash kitchen cabinetry, Halifax",
   },
   {
     asset: ig4,
     designer: "Hempston Home",
     alt: "Cefalù cerused washed oak shaker door with white oak finish",
-    title: "Cefalù cerused washed oak shaker door — Hempston Home",
+    title: "Cerused washed oak shaker cabinet door",
   },
 ];
 
@@ -185,8 +185,8 @@ function Index() {
         <ResponsiveImg
           src={heroKitchen}
           sizes="100vw"
-          alt="Glen Haven custom white painted kitchen cabinetry with stained white oak island by Hempston Home"
-          title="Glen Haven oak island kitchen — 31 Westgate, Nova Scotia"
+          alt="Painted oak island kitchen cabinetry with a stained white oak island, Halifax"
+          title="Oak island painted kitchen cabinetry, Halifax"
           width={1600}
           height={1000}
           fetchPriority="high"
@@ -272,8 +272,8 @@ function Index() {
           <div className="relative overflow-hidden">
             <ResponsiveImg
               src={elevateRoom}
-              alt="Modern Drift custom white laundry room cabinetry with painted shaker doors and full-height storage by Hempston Home"
-              title="Modern Drift laundry cabinetry — 31 Westgate"
+              alt="Painted shaker laundry cabinetry with full-height storage, Halifax"
+              title="Painted shaker laundry cabinetry, Halifax"
               width={1600}
               height={780}
               loading="lazy"
@@ -340,7 +340,7 @@ function Index() {
                   <ResponsiveImg
                     src={p.image}
                     alt={p.alt}
-                    title={`${p.title} — ${p.designer}`}
+                    title={p.alt}
                     loading="lazy"
                     sizes="(min-width: 640px) 420px, 80vw"
                     className={`w-full ${isDoorRender ? "object-contain p-4 sm:p-6" : "object-cover"} ${isFocus ? "h-[520px]" : "h-[520px] blur-sm"}`}
@@ -396,7 +396,7 @@ function Index() {
                 <ResponsiveImg
                   src={exploreProducts[0].image}
                   alt={exploreProducts[0].alt}
-                  title={`${exploreProducts[0].title} — ${exploreProducts[0].designer}`}
+                  title={exploreProducts[0].alt}
                   loading="lazy"
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="h-[640px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
@@ -430,7 +430,7 @@ function Index() {
                     <ResponsiveImg
                       src={p.image}
                       alt={p.alt}
-                      title={`${p.title} — ${p.designer}`}
+                      title={p.alt}
                       loading="lazy"
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
@@ -469,8 +469,8 @@ function Index() {
           <div className="relative mt-12 overflow-hidden">
             <ResponsiveImg
               src={storyRoom}
-              alt="Glen Haven custom white painted kitchen cabinetry with brass hood and shaker doors by Hempston Home"
-              title="Glen Haven brass hood kitchen — 31 Westgate"
+              alt="Painted shaker kitchen cabinetry with a brass hood, Halifax"
+              title="Painted shaker kitchen with a brass hood, Halifax"
               width={1600}
               height={800}
               loading="lazy"

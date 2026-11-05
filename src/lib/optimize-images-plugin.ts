@@ -7,7 +7,7 @@ import { assertAssetSlugs, assetSlug, derivativeFileName, publicImagePath } from
 /**
  * Serves imported JPG/PNG assets as resized WebP and AVIF (800 and 1600).
  * The default export is the 1600w WebP URL. Import `file.jpg?w=800` for the
- * 800w WebP URL. Public names are keyword slugs (`glen-haven-oak-island-painted-beam-kitchen-cabinetry-1600.avif`),
+ * 800w WebP URL. Public names are keyword slugs (`oak-island-painted-kitchen-cabinetry-halifax-1600.avif`),
  * not a hash of the path or mtime. Output does not keep EXIF, GPS, or other metadata.
  *
  * Old hashed URLs are not redirected. The previous name mixed the absolute

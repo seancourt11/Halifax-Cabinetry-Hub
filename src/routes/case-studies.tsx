@@ -57,6 +57,8 @@ const studies = [
     summary:
       "White painted Shaker cabinetry with a stained white oak island, brass hood, and glass-front butler's pantry.",
     image: ghImg,
+    imageAlt: "Painted shaker kitchen cabinetry with a stained white oak island, Halifax",
+    imageTitle: "Painted shaker kitchen cabinetry, Halifax",
     designer: "31 Westgate Design Studio",
     externalUrl: "https://www.31westgate.com/glen-haven/",
   },
@@ -67,6 +69,8 @@ const studies = [
     summary:
       "A warm, durable kitchen designed for family living at the edge of Hemlock Ravine — natural materials, subtle transitions, and cabinetry built for daily use.",
     image: kentImg,
+    imageAlt: "Inset kitchen cabinetry with a white oak island and corner window, Halifax",
+    imageTitle: "Inset white oak island kitchen cabinetry, Halifax",
     designer: "DB Architecture",
     externalUrl: "https://www.dbarchitecture.ca/project/house-on-kent",
   },
@@ -77,6 +81,9 @@ const studies = [
     summary:
       "A calm, cohesive redesign beneath newly vaulted ceilings — reclaimed space, clarity, and a kitchen that anchors the home.",
     image: peterLoweImg,
+    imageAlt:
+      "Painted kitchen cabinetry with a dark stained oak island and white oak beams, Halifax",
+    imageTitle: "Dark stained oak island kitchen cabinetry, Halifax",
     designer: "DB Architecture",
     externalUrl: "https://www.dbarchitecture.ca/project/house-on-peter-lowe",
   },
@@ -87,6 +94,8 @@ const studies = [
     summary:
       "Painted white perimeter cabinetry with a monolithic stained white oak island, integrated appliance panels, and marble waterfall.",
     image: nwcImg,
+    imageAlt: "White oak island kitchen cabinetry with painted perimeter cabinets, Halifax",
+    imageTitle: "White oak island kitchen cabinetry, Halifax",
     designer: "31 Westgate Design Studio",
     externalUrl: "https://www.31westgate.com/north-west-cove/",
   },
@@ -128,8 +137,8 @@ function CaseStudiesIndex() {
                 <div className="overflow-hidden">
                   <ResponsiveImg
                     src={s.image}
-                    alt={`${s.title} — custom Hempston cabinetry, designed by ${s.designer}`}
-                    title={`${s.title} — ${s.designer}`}
+                    alt={s.imageAlt}
+                    title={s.imageTitle}
                     width={1200}
                     height={900}
                     {...(hero ? { fetchPriority: "high" as const } : { loading: "lazy" as const })}
@@ -138,7 +147,7 @@ function CaseStudiesIndex() {
                   />
                 </div>
                 <figcaption className="mt-3 text-[11px] uppercase tracking-[0.18em] text-white/55">
-                  {s.title}. Design: {s.designer}.
+                  {s.imageTitle}
                 </figcaption>
               </figure>
               <div>
