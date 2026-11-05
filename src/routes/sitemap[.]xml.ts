@@ -1,19 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import {
-  novaScotiaHero,
-  novaScotiaProjectPhotos,
-  uniqueImages,
-  type SeoImage,
-} from "@/data/seo-page-images";
+import { novaScotiaHero, novaScotiaProjectPhotos, uniqueImages } from "@/data/seo-page-images";
+import { insetPagePhotos, uniqueInsetPhotos } from "@/data/inset-page-photos";
 
 const BASE_URL = "https://www.hempstonhome.com";
 
-const pageImages: Record<string, SeoImage[]> = {
+type SitemapImage = { src: string; title: string; caption: string };
+
+const pageImages: Record<string, SitemapImage[]> = {
   "/custom-kitchen-cabinets-nova-scotia": uniqueImages([
     novaScotiaHero,
     ...novaScotiaProjectPhotos,
   ]),
+  "/inset-face-frame-cabinets": uniqueInsetPhotos(insetPagePhotos),
 };
 
 interface SitemapEntry {
