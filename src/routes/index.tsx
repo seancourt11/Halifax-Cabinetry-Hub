@@ -132,7 +132,7 @@ const exploreProducts = [
   {
     title: "Bar & Pantry Cabinetry",
     image: productPot,
-    alt: "Custom bar and pantry cabinetry",
+    alt: "Grey oak bar and pantry cabinetry",
     tall: false,
     blurb: "Tailored pantry and bar cabinetry designed around how you entertain, store, and live.",
     designer: "31 Westgate",
@@ -149,10 +149,30 @@ const exploreProducts = [
 ];
 
 const instagramTiles = [
-  { asset: ig1, designer: "31 Westgate" },
-  { asset: ig2, designer: "Sara McKeenan" },
-  { asset: ig3, designer: "31 Westgate" },
-  { asset: ig4, designer: "Hempston Home" },
+  {
+    asset: ig1,
+    designer: "31 Westgate",
+    alt: "Farmhouse sink with blue tile and custom cabinetry by Hempston Home",
+    title: "Farmhouse sink cabinetry — 31 Westgate",
+  },
+  {
+    asset: ig2,
+    designer: "Sara McKeenan",
+    alt: "White oak cabinet door and drawer detail by Hempston Home",
+    title: "White oak cabinet detail — Sara McKeenan",
+  },
+  {
+    asset: ig3,
+    designer: "31 Westgate",
+    alt: "Navy tile backsplash with custom cabinetry at Northwest Cove",
+    title: "Navy tile backsplash — 31 Westgate",
+  },
+  {
+    asset: ig4,
+    designer: "Hempston Home",
+    alt: "Cefalù cerused washed oak shaker door with white oak finish",
+    title: "Cefalù cerused washed oak shaker door — Hempston Home",
+  },
 ];
 
 function Index() {
@@ -166,6 +186,7 @@ function Index() {
           src={heroKitchen}
           sizes="100vw"
           alt="Glen Haven custom white painted kitchen cabinetry with stained white oak island by Hempston Home"
+          title="Glen Haven oak island kitchen — 31 Westgate, Nova Scotia"
           width={1600}
           height={1000}
           fetchPriority="high"
@@ -252,6 +273,7 @@ function Index() {
             <ResponsiveImg
               src={elevateRoom}
               alt="Modern Drift custom white laundry room cabinetry with painted shaker doors and full-height storage by Hempston Home"
+              title="Modern Drift laundry cabinetry — 31 Westgate"
               width={1600}
               height={780}
               loading="lazy"
@@ -318,6 +340,7 @@ function Index() {
                   <ResponsiveImg
                     src={p.image}
                     alt={p.alt}
+                    title={`${p.title} — ${p.designer}`}
                     loading="lazy"
                     sizes="(min-width: 640px) 420px, 80vw"
                     className={`w-full ${isDoorRender ? "object-contain p-4 sm:p-6" : "object-cover"} ${isFocus ? "h-[520px]" : "h-[520px] blur-sm"}`}
@@ -373,6 +396,7 @@ function Index() {
                 <ResponsiveImg
                   src={exploreProducts[0].image}
                   alt={exploreProducts[0].alt}
+                  title={`${exploreProducts[0].title} — ${exploreProducts[0].designer}`}
                   loading="lazy"
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="h-[640px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
@@ -406,6 +430,7 @@ function Index() {
                     <ResponsiveImg
                       src={p.image}
                       alt={p.alt}
+                      title={`${p.title} — ${p.designer}`}
                       loading="lazy"
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       className="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
@@ -445,6 +470,7 @@ function Index() {
             <ResponsiveImg
               src={storyRoom}
               alt="Glen Haven custom white painted kitchen cabinetry with brass hood and shaker doors by Hempston Home"
+              title="Glen Haven brass hood kitchen — 31 Westgate"
               width={1600}
               height={800}
               loading="lazy"
@@ -493,7 +519,8 @@ function Index() {
               >
                 <ResponsiveImg
                   src={tile.asset}
-                  alt={`Custom Hempston Home cabinetry project ${i + 1} on Instagram`}
+                  alt={tile.alt}
+                  title={tile.title}
                   loading="lazy"
                   sizes="(min-width: 768px) 25vw, 50vw"
                   className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"

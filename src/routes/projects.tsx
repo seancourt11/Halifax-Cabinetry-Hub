@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
 import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import monctonHero from "@/assets/projects/moncton-built-ins-fireplace-wall.jpg";
 
 const PAGE_TITLE = "Cabinetry Projects | Hempston Home";
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/projects")({
       { name: "twitter:title", content: PAGE_TITLE },
       { name: "twitter:description", content: PAGE_DESC },
     ],
-    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(monctonHero)],
     scripts: [
       {
         type: "application/ld+json",
@@ -56,15 +57,22 @@ function ProjectsPage() {
       </section>
 
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-20 sm:px-8 lg:grid-cols-2">
-        <ResponsiveImg
-          src={monctonHero}
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          alt="Custom painted built-in cabinets and fireplace surround for a home in Dieppe, NB by Hempston Home"
-          width={1600}
-          height={1200}
-          loading="lazy"
-          className="w-full object-cover"
-        />
+        <figure>
+          <ResponsiveImg
+            src={monctonHero}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            alt="Custom painted built-in cabinets and fireplace surround for a home in Dieppe, NB by Hempston Home"
+            title="Built-ins and fireplace surround, Dieppe, NB"
+            width={1600}
+            height={1200}
+            fetchPriority="high"
+            className="w-full object-cover"
+          />
+          <figcaption className="mt-3 text-sm leading-relaxed text-white/70">
+            Built-ins and fireplace surround, Dieppe, NB. Painted shaker doors, drawers and open
+            upper shelving, photographed finished before delivery.
+          </figcaption>
+        </figure>
         <div>
           <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/85">
             Dieppe, NB

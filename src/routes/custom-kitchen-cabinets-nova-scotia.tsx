@@ -121,6 +121,7 @@ function NovaScotiaKitchensPage() {
             src={heroImg}
             sizes="100vw"
             alt="Painted custom kitchen cabinets with a white oak island"
+            title="Glen Haven oak island kitchen — 31 Westgate, Nova Scotia"
             width={1600}
             height={1000}
             fetchPriority="high"

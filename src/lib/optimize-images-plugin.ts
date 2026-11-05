@@ -1,37 +1,36 @@
-import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import type { Plugin } from "vite";
+import { encodeDerivatives, sourceContentHash, type PixelSize } from "./image-encode";
+import { assertAssetSlugs, assetSlug, derivativeFileName, publicImagePath } from "./image-slugs";
 
 /**
- * Serves imported JPG/PNG assets as resized WebP and AVIF (800 and 1600)
- * so pages do not ship multi-megabyte originals. Default export is the
- * 1600w WebP URL. Import `file.jpg?w=800` for the 800w WebP URL.
- * AVIF files use the same hash with an `.avif` extension.
- * Output does not keep EXIF or other metadata.
+ * Serves imported JPG/PNG assets as resized WebP and AVIF (800 and 1600).
+ * The default export is the 1600w WebP URL. Import `file.jpg?w=800` for the
+ * 800w WebP URL. Public names are keyword slugs (`glen-haven-oak-island-painted-beam-kitchen-cabinetry-1600.avif`),
+ * not a hash of the path or mtime. Output does not keep EXIF, GPS, or other metadata.
+ *
+ * Old hashed URLs are not redirected. The previous name mixed the absolute
+ * path with mtime, so those URLs cannot be reproduced from the repo.
  */
 const CACHE = path.resolve("node_modules/.cache/hempston-img");
-let sharpMod: typeof import("sharp") | undefined;
-
-async function loadSharp() {
-  if (!sharpMod) {
-    sharpMod = (await import("sharp")).default as unknown as typeof import("sharp");
-  }
-  return sharpMod;
-}
+const PUBLIC_DIR = path.resolve("public/assets/img");
 
 type Built = {
+  slug: string;
   fullName: string;
   smallName: string;
   fullAvifName: string;
   smallAvifName: string;
-  width: number;
-  height: number;
+  full: PixelSize;
+  small: PixelSize;
 };
 
-function assetNames(img: Built) {
-  return [img.fullName, img.smallName, img.fullAvifName, img.smallAvifName];
-}
+type Stamp = {
+  hash: string;
+  full: PixelSize;
+  small: PixelSize;
+};
 
 const built = new Map<string, Built>();
 const emitted = new Set<string>();
@@ -54,81 +53,100 @@ function release() {
   else active -= 1;
 }
 
-async function ensure(file: string): Promise<Built> {
-  const stat = fs.statSync(file);
-  const key = createHash("sha1")
-    .update(file)
-    .update(String(stat.mtimeMs))
-    .update(String(stat.size))
-    .digest("hex")
-    .slice(0, 16);
-  const cached = built.get(key);
-  if (
-    cached &&
-    fs.existsSync(path.join(CACHE, cached.fullName)) &&
-    fs.existsSync(path.join(CACHE, cached.fullAvifName))
-  ) {
-    return cached;
+function namesFor(slug: string) {
+  return {
+    fullName: derivativeFileName(slug, 1600, "webp"),
+    smallName: derivativeFileName(slug, 800, "webp"),
+    fullAvifName: derivativeFileName(slug, 1600, "avif"),
+    smallAvifName: derivativeFileName(slug, 800, "avif"),
+  };
+}
+
+function assetNames(img: Built) {
+  return [img.fullName, img.smallName, img.fullAvifName, img.smallAvifName];
+}
+
+function cacheDir(hash: string) {
+  return path.join(CACHE, "by-hash", hash);
+}
+
+function stampPath(slug: string) {
+  return path.join(CACHE, "stamps", `${slug}.json`);
+}
+
+function readStamp(slug: string): Stamp | null {
+  try {
+    return JSON.parse(fs.readFileSync(stampPath(slug), "utf8")) as Stamp;
+  } catch {
+    return null;
+  }
+}
+
+function filesReady(hash: string) {
+  const dir = cacheDir(hash);
+  return ["1600.webp", "800.webp", "1600.avif", "800.avif"].every((name) =>
+    fs.existsSync(path.join(dir, name)),
+  );
+}
+
+function fromCache(img: Built, hash: string, which: string) {
+  const kind = which.endsWith("-1600.webp")
+    ? "1600.webp"
+    : which.endsWith("-800.webp")
+      ? "800.webp"
+      : which.endsWith("-1600.avif")
+        ? "1600.avif"
+        : "800.avif";
+  return path.join(cacheDir(hash), kind);
+}
+
+async function ensure(file: string): Promise<{ img: Built; hash: string }> {
+  const rel = path.relative(path.resolve("src/assets"), file).split(path.sep).join("/");
+  const slug = assetSlug(rel);
+  const names = namesFor(slug);
+  const hash = sourceContentHash(file);
+  const cached = built.get(slug);
+  if (cached && filesReady(hash)) return { img: cached, hash };
+
+  const stamp = readStamp(slug);
+  if (stamp?.hash === hash && filesReady(hash)) {
+    const img: Built = { slug, ...names, full: stamp.full, small: stamp.small };
+    built.set(slug, img);
+    return { img, hash };
   }
 
-  const dir = path.join(CACHE, key);
-  fs.mkdirSync(dir, { recursive: true });
-  const fullPath = path.join(dir, "1600.webp");
-  const smallPath = path.join(dir, "800.webp");
-  const fullAvifPath = path.join(dir, "1600.avif");
-  const smallAvifPath = path.join(dir, "800.avif");
   await acquire();
   try {
-    const sharp = await loadSharp();
-    const inputOpts = { limitInputPixels: false, sequentialRead: true } as const;
-    if (!fs.existsSync(fullPath) || !fs.existsSync(smallPath)) {
-      // rotate() bakes in orientation. Output is written without EXIF, GPS, or ICC.
-      await sharp(file, inputOpts)
-        .rotate()
-        .resize({ width: 1600, withoutEnlargement: true })
-        .webp({ quality: 72, effort: 4 })
-        .toFile(fullPath);
-      await sharp(file, inputOpts)
-        .rotate()
-        .resize({ width: 800, withoutEnlargement: true })
-        .webp({ quality: 64, effort: 4 })
-        .toFile(smallPath);
+    const again = readStamp(slug);
+    if (again?.hash === hash && filesReady(hash)) {
+      const img: Built = { slug, ...names, full: again.full, small: again.small };
+      built.set(slug, img);
+      return { img, hash };
     }
-    if (!fs.existsSync(fullAvifPath) || !fs.existsSync(smallAvifPath)) {
-      await sharp(file, inputOpts)
-        .rotate()
-        .resize({ width: 1600, withoutEnlargement: true })
-        .avif({ quality: 45, effort: 2 })
-        .toFile(fullAvifPath);
-      await sharp(file, inputOpts)
-        .rotate()
-        .resize({ width: 800, withoutEnlargement: true })
-        .avif({ quality: 40, effort: 2 })
-        .toFile(smallAvifPath);
-    }
-    const meta = await sharp(fullPath).metadata();
-    const result: Built = {
-      fullName: `${key}-1600.webp`,
-      smallName: `${key}-800.webp`,
-      fullAvifName: `${key}-1600.avif`,
-      smallAvifName: `${key}-800.avif`,
-      width: meta.width ?? 1600,
-      height: meta.height ?? 1000,
-    };
-    for (const name of assetNames(result)) {
-      const from = name.endsWith("-1600.webp")
-        ? fullPath
-        : name.endsWith("-800.webp")
-          ? smallPath
-          : name.endsWith("-1600.avif")
-            ? fullAvifPath
-            : smallAvifPath;
-      fs.copyFileSync(from, path.join(CACHE, name));
-    }
-    built.set(key, result);
-    return result;
+    const encoded = await encodeDerivatives(file, cacheDir(hash));
+    const stampBody: Stamp = { hash, full: encoded.full, small: encoded.small };
+    fs.mkdirSync(path.dirname(stampPath(slug)), { recursive: true });
+    fs.writeFileSync(stampPath(slug), JSON.stringify(stampBody));
+    const img: Built = { slug, ...names, full: encoded.full, small: encoded.small };
+    built.set(slug, img);
+    return { img, hash };
   } finally {
     release();
+  }
+}
+
+function moduleSource(url: string, width: number, height: number, avif: string) {
+  return [
+    `import { registerImage } from "@/lib/image-registry";`,
+    `registerImage(${JSON.stringify(url)}, ${JSON.stringify({ width, height, avif })});`,
+    `export default ${JSON.stringify(url)};`,
+  ].join("\n");
+}
+
+function copyPublic(img: Built, hash: string) {
+  fs.mkdirSync(PUBLIC_DIR, { recursive: true });
+  for (const name of assetNames(img)) {
+    fs.copyFileSync(fromCache(img, hash, name), path.join(PUBLIC_DIR, name));
   }
 }
 
@@ -141,49 +159,58 @@ function isAssetImage(id: string) {
   return clean.includes(`${path.sep}src${path.sep}assets${path.sep}`);
 }
 
+function walkAssets(dir: string, out: string[] = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walkAssets(full, out);
+    else if (/\.(png|jpe?g)$/i.test(entry.name)) out.push(full);
+  }
+  return out;
+}
+
 export function optimizeImagesPlugin(): Plugin {
   return {
     name: "hempston-optimize-images",
     enforce: "pre",
+    buildStart() {
+      const root = path.resolve("src/assets");
+      const rels = walkAssets(root).map((file) =>
+        path.relative(root, file).split(path.sep).join("/"),
+      );
+      assertAssetSlugs(rels);
+    },
     async load(id) {
       if (!isAssetImage(id)) return null;
       const file = id.split("?")[0];
       const smallOnly = id.endsWith("?w=800");
-      const img = await ensure(file);
+      const { img, hash } = await ensure(file);
       const command = this.environment?.config?.command;
       const serve = command === "serve";
 
       if (serve) {
-        const pub = path.resolve("public/opt");
-        fs.mkdirSync(pub, { recursive: true });
-        for (const name of assetNames(img)) {
-          const dest = path.join(pub, name);
-          if (!fs.existsSync(dest)) fs.copyFileSync(path.join(CACHE, name), dest);
-        }
-        const fullUrl = `/opt/${img.fullName}`;
-        const smallUrl = `/opt/${img.smallName}`;
-        const url = smallOnly ? smallUrl : fullUrl;
-        return `export default ${JSON.stringify(url)};`;
+        copyPublic(img, hash);
       }
 
-      // Stable public URLs. Rollup's file URL in the SSR bundle is a file:// path,
-      // which would ship broken image srcs in the HTML. The client build emits the
-      // files at these exact paths.
       const envName = this.environment?.name ?? "";
       const isServer = envName === "ssr" || envName.includes("ssr");
-      if (!isServer) {
+      if (!serve && !isServer) {
         for (const name of assetNames(img)) {
           if (emitted.has(name)) continue;
           emitted.add(name);
           this.emitFile({
             type: "asset",
             fileName: `assets/img/${name}`,
-            source: fs.readFileSync(path.join(CACHE, name)),
+            source: fs.readFileSync(fromCache(img, hash, name)),
           });
         }
       }
-      const url = `/assets/img/${smallOnly ? img.smallName : img.fullName}`;
-      return `export default ${JSON.stringify(url)};`;
+
+      const width = smallOnly ? img.small.width : img.full.width;
+      const height = smallOnly ? img.small.height : img.full.height;
+      const fileName = smallOnly ? img.smallName : img.fullName;
+      const avifName = smallOnly ? img.smallAvifName : img.fullAvifName;
+      const url = publicImagePath(fileName);
+      return moduleSource(url, width, height, publicImagePath(avifName));
     },
   };
 }

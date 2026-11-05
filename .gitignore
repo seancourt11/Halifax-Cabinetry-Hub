@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 public/opt
+public/assets/img
 node_modules/.cache
 dist
 dist-ssr

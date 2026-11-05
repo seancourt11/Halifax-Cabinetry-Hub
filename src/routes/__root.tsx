@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { ImageSchemaProvider } from "../components/image-schema";
 import { GoogleAnalytics } from "../components/google-analytics";
 import appCss from "../styles.css?url";
 import { GA_BOOTSTRAP_SCRIPT } from "../lib/ga4";
@@ -175,11 +176,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GoogleAnalytics />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <main>
-        <Outlet />
-      </main>
+      <ImageSchemaProvider>
+        <GoogleAnalytics />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <main>
+          <Outlet />
+        </main>
+      </ImageSchemaProvider>
     </QueryClientProvider>
   );
 }

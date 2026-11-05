@@ -6,6 +6,7 @@ import { StickyConsultationCTA } from "@/components/sticky-consultation-cta";
 import { breadcrumbSchema, SITE_URL } from "@/lib/schema";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import { ResponsiveImg } from "@/components/responsive-img";
+import { heroImagePreload } from "@/lib/image-srcset";
 import ogImg from "@/assets/og/og-case-studies.jpg";
 import ghImg from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 
@@ -32,7 +33,7 @@ export const Route = createFileRoute("/case-studies")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
-    links: [{ rel: "canonical", href: ABSOLUTE_URL }],
+    links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(ghImg)],
     scripts: [
       {
         type: "application/ld+json",
@@ -112,40 +113,49 @@ function CaseStudiesIndex() {
       </section>
 
       <section className="mx-auto max-w-6xl space-y-16 px-5 pb-32 sm:px-8">
-        {studies.map((s) => (
-          <a
-            id={s.slug}
-            key={s.slug}
-            href={s.externalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group grid gap-8 md:grid-cols-2 md:items-center md:gap-12"
-          >
-            <div className="overflow-hidden">
-              <ResponsiveImg
-                src={s.image}
-                alt={`${s.title} — custom Hempston cabinetry, designed by ${s.designer}`}
-                width={1200}
-                height={900}
-                loading="lazy"
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-            </div>
-            <div>
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
-                {s.location}
-              </p>
-              <h2 className="mt-4 font-display text-2xl font-light uppercase tracking-[0.05em] text-white sm:text-3xl">
-                {s.title}
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-white/70">{s.summary}</p>
-              <p className="mt-6 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.22em] text-white/80 transition-opacity group-hover:opacity-70">
-                View on {s.designer} <ArrowRight className="h-4 w-4" />
-              </p>
-            </div>
-          </a>
-        ))}
+        {studies.map((s, index) => {
+          const hero = index === 0;
+          return (
+            <a
+              id={s.slug}
+              key={s.slug}
+              href={s.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group grid gap-8 md:grid-cols-2 md:items-center md:gap-12"
+            >
+              <figure>
+                <div className="overflow-hidden">
+                  <ResponsiveImg
+                    src={s.image}
+                    alt={`${s.title} — custom Hempston cabinetry, designed by ${s.designer}`}
+                    title={`${s.title} — ${s.designer}`}
+                    width={1200}
+                    height={900}
+                    {...(hero ? { fetchPriority: "high" as const } : { loading: "lazy" as const })}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <figcaption className="mt-3 text-[11px] uppercase tracking-[0.18em] text-white/55">
+                  {s.title}. Design: {s.designer}.
+                </figcaption>
+              </figure>
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                  {s.location}
+                </p>
+                <h2 className="mt-4 font-display text-2xl font-light uppercase tracking-[0.05em] text-white sm:text-3xl">
+                  {s.title}
+                </h2>
+                <p className="mt-4 text-sm leading-relaxed text-white/70">{s.summary}</p>
+                <p className="mt-6 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.22em] text-white/80 transition-opacity group-hover:opacity-70">
+                  View on {s.designer} <ArrowRight className="h-4 w-4" />
+                </p>
+              </div>
+            </a>
+          );
+        })}
       </section>
 
       <SiteFooter />

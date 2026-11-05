@@ -109,6 +109,7 @@ function InsetFaceFramePage() {
             src={heroImg}
             sizes="100vw"
             alt="Inset raised-panel cabinet door set flush in a face frame"
+            title="Tracadie inset raised panel cabinet door in School House White"
             width={1600}
             height={2000}
             fetchPriority="high"

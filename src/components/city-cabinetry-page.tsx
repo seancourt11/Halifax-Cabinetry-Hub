@@ -393,6 +393,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
   const seo = CITY_SEO[city.slug];
   const idx = cityIndex(city);
   const heroImg = shareImages[idx % shareImages.length];
+  const heroProject =
+    recentProjectsPool.find((project) => project.src === heroImg.full) ?? recentProjectsPool[0];
   const inCanada = city.countryCode === "CA";
   const madeLine = originLine(city);
   const shownProjects = Array.from(
@@ -425,7 +427,8 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
         <ResponsiveImg
           src={heroImg.full}
           sizes="100vw"
-          alt="Custom kitchen cabinetry by Hempston Home"
+          alt={heroProject.alt}
+          title={`${heroProject.title} — ${heroProject.designer}`}
           width={1600}
           height={1000}
           fetchPriority="high"

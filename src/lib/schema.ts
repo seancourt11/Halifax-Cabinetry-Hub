@@ -136,6 +136,7 @@ export function organizationJsonLd(opts?: { includeOffices?: boolean }) {
     logo: {
       "@type": "ImageObject",
       url: LOGO_URL,
+      contentUrl: LOGO_URL,
       width: 512,
       height: 512,
     },
@@ -317,12 +318,31 @@ export function howToSchema(opts: {
   };
 }
 
-export function imageObjectsSchema(items: { url: string; caption: string; creator?: string }[]) {
+export function imageObjectsSchema(
+  items: {
+    url: string;
+    caption: string;
+    creator?: string;
+    width?: number;
+    height?: number;
+    name?: string;
+  }[],
+) {
   return items.map((it) => ({
     "@context": "https://schema.org",
     "@type": "ImageObject",
     contentUrl: it.url,
     caption: it.caption,
+    ...(it.name ? { name: it.name } : {}),
+    ...(it.width ? { width: it.width } : {}),
+    ...(it.height ? { height: it.height } : {}),
+    encodingFormat: it.url.endsWith(".avif")
+      ? "image/avif"
+      : it.url.endsWith(".webp")
+        ? "image/webp"
+        : it.url.endsWith(".png")
+          ? "image/png"
+          : "image/jpeg",
     ...(it.creator ? { creator: { "@type": "Person", name: it.creator } } : {}),
     copyrightHolder: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },
   }));
