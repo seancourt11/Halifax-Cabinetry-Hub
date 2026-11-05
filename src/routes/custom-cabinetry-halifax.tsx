@@ -422,7 +422,7 @@ const reasons = [
   {
     icon: Leaf,
     title: "Built in Canada",
-    body: "Cabinets are built in Halifax at our Bayne St shop. Toronto and the Long Beach area facility are studios and service bases.",
+    body: "Cabinets are built in Halifax at our Bayne St shop. Toronto and the Long Beach area facility are facilities and service bases.",
   },
   {
     icon: Clock,
@@ -708,14 +708,14 @@ function HalifaxPage() {
             { k: "Vanities and built-ins", v: VANITY_PRICE_LABEL },
             { k: "Lead time", v: LEAD_TIME_LABEL },
             { k: "Warranty", v: WARRANTY_LABEL },
-            { k: "Halifax studio", v: LOCATIONS.halifax.copyLabel },
+            { k: "Halifax facility", v: LOCATIONS.halifax.copyLabel },
             { k: "Phone", v: PHONE_DISPLAY },
           ].map((item) => (
             <div key={item.k}>
               <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/85">
                 {item.k}
               </p>
-              {item.k === "Halifax studio" ? (
+              {item.k === "Halifax facility" ? (
                 <a
                   href={mapsUrl(LOCATIONS.halifax)}
                   className="mt-2 block text-sm text-white underline"
@@ -1402,7 +1402,7 @@ function HalifaxPage() {
                 href="mailto:info@hempstonhome.com"
                 className="inline-block border border-black/70 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-black hover:text-white"
               >
-                Email Our Studio
+                Email Us
               </a>
             </div>
           </div>

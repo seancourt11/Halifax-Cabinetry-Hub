@@ -52,7 +52,7 @@ const faqs = [
   },
   {
     q: "Where are inset kitchens built, and what do they cost?",
-    a: "They are built in Halifax and installed across Nova Scotia, across Canada from the Toronto-area studio, and in the U.S. from the Long Beach area. Most full kitchens take 8 to 14 weeks and typically run $25,000 to $75,000+, with a 5-year warranty.",
+    a: "They are built in Halifax and installed across Nova Scotia, across Canada from the Toronto-area facility, and in the U.S. from the Long Beach area. Most full kitchens take 8 to 14 weeks and typically run $25,000 to $75,000+, with a 5-year warranty.",
   },
 ];
 
@@ -310,7 +310,7 @@ function InsetFaceFramePage() {
           <div className="mt-8 max-w-3xl space-y-5 text-sm leading-relaxed text-white/75">
             <p>
               Kitchens are built in Halifax. Installation covers Nova Scotia, the rest of Canada
-              from the Toronto-area studio, and the U.S. from the Long Beach area.
+              from the Toronto-area facility, and the U.S. from the Long Beach area.
             </p>
             <p>
               Most full kitchens take 8 to 14 weeks and typically run $25,000 to $75,000+, with a

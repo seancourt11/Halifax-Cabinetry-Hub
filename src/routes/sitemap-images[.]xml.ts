@@ -46,7 +46,7 @@ const entries: ImageEntry[] = [
       {
         loc: `${SITE_URL}${ogAbout}`,
         title: "About Hempston Home",
-        caption: "Halifax custom cabinet studio",
+        caption: "Halifax custom cabinet facility",
       },
     ],
   },

@@ -336,7 +336,7 @@ function MonctonPage() {
                 href="mailto:info@hempstonhome.com"
                 className="inline-block border border-black px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black"
               >
-                Email the studio
+                Email Us
               </a>
             </div>
           </div>

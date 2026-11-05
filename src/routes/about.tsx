@@ -21,7 +21,7 @@ import workshopImg from "@/assets/projects/white-oak-cabinet-detail.jpg";
 
 const PAGE_TITLE = "About Our Halifax Cabinet Makers | Hempston Home";
 const PAGE_DESC =
-  "Meet Hempston Home, a Halifax cabinet studio founded in 2015. Built in Canada at our Bayne St shop. One team designs, builds, finishes and installs.";
+  "Meet Hempston Home, a Halifax cabinet facility founded in 2015. Built in Canada at our Bayne St shop. One team designs, builds, finishes and installs.";
 const ABSOLUTE_URL = `${SITE_URL}/about`;
 const ABSOLUTE_IMAGE = `${SITE_URL}${ogImg}`;
 
@@ -97,7 +97,7 @@ const values = [
   {
     n: "02",
     title: "One Team, Start to Install",
-    body: "Designer, drafter, cabinetmaker, finisher, and installer all sit in one studio. Nothing gets lost in translation between a showroom and a factory floor.",
+    body: "Designer, drafter, cabinetmaker, finisher, and installer all sit in one facility. Nothing gets lost in translation between a showroom and a factory floor.",
   },
   {
     n: "03",
@@ -107,7 +107,7 @@ const values = [
   {
     n: "04",
     title: "Coast-to-Coast Install",
-    body: "Studios in Halifax, Toronto, and the Long Beach area. Cabinets are built at the Bayne St shop in Halifax. We install across Canada and the United States.",
+    body: "Facilities in Halifax, Toronto, and the Long Beach area. Cabinets are built at the Bayne St shop in Halifax. We install across Canada and the United States.",
   },
 ];
 
@@ -183,7 +183,7 @@ function AboutPage() {
           </p>
           <p>
             Cabinets are built in Halifax, Nova Scotia at our Bayne St shop. Toronto and the Long
-            Beach area facility are studios and service bases, not manufacturing sites. Built in
+            Beach area facility are facilities and service bases, not manufacturing sites. Built in
             Canada. We install across Canada and the United States. One team still takes a project
             from concept to install, with laser-measured shop drawings and finishes sprayed or
             hand-rubbed.

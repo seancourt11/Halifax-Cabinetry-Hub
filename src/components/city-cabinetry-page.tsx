@@ -552,7 +552,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               { k: "Consultation", v: "Free" },
               { k: "Phone", v: PHONE_DISPLAY },
               { k: "Email", v: "info@hempstonhome.com" },
-              ...(torontoStudio ? [{ k: "Toronto studio", v: torontoStudio.copyLabel }] : []),
+              ...(torontoStudio ? [{ k: "Toronto facility", v: torontoStudio.copyLabel }] : []),
             ].map((row) => (
               <div key={row.k} className="border-t border-black/15 pt-4">
                 <dt className="text-[10px] font-medium uppercase tracking-[0.24em] text-black/55">
@@ -865,16 +865,16 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
       {torontoStudio ? (
         <section className={`${lightBg} ${darkText} border-y border-black/10 py-16`}>
           <div className="mx-auto max-w-3xl px-5 sm:px-8">
-            <p className={eyebrowLight}>Toronto studio</p>
+            <p className={eyebrowLight}>Toronto facility</p>
             <h2 className="mt-4 font-display text-3xl font-light uppercase tracking-[0.06em]">
-              Visit the Toronto studio
+              Visit the Toronto facility
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-black/75">
-              The Toronto studio is a local base for Greater Toronto Area projects.{" "}
+              The Toronto facility is a local base for Greater Toronto Area projects.{" "}
               {torontoStudio.copyLabel}.
             </p>
             <a href={mapsUrl(torontoStudio)} className="mt-6 inline-block text-sm underline">
-              Map for the Toronto studio
+              Map for the Toronto facility
             </a>
           </div>
         </section>
@@ -984,7 +984,7 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
                 href="mailto:info@hempstonhome.com"
                 className="inline-block border border-black/70 px-8 py-3.5 text-[11px] font-medium uppercase tracking-[0.28em] text-black transition-colors hover:bg-black hover:text-white"
               >
-                Email Our Studio
+                Email Us
               </a>
             </div>
           </div>
