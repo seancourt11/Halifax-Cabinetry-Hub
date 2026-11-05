@@ -15,7 +15,7 @@ export const cityServiceNotes: Record<string, string> = {
   "custom-cabinetry-st-johns":
     "For St. John's, Mount Pearl, Paradise, and the Northeast Avalon, the design consult is in person or by video call. We measure sloped floors and out-of-square walls instead of forcing a stock size, build the cabinetry in Canada, and install it on the Avalon. A 5-year workmanship warranty covers the cabinetry.",
   "custom-cabinetry-toronto":
-    "Toronto and GTA projects can start at the home or by video call. The Toronto studio on Galaxy Blvd is a local base for measuring and coordination. It is not a second factory. Cabinetry is built in Canada, then delivered and installed across the city and the GTA. A 5-year workmanship warranty covers the work.",
+    "Toronto and GTA projects can start at the home or by video call. The Toronto facility on Galaxy Blvd is a local base for measuring and coordination. It is not a second factory. Cabinetry is built in Canada, then delivered and installed across the city and the GTA. A 5-year workmanship warranty covers the work.",
   "custom-cabinetry-montreal":
     "Montreal plexes, Outremont houses, and West Island homes are measured as they stand. The consult is in person or by video call. Cabinetry is built in Canada, delivered, and installed in Greater Montreal. A 5-year workmanship warranty covers the cabinetry.",
   "custom-cabinetry-vancouver":

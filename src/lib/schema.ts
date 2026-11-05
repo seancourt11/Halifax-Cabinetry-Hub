@@ -83,7 +83,7 @@ function locationEntity(loc: ShopLocation) {
       latitude: loc.latitude,
       longitude: loc.longitude,
     },
-    // One published phone, on the organization and the Halifax studio only.
+    // One published phone, on the organization and the Halifax facility only.
     ...(isHalifax ? { telephone: PHONE_E164, email: EMAIL } : { email: EMAIL }),
     ...(isHalifax
       ? {

@@ -50,7 +50,7 @@ export const INSTALL_LINE = "We install across Canada and the United States.";
 
 /** Allowed on the Halifax page, About, and the global FAQ / llms.txt. */
 export const HALIFAX_BUILD_SENTENCE =
-  "Cabinets are built in Halifax, Nova Scotia at our Bayne St shop, 6359 Bayne St, Halifax, NS B3K 2V6. Toronto and the Long Beach area facility are studios and service bases, not manufacturing sites.";
+  "Cabinets are built in Halifax, Nova Scotia at our Bayne St shop, 6359 Bayne St, Halifax, NS B3K 2V6. Toronto and the Long Beach area facility are facilities and service bases, not manufacturing sites.";
 
 export type ShopLocation = {
   id: string;
@@ -76,7 +76,7 @@ export const LOCATIONS: Record<ShopLocation["key"], ShopLocation> = {
     id: `${SITE_URL}/#location-halifax`,
     key: "halifax",
     name: "Hempston Home",
-    role: "Halifax studio",
+    role: "Halifax facility",
     streetAddress: "6359 Bayne St",
     addressLocality: "Halifax",
     addressRegion: "NS",
@@ -94,7 +94,7 @@ export const LOCATIONS: Record<ShopLocation["key"], ShopLocation> = {
     id: `${SITE_URL}/#location-toronto`,
     key: "toronto",
     name: "Hempston Home Toronto",
-    role: "Toronto studio",
+    role: "Toronto facility",
     streetAddress: "116B Galaxy Blvd",
     addressLocality: "Toronto",
     addressRegion: "ON",
@@ -106,7 +106,7 @@ export const LOCATIONS: Record<ShopLocation["key"], ShopLocation> = {
     longitude: -79.5865821,
     copyLabel: "116B Galaxy Blvd, Toronto (Etobicoke), ON M9W 4Y6, Canada",
     schemaDescription:
-      "Toronto studio and service base for Toronto and Greater Toronto Area projects.",
+      "Toronto facility and service base for Toronto and Greater Toronto Area projects.",
   },
   longBeach: {
     id: `${SITE_URL}/#location-long-beach`,

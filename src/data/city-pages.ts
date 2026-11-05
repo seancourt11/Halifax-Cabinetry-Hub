@@ -331,7 +331,7 @@ const toronto: CityPageData = {
   introHeadline: "Cabinetry designed for Toronto homes",
   introBody: [
     "Toronto's building stock is astonishingly varied — narrow century Victorians, mid-century bungalows, boutique condos, and sprawling North York new builds. What they share is a real premium on space, storage, and finish quality. Hempston designs and hand-builds custom cabinetry in Toronto from the ground up, so every inch is put to work and every finish is delivered to a furniture-grade standard.",
-    "Our Toronto studio coordinates directly with your architect, designer, and contractor, and every project ships fully pre-staged from our workshop for a precise, low-disruption install.",
+    "Our Toronto facility coordinates directly with your architect, designer, and contractor, and every project ships fully pre-staged from our workshop for a precise, low-disruption install.",
   ],
   taxNote: "HST 13%",
   permitAuthority: "the City of Toronto",

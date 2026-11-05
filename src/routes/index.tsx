@@ -180,7 +180,7 @@ function Index() {
                 Custom Cabinetry and Millwork, Made in Nova Scotia
               </h1>
               <p id="home-summary" className="mt-6 max-w-md text-sm leading-relaxed text-white/80">
-                Hempston Home is a Halifax, Nova Scotia cabinet studio that designs, builds and
+                Hempston Home is a Halifax, Nova Scotia cabinet facility that designs, builds and
                 installs 100% custom kitchens, vanities and built-ins. Built in Canada. Most
                 kitchens take {LEAD_TIME_LABEL} and start around $25,000. We install across Canada
                 and the United States.
