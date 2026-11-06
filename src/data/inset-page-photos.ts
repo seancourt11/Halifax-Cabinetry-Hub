@@ -18,7 +18,7 @@ import oakVanitySide from "@/assets/projects/face-frame/white-oak-face-frame-van
 import oakKnifeBlock from "@/assets/projects/face-frame/stained-oak-custom-knife-block-shop.webp";
 import navyPantryLadder from "@/assets/projects/face-frame/navy-painted-face-frame-pantry-library-ladder.webp";
 import navyPantryShelves from "@/assets/projects/face-frame/navy-painted-face-frame-pantry-open-shelves.webp";
-import ashCabinet from "@/assets/projects/face-frame/unfinished-ash-face-frame-cabinet-crown-slats.webp";
+import ashCabinet from "@/assets/projects/face-frame/bespoke-ash-face-frame-cabinet-crown-molding-oak-slatted-back.webp";
 import shopBuiltins from "@/assets/projects/face-frame/white-face-frame-builtins-fireplace-surround-shop.webp";
 import greigeKitchen from "@/assets/projects/face-frame/greige-inset-face-frame-kitchen-mantel-hood.webp";
 import raspberryBar from "@/assets/projects/face-frame/raspberry-painted-face-frame-bar-glass-uppers.webp";
@@ -234,14 +234,17 @@ export const otherFaceFrameJobs: { job: string; photos: InsetPhoto[] }[] = [
         1067,
         1600,
       ),
-      project(
-        ashCabinet,
-        "unfinished-ash-face-frame-cabinet-crown-slats.webp",
-        "Unfinished ash cabinet",
-        "Unfinished ash face-frame cabinet top with crown moulding and a slatted back, in the shop",
-        1200,
-        1600,
-      ),
+      {
+        src: ashCabinet,
+        fileName: "bespoke-ash-face-frame-cabinet-crown-molding-oak-slatted-back.webp",
+        title: "Bespoke ash cabinet",
+        alt: "Bespoke ash face frame cabinet with crown molding and oak slatted back in the Hempston shop",
+        caption:
+          "A bespoke ash face frame cabinet with crown molding and a weaved oak slatted back, in the shop and to be delivered to site for hand painting.",
+        ...projectSize,
+        schemaWidth: 1200,
+        schemaHeight: 1600,
+      },
       project(
         shopBuiltins,
         "white-face-frame-builtins-fireplace-surround-shop.webp",
