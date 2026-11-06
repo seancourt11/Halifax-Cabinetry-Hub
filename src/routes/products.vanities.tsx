@@ -13,7 +13,7 @@ import { heroImagePreload } from "@/lib/image-srcset";
 
 const PAGE_TITLE = "Custom Bathroom Vanities | Hempston Home";
 const PAGE_DESC =
-  "Custom bathroom vanities in slab, shaker, floating and furniture forms. The vanities shown are a selection, and we can design any vanity from a photo you send. Built in Canada. Catalogue vanities take 2 to 4 weeks. A custom vanity takes 8 to 14 weeks.";
+  "Custom bathroom vanities in slab, shaker, floating and furniture forms. The vanities shown are a selection, and we can design any vanity from a photo you send. Built in Canada. Catalogue and custom vanities are made in 2 to 4 weeks of production time.";
 const ABSOLUTE_URL = `${SITE_URL}/products/vanities`;
 const hero = vanityPieces[0];
 const ABSOLUTE_IMAGE = `${SITE_URL}${hero.src}`;
@@ -33,11 +33,11 @@ const faqs = [
   },
   {
     q: "Can you build a vanity that is not shown here?",
-    a: "Yes. The vanities shown here are just a selection. We custom design and build vanities of any size, style or finish. Send us a photo of a vanity you love and we'll design and produce one to match. A custom vanity takes 8 to 14 weeks. The 2 to 4 week production time applies only to the catalogue vanities on this page.",
+    a: "Yes. The vanities shown here are just a selection. We custom design and build vanities of any size, style or finish. Send us a photo of a vanity you love and we'll design and produce one to match. A custom vanity is made in the same 2 to 4 weeks of production time.",
   },
   {
-    q: "How long do catalogue vanities take?",
-    a: "The catalogue vanities on this page are made in 2 to 4 weeks of production time. A vanity designed from your photo, or any vanity outside this selection, takes 8 to 14 weeks. Hours are Monday to Friday, 9 AM to 5 PM.",
+    q: "How long do these vanities take?",
+    a: "Catalogue vanities and a vanity designed from your photo are made in 2 to 4 weeks of production time. Hours are Monday to Friday, 9 AM to 5 PM.",
   },
 ];
 
@@ -112,8 +112,8 @@ function VanitiesPage() {
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
             The vanities shown here are just a selection. We custom design and build vanities of any
             size, style or finish. Send us a photo of a vanity you love and we'll design and produce
-            one to match. A vanity designed from your photo takes 8 to 14 weeks. The 2 to 4 week
-            production time applies only to the catalogue vanities on this page. See the{" "}
+            one to match. Catalogue vanities and custom vanities are both made in 2 to 4 weeks of
+            production time. See the{" "}
             <Link to="/products/door-styles" className="underline hover:text-white">
               door styles
             </Link>
@@ -165,8 +165,8 @@ function VanitiesPage() {
             <p className="mt-4 text-base leading-relaxed text-white/70">
               The vanities shown here are just a selection. We custom design and build vanities of
               any size, style or finish. Send us a photo of a vanity you love and we'll design and
-              produce one to match. A custom vanity takes 8 to 14 weeks. The 2 to 4 week production
-              time applies only to the catalogue vanities on this page.
+              produce one to match. A custom vanity is made in the same 2 to 4 weeks of production
+              time.
             </p>
           </div>
           <Link
@@ -181,7 +181,7 @@ function VanitiesPage() {
       <ProductCTA
         eyebrow="Request a quote"
         heading="Start a vanity quote"
-        body="Tell us the vanity, the finish and the room. We will sample the colour or stain and quote the piece. Catalogue vanities on this page are made in 2 to 4 weeks of production time. A custom vanity takes 8 to 14 weeks."
+        body="Tell us the vanity, the finish and the room, or send a photo of a vanity you love. We will sample the colour or stain and quote the piece. Catalogue and custom vanities are made in 2 to 4 weeks of production time."
       />
       <SiteFooter />
     </div>

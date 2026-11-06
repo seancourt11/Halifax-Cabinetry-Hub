@@ -5,7 +5,7 @@ const facts = [
   {
     label: "01",
     title: "In time for Christmas",
-    body: "These catalogue vanities are made in 2 to 4 weeks of production time, ready to give as a Christmas gift.",
+    body: "Vanities are made in 2 to 4 weeks of production time, including a custom piece from a photo you send, ready to give as a Christmas gift.",
   },
   {
     label: "02",
@@ -29,7 +29,7 @@ export function VanityPromoBanner() {
           Holiday promotion
         </p>
         <h2 className="mt-4 max-w-3xl font-display text-3xl font-light uppercase leading-[1.08] tracking-[0.04em] sm:text-5xl">
-          Catalogue vanities, in time for Christmas
+          Vanities, in time for Christmas
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-black/70 sm:text-lg">
           A warm, considered gift for the home. The pieces on this page can be in production and
@@ -55,7 +55,7 @@ export function VanityPromoBanner() {
             </p>
             <p className="mt-2 text-sm leading-relaxed text-black/65">
               The promotion runs through Friday, November 13, 2026. This 2 to 4 week production time
-              applies only to the catalogue vanities shown here.
+              applies to vanities, including a custom vanity designed from a photo you send.
             </p>
           </div>
           <Link
