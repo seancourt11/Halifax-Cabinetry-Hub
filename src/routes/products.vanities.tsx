@@ -13,7 +13,7 @@ import { heroImagePreload } from "@/lib/image-srcset";
 
 const PAGE_TITLE = "Custom Bathroom Vanities | Hempston Home";
 const PAGE_DESC =
-  "Custom bathroom vanities in slab, shaker, floating and furniture forms. Painted and stained finishes, white marble tops, built in Canada. Catalogue vanities are made in 2 to 4 weeks of production time.";
+  "Custom bathroom vanities in slab, shaker, floating and furniture forms. The vanities shown are a selection, and we can design any vanity from a photo you send. Built in Canada. Catalogue vanities take 2 to 4 weeks. A custom vanity takes 8 to 14 weeks.";
 const ABSOLUTE_URL = `${SITE_URL}/products/vanities`;
 const hero = vanityPieces[0];
 const ABSOLUTE_IMAGE = `${SITE_URL}${hero.src}`;
@@ -32,8 +32,12 @@ const faqs = [
     a: "Yes. Paint colours, including Farrow & Ball and Benjamin Moore, and wood stains are fully custom. Natural oil finishes such as Rubio Monocoat and Osmo are available as well.",
   },
   {
+    q: "Can you build a vanity that is not shown here?",
+    a: "Yes. The vanities shown here are just a selection. We custom design and build vanities of any size, style or finish. Send us a photo of a vanity you love and we'll design and produce one to match. A custom vanity takes 8 to 14 weeks. The 2 to 4 week production time applies only to the catalogue vanities on this page.",
+  },
+  {
     q: "How long do catalogue vanities take?",
-    a: "The vanities on this page are made in 2 to 4 weeks of production time. Other custom cabinetry usually takes 8 to 14 weeks. Hours are Monday to Friday, 9 AM to 5 PM.",
+    a: "The catalogue vanities on this page are made in 2 to 4 weeks of production time. A vanity designed from your photo, or any vanity outside this selection, takes 8 to 14 weeks. Hours are Monday to Friday, 9 AM to 5 PM.",
   },
 ];
 
@@ -105,9 +109,11 @@ function VanitiesPage() {
             to the width, height and basin layout of the room.
           </p>
           <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/55">
-            Catalogue vanities on this page are made in 2 to 4 weeks of production time. A fully
-            custom vanity outside this catalogue typically takes 8 to 14 weeks. See the{" "}
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
+            The vanities shown here are just a selection. We custom design and build vanities of any
+            size, style or finish. Send us a photo of a vanity you love and we'll design and produce
+            one to match. A vanity designed from your photo takes 8 to 14 weeks. The 2 to 4 week
+            production time applies only to the catalogue vanities on this page. See the{" "}
             <Link to="/products/door-styles" className="underline hover:text-white">
               door styles
             </Link>
@@ -147,10 +153,35 @@ function VanitiesPage() {
         </div>
       </section>
 
+      <section className="border-t border-white/10 bg-[oklch(0.14_0_0)]">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-center">
+          <div className="max-w-2xl">
+            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/70">
+              Any vanity
+            </p>
+            <h2 className="mt-4 font-display text-3xl font-light uppercase leading-[1.05] tracking-[0.04em] sm:text-4xl">
+              Bring us a vanity you love
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-white/70">
+              The vanities shown here are just a selection. We custom design and build vanities of
+              any size, style or finish. Send us a photo of a vanity you love and we'll design and
+              produce one to match. A custom vanity takes 8 to 14 weeks. The 2 to 4 week production
+              time applies only to the catalogue vanities on this page.
+            </p>
+          </div>
+          <Link
+            to="/contact"
+            className="inline-flex shrink-0 items-center justify-center bg-white px-6 py-4 text-center text-[10px] font-medium uppercase tracking-[0.28em] text-[oklch(0.14_0_0)] transition-colors hover:bg-white/85"
+          >
+            Send us your inspiration
+          </Link>
+        </div>
+      </section>
+
       <ProductCTA
         eyebrow="Request a quote"
         heading="Start a vanity quote"
-        body="Tell us the vanity, the finish and the room. We will sample the colour or stain and quote the piece. Catalogue vanities on this page are made in 2 to 4 weeks of production time."
+        body="Tell us the vanity, the finish and the room. We will sample the colour or stain and quote the piece. Catalogue vanities on this page are made in 2 to 4 weeks of production time. A custom vanity takes 8 to 14 weeks."
       />
       <SiteFooter />
     </div>
