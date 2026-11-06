@@ -107,11 +107,7 @@ function VanitiesPage() {
           <BuiltInCanadaLine className="mt-4 max-w-2xl text-sm text-white/70" />
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/55">
             Catalogue vanities on this page are made in 2 to 4 weeks of production time. A fully
-            custom vanity outside this catalogue typically takes 8 to 14 weeks. Also see{" "}
-            <Link to="/products/freestanding-furniture" className="underline hover:text-white">
-              freestanding furniture
-            </Link>{" "}
-            and{" "}
+            custom vanity outside this catalogue typically takes 8 to 14 weeks. See the{" "}
             <Link to="/products/door-styles" className="underline hover:text-white">
               door styles
             </Link>

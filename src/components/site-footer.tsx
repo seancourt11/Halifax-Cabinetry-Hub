@@ -12,7 +12,6 @@ import {
 const productLinks = [
   { label: "Cabinet Door Styles", to: "/products/door-styles" as const },
   { label: "Bathroom Vanities", to: "/products/vanities" as const },
-  { label: "Freestanding Furniture", to: "/products/freestanding-furniture" as const },
   { label: "Construction Styles", to: "/products/cabinet-styles" as const },
   { label: "Colours and Finishes", to: "/products/colours-finishes" as const },
   { label: "Brands We Work With", to: "/products/brands" as const },

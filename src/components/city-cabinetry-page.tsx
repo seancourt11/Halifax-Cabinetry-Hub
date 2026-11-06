@@ -710,9 +710,6 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
             <Link to="/products/vanities" className={btnLight}>
               Bathroom Vanities
             </Link>
-            <Link to="/products/freestanding-furniture" className={btnLight}>
-              Freestanding Furniture
-            </Link>
           </div>
         </div>
       </section>

@@ -44,7 +44,6 @@ import { Route as ProductsBrandsRouteImport } from './routes/products.brands'
 import { Route as ProductsCabinetStylesRouteImport } from './routes/products.cabinet-styles'
 import { Route as ProductsColoursFinishesRouteImport } from './routes/products.colours-finishes'
 import { Route as ProductsDoorStylesRouteImport } from './routes/products.door-styles'
-import { Route as ProductsFreestandingFurnitureRouteImport } from './routes/products.freestanding-furniture'
 import { Route as ProductsVanitiesRouteImport } from './routes/products.vanities'
 
 const IndexRoute = IndexRouteImport.update({
@@ -230,12 +229,6 @@ const ProductsDoorStylesRoute = ProductsDoorStylesRouteImport.update({
   path: '/products/door-styles',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsFreestandingFurnitureRoute =
-  ProductsFreestandingFurnitureRouteImport.update({
-    id: '/products/freestanding-furniture',
-    path: '/products/freestanding-furniture',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ProductsVanitiesRoute = ProductsVanitiesRouteImport.update({
   id: '/products/vanities',
   path: '/products/vanities',
@@ -278,7 +271,6 @@ export interface FileRoutesByFullPath {
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
   '/products/door-styles': typeof ProductsDoorStylesRoute
-  '/products/freestanding-furniture': typeof ProductsFreestandingFurnitureRoute
   '/products/vanities': typeof ProductsVanitiesRoute
 }
 export interface FileRoutesByTo {
@@ -317,7 +309,6 @@ export interface FileRoutesByTo {
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
   '/products/door-styles': typeof ProductsDoorStylesRoute
-  '/products/freestanding-furniture': typeof ProductsFreestandingFurnitureRoute
   '/products/vanities': typeof ProductsVanitiesRoute
 }
 export interface FileRoutesById {
@@ -357,7 +348,6 @@ export interface FileRoutesById {
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
   '/products/door-styles': typeof ProductsDoorStylesRoute
-  '/products/freestanding-furniture': typeof ProductsFreestandingFurnitureRoute
   '/products/vanities': typeof ProductsVanitiesRoute
 }
 export interface FileRouteTypes {
@@ -398,7 +388,6 @@ export interface FileRouteTypes {
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
     | '/products/door-styles'
-    | '/products/freestanding-furniture'
     | '/products/vanities'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -437,7 +426,6 @@ export interface FileRouteTypes {
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
     | '/products/door-styles'
-    | '/products/freestanding-furniture'
     | '/products/vanities'
   id:
     | '__root__'
@@ -476,7 +464,6 @@ export interface FileRouteTypes {
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
     | '/products/door-styles'
-    | '/products/freestanding-furniture'
     | '/products/vanities'
   fileRoutesById: FileRoutesById
 }
@@ -516,7 +503,6 @@ export interface RootRouteChildren {
   ProductsCabinetStylesRoute: typeof ProductsCabinetStylesRoute
   ProductsColoursFinishesRoute: typeof ProductsColoursFinishesRoute
   ProductsDoorStylesRoute: typeof ProductsDoorStylesRoute
-  ProductsFreestandingFurnitureRoute: typeof ProductsFreestandingFurnitureRoute
   ProductsVanitiesRoute: typeof ProductsVanitiesRoute
 }
 
@@ -767,13 +753,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsDoorStylesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/freestanding-furniture': {
-      id: '/products/freestanding-furniture'
-      path: '/products/freestanding-furniture'
-      fullPath: '/products/freestanding-furniture'
-      preLoaderRoute: typeof ProductsFreestandingFurnitureRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/products/vanities': {
       id: '/products/vanities'
       path: '/products/vanities'
@@ -820,7 +799,6 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsCabinetStylesRoute: ProductsCabinetStylesRoute,
   ProductsColoursFinishesRoute: ProductsColoursFinishesRoute,
   ProductsDoorStylesRoute: ProductsDoorStylesRoute,
-  ProductsFreestandingFurnitureRoute: ProductsFreestandingFurnitureRoute,
   ProductsVanitiesRoute: ProductsVanitiesRoute,
 }
 export const routeTree = rootRouteImport

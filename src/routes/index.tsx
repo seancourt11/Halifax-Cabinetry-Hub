@@ -610,20 +610,6 @@ function Index() {
                 Slab vanities, floating doubles, and furniture-style singles.
               </p>
             </Link>
-            <Link
-              to="/products/freestanding-furniture"
-              className="border border-white/15 p-5 transition-colors hover:border-white/40"
-            >
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
-                05
-              </p>
-              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">
-                Freestanding Furniture
-              </p>
-              <p className="mt-2 text-sm text-white/60">
-                Hutches, kitchen islands, storage tables and worktables.
-              </p>
-            </Link>
           </div>
           <p className="mt-8 text-sm text-white/70">
             <Link
@@ -649,15 +635,6 @@ function Index() {
               className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
             >
               Bathroom vanities
-            </Link>
-            <span className="mx-3 text-white/40" aria-hidden="true">
-              /
-            </span>
-            <Link
-              to="/products/freestanding-furniture"
-              className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
-            >
-              Freestanding furniture
             </Link>
           </p>
         </div>

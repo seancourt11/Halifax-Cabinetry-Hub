@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { novaScotiaHero, novaScotiaProjectPhotos, uniqueImages } from "@/data/seo-page-images";
 import { insetPagePhotos, uniqueInsetPhotos } from "@/data/inset-page-photos";
-import { freestandingPieces, vanityPieces } from "@/data/furniture-catalogue";
+import { vanityPieces } from "@/data/furniture-catalogue";
 
 const BASE_URL = "https://www.hempstonhome.com";
 
@@ -15,11 +15,6 @@ const pageImages: Record<string, SitemapImage[]> = {
   ]),
   "/inset-face-frame-cabinets": uniqueInsetPhotos(insetPagePhotos),
   "/products/vanities": vanityPieces.map((piece) => ({
-    src: piece.src,
-    title: piece.title,
-    caption: piece.caption,
-  })),
-  "/products/freestanding-furniture": freestandingPieces.map((piece) => ({
     src: piece.src,
     title: piece.title,
     caption: piece.caption,
@@ -64,12 +59,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/products/door-styles", changefreq: "monthly", priority: "0.8" },
           {
             path: "/products/vanities",
-            changefreq: "monthly",
-            priority: "0.8",
-            lastmod: "2026-11-06",
-          },
-          {
-            path: "/products/freestanding-furniture",
             changefreq: "monthly",
             priority: "0.8",
             lastmod: "2026-11-06",

@@ -69,29 +69,3 @@ export function VanityPromoBanner() {
     </section>
   );
 }
-
-/** Compact matching strip for the freestanding furniture page. */
-export function VanityPromoStrip() {
-  if (!vanityPromoActive()) return null;
-  return (
-    <section className="border-b border-black/10 bg-[oklch(0.96_0.012_85)] text-black">
-      <div className="mx-auto flex max-w-6xl flex-col gap-5 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <div>
-          <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/55">
-            Holiday vanity promotion
-          </p>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-black/75">
-            Catalogue vanities are made in 2 to 4 weeks of production time, in time for Christmas.
-            Up to 35% off every vanity. Offer ends Friday, November 13, 2026.
-          </p>
-        </div>
-        <Link
-          to="/products/vanities"
-          className="inline-flex shrink-0 items-center justify-center border border-black/20 px-5 py-3 text-[10px] font-medium uppercase tracking-[0.24em] transition-colors hover:bg-[oklch(0.14_0_0)] hover:text-white"
-        >
-          View the vanities
-        </Link>
-      </div>
-    </section>
-  );
-}

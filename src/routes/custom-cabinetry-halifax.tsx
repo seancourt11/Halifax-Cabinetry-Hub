@@ -939,9 +939,6 @@ function HalifaxPage() {
             <Link to="/products/vanities" className={btnOutlineDark}>
               Bathroom Vanities
             </Link>
-            <Link to="/products/freestanding-furniture" className={btnOutlineDark}>
-              Freestanding Furniture
-            </Link>
           </div>
         </div>
       </section>
