@@ -40,6 +40,7 @@ import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as WorkWithUsRouteImport } from './routes/work-with-us'
 import { Route as ApiContactRouteImport } from './routes/api.contact'
+import { Route as LpCustomVanitiesRouteImport } from './routes/lp.custom-vanities'
 import { Route as ProductsBrandsRouteImport } from './routes/products.brands'
 import { Route as ProductsCabinetStylesRouteImport } from './routes/products.cabinet-styles'
 import { Route as ProductsColoursFinishesRouteImport } from './routes/products.colours-finishes'
@@ -209,6 +210,11 @@ const ApiContactRoute = ApiContactRouteImport.update({
   path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LpCustomVanitiesRoute = LpCustomVanitiesRouteImport.update({
+  id: '/lp/custom-vanities',
+  path: '/lp/custom-vanities',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsBrandsRoute = ProductsBrandsRouteImport.update({
   id: '/products/brands',
   path: '/products/brands',
@@ -267,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work-with-us': typeof WorkWithUsRoute
   '/api/contact': typeof ApiContactRoute
+  '/lp/custom-vanities': typeof LpCustomVanitiesRoute
   '/products/brands': typeof ProductsBrandsRoute
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
@@ -305,6 +312,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work-with-us': typeof WorkWithUsRoute
   '/api/contact': typeof ApiContactRoute
+  '/lp/custom-vanities': typeof LpCustomVanitiesRoute
   '/products/brands': typeof ProductsBrandsRoute
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
@@ -344,6 +352,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work-with-us': typeof WorkWithUsRoute
   '/api/contact': typeof ApiContactRoute
+  '/lp/custom-vanities': typeof LpCustomVanitiesRoute
   '/products/brands': typeof ProductsBrandsRoute
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
@@ -384,6 +393,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/work-with-us'
     | '/api/contact'
+    | '/lp/custom-vanities'
     | '/products/brands'
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
@@ -422,6 +432,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/work-with-us'
     | '/api/contact'
+    | '/lp/custom-vanities'
     | '/products/brands'
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
@@ -460,6 +471,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/work-with-us'
     | '/api/contact'
+    | '/lp/custom-vanities'
     | '/products/brands'
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
@@ -499,6 +511,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WorkWithUsRoute: typeof WorkWithUsRoute
   ApiContactRoute: typeof ApiContactRoute
+  LpCustomVanitiesRoute: typeof LpCustomVanitiesRoute
   ProductsBrandsRoute: typeof ProductsBrandsRoute
   ProductsCabinetStylesRoute: typeof ProductsCabinetStylesRoute
   ProductsColoursFinishesRoute: typeof ProductsColoursFinishesRoute
@@ -725,6 +738,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/custom-vanities': {
+      id: '/lp/custom-vanities'
+      path: '/lp/custom-vanities'
+      fullPath: '/lp/custom-vanities'
+      preLoaderRoute: typeof LpCustomVanitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/brands': {
       id: '/products/brands'
       path: '/products/brands'
@@ -795,6 +815,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WorkWithUsRoute: WorkWithUsRoute,
   ApiContactRoute: ApiContactRoute,
+  LpCustomVanitiesRoute: LpCustomVanitiesRoute,
   ProductsBrandsRoute: ProductsBrandsRoute,
   ProductsCabinetStylesRoute: ProductsCabinetStylesRoute,
   ProductsColoursFinishesRoute: ProductsColoursFinishesRoute,
