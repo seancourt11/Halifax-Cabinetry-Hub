@@ -13,6 +13,16 @@ import kentCoffee from "@/assets/projects/dba-kent-kitchen-2.jpg";
 import farmhouseSink from "@/assets/projects/farmhouse-sink-blue-tile.jpg";
 import kentPantry from "@/assets/projects/dba-kent-pantry.jpg";
 import plKitchen from "@/assets/projects/dba-pl-kitchen-1.jpg";
+import oakVanityFluted from "@/assets/projects/face-frame/white-oak-face-frame-vanity-fluted-drawers.webp";
+import oakVanitySide from "@/assets/projects/face-frame/white-oak-face-frame-vanity-side-slatted-shelf.webp";
+import oakKnifeBlock from "@/assets/projects/face-frame/stained-oak-custom-knife-block-shop.webp";
+import navyPantryLadder from "@/assets/projects/face-frame/navy-painted-face-frame-pantry-library-ladder.webp";
+import navyPantryShelves from "@/assets/projects/face-frame/navy-painted-face-frame-pantry-open-shelves.webp";
+import ashCabinet from "@/assets/projects/face-frame/bespoke-ash-face-frame-cabinet-crown-molding-oak-slatted-back.webp";
+import shopBuiltins from "@/assets/projects/face-frame/white-face-frame-builtins-fireplace-surround-shop.webp";
+import greigeKitchen from "@/assets/projects/face-frame/greige-inset-face-frame-kitchen-mantel-hood.webp";
+import raspberryBar from "@/assets/projects/face-frame/raspberry-painted-face-frame-bar-glass-uppers.webp";
+import curvedOakBar from "@/assets/projects/face-frame/curved-oak-bar-front-library-shelving-ladder.webp";
 
 import noto from "@/assets/door-gallery-2026/inset_malibu_setting_plaster.png";
 import tracadie from "@/assets/door-gallery-2026/inset_malibu_school_house_white.png";
@@ -173,6 +183,109 @@ export const otherFaceFrameJobs: { job: string; photos: InsetPhoto[] }[] = [
         "Cream face-frame drawers and doors around a dark island and a brick backsplash",
         1600,
         1066,
+      ),
+    ],
+  },
+  {
+    job: "Vanities and furniture details",
+    photos: [
+      project(
+        oakVanityFluted,
+        "white-oak-face-frame-vanity-fluted-drawers.webp",
+        "White oak fluted vanity",
+        "White oak face-frame bathroom vanity with fluted drawer and door fronts, polished nickel knobs, a marble top, and a hex mosaic floor",
+        1024,
+        768,
+      ),
+      project(
+        oakVanitySide,
+        "white-oak-face-frame-vanity-side-slatted-shelf.webp",
+        "White oak vanity side",
+        "White oak face-frame vanity side with a frame-and-panel end and a slatted bottom shelf, on the shop bench",
+        1200,
+        1600,
+      ),
+      project(
+        oakKnifeBlock,
+        "stained-oak-custom-knife-block-shop.webp",
+        "Custom stained oak knife block",
+        "Custom stained oak knife block with a slatted, rounded-edge design, made in the Hempston Home shop",
+        736,
+        1600,
+      ),
+    ],
+  },
+  {
+    job: "Pantries and built-ins",
+    photos: [
+      project(
+        navyPantryLadder,
+        "navy-painted-face-frame-pantry-library-ladder.webp",
+        "Navy pantry with a library ladder",
+        "Navy painted pantry with face-frame lower cabinets, a beadboard wall, and a library ladder",
+        1067,
+        1600,
+      ),
+      project(
+        navyPantryShelves,
+        "navy-painted-face-frame-pantry-open-shelves.webp",
+        "Navy pantry corner",
+        "Navy painted pantry corner with face-frame lower cabinets and open shelving above",
+        1067,
+        1600,
+      ),
+      {
+        src: ashCabinet,
+        fileName: "bespoke-ash-face-frame-cabinet-crown-molding-oak-slatted-back.webp",
+        title: "Bespoke ash cabinet",
+        alt: "Bespoke ash face frame cabinet with crown molding and oak slatted back in the Hempston shop",
+        caption:
+          "A bespoke ash face frame cabinet with crown molding and a weaved oak slatted back, in the shop and to be delivered to site for hand painting.",
+        ...projectSize,
+        schemaWidth: 1200,
+        schemaHeight: 1600,
+      },
+      project(
+        shopBuiltins,
+        "white-face-frame-builtins-fireplace-surround-shop.webp",
+        "White built-ins and fireplace surround",
+        "Two painted white face-frame built-in units and a fireplace surround in the shop",
+        1200,
+        1600,
+      ),
+    ],
+  },
+  {
+    job: "Inset kitchen",
+    photos: [
+      project(
+        greigeKitchen,
+        "greige-inset-face-frame-kitchen-mantel-hood.webp",
+        "Greige inset kitchen",
+        "Greige painted inset face-frame kitchen with a mantel-style hood, glass uppers, and a freestanding island with a slatted shelf and baskets",
+        1600,
+        1067,
+      ),
+    ],
+  },
+  {
+    job: "Bars and dining storage",
+    photos: [
+      project(
+        raspberryBar,
+        "raspberry-painted-face-frame-bar-glass-uppers.webp",
+        "Raspberry painted bar",
+        "Raspberry painted face-frame cabinet wall with glass upper doors, brass pulls, and floral wallpaper behind the glass",
+        1600,
+        1067,
+      ),
+      project(
+        curvedOakBar,
+        "curved-oak-bar-front-library-shelving-ladder.webp",
+        "Curved oak bar",
+        "Dark lounge bar with a curved oak bar front, built-in library shelving, and a ladder",
+        1600,
+        914,
       ),
     ],
   },
