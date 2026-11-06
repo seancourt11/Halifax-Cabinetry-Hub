@@ -91,7 +91,7 @@ function VanitiesPage() {
       <section className="bg-[oklch(0.14_0_0)]">
         <div className="mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 sm:pt-20 sm:pb-24">
           <div className="text-white/80">
-            <ProductBreadcrumb label="Bathroom Vanities" />
+            <ProductBreadcrumb label="Bathroom Vanities" tone="onDark" />
           </div>
           <p className="mt-10 text-[10px] font-medium uppercase tracking-[0.28em] text-white/70">
             Slab vanities and vanity shapes
