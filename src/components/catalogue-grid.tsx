@@ -10,6 +10,7 @@ function desktopColumns(count: number): 2 | 3 {
 }
 
 export function CatalogueGroups({ groups }: { groups: CatalogueGroup[] }) {
+  let imageIndex = 0;
   return (
     <>
       {groups.map((group) => {
@@ -35,38 +36,50 @@ export function CatalogueGroups({ groups }: { groups: CatalogueGroup[] }) {
               <h2 className="mt-5 max-w-3xl font-display text-3xl font-light uppercase leading-[1.05] tracking-[0.06em] sm:text-4xl">
                 {group.title}
               </h2>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-black/70">{group.intro}</p>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-black/70">
+                {group.intro}
+              </p>
               <div className="mt-14 flex flex-wrap justify-center gap-6">
-                {group.pieces.map((piece) => (
-                  <figure key={piece.src} className={`${cardWidth} border border-black/10 bg-white`}>
-                    <div className="aspect-[3/4] overflow-hidden bg-white p-4 sm:p-6">
-                      <ResponsiveImg
-                        src={piece.src}
-                        alt={piece.alt}
-                        title={piece.title}
-                        width={piece.width}
-                        height={piece.height}
-                        loading="lazy"
-                        sizes={sizes}
-                        className="h-full w-full object-contain"
-                      />
-                    </div>
-                    <figcaption className="border-t border-black/10 p-5">
-                      <p className="font-display text-sm font-light uppercase tracking-[0.12em] text-black">
-                        {piece.title}
-                      </p>
-                      <p className="mt-3 text-sm leading-relaxed text-black/65">{piece.caption}</p>
-                      <div className="mt-4 border-t border-black/10 pt-3">
-                        <SampleRequestLink
-                          tone="light"
-                          projectType={`${piece.title} enquiry`}
-                          message={`I'm interested in the ${piece.title}.`}
-                          label="Enquire about this piece"
+                {group.pieces.map((piece) => {
+                  const index = imageIndex;
+                  imageIndex += 1;
+                  return (
+                    <figure
+                      key={piece.src}
+                      className={`${cardWidth} border border-black/10 bg-white`}
+                    >
+                      <div className="aspect-[3/4] overflow-hidden bg-white p-4 sm:p-6">
+                        <ResponsiveImg
+                          src={piece.src}
+                          alt={piece.alt}
+                          title={piece.title}
+                          width={piece.width}
+                          height={piece.height}
+                          loading={index < 2 ? "eager" : "lazy"}
+                          fetchPriority={index === 0 ? "high" : undefined}
+                          sizes={sizes}
+                          className="h-full w-full object-contain"
                         />
                       </div>
-                    </figcaption>
-                  </figure>
-                ))}
+                      <figcaption className="border-t border-black/10 p-5">
+                        <p className="font-display text-sm font-light uppercase tracking-[0.12em] text-black">
+                          {piece.title}
+                        </p>
+                        <p className="mt-3 text-sm leading-relaxed text-black/65">
+                          {piece.caption}
+                        </p>
+                        <div className="mt-4 border-t border-black/10 pt-3">
+                          <SampleRequestLink
+                            tone="light"
+                            projectType={`${piece.title} enquiry`}
+                            message={`I'm interested in the ${piece.title}.`}
+                            label="Enquire about this piece"
+                          />
+                        </div>
+                      </figcaption>
+                    </figure>
+                  );
+                })}
               </div>
             </div>
           </section>

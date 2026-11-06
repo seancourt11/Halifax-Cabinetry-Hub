@@ -1,4 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { createIsomorphicFn } from "@tanstack/react-start";
+import { getRequestHeader } from "@tanstack/react-start/server";
 import {
   VANITY_PROMO_TIMING,
   vanityPromoOverrideDay,
@@ -6,10 +8,23 @@ import {
   type VanityPromoPhase,
 } from "@/lib/vanity-promo";
 
+function firstHeaderValue(value: string | undefined) {
+  return (value ?? "").split(",")[0]?.trim() ?? "";
+}
+
+const readRequestHost = createIsomorphicFn()
+  .server(() => {
+    try {
+      return firstHeaderValue(getRequestHeader("x-forwarded-host") || getRequestHeader("host"));
+    } catch {
+      return "";
+    }
+  })
+  .client(() => window.location.host);
+
 export function useVanityPromoPhase(): VanityPromoPhase | null {
   const searchStr = useRouterState({ select: (s) => s.location.searchStr });
-  const host = typeof window === "undefined" ? "" : window.location.hostname;
-  return vanityPromoPhase(new Date(), vanityPromoOverrideDay(searchStr ?? "", host));
+  return vanityPromoPhase(new Date(), vanityPromoOverrideDay(searchStr ?? "", readRequestHost()));
 }
 
 const facts = [
