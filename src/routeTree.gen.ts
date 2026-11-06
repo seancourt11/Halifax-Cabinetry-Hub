@@ -44,6 +44,7 @@ import { Route as ProductsBrandsRouteImport } from './routes/products.brands'
 import { Route as ProductsCabinetStylesRouteImport } from './routes/products.cabinet-styles'
 import { Route as ProductsColoursFinishesRouteImport } from './routes/products.colours-finishes'
 import { Route as ProductsDoorStylesRouteImport } from './routes/products.door-styles'
+import { Route as ProductsVanitiesRouteImport } from './routes/products.vanities'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -228,6 +229,11 @@ const ProductsDoorStylesRoute = ProductsDoorStylesRouteImport.update({
   path: '/products/door-styles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsVanitiesRoute = ProductsVanitiesRouteImport.update({
+  id: '/products/vanities',
+  path: '/products/vanities',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -265,6 +271,7 @@ export interface FileRoutesByFullPath {
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
   '/products/door-styles': typeof ProductsDoorStylesRoute
+  '/products/vanities': typeof ProductsVanitiesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -302,6 +309,7 @@ export interface FileRoutesByTo {
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
   '/products/door-styles': typeof ProductsDoorStylesRoute
+  '/products/vanities': typeof ProductsVanitiesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -340,6 +348,7 @@ export interface FileRoutesById {
   '/products/cabinet-styles': typeof ProductsCabinetStylesRoute
   '/products/colours-finishes': typeof ProductsColoursFinishesRoute
   '/products/door-styles': typeof ProductsDoorStylesRoute
+  '/products/vanities': typeof ProductsVanitiesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -379,6 +388,7 @@ export interface FileRouteTypes {
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
     | '/products/door-styles'
+    | '/products/vanities'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -416,6 +426,7 @@ export interface FileRouteTypes {
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
     | '/products/door-styles'
+    | '/products/vanities'
   id:
     | '__root__'
     | '/'
@@ -453,6 +464,7 @@ export interface FileRouteTypes {
     | '/products/cabinet-styles'
     | '/products/colours-finishes'
     | '/products/door-styles'
+    | '/products/vanities'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -491,6 +503,7 @@ export interface RootRouteChildren {
   ProductsCabinetStylesRoute: typeof ProductsCabinetStylesRoute
   ProductsColoursFinishesRoute: typeof ProductsColoursFinishesRoute
   ProductsDoorStylesRoute: typeof ProductsDoorStylesRoute
+  ProductsVanitiesRoute: typeof ProductsVanitiesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -740,6 +753,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsDoorStylesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/vanities': {
+      id: '/products/vanities'
+      path: '/products/vanities'
+      fullPath: '/products/vanities'
+      preLoaderRoute: typeof ProductsVanitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -779,6 +799,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsCabinetStylesRoute: ProductsCabinetStylesRoute,
   ProductsColoursFinishesRoute: ProductsColoursFinishesRoute,
   ProductsDoorStylesRoute: ProductsDoorStylesRoute,
+  ProductsVanitiesRoute: ProductsVanitiesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

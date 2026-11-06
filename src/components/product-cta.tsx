@@ -34,18 +34,32 @@ export function ProductCTA({
   );
 }
 
-export function ProductBreadcrumb({ label }: { label: string }) {
+export function ProductBreadcrumb({
+  label,
+  tone = "default",
+}: {
+  label: string;
+  /** onDark keeps the current page in the same light colour as Home and Products. */
+  tone?: "default" | "onDark";
+}) {
+  const onDark = tone === "onDark";
   return (
-    <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
-      <Link to="/" className="hover:text-foreground">
+    <nav
+      aria-label="Breadcrumb"
+      className={onDark ? "text-sm text-white/80" : "text-sm text-muted-foreground"}
+    >
+      <Link to="/" className={onDark ? "hover:text-white" : "hover:text-foreground"}>
         Home
       </Link>
       <span className="mx-2 opacity-60">/</span>
-      <Link to="/products/door-styles" className="hover:text-foreground">
+      <Link
+        to="/products/door-styles"
+        className={onDark ? "hover:text-white" : "hover:text-foreground"}
+      >
         Products
       </Link>
       <span className="mx-2 opacity-60">/</span>
-      <span className="text-foreground">{label}</span>
+      <span className={onDark ? "text-white/80" : "text-foreground"}>{label}</span>
     </nav>
   );
 }

@@ -703,9 +703,12 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
               </figure>
             ))}
           </div>
-          <div className="mt-14 text-center">
+          <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link to="/products/door-styles" className={btnLight}>
               Browse All Door Styles
+            </Link>
+            <Link to="/products/vanities" className={btnLight}>
+              Bathroom Vanities
             </Link>
           </div>
         </div>

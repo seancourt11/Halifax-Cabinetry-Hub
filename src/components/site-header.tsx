@@ -12,6 +12,7 @@ import {
 
 const customCabinets = [
   { label: "Door Styles", to: "/products/door-styles" as const },
+  { label: "Vanities", to: "/products/vanities" as const },
   { label: "Cabinet Styles", to: "/products/cabinet-styles" as const },
   { label: "Colours & Finishes", to: "/products/colours-finishes" as const },
   { label: "Brands We Work With", to: "/products/brands" as const },
