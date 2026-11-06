@@ -53,13 +53,24 @@ export function halifaxCalendarDay(now = new Date()) {
   }).format(now);
 }
 
-const PRODUCTION_HOSTS = new Set(["hempstonhome.com", "www.hempstonhome.com"]);
+const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
 
-/** Query override is for preview and local review. It is ignored on the live site. */
+function normalizeHost(host: string) {
+  let name = host.trim().toLowerCase();
+  if (name.startsWith("[")) {
+    const end = name.indexOf("]");
+    return end >= 0 ? name.slice(1, end) : name.slice(1);
+  }
+  return name.split(":")[0] ?? "";
+}
+
+/** Query override is only for localhost and Vercel preview hosts. */
 export function vanityPromoOverrideAllowed(host: string) {
-  const name = host.trim().toLowerCase().split(":")[0];
-  if (!name) return true;
-  return !PRODUCTION_HOSTS.has(name);
+  const name = normalizeHost(host);
+  if (!name) return false;
+  if (name === "hempstonhome.com" || name === "www.hempstonhome.com") return false;
+  if (LOCAL_HOSTS.has(name)) return true;
+  return name.endsWith(".vercel.app");
 }
 
 /**

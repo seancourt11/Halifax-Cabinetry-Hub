@@ -16,14 +16,20 @@ test("phase 1 lasts through 11:59 PM Halifax on November 9", () => {
   const phase = vanityPromoPhase(phase1Evening);
   assert.equal(phase?.id, "phase1");
   assert.equal(phase?.percent, 40);
-  assert.equal(phase?.discount, "40% off until Monday, November 9. Then 30% off until November 16.");
+  assert.equal(
+    phase?.discount,
+    "40% off until Monday, November 9. Then 30% off until November 16.",
+  );
 });
 
 test("phase 2 runs from November 10 through 11:59 PM Halifax on November 16", () => {
   assert.equal(vanityPromoPhase(phase2Start)?.id, "phase2");
   assert.equal(vanityPromoPhase(phase2Start)?.percent, 30);
   assert.equal(vanityPromoPhase(phase2Evening)?.discount, "30% off until Monday, November 16.");
-  assert.match(vanityPromoPhase(phase2Evening)?.note ?? "", /Regular pricing applies after Monday, November 16/);
+  assert.match(
+    vanityPromoPhase(phase2Evening)?.note ?? "",
+    /Regular pricing applies after Monday, November 16/,
+  );
 });
 
 test("the promotion hides after November 16 and when it is switched off", () => {
@@ -37,12 +43,19 @@ test("the 2 to 4 week line names the November 16 end of the promotion", () => {
   assert.equal(VANITY_PROMO_TIMING.includes("\u2014"), false);
 });
 
-test("preview query overrides the phase and is ignored on the live host", () => {
+test("preview query overrides the phase only on localhost and preview hosts", () => {
   assert.equal(vanityPromoOverrideDay("?vanityPromo=phase1", "localhost"), "2026-11-09");
   assert.equal(vanityPromoOverrideDay("vanityPromo=phase2", "preview.vercel.app"), "2026-11-10");
-  assert.equal(vanityPromoOverrideDay("?vanityPromo=off"), "2026-11-17");
-  assert.equal(vanityPromoOverrideDay("?vanityPromo=2026-11-12", "127.0.0.1"), "2026-11-12");
+  assert.equal(vanityPromoOverrideDay("?vanityPromo=off", "127.0.0.1"), "2026-11-17");
+  assert.equal(vanityPromoOverrideDay("?vanityPromo=2026-11-12", "localhost:4321"), "2026-11-12");
   assert.equal(vanityPromoPhase(afterPromo, "2026-11-12")?.id, "phase2");
+  assert.equal(vanityPromoOverrideAllowed(""), false);
+  assert.equal(vanityPromoOverrideDay("?vanityPromo=phase2", ""), null);
+  assert.equal(vanityPromoOverrideDay("?vanityPromo=phase2"), null);
+  assert.equal(vanityPromoOverrideAllowed("hempstonhome.com"), false);
   assert.equal(vanityPromoOverrideAllowed("www.hempstonhome.com"), false);
   assert.equal(vanityPromoOverrideDay("?vanityPromo=phase2", "www.hempstonhome.com"), null);
+  assert.equal(vanityPromoOverrideDay("?vanityPromo=phase2", "hempstonhome.com"), null);
+  assert.equal(vanityPromoOverrideAllowed("example.com"), false);
+  assert.equal(vanityPromoOverrideDay("?vanityPromo=phase1", "example.com"), null);
 });

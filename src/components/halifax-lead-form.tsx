@@ -198,7 +198,7 @@ export function HalifaxLeadForm({
       </h3>
 
       <p className="mt-2 text-sm text-black/80">
-        No pressure, no obligation — just expert guidance and an honest budget.
+        No pressure, no obligation, just expert guidance and an honest budget.
       </p>
 
       <div className="mt-7 grid gap-5">
@@ -318,7 +318,7 @@ export function HalifaxLeadForm({
             </Button>
           </div>
           <p id="attachments-help" className="text-xs text-black/75">
-            Photos, floor plans, or inspiration — PDF, DOC, or images up to 10 MB each (max{" "}
+            Photos, floor plans, or inspiration. PDF, DOC, or images up to 10 MB each (max{" "}
             {MAX_FILES}).
           </p>
           {files.length > 0 && (
