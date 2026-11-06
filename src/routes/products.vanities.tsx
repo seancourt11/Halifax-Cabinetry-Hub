@@ -10,10 +10,12 @@ import { vanityGroups, vanityPieces } from "@/data/furniture-catalogue";
 import { catalogueItemList } from "@/lib/catalogue-schema";
 import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
 import { heroImagePreload } from "@/lib/image-srcset";
+import { VANITY_PROMO_TIMING, VANITY_TIMELINE_NOTE, vanityPromoPhase } from "@/lib/vanity-promo";
+import { useVanityPromoPhase } from "@/components/vanity-promo-banner";
 
 const PAGE_TITLE = "Custom Bathroom Vanities | Hempston Home";
 const PAGE_DESC =
-  "Custom bathroom vanities in slab, shaker, floating and furniture forms. The vanities shown are a selection, and we can design any vanity from a photo you send. Built in Canada. Catalogue and custom vanities are made in 2 to 4 weeks of production time.";
+  "Custom bathroom vanities in slab, shaker, floating and furniture forms. The vanities shown are a selection, and we can design any vanity from a photo you send. Built in Canada.";
 const ABSOLUTE_URL = `${SITE_URL}/products/vanities`;
 const hero = vanityPieces[0];
 const ABSOLUTE_IMAGE = `${SITE_URL}${hero.src}`;
@@ -33,32 +35,46 @@ const faqs = [
   },
   {
     q: "Can you build a vanity that is not shown here?",
-    a: "Yes. The vanities shown here are just a selection. We custom design and build vanities of any size, style or finish. Send us a photo of a vanity you love and we'll design and produce one to match. A custom vanity is made in the same 2 to 4 weeks of production time.",
-  },
-  {
-    q: "How long do these vanities take?",
-    a: "Catalogue vanities and a vanity designed from your photo are made in 2 to 4 weeks of production time. Hours are Monday to Friday, 9 AM to 5 PM.",
+    a: "Yes. The vanities shown here are just a selection. We custom design and build vanities of any size, style or finish. Send us a photo of a vanity you love and we'll design and produce one to match.",
   },
 ];
+
+function vanityFaqs(phase = vanityPromoPhase()) {
+  const timing = phase
+    ? {
+        q: "How long do these vanities take?",
+        a: `${VANITY_PROMO_TIMING} ${VANITY_TIMELINE_NOTE} Hours are Monday to Friday, 9 AM to 5 PM.`,
+      }
+    : {
+        q: "How long do these vanities take?",
+        a: `${VANITY_TIMELINE_NOTE} Hours are Monday to Friday, 9 AM to 5 PM.`,
+      };
+  return [...faqs, timing];
+}
+
+function pageDescription(phase = vanityPromoPhase()) {
+  if (!phase) return PAGE_DESC;
+  return `${PAGE_DESC} ${phase.discount} ${VANITY_PROMO_TIMING}`;
+}
 
 export const Route = createFileRoute("/products/vanities")({
   head: () => ({
     meta: [
       { title: PAGE_TITLE },
-      { name: "description", content: PAGE_DESC },
+      { name: "description", content: pageDescription() },
       {
         name: "keywords",
         content:
           "custom bathroom vanity, six drawer vanity, floating double vanity, wall hung double vanity, shaker vanity, slab vanity, white marble vanity, smoked oak vanity, cerused oak vanity",
       },
       { property: "og:title", content: PAGE_TITLE },
-      { property: "og:description", content: PAGE_DESC },
+      { property: "og:description", content: pageDescription() },
       { property: "og:type", content: "website" },
       { property: "og:url", content: ABSOLUTE_URL },
       { property: "og:image", content: ABSOLUTE_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PAGE_TITLE },
-      { name: "twitter:description", content: PAGE_DESC },
+      { name: "twitter:description", content: pageDescription() },
       { name: "twitter:image", content: ABSOLUTE_IMAGE },
     ],
     links: [{ rel: "canonical", href: ABSOLUTE_URL }, heroImagePreload(hero.src)],
@@ -79,7 +95,7 @@ export const Route = createFileRoute("/products/vanities")({
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify(faqPageSchema(faqs)),
+        children: JSON.stringify(faqPageSchema(vanityFaqs())),
       },
     ],
   }),
@@ -87,6 +103,8 @@ export const Route = createFileRoute("/products/vanities")({
 });
 
 function VanitiesPage() {
+  const phase = useVanityPromoPhase();
+  const pageFaqs = vanityFaqs(phase);
   return (
     <div className="min-h-screen bg-[oklch(0.14_0_0)] text-white">
       <SiteHeader />
@@ -112,8 +130,7 @@ function VanitiesPage() {
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
             The vanities shown here are just a selection. We custom design and build vanities of any
             size, style or finish. Send us a photo of a vanity you love and we'll design and produce
-            one to match. Catalogue vanities and custom vanities are both made in 2 to 4 weeks of
-            production time. See the{" "}
+            one to match. {VANITY_TIMELINE_NOTE} See the{" "}
             <Link to="/products/door-styles" className="underline hover:text-white">
               door styles
             </Link>
@@ -141,7 +158,7 @@ function VanitiesPage() {
             Single, double or floating
           </h2>
           <dl className="mt-12 space-y-8">
-            {faqs.map((faq) => (
+            {pageFaqs.map((faq) => (
               <div key={faq.q} className="border-t border-white/10 pt-6">
                 <dt className="font-display text-lg font-light uppercase tracking-[0.06em]">
                   {faq.q}
@@ -165,8 +182,7 @@ function VanitiesPage() {
             <p className="mt-4 text-base leading-relaxed text-white/70">
               The vanities shown here are just a selection. We custom design and build vanities of
               any size, style or finish. Send us a photo of a vanity you love and we'll design and
-              produce one to match. A custom vanity is made in the same 2 to 4 weeks of production
-              time.
+              produce one to match. {VANITY_TIMELINE_NOTE}
             </p>
           </div>
           <Link
@@ -181,7 +197,7 @@ function VanitiesPage() {
       <ProductCTA
         eyebrow="Request a quote"
         heading="Start a vanity quote"
-        body="Tell us the vanity, the finish and the room, or send a photo of a vanity you love. We will sample the colour or stain and quote the piece. Catalogue and custom vanities are made in 2 to 4 weeks of production time."
+        body={`Tell us the vanity, the finish and the room, or send a photo of a vanity you love. We will sample the colour or stain and quote the piece. ${VANITY_TIMELINE_NOTE}`}
       />
       <SiteFooter />
     </div>

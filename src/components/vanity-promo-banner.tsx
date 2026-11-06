@@ -1,11 +1,22 @@
-import { Link } from "@tanstack/react-router";
-import { vanityPromoActive } from "@/lib/vanity-promo";
+import { Link, useRouterState } from "@tanstack/react-router";
+import {
+  VANITY_PROMO_TIMING,
+  vanityPromoOverrideDay,
+  vanityPromoPhase,
+  type VanityPromoPhase,
+} from "@/lib/vanity-promo";
+
+export function useVanityPromoPhase(): VanityPromoPhase | null {
+  const searchStr = useRouterState({ select: (s) => s.location.searchStr });
+  const host = typeof window === "undefined" ? "" : window.location.hostname;
+  return vanityPromoPhase(new Date(), vanityPromoOverrideDay(searchStr ?? "", host));
+}
 
 const facts = [
   {
     label: "01",
     title: "In time for Christmas",
-    body: "Vanities are made in 2 to 4 weeks of production time, including a custom piece from a photo you send, ready to give as a Christmas gift.",
+    body: VANITY_PROMO_TIMING,
   },
   {
     label: "02",
@@ -19,11 +30,15 @@ const facts = [
   },
 ];
 
-/** Full promotional header for the vanities page. Renders nothing after the end date. */
+/** Full promotional header for the vanities page. Renders nothing after phase 2. */
 export function VanityPromoBanner() {
-  if (!vanityPromoActive()) return null;
+  const phase = useVanityPromoPhase();
+  if (!phase) return null;
   return (
-    <section className="border-b border-black/10 bg-[oklch(0.96_0.012_85)] text-black">
+    <section
+      id="vanity-holiday-promo"
+      className="border-b border-black/10 bg-[oklch(0.96_0.012_85)] text-black"
+    >
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
         <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/55">
           Holiday promotion
@@ -51,12 +66,9 @@ export function VanityPromoBanner() {
         <div className="mt-10 flex flex-col gap-6 border border-black/15 bg-white/70 p-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-xl font-light uppercase tracking-[0.05em]">
-              Up to 35% off every vanity on this page
+              {phase.discount}
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-black/65">
-              The promotion runs through Friday, November 13, 2026. This 2 to 4 week production time
-              applies to vanities, including a custom vanity designed from a photo you send.
-            </p>
+            <p className="mt-2 text-sm leading-relaxed text-black/65">{phase.note}</p>
           </div>
           <Link
             to="/contact"

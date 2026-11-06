@@ -1,11 +1,48 @@
 /**
- * Holiday vanity promotion.
- * Set VANITY_PROMO_ENABLED to false to take the banner down early.
- * It also hides on its own after 13 November 2026, America/Halifax (Atlantic time).
- * The included end date is the last day the banner is shown.
+ * Holiday vanity promotion. All dates are calendar days in America/Halifax.
+ * Set VANITY_PROMO_ENABLED to false to take the promotion down early.
+ * Phase 1 runs through the end of Monday, November 9, 2026.
+ * Phase 2 runs from Tuesday, November 10 through the end of Monday, November 16, 2026.
+ * After that the promotion hides and regular pricing applies.
  */
 export const VANITY_PROMO_ENABLED = true;
-export const VANITY_PROMO_END_DATE = "2026-11-13";
+export const VANITY_PROMO_PHASE1_END = "2026-11-09";
+export const VANITY_PROMO_PHASE2_END = "2026-11-16";
+
+/** Shown only while the holiday promotion is active. Not a standing lead time. */
+export const VANITY_PROMO_TIMING =
+  "Order during our holiday promotion, ending Monday, November 16, 2026, and we'll aim for 2 to 4 week production on catalogue and custom vanities, in time for Christmas.";
+
+export const VANITY_TIMELINE_NOTE =
+  "Timelines are confirmed when you order and depend on the shop schedule.";
+
+export type VanityPromoPhaseId = "phase1" | "phase2";
+
+export type VanityPromoPhase = {
+  id: VanityPromoPhaseId;
+  percent: 40 | 30;
+  /** Inclusive last America/Halifax calendar day. */
+  endDay: string;
+  discount: string;
+  note: string;
+};
+
+const PHASES: Record<VanityPromoPhaseId, VanityPromoPhase> = {
+  phase1: {
+    id: "phase1",
+    percent: 40,
+    endDay: VANITY_PROMO_PHASE1_END,
+    discount: "40% off until Monday, November 9. Then 30% off until November 16.",
+    note: VANITY_TIMELINE_NOTE,
+  },
+  phase2: {
+    id: "phase2",
+    percent: 30,
+    endDay: VANITY_PROMO_PHASE2_END,
+    discount: "30% off until Monday, November 16.",
+    note: `Regular pricing applies after Monday, November 16. ${VANITY_TIMELINE_NOTE}`,
+  },
+};
 
 export function halifaxCalendarDay(now = new Date()) {
   return new Intl.DateTimeFormat("en-CA", {
@@ -16,7 +53,44 @@ export function halifaxCalendarDay(now = new Date()) {
   }).format(now);
 }
 
-export function vanityPromoActive(now = new Date()) {
-  if (!VANITY_PROMO_ENABLED) return false;
-  return halifaxCalendarDay(now) <= VANITY_PROMO_END_DATE;
+const PRODUCTION_HOSTS = new Set(["hempstonhome.com", "www.hempstonhome.com"]);
+
+/** Query override is for preview and local review. It is ignored on the live site. */
+export function vanityPromoOverrideAllowed(host: string) {
+  const name = host.trim().toLowerCase().split(":")[0];
+  if (!name) return true;
+  return !PRODUCTION_HOSTS.has(name);
+}
+
+/**
+ * Preview review values: phase1, phase2, off, or a YYYY-MM-DD America/Halifax day.
+ * Example: /products/vanities?vanityPromo=phase2
+ */
+export function vanityPromoOverrideDay(search: string, host = "") {
+  if (!vanityPromoOverrideAllowed(host)) return null;
+  const query = search.startsWith("?") ? search.slice(1) : search;
+  const raw = new URLSearchParams(query).get("vanityPromo");
+  if (!raw) return null;
+  if (raw === "phase1") return VANITY_PROMO_PHASE1_END;
+  if (raw === "phase2") return "2026-11-10";
+  if (raw === "off") return "2026-11-17";
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  return null;
+}
+
+export function vanityPromoPhase(
+  now = new Date(),
+  overrideDay?: string | null,
+  enabled = VANITY_PROMO_ENABLED,
+): VanityPromoPhase | null {
+  if (!enabled) return null;
+  const day =
+    overrideDay && /^\d{4}-\d{2}-\d{2}$/.test(overrideDay) ? overrideDay : halifaxCalendarDay(now);
+  if (day <= VANITY_PROMO_PHASE1_END) return PHASES.phase1;
+  if (day <= VANITY_PROMO_PHASE2_END) return PHASES.phase2;
+  return null;
+}
+
+export function vanityPromoActive(now = new Date(), overrideDay?: string | null) {
+  return vanityPromoPhase(now, overrideDay) !== null;
 }
