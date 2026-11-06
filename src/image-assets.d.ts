@@ -12,3 +12,8 @@ declare module "*.png?w=800" {
   const src: string;
   export default src;
 }
+
+declare module "*.webp" {
+  const src: string;
+  export default src;
+}

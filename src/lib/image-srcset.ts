@@ -1,5 +1,10 @@
-/** 800w sibling of a built 1600w WebP, when the image plugin emitted both. */
+/** 800w sibling of a built large WebP, when the image plugin emitted both. */
 export function responsiveSrcSet(src: string) {
+  const native = src.match(/-w(\d+)\.webp$/);
+  if (native && native[1] !== "800") {
+    const small = src.replace(`-w${native[1]}.webp`, "-w800.webp");
+    return `${small} 800w, ${src} ${native[1]}w`;
+  }
   if (!src.includes("-1600.webp")) return undefined;
   const small = src.replace("-1600.webp", "-800.webp");
   return `${small} 800w, ${src} 1600w`;

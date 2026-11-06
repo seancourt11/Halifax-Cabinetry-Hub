@@ -7,6 +7,9 @@ import type { Plugin } from "vite";
  * Serves imported JPG/PNG assets as resized WebP and AVIF (800 and 1600)
  * so pages do not ship multi-megabyte originals. Default export is the
  * 1600w WebP URL. Import `file.jpg?w=800` for the 800w WebP URL.
+ * Native WebP masters (the vanity and furniture renders) keep their original
+ * pixels as the large source. Only the 800w file and the AVIF siblings are
+ * derived. Nothing is upscaled or sharpened.
  * AVIF files use the same hash with an `.avif` extension.
  * Output does not keep EXIF or other metadata.
  */
@@ -81,6 +84,51 @@ async function ensure(file: string): Promise<Built> {
   try {
     const sharp = await loadSharp();
     const inputOpts = { limitInputPixels: false, sequentialRead: true } as const;
+    if (/\.webp$/i.test(file)) {
+      const metaIn = await sharp(file, inputOpts).metadata();
+      const width = metaIn.width ?? 0;
+      const height = metaIn.height ?? 0;
+      if (width < 1 || height < 1) throw new Error(`Missing dimensions: ${file}`);
+      const fullOut = path.join(dir, "full.webp");
+      const smallOut = path.join(dir, "800.webp");
+      const fullAvifOut = path.join(dir, "full.avif");
+      const smallAvifOut = path.join(dir, "800.avif");
+      if (!fs.existsSync(fullOut)) fs.copyFileSync(file, fullOut);
+      if (!fs.existsSync(smallOut)) {
+        await sharp(file, inputOpts)
+          .resize({ width: 800, withoutEnlargement: true })
+          .webp({ quality: 64, effort: 4 })
+          .toFile(smallOut);
+      }
+      if (!fs.existsSync(fullAvifOut)) {
+        await sharp(file, inputOpts).avif({ quality: 45, effort: 2 }).toFile(fullAvifOut);
+      }
+      if (!fs.existsSync(smallAvifOut)) {
+        await sharp(file, inputOpts)
+          .resize({ width: 800, withoutEnlargement: true })
+          .avif({ quality: 40, effort: 2 })
+          .toFile(smallAvifOut);
+      }
+      const result: Built = {
+        fullName: `${key}-w${width}.webp`,
+        smallName: `${key}-w800.webp`,
+        fullAvifName: `${key}-w${width}.avif`,
+        smallAvifName: `${key}-w800.avif`,
+        width,
+        height,
+      };
+      const outputs: Record<string, string> = {
+        [result.fullName]: fullOut,
+        [result.smallName]: smallOut,
+        [result.fullAvifName]: fullAvifOut,
+        [result.smallAvifName]: smallAvifOut,
+      };
+      for (const name of assetNames(result)) {
+        fs.copyFileSync(outputs[name], path.join(CACHE, name));
+      }
+      built.set(key, result);
+      return result;
+    }
     if (!fs.existsSync(fullPath) || !fs.existsSync(smallPath)) {
       // rotate() bakes in orientation. Output is written without EXIF, GPS, or ICC.
       await sharp(file, inputOpts)
@@ -135,7 +183,7 @@ async function ensure(file: string): Promise<Built> {
 function isAssetImage(id: string) {
   const clean = id.split("?")[0];
   const query = id.includes("?") ? id.slice(id.indexOf("?") + 1) : "";
-  if (!/\.(png|jpe?g)$/i.test(clean)) return false;
+  if (!/\.(png|jpe?g|webp)$/i.test(clean)) return false;
   if (query && query !== "w=800") return false;
   if (clean.includes(`${path.sep}node_modules${path.sep}`)) return false;
   return clean.includes(`${path.sep}src${path.sep}assets${path.sep}`);

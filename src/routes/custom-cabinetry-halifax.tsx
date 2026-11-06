@@ -932,9 +932,15 @@ function HalifaxPage() {
               </figure>
             ))}
           </div>
-          <div className="mt-14 text-center">
+          <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link to="/products/door-styles" className={btnOutlineDark}>
               Browse All Custom Door Styles
+            </Link>
+            <Link to="/products/vanities" className={btnOutlineDark}>
+              Bathroom Vanities
+            </Link>
+            <Link to="/products/freestanding-furniture" className={btnOutlineDark}>
+              Freestanding Furniture
             </Link>
           </div>
         </div>

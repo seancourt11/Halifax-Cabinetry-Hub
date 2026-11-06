@@ -527,10 +527,16 @@ function Index() {
           </h2>
           <div className="mt-8 space-y-5 text-base leading-relaxed text-white/70">
             <p>
-              Hempston Home is a custom cabinet maker designing and handcrafting bespoke kitchens,
-              bathroom vanities, built-in millwork, and pantry cabinetry for architects, interior
-              designers, and homeowners. Every project is drawn, built, and finished under one roof
-              — from the first site measure to white-glove installation.
+              Hempston Home is a custom cabinet maker designing and handcrafting bespoke kitchens,{" "}
+              <Link
+                to="/products/vanities"
+                className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+              >
+                bathroom vanities
+              </Link>
+              , built-in millwork, and pantry cabinetry for architects, interior designers, and
+              homeowners. Every project is drawn, built, and finished under one roof — from the
+              first site measure to white-glove installation.
             </p>
             <p>
               We specialise in Shaker kitchens, inset face-frame cabinetry, rift-cut white oak
@@ -547,7 +553,7 @@ function Index() {
               hardwax oil. If you can draw it, we can build it.
             </p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link
               to="/products/door-styles"
               className="border border-white/15 p-5 transition-colors hover:border-white/40"
@@ -590,6 +596,34 @@ function Index() {
                 Hand-sprayed paints and hand-rubbed hardwax-oil stains.
               </p>
             </Link>
+            <Link
+              to="/products/vanities"
+              className="border border-white/15 p-5 transition-colors hover:border-white/40"
+            >
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                04
+              </p>
+              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">
+                Bathroom Vanities
+              </p>
+              <p className="mt-2 text-sm text-white/60">
+                Slab vanities, floating doubles, and furniture-style singles.
+              </p>
+            </Link>
+            <Link
+              to="/products/freestanding-furniture"
+              className="border border-white/15 p-5 transition-colors hover:border-white/40"
+            >
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/50">
+                05
+              </p>
+              <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em] text-white">
+                Freestanding Furniture
+              </p>
+              <p className="mt-2 text-sm text-white/60">
+                Hutches, kitchen islands, storage tables and worktables.
+              </p>
+            </Link>
           </div>
           <p className="mt-8 text-sm text-white/70">
             <Link
@@ -606,6 +640,24 @@ function Index() {
               className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
             >
               Inset face-frame cabinets
+            </Link>
+            <span className="mx-3 text-white/40" aria-hidden="true">
+              /
+            </span>
+            <Link
+              to="/products/vanities"
+              className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+            >
+              Bathroom vanities
+            </Link>
+            <span className="mx-3 text-white/40" aria-hidden="true">
+              /
+            </span>
+            <Link
+              to="/products/freestanding-furniture"
+              className="underline decoration-white/30 underline-offset-4 hover:decoration-white"
+            >
+              Freestanding furniture
             </Link>
           </p>
         </div>
