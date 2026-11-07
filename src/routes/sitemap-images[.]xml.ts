@@ -4,6 +4,7 @@ import { SITE_URL } from "@/lib/schema";
 import { novaScotiaHero, novaScotiaProjectPhotos, uniqueImages } from "@/data/seo-page-images";
 import { insetPagePhotos, uniqueInsetPhotos } from "@/data/inset-page-photos";
 import { vanityPieces } from "@/data/furniture-catalogue";
+import { recentVanities } from "@/data/recent-vanities";
 import homeHero from "@/assets/projects/gh-oak-island-painted-beams.jpg";
 import ogHalifax from "@/assets/og/og-halifax.jpg";
 import ogAbout from "@/assets/og/og-about.jpg";
@@ -119,11 +120,18 @@ const entries: ImageEntry[] = [
   },
   {
     pageUrl: `${SITE_URL}/products/vanities`,
-    images: vanityPieces.map((piece) => ({
-      loc: `${SITE_URL}${piece.src}`,
-      title: piece.title,
-      caption: piece.caption,
-    })),
+    images: [
+      ...vanityPieces.map((piece) => ({
+        loc: `${SITE_URL}${piece.src}`,
+        title: piece.title,
+        caption: piece.caption,
+      })),
+      ...recentVanities.map((photo) => ({
+        loc: `${SITE_URL}${photo.src}`,
+        title: photo.name,
+        caption: photo.caption,
+      })),
+    ],
   },
   {
     pageUrl: `${SITE_URL}/case-studies`,
