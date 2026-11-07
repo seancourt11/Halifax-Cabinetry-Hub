@@ -1,17 +1,19 @@
 /**
  * Holiday vanity promotion. All dates are calendar days in America/Halifax.
  * Set VANITY_PROMO_ENABLED to false to take the promotion down early.
- * Phase 1 runs through the end of Monday, November 9, 2026.
- * Phase 2 runs from Tuesday, November 10 through the end of Monday, November 16, 2026.
+ * Phase 1 runs through 11:59 PM America/Halifax on Tuesday, November 10, 2026.
+ * That instant is 2026-11-11 03:59:59 UTC because Atlantic Standard Time is UTC-4.
+ * Phase 2 runs from Wednesday, November 11 through 11:59 PM America/Halifax
+ * on Friday, November 27, 2026. That instant is 2026-11-28 03:59:59 UTC.
  * After that the promotion hides and regular pricing applies.
  */
 export const VANITY_PROMO_ENABLED = true;
-export const VANITY_PROMO_PHASE1_END = "2026-11-09";
-export const VANITY_PROMO_PHASE2_END = "2026-11-16";
+export const VANITY_PROMO_PHASE1_END = "2026-11-10";
+export const VANITY_PROMO_PHASE2_END = "2026-11-27";
 
 /** Shown only while the holiday promotion is active. Not a standing lead time. */
 export const VANITY_PROMO_TIMING =
-  "Order during our holiday promotion, ending Monday, November 16, 2026, and we'll aim for 2 to 4 week production on catalogue and custom vanities, in time for Christmas.";
+  "Order during our holiday promotion, ending Friday, November 27, 2026, and we'll aim for 2 to 4 week production on catalogue and custom vanities, in time for Christmas.";
 
 export const VANITY_TIMELINE_NOTE =
   "Timelines are confirmed when you order and depend on the shop schedule.";
@@ -32,15 +34,15 @@ const PHASES: Record<VanityPromoPhaseId, VanityPromoPhase> = {
     id: "phase1",
     percent: 40,
     endDay: VANITY_PROMO_PHASE1_END,
-    discount: "40% off until Monday, November 9. Then 30% off until November 16.",
+    discount: "40% off until Tuesday, November 10. Then 30% off until Friday, November 27.",
     note: VANITY_TIMELINE_NOTE,
   },
   phase2: {
     id: "phase2",
     percent: 30,
     endDay: VANITY_PROMO_PHASE2_END,
-    discount: "30% off until Monday, November 16.",
-    note: `Regular pricing applies after Monday, November 16. ${VANITY_TIMELINE_NOTE}`,
+    discount: "30% off until Friday, November 27.",
+    note: `Regular pricing applies after Friday, November 27. ${VANITY_TIMELINE_NOTE}`,
   },
 };
 
@@ -83,8 +85,8 @@ export function vanityPromoOverrideDay(search: string, host = "") {
   const raw = new URLSearchParams(query).get("vanityPromo");
   if (!raw) return null;
   if (raw === "phase1") return VANITY_PROMO_PHASE1_END;
-  if (raw === "phase2") return "2026-11-10";
-  if (raw === "off") return "2026-11-17";
+  if (raw === "phase2") return "2026-11-11";
+  if (raw === "off") return "2026-11-28";
   if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
   return null;
 }
