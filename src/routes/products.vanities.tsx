@@ -5,10 +5,12 @@ import { ProductCTA, ProductBreadcrumb } from "@/components/product-cta";
 import { CustomRequestCTA } from "@/components/custom-request-cta";
 import { BuiltInCanadaLine } from "@/components/built-in-canada";
 import { CatalogueGroups } from "@/components/catalogue-grid";
+import { RecentVanitiesGallery } from "@/components/recent-vanities-gallery";
 import { VanityPromoBanner } from "@/components/vanity-promo-banner";
 import { vanityGroups, vanityPieces } from "@/data/furniture-catalogue";
+import { recentVanityImageObjects } from "@/data/recent-vanities";
 import { catalogueItemList } from "@/lib/catalogue-schema";
-import { breadcrumbSchema, faqPageSchema, SITE_URL } from "@/lib/schema";
+import { breadcrumbSchema, faqPageSchema, imageObjectGraph, SITE_URL } from "@/lib/schema";
 import { heroImagePreload } from "@/lib/image-srcset";
 import { VANITY_PROMO_TIMING, VANITY_TIMELINE_NOTE, vanityPromoPhase } from "@/lib/vanity-promo";
 import { useVanityPromoPhase } from "@/components/vanity-promo-banner";
@@ -97,6 +99,10 @@ export const Route = createFileRoute("/products/vanities")({
         type: "application/ld+json",
         children: JSON.stringify(faqPageSchema(vanityFaqs())),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(imageObjectGraph(recentVanityImageObjects(SITE_URL))),
+      },
     ],
   }),
   component: VanitiesPage,
@@ -148,6 +154,8 @@ function VanitiesPage() {
       />
 
       <CatalogueGroups groups={vanityGroups} />
+
+      <RecentVanitiesGallery />
 
       <section className="border-t border-white/10 bg-[oklch(0.14_0_0)]">
         <div className="mx-auto max-w-4xl px-5 py-24 sm:px-8 sm:py-28">

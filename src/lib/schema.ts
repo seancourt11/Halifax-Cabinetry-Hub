@@ -330,7 +330,14 @@ export function imageObjectsSchema(items: { url: string; caption: string; creato
 
 /** ImageObject nodes for photos on a page. Width and height are the served file size. */
 export function imageObjectGraph(
-  items: { url: string; caption: string; name: string; width: number; height: number }[],
+  items: {
+    url: string;
+    caption: string;
+    name: string;
+    width: number;
+    height: number;
+    description?: string;
+  }[],
 ) {
   return {
     "@context": "https://schema.org",
@@ -339,6 +346,7 @@ export function imageObjectGraph(
       contentUrl: it.url,
       caption: it.caption,
       name: it.name,
+      ...(it.description ? { description: it.description } : {}),
       width: it.width,
       height: it.height,
       copyrightHolder: { "@id": ORG_ID, "@type": "Organization", name: ORG_NAME },

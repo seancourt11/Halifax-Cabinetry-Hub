@@ -3,6 +3,7 @@ import type {} from "@tanstack/react-start";
 import { novaScotiaHero, novaScotiaProjectPhotos, uniqueImages } from "@/data/seo-page-images";
 import { insetPagePhotos, uniqueInsetPhotos } from "@/data/inset-page-photos";
 import { vanityPieces } from "@/data/furniture-catalogue";
+import { recentVanities } from "@/data/recent-vanities";
 
 const BASE_URL = "https://www.hempstonhome.com";
 
@@ -14,11 +15,18 @@ const pageImages: Record<string, SitemapImage[]> = {
     ...novaScotiaProjectPhotos,
   ]),
   "/inset-face-frame-cabinets": uniqueInsetPhotos(insetPagePhotos),
-  "/products/vanities": vanityPieces.map((piece) => ({
-    src: piece.src,
-    title: piece.title,
-    caption: piece.caption,
-  })),
+  "/products/vanities": [
+    ...vanityPieces.map((piece) => ({
+      src: piece.src,
+      title: piece.title,
+      caption: piece.caption,
+    })),
+    ...recentVanities.map((photo) => ({
+      src: photo.src,
+      title: photo.name,
+      caption: photo.caption,
+    })),
+  ],
 };
 
 interface SitemapEntry {
