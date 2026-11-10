@@ -1,9 +1,9 @@
 import process from "node:process";
-import { Buffer } from "node:buffer";
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import nodemailer from "nodemailer";
+import nodemailer, { type Transporter } from "nodemailer";
 import { z } from "zod";
+import { readContactForm } from "@/lib/contact-attachments";
 import {
   RATE_LIMIT_MESSAGE,
   TURNSTILE_REJECT_MESSAGE,
@@ -14,10 +14,6 @@ import {
 } from "@/lib/contact-guard";
 import { consumeContactRateLimit } from "@/lib/contact-rate-limit";
 import { verifyTurnstile, warnIfTurnstileMisconfigured } from "@/lib/turnstile.server";
-
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB per file
-const MAX_FILES = 8;
-const MAX_TOTAL_ATTACHMENTS_SIZE = 20 * 1024 * 1024; // keep total message size mailbox-friendly
 
 const contactSchema = z.object({
   formType: z.enum(["consultation", "work-with-us"]).default("consultation"),
@@ -31,7 +27,7 @@ const contactSchema = z.object({
   message: z.string().trim().nonempty().max(1500),
 });
 
-let transporter: nodemailer.Transporter | null = null;
+let transporter: Transporter | null = null;
 
 function getTransporter() {
   if (!transporter) {
@@ -68,39 +64,11 @@ export const Route = createFileRoute("/api/contact")({
           return Response.json({ ok: false, error: "Invalid form submission." }, { status: 400 });
         }
 
-        const fields: Record<string, string> = {};
-        const attachments: { filename: string; content: Buffer; contentType?: string }[] = [];
-        let totalAttachmentBytes = 0;
-
-        for (const [key, value] of formData.entries()) {
-          if (value instanceof File) {
-            if (key !== "attachments" || value.size === 0) continue;
-            if (attachments.length >= MAX_FILES) continue;
-            if (value.size > MAX_FILE_SIZE) {
-              return Response.json(
-                { ok: false, error: `"${value.name}" is larger than 10 MB.` },
-                { status: 400 },
-              );
-            }
-            totalAttachmentBytes += value.size;
-            if (totalAttachmentBytes > MAX_TOTAL_ATTACHMENTS_SIZE) {
-              return Response.json(
-                {
-                  ok: false,
-                  error: "Attachments are too large overall. Please remove a file and try again.",
-                },
-                { status: 400 },
-              );
-            }
-            attachments.push({
-              filename: value.name,
-              content: Buffer.from(await value.arrayBuffer()),
-              contentType: value.type || undefined,
-            });
-          } else {
-            fields[key] = value;
-          }
+        const parsed = await readContactForm(formData);
+        if (!parsed.ok) {
+          return Response.json({ ok: false, error: parsed.error }, { status: 400 });
         }
+        const { fields, attachments } = parsed;
 
         const result = contactSchema.safeParse(fields);
         if (!result.success) {

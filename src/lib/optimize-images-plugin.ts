@@ -4,21 +4,24 @@ import path from "node:path";
 import type { Plugin } from "vite";
 
 /**
- * Serves imported JPG/PNG assets as resized WebP and AVIF (800 and 1600)
- * so pages do not ship multi-megabyte originals. Default export is the
- * 1600w WebP URL. Import `file.jpg?w=800` for the 800w WebP URL.
+ * Serves imported JPG/PNG assets as resized WebP and AVIF.
+ * The resize caps are 800 and 1600, and `withoutEnlargement` keeps smaller
+ * originals at their real size. Public filenames use those pixel sizes
+ * (`hash-w1280h1436-s800h898.webp`), not the cap. Default export is the
+ * larger WebP. Import `file.jpg?w=800` for the smaller WebP.
  * Native WebP masters (the vanity and furniture renders) keep their original
- * pixels as the large source. Only the 800w file and the AVIF siblings are
- * derived. Nothing is upscaled or sharpened.
- * AVIF files use the same hash with an `.avif` extension.
- * Output does not keep EXIF or other metadata.
+ * pixels as the large source and stay named `-w{width}`. Only the 800w file
+ * and the AVIF siblings are derived. Nothing is upscaled or sharpened.
+ * AVIF files use the same hash and the same pixel size as the WebP.
+ * Output does not keep EXIF, GPS, or other metadata.
  */
 const CACHE = path.resolve("node_modules/.cache/hempston-img");
-let sharpMod: typeof import("sharp") | undefined;
+type SharpFactory = typeof import("sharp").default;
+let sharpMod: SharpFactory | undefined;
 
 async function loadSharp() {
   if (!sharpMod) {
-    sharpMod = (await import("sharp")).default as unknown as typeof import("sharp");
+    sharpMod = (await import("sharp")).default;
   }
   return sharpMod;
 }
@@ -109,19 +112,28 @@ async function ensure(file: string): Promise<Built> {
           .avif({ quality: 40, effort: 2 })
           .toFile(smallAvifOut);
       }
+      const smallMeta = await sharp(smallOut).metadata();
+      const smallWidth = smallMeta.width ?? 0;
+      if (smallWidth < 1) throw new Error(`Missing small dimensions: ${file}`);
+      // Srcset labels a -w800 sibling as 800w. Publish that name only when it is 800px.
+      if (width > 800 && smallWidth !== 800) {
+        throw new Error(`800w sibling of ${file} is ${smallWidth}px wide`);
+      }
+      const smallIsFull = smallWidth === width;
+      const smallStem = smallIsFull ? `${key}-w${width}` : `${key}-w${smallWidth}`;
       const result: Built = {
         fullName: `${key}-w${width}.webp`,
-        smallName: `${key}-w800.webp`,
+        smallName: `${smallStem}.webp`,
         fullAvifName: `${key}-w${width}.avif`,
-        smallAvifName: `${key}-w800.avif`,
+        smallAvifName: `${smallStem}.avif`,
         width,
         height,
       };
       const outputs: Record<string, string> = {
         [result.fullName]: fullOut,
-        [result.smallName]: smallOut,
+        [result.smallName]: smallIsFull ? fullOut : smallOut,
         [result.fullAvifName]: fullAvifOut,
-        [result.smallAvifName]: smallAvifOut,
+        [result.smallAvifName]: smallIsFull ? fullAvifOut : smallAvifOut,
       };
       for (const name of assetNames(result)) {
         fs.copyFileSync(outputs[name], path.join(CACHE, name));
@@ -154,24 +166,46 @@ async function ensure(file: string): Promise<Built> {
         .avif({ quality: 40, effort: 2 })
         .toFile(smallAvifPath);
     }
-    const meta = await sharp(fullPath).metadata();
+    const fullMeta = await sharp(fullPath).metadata();
+    const smallMeta = await sharp(smallPath).metadata();
+    const fullW = fullMeta.width ?? 0;
+    const fullH = fullMeta.height ?? 0;
+    const smallW = smallMeta.width ?? 0;
+    const smallH = smallMeta.height ?? 0;
+    if (fullW < 1 || fullH < 1 || smallW < 1 || smallH < 1) {
+      throw new Error(`Missing dimensions: ${file}`);
+    }
+    const fullAvifMeta = await sharp(fullAvifPath).metadata();
+    const smallAvifMeta = await sharp(smallAvifPath).metadata();
+    if (
+      fullAvifMeta.width !== fullW ||
+      fullAvifMeta.height !== fullH ||
+      smallAvifMeta.width !== smallW ||
+      smallAvifMeta.height !== smallH
+    ) {
+      throw new Error(`AVIF dimensions do not match WebP: ${file}`);
+    }
+    const sameSize = fullW === smallW && fullH === smallH;
+    const fullBase = sameSize
+      ? `${key}-w${fullW}h${fullH}`
+      : `${key}-w${fullW}h${fullH}-s${smallW}h${smallH}`;
+    const smallBase = `${key}-w${smallW}h${smallH}`;
     const result: Built = {
-      fullName: `${key}-1600.webp`,
-      smallName: `${key}-800.webp`,
-      fullAvifName: `${key}-1600.avif`,
-      smallAvifName: `${key}-800.avif`,
-      width: meta.width ?? 1600,
-      height: meta.height ?? 1000,
+      fullName: `${fullBase}.webp`,
+      smallName: sameSize ? `${fullBase}.webp` : `${smallBase}.webp`,
+      fullAvifName: `${fullBase}.avif`,
+      smallAvifName: sameSize ? `${fullBase}.avif` : `${smallBase}.avif`,
+      width: fullW,
+      height: fullH,
+    };
+    const outputs: Record<string, string> = {
+      [result.fullName]: fullPath,
+      [result.smallName]: sameSize ? fullPath : smallPath,
+      [result.fullAvifName]: fullAvifPath,
+      [result.smallAvifName]: sameSize ? fullAvifPath : smallAvifPath,
     };
     for (const name of assetNames(result)) {
-      const from = name.endsWith("-1600.webp")
-        ? fullPath
-        : name.endsWith("-800.webp")
-          ? smallPath
-          : name.endsWith("-1600.avif")
-            ? fullAvifPath
-            : smallAvifPath;
-      fs.copyFileSync(from, path.join(CACHE, name));
+      fs.copyFileSync(outputs[name], path.join(CACHE, name));
     }
     built.set(key, result);
     return result;

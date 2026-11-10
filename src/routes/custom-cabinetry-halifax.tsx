@@ -531,8 +531,6 @@ function HalifaxPage() {
           src={projGhOakIsland}
           sizes="100vw"
           alt="Custom kitchen cabinets in a Halifax home: painted shaker perimeter and a white oak island by Hempston Home"
-          width={1600}
-          height={1000}
           fetchPriority="high"
           decoding="sync"
           className="h-[86vh] min-h-[560px] w-full object-cover"
@@ -1195,8 +1193,6 @@ function HalifaxPage() {
         <ResponsiveImg
           src={craftDetail}
           alt="Close-up detail of handcrafted custom cabinetry from the Hempston workshop"
-          width={1600}
-          height={900}
           loading="lazy"
           sizes="100vw"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
@@ -1298,8 +1294,6 @@ function HalifaxPage() {
         <ResponsiveImg
           src={cityImg}
           alt="Halifax, Nova Scotia waterfront with historic Maritime architecture"
-          width={1600}
-          height={900}
           loading="lazy"
           sizes="100vw"
           className="absolute inset-0 -z-10 h-full w-full object-cover"

@@ -426,8 +426,6 @@ export function CityCabinetryPage({ city }: { city: CityPageData }) {
           src={heroImg.full}
           sizes="100vw"
           alt="Custom kitchen cabinetry by Hempston Home"
-          width={1600}
-          height={1000}
           fetchPriority="high"
           decoding="async"
           className="h-[86vh] min-h-[560px] w-full object-cover"

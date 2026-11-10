@@ -55,7 +55,7 @@ export function VanityPromoBanner() {
       className="border-b border-black/10 bg-[oklch(0.96_0.012_85)] text-black"
     >
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
-        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/55">
+        <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/70">
           Holiday promotion
         </p>
         <h2 className="mt-4 max-w-3xl font-display text-3xl font-light uppercase leading-[1.08] tracking-[0.04em] sm:text-5xl">
@@ -68,7 +68,7 @@ export function VanityPromoBanner() {
         <div className="mt-10 grid gap-8 sm:grid-cols-3">
           {facts.map((fact) => (
             <div key={fact.label} className="border-t border-black/15 pt-5">
-              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/45">
+              <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-black/70">
                 {fact.label}
               </p>
               <p className="mt-3 font-display text-lg font-light uppercase tracking-[0.06em]">
