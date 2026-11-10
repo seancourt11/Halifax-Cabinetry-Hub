@@ -137,8 +137,6 @@ function InsetFaceFramePage() {
             src={heroImg}
             sizes="100vw"
             alt="Inset raised-panel cabinet door set flush in a face frame"
-            width={1600}
-            height={2000}
             fetchPriority="high"
             className="h-full w-full object-cover opacity-70"
           />

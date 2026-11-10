@@ -60,8 +60,6 @@ function ProjectsPage() {
           src={monctonHero}
           sizes="(min-width: 1024px) 50vw, 100vw"
           alt="Custom painted built-in cabinets and fireplace surround for a home in Dieppe, NB by Hempston Home"
-          width={1600}
-          height={1200}
           loading="lazy"
           className="w-full object-cover"
         />

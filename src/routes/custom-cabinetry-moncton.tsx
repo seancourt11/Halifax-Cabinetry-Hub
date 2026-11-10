@@ -152,8 +152,6 @@ function MonctonPage() {
           src={monctonHero}
           sizes="100vw"
           alt={HERO_ALT}
-          width={1600}
-          height={1200}
           fetchPriority="high"
           decoding="sync"
           className="h-[78vh] min-h-[520px] w-full object-cover"

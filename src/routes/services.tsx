@@ -278,8 +278,6 @@ function ServicesPage() {
           src={heroImg}
           sizes="100vw"
           alt="Custom white painted Hempston kitchen with stained white oak island"
-          width={1600}
-          height={1000}
           fetchPriority="high"
           className="h-[70vh] min-h-[500px] w-full object-cover"
         />

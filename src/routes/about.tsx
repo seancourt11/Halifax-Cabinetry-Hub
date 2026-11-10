@@ -124,8 +124,6 @@ function AboutPage() {
           src={heroImg}
           sizes="100vw"
           alt="Hempston Home custom white painted shaker kitchen cabinetry with brass hood in Glen Haven, Nova Scotia"
-          width={1600}
-          height={1000}
           fetchPriority="high"
           className="h-[70vh] min-h-[500px] w-full object-cover"
         />
@@ -228,8 +226,6 @@ function AboutPage() {
           src={workshopImg}
           sizes="100vw"
           alt="Hand-detailed custom white oak cabinet by Hempston Home craftspeople"
-          width={1600}
-          height={900}
           loading="lazy"
           className="h-[60vh] min-h-[420px] w-full object-cover"
         />

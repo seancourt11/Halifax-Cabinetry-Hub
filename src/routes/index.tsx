@@ -166,8 +166,6 @@ function Index() {
           src={heroKitchen}
           sizes="100vw"
           alt="Glen Haven custom white painted kitchen cabinetry with stained white oak island by Hempston Home"
-          width={1600}
-          height={1000}
           fetchPriority="high"
           decoding="sync"
           className="h-[86vh] min-h-[560px] w-full object-cover"
@@ -252,8 +250,6 @@ function Index() {
             <ResponsiveImg
               src={elevateRoom}
               alt="Modern Drift custom white laundry room cabinetry with painted shaker doors and full-height storage by Hempston Home"
-              width={1600}
-              height={780}
               loading="lazy"
               sizes="(min-width: 1152px) 1152px, 100vw"
               className="h-[60vh] min-h-[380px] w-full object-cover"
@@ -445,8 +441,6 @@ function Index() {
             <ResponsiveImg
               src={storyRoom}
               alt="Glen Haven custom white painted kitchen cabinetry with brass hood and shaker doors by Hempston Home"
-              width={1600}
-              height={800}
               loading="lazy"
               sizes="(min-width: 1152px) 1152px, 100vw"
               className="h-[62vh] min-h-[420px] w-full object-cover"
